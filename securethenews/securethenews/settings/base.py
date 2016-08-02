@@ -29,6 +29,8 @@ INSTALLED_APPS = [
     'home',
     'search',
 
+    'scans.apps.ScansConfig',
+
     'wagtail.wagtailforms',
     'wagtail.wagtailredirects',
     'wagtail.wagtailembeds',
