@@ -3,3 +3,6 @@
 # Python bytecode
 __pycache__/
 *.pyc
+
+# Development database
+db.sqlite3
