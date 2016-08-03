@@ -1,0 +1,24 @@
+---
+- name: Install apt dependencies.
+  become: yes
+  apt:
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
+    # Only update if it's been 24 hours since last time
+    cache_valid_time: 86400
+  with_items: "{{ apt_packages }}"
+
+- name: Upgrade all packages.
+  become: yes
+  apt:
+    upgrade: safe
+    update_cache: yes
+    cache_valid_time: 86400
+
+  # https://www.digitalocean.com/community/tutorials/how-to-install-the-django-web-framework-on-ubuntu-14-04
+- name: Install Django project requirements
+  become: yes
+  pip:
+    requirements: "/vagrant/securethenews/requirements.txt"
+    executable: pip3

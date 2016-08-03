@@ -1,0 +1,5 @@
+---
+- name: Deploy Secure The News development machine
+  hosts: all
+  roles:
+    - role: securethenews-deploy
