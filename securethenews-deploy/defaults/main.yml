@@ -3,6 +3,8 @@ apt_packages:
     - aptitude # needed by Ansible for apt upgrade
     - libjpeg-dev # Wagtail -> Pillow dependency
     - python3-pip
+    - ruby2.3
+    - ruby2.3-dev
     - tmux
     - vim
     - zlib1g-dev # Wagtail -> Pillow dependency
