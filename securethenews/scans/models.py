@@ -16,8 +16,15 @@ class Site(models.Model):
     
 
 class Scan(models.Model):
-    site = models.ForeignKey(Site, on_delete=models.CASCADE, related_name='scans')
-    added = models.DateTimeField(auto_now_add=True)
+    site = models.ForeignKey(
+        Site,
+        on_delete=models.CASCADE,
+        related_name='scans')
+    timestamp = models.DateTimeField(auto_now_add=True)
 
     # Scan results
     supports_https = models.BooleanField()
+    enforces_https = models.BooleanField()
+
+    def __str__(self):
+        return "Scan for %s on %s" % (self.site.name, self.timestamp)
