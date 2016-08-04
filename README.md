@@ -12,6 +12,21 @@ $ cd /vagrant/securethenews
 $ python3 manage.py runserver 0.0.0.0:8000
 ```
 
+### Loading the development fixtures
+
+I have generated fixtures using the sites from `prototype_data/domains.csv` and
+a single scan run generated with `python3 manage.py scan`. The fixtures are
+stored in the repository and can be quickly loaded into your database so you
+have something to work with during development.
+
+To load the fixtures:
+
+```sh
+# in the Vagrant VM
+$ cd /vagrant/securethenews
+$ python3 manage.py loaddata scans/fixtures/0001_20160803T235828.json
+```
+
 ### Notes
 
 * Port 8000 is forwarded from the guest to the host. By default, `runserver`
