@@ -13,8 +13,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
         {# Global stylesheets #}
-        <link rel="stylesheet" type="text/css" href="{% static 'css/securethenews.css' %}">
-
+        <link rel="stylesheet" type="text/css" href="{% static 'main.css' %}">
+        <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,200,700' rel='stylesheet' type='text/css'>
         {% block extra_css %}
             {# Override this in templates to add extra stylesheets #}
         {% endblock %}
@@ -23,10 +23,34 @@
     <body class="{% block body_class %}{% endblock %}">
         {% wagtailuserbar %}
 
+        {% block header %}
+          <div class="header sticky">
+            <span class="header-item logo">SECURETHENEWS</span>
+            {% block menu %}{% endblock %}
+          </div>
+        {% endblock %}
+
         {% block content %}{% endblock %}
 
+        {% block footer %}
+          <section class="footer align-center">
+            <div class="section-content">
+              <h3 class="footer-header align-center">
+                A JOINT PROJECT OF:
+              </h3>
+              <div class="footer-logos">
+                <span class="fpf-logo">FREEDOM OF THE PRESS</span>
+                <span class="cpj-logo">COMMITTEE TO PROTECT JOURNALISTS</span>
+              </div>
+              <p class="fine-print">
+                This work is licensed under a Creative Commons Attribution 4.0 International License
+              </p>
+            </div>
+          </section>
+        {% endblock %}
+
         {# Global javascript #}
-        <script type="text/javascript" src="{% static 'js/securethenews.js' %}"></script>
+        <script type="text/javascript" src="{% static 'build.js' %}"></script>
 
         {% block extra_js %}
             {# Override this in templates to add extra javascript #}

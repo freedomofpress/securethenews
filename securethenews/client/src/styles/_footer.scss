@@ -1,0 +1,24 @@
+.footer {
+  background-color: $gray;
+}
+
+.footer-header {
+  color: $darkGray;
+  letter-spacing: 2px;
+  margin-bottom: $spacingUnit;
+}
+
+.footer-logos {
+  height: 100px;
+
+  // Placeholder
+  .fpf-logo,
+  .cpj-logo {
+    display: inline-block;
+    width: 200px;
+  }
+}
+
+.fine-print {
+  font-size: 12px;
+}

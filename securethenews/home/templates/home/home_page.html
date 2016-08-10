@@ -2,10 +2,110 @@
 
 {% block body_class %}template-homepage{% endblock %}
 
+{% block menu %}
+  <a href="#about">
+    <span class="header-item about">
+      about
+    </span>
+  </a>
+  <a href="#stats">
+    <span class="header-item stats" href="#stats">
+      stats
+    </span>
+  </a>
+  <a href="#why">
+    <span class="header-item why" href="#why">
+      why
+    </span>
+  </a>
+  <a href="#how">
+    <span class="header-item how" href="#how">
+      how
+    </span>
+  </a>
+{% endblock %}
+
 {% block content %}
-    <h1>Welcome to your new Wagtail site!</h1>
+  <section class="blue-section">
+    <div class="section-content">
+      <h1 class="home-header">Every news site should be secure.</h1>
+      <h5 class="home-subhead">It's critical for both journalists and readers.</h5>
 
-    <p>You can access the admin interface <a href="{% url 'wagtailadmin_home' %}">here</a> (make sure you have run "./manage.py createsuperuser" in the console first).
+      <div class="overview-stats">
+        <div class="stat-block">
+          <div class="stat-block-number">13%</div>
+          <div class="stat-block-caption">Of news sites offer HTTPS</div>
+        </div>
+        <div class="stat-block">
+          <div class="stat-block-number">5%</div>
+          <div class="stat-block-caption">default to HTTPS</div>
+        </div>
+        <div class="stat-block">
+          <div class="stat-block-number">39</div>
+          <div class="stat-block-caption">sites committed to change</div>
+        </div>
+      </div>
 
-    <p>If you haven't already given the documentation a read, head over to <a href="http://docs.wagtail.io/">http://docs.wagtail.io</a> to start building on Wagtail</p>
+      <div class="score-teaser">
+        <span class="graded-news-org">New York Times <span class="grade grade-a">A+</span></span>
+        <span class="graded-news-org">Wall Street Journal <span class="grade grade-b">B</span></span>
+        <span class="graded-news-org">Buzzfeed <span class="grade grade-b">B-</span></span>
+      </div>
+
+      <div class="align-center">
+        <div class="button button-primary" aria-role="button">
+          See full leaderboard  <i class="fa fa-chevron-right" aria-hidden="true"></i>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="gray-section panel-section">
+    <div class="panel-container">
+      <div class="panel green-panel panel-inline">
+        <div class="inner-panel">
+          <span class="panel-label">
+            how
+          </span>
+          <h3 class="panel-title">
+            Switching to HTTPS is easier than ever
+          </h3>
+          <p class="panel-content">
+            {% lorem 35 w random %}
+          </p>
+          <div class="panel-cta button button-default">
+            Learn more
+          </div>
+        </div>
+      </div>
+      <div class="panel blue-panel panel-inline">
+        <div class="inner-panel">
+          <span class="panel-label">
+            why
+          </span>
+          <h3 class="panel-title">
+            Encryption protects your readers
+          </h3>
+          <p class="panel-content">
+            {% lorem 35 w random %}
+          </p>
+          <div class="panel-cta button button-default">
+            Learn more
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="leaderboard-section">
+    <div class="section-content">
+      <h1 class="leaderboard-header align-center">Leaderboard</h1>
+      {% include "leaderboard.html" %}
+      <div class="align-center leaderboard-button-container">
+        <div class="button button-primary button-dark">
+          See full leaderboard  <i class="fa fa-chevron-right" aria-hidden="true"></i>
+        </div>
+      </div>
+    </div>
+  </section>
 {% endblock %}

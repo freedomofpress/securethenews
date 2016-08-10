@@ -1,0 +1,42 @@
+.header {
+  height: $headerHeight;
+  line-height: $headerHeight;
+  font-size: $spacingUnit;
+  text-transform: uppercase;
+  padding: 0 $spacingUnit;
+  position: absolute;
+  width: 100%;
+  font-weight: 200;
+
+  a,
+  a:visited {
+    color: $gray;
+    text-decoration: none;
+  }
+
+  a:active,
+  a:hover {
+    color: #fff;
+  }
+}
+
+.header + * {
+  padding-top: $headerHeight;
+}
+
+.header-item {
+  float: right;
+  display: inline-block;
+  min-width: 4 * $spacingUnit;
+  padding: 0 $spacingUnit / 2;
+  font-size: 14px;
+  letter-spacing: 2px;
+}
+
+.header-item.logo {
+  float: left;
+  font-size: 20px;
+  color: #fff;
+  font-weight: normal;
+  letter-spacing: 1px;
+}
