@@ -3,7 +3,7 @@
 {% block body_class %}template-homepage{% endblock %}
 
 {% block menu %}
-  <a href="#about">
+  <a href="#footer">
     <span class="header-item about">
       about
     </span>
@@ -28,8 +28,8 @@
 {% block content %}
   <section class="blue-section">
     <div class="section-content">
-      <h1 class="home-header">Every news site should be secure.</h1>
-      <h5 class="home-subhead">It's critical for both journalists and readers.</h5>
+      <h1 class="home-header">{{ page.main_title }}</h1>
+      <h5 class="home-subhead">{{ page.sub_title }}</h5>
 
       <div class="overview-stats">
         <div class="stat-block">
@@ -62,32 +62,32 @@
 
   <section class="gray-section panel-section">
     <div class="panel-container">
-      <div class="panel green-panel panel-inline">
+      <div class="panel green-panel panel-inline" id="how">
         <div class="inner-panel">
           <span class="panel-label">
             how
           </span>
           <h3 class="panel-title">
-            Switching to HTTPS is easier than ever
+            {{ page.how_header }}
           </h3>
           <p class="panel-content">
-            {% lorem 35 w random %}
+            {{ page.how_body }}
           </p>
           <div class="panel-cta button button-default">
             Learn more
           </div>
         </div>
       </div>
-      <div class="panel blue-panel panel-inline">
+      <div class="panel blue-panel panel-inline" id="why">
         <div class="inner-panel">
           <span class="panel-label">
             why
           </span>
           <h3 class="panel-title">
-            Encryption protects your readers
+            {{ page.why_header }}
           </h3>
           <p class="panel-content">
-            {% lorem 35 w random %}
+            {{ page.why_body }}
           </p>
           <div class="panel-cta button button-default">
             Learn more
@@ -97,7 +97,7 @@
     </div>
   </section>
 
-  <section class="leaderboard-section">
+  <section class="leaderboard-section" id="stats">
     <div class="section-content">
       <h1 class="leaderboard-header align-center">Leaderboard</h1>
       {% include "leaderboard.html" %}
