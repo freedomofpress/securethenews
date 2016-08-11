@@ -1,0 +1,22 @@
+.leaderboard {
+  font-size: 20px;
+  font-weight: bold;
+  color: $textGray;
+
+  th {
+    font-size: 14px;
+    max-width: 150px;
+    text-transform: uppercase;
+  }
+
+  th,
+  td:not(:first-child) {
+    padding: $spacingUnit / 2 $spacingUnit * 2;
+    text-align: center;
+  }
+
+  tr {
+    padding: $spacingUnit 0;
+    border-bottom: 1px solid $gray;
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "name": "securethenews",
+  "version": "1.0.0",
+  "description": "Educating news organizations about transport security.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/freedomofpress/securethenews.git"
+  },
+  "author": "Gabe Isman <gabe.isman@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/freedomofpress/securethenews/issues"
+  },
+  "homepage": "https://github.com/freedomofpress/securethenews#readme",
+  "devDependencies": {
+    "babelify": "^7.3.0",
+    "browserify": "^13.0.1",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.1.0",
+    "gulp-livereload": "^3.8.1",
+    "gulp-plumber": "^1.1.0",
+    "gulp-sass": "^2.3.2",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-util": "^3.0.7",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0",
+    "watchify": "^3.7.0"
+  }
+}

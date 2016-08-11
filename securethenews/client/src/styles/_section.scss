@@ -1,0 +1,14 @@
+section {
+  width: 100%;
+  padding: 0 $spacingUnit;
+
+  &.panel-section {
+    padding: 0;
+  }
+}
+
+.section-content {
+  max-width: $contentMaxWidth;
+  margin: auto;
+  padding: 2 * $spacingUnit 0;
+}

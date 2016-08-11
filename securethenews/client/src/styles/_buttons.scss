@@ -1,0 +1,59 @@
+$buttonHeight: 50px;
+
+.button {
+  display: inline-block;
+  margin-bottom: 0;
+  vertical-align: middle;
+  background-image: none;
+  border-radius: $buttonHeight / 2;
+  font-size: 16px;
+  height: $buttonHeight;
+  line-height: $buttonHeight;
+  padding: 0 $spacingUnit * 2.5;
+  cursor: pointer;
+  text-align: center;
+  touch-action: manipulation;
+  border: 1px solid transparent;
+  white-space: nowrap;
+
+  i {
+    margin-left: $spacingUnit / 2;
+  }
+
+  &.button-primary {
+    background-color: $lightBlue;
+    color: $blue;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 1px;
+
+    &:hover {
+      background-color: darken($lightBlue, 20%);
+      color: darken($blue, 20%);
+    }
+  }
+
+  &.button-default {
+    color: #fff;
+    border: 1px solid $yellow;
+
+    &:hover {
+      background-color: $yellow;
+      color: $blue;
+    }
+  }
+
+  &.button-dark {
+    background-color: $blue;
+    color: #fff;
+
+    i {
+      color: $yellow;
+    }
+
+    &:hover {
+      background-color: darken($blue, 10%);
+      color: #fff;
+    }
+  }
+}

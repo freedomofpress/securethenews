@@ -1,0 +1,57 @@
+.panel {
+  padding: $spacingUnit * 2;
+  color: #fff;
+
+  &.green-panel {
+    background: linear-gradient(to top, #2b491e, #56763b);
+  }
+
+  &.blue-panel {
+    background: linear-gradient(to top, #153350, #2d5275);
+  }
+}
+
+.inner-panel {
+  max-width: $contentMaxWidth;
+  margin: auto;
+}
+
+// A full desktop gets alternate panels
+@media (min-width: $mediaLarge) {
+  $panelContainerMaxWidth: 1250px;
+
+  .panel-container {
+    max-width: $panelContainerMaxWidth;
+    margin: auto;
+  }
+
+  .panel {
+    display: inline-block;
+    max-width: $panelContainerMaxWidth / 2 - $spacingUnit * 6;
+    vertical-align: top;
+    margin: $spacingUnit * 3;
+
+    &:not(:last-child) {
+      margin-right: $spacingUnit ;
+    }
+  }
+}
+
+.panel-label {
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.panel-title {
+  margin: $spacingUnit 0;
+  font-weight: 200;
+  font-size: 30px;
+}
+
+.panel-content {
+  margin-bottom: $spacingUnit * 3;
+  font-weight: 200;
+  font-size: 18px;
+  line-height: 26px;
+}
