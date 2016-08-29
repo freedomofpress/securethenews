@@ -27,7 +27,7 @@ class HomePage(Page):
     def get_context(self, request):
         context = super(HomePage, self).get_context(request)
         page_sites = self.sites.all().prefetch_related('site')
-        context['sites'] = map(lambda x: x.site, page_sites)
+        context['sites'] = [x.site for x in page_sites]
         return context
 
 class HomePageSite(Orderable, models.Model):
