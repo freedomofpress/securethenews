@@ -47,9 +47,9 @@
       </div>
 
       <div class="score-teaser">
-        <span class="graded-news-org">New York Times <span class="grade grade-a">A+</span></span>
-        <span class="graded-news-org">Wall Street Journal <span class="grade grade-b">B</span></span>
-        <span class="graded-news-org">Buzzfeed <span class="grade grade-b">B-</span></span>
+        {% for site in sites %}
+          <span class="graded-news-org">{{ site.name }} <span class="grade grade-a">{#{ site.grade }#}A+</span></span>
+        {% endfor %}
       </div>
 
       <div class="align-center">

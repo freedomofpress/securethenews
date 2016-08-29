@@ -24,6 +24,12 @@ class HomePage(Page):
         InlinePanel('sites', label='Featured Sites'),
     ]
 
+    def get_context(self, request):
+        context = super(HomePage, self).get_context(request)
+        page_sites = self.sites.all().prefetch_related('site')
+        context['sites'] = map(lambda x: x.site, page_sites)
+        return context
+
 class HomePageSite(Orderable, models.Model):
     home_page = ParentalKey(HomePage, on_delete=models.CASCADE, related_name='sites')
     site = models.ForeignKey(Site, on_delete=models.CASCADE, related_name='pages')
