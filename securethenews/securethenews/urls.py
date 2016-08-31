@@ -19,6 +19,8 @@ urlpatterns = [
 
     url(r'^scans/', include('scans.urls')),
 
+    url(r'^sites/', include('sites.urls')),
+
     url(r'', include(wagtail_urls)),
 ]
 
