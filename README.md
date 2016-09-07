@@ -1,8 +1,10 @@
 # Secure the News
 
-## Getting Started with Vagrant
+## Getting Started with the Development Environment
 
-We assume you have Vagrant (>=1.8.4) and Ansible (>=1.9.4) installed.
+Make sure you have Vagrant (>=2.0) and Ansible (>=1.9.4) installed. A
+Makefile is provided to automate the setup of the development
+environment. Run:
 
 ```sh
 $ vagrant up
