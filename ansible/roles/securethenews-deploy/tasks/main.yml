@@ -32,3 +32,9 @@
   become: yes
   gem:
     name: site-inspector
+
+- name: Install gulp
+  become: yes
+  npm:
+    global: yes
+    name: gulp
