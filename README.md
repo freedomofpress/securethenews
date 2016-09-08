@@ -10,6 +10,8 @@ environment. Run:
     $ vagrant ssh
     # in the VM
     $ cd /vagrant/securethenews
+    $ npm install -g gulp
+    $ gulp # Leave this running to live reload changes to js/css files
     $ python3 manage.py runserver 0.0.0.0:8000
 
 ### Loading the development fixtures
