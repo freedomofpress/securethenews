@@ -10,7 +10,7 @@ environment. Run:
     $ vagrant ssh
     # in the VM
     $ cd /vagrant/securethenews
-    $ gulp # Leave this running to live reload changes to js/css files
+    $ gulp # Run this in a separate session to live reload js/css files
     $ python3 manage.py runserver 0.0.0.0:8000
 
 ### Loading the development fixtures
