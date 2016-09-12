@@ -32,3 +32,13 @@
   become: yes
   gem:
     name: site-inspector
+
+- name: Install Node dependencies
+  npm:
+    path: /vagrant/securethenews
+
+- name: Install gulp globally
+  become: yes
+  npm:
+    global: yes
+    name: gulp

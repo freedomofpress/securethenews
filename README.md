@@ -1,16 +1,17 @@
 # Secure the News
 
-## Getting Started with Vagrant
+## Getting Started with the Development Environment
 
-We assume you have Vagrant (>=1.8.4) and Ansible (>=1.9.4) installed.
+Make sure you have Vagrant (>=2.0) and Ansible (>=1.9.4) installed. A
+Makefile is provided to automate the setup of the development
+environment. Run:
 
-```sh
-$ vagrant up
-$ vagrant ssh
-# in the VM
-$ cd /vagrant/securethenews
-$ python3 manage.py runserver 0.0.0.0:8000
-```
+    $ make dev
+    $ vagrant ssh
+    # in the VM
+    $ cd /vagrant/securethenews
+    $ gulp # Run this in a separate session to live reload js/css files
+    $ python3 manage.py runserver 0.0.0.0:8000
 
 ### Loading the development fixtures
 
@@ -21,11 +22,9 @@ have something to work with during development.
 
 To load the fixtures:
 
-```sh
-# in the Vagrant VM
-$ cd /vagrant/securethenews
-$ python3 manage.py loaddata scans/fixtures/0001_20160803T235828.json
-```
+    # in the VM
+    $ cd /vagrant/securethenews
+    $ python3 manage.py loaddata scans/fixtures/0001_20160803T235828.json
 
 ### Notes
 
