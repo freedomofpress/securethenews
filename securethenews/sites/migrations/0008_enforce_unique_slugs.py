@@ -8,7 +8,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('scans', '0007_populate_slug_values'),
+        ('sites', '0007_populate_slug_values'),
     ]
 
     operations = [

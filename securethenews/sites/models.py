@@ -24,7 +24,7 @@ class Scan(models.Model):
     site = models.ForeignKey(
         Site,
         on_delete=models.CASCADE,
-        related_name='scans')
+        related_name='sites')
     timestamp = models.DateTimeField(auto_now_add=True)
 
     # Scan results

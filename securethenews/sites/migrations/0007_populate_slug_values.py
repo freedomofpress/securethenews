@@ -7,7 +7,7 @@ from django.utils.text import slugify
 
 
 def gen_slugs_from_names(apps, schema_editor):
-    Site = apps.get_model('scans', 'Site')
+    Site = apps.get_model('sites', 'Site')
     for site in Site.objects.all():
         site.slug = slugify(site.name)
         site.save()
@@ -15,7 +15,7 @@ def gen_slugs_from_names(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('scans', '0006_add_slug_field'),
+        ('sites', '0006_add_slug_field'),
     ]
 
     operations = [
