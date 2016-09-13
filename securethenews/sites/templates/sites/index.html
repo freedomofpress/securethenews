@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>
+   Leaderboard
+  </h1>
+  {% for site in sites %}
+    <div class="site-listing">
+      <a href="/sites/{{ site.id }}/{{ site.name|slugify }}">{{ site.name }}</a>
+    </div>
+  {% endfor %}
+{% endblock %}
