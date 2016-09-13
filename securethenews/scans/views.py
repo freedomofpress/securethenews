@@ -1,6 +1,18 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 
-# Create your views here.
+from .models import Site
+
+
 def index(request):
-    return HttpResponse('scans index')
+    sites = Site.objects.all()
+    return render(request, 'scans/index.html', dict(
+        sites=sites,
+    ))
+
+
+def site(request, slug):
+    site = get_object_or_404(Site, slug=slug)
+    return render(request, 'scans/site.html', dict(
+        site=site,
+    ))
