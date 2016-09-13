@@ -1,14 +1,15 @@
 <!doctype html>
 <html>
 <head>
-  <title>Sites</title>
+  <title>Leaderboard</title>
 </head>
 <body>
+  <h1>Leaderboard</h1>
   {% if sites %}
   <ul>
     {% for site in sites %}
     <li>
-      <a href="{% url 'site' site.slug %}">{{ site.name }}</a>
+      <a href="{% url 'sites:site' site.slug %}">{{ site.name }}</a>
     </li>
     {% endfor %}
   </ul>
