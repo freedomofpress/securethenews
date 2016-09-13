@@ -11,30 +11,16 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>New York Times</td>
-        <td class="grade-a">92%</td>
-        <td class="grade-b">95%</td>
-        <td class="grade-a">91%</td>
-        <td class="grade-a">89%</td>
-        <td><span class="grade grade-a">A+</span></td>
-      </tr>
-      <tr>
-        <td>Wall Street Journal</td>
-        <td class="grade-a">92%</td>
-        <td class="grade-b">95%</td>
-        <td class="grade-f">42%</td>
-        <td class="grade-a">89%</td>
-        <td><span class="grade grade-b">B-</span></td>
-      </tr>
-      <tr>
-        <td>Buzzfeed</td>
-        <td class="grade-a">92%</td>
-        <td class="grade-b">95%</td>
-        <td class="grade-f">0%</td>
-        <td class="grade-f">10%</td>
-        <td><span class="grade grade-f">F</span></td>
-      </tr>
+      {% for site in sites %}
+        <tr>
+          <td>{{ site.name }}</td>
+          <td class="grade-a">92%</td>
+          <td class="grade-b">95%</td>
+          <td class="grade-a">91%</td>
+          <td class="grade-a">89%</td>
+          <td><span class="grade grade-a">A+</span></td>
+        </tr>
+      {% endfor %}
     </tbody>
   </table>
 </div>
