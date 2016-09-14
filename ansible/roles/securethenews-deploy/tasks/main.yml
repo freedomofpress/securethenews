@@ -42,3 +42,13 @@
   npm:
     global: yes
     name: gulp
+
+  # pshtt is a new tool to scan websites for HTTPS deployment best practices.
+  # It is still under active development, so the best way to install it for now
+  # is from my fork on GitHub, which has a working setup.py script that can
+  # install the Python package.
+- name: Install pshtt from fork
+  become: yes
+  pip:
+    editable: false
+    name: "git+https://github.com/garrettr/pshtt.git@package#egg=pshtt"
