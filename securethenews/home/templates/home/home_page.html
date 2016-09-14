@@ -53,9 +53,11 @@
       </div>
 
       <div class="align-center">
-        <div class="button button-primary" aria-role="button">
-          See full leaderboard  <i class="fa fa-chevron-right" aria-hidden="true"></i>
-        </div>
+        <a href="{% url 'sites:index' %}">
+          <div class="button button-primary" aria-role="button">
+            See full leaderboard  <i class="fa fa-chevron-right" aria-hidden="true"></i>
+          </div>
+        </a>
       </div>
     </div>
   </section>
@@ -102,9 +104,11 @@
       <h1 class="leaderboard-header align-center">Leaderboard</h1>
       {% include "leaderboard.html" %}
       <div class="align-center leaderboard-button-container">
-        <div class="button button-primary button-dark">
-          See full leaderboard  <i class="fa fa-chevron-right" aria-hidden="true"></i>
-        </div>
+        <a href="{% url 'sites:index' %}">
+          <div class="button button-primary button-dark" aria-role="button">
+            See full leaderboard  <i class="fa fa-chevron-right" aria-hidden="true"></i>
+          </div>
+        </a>
       </div>
     </div>
   </section>

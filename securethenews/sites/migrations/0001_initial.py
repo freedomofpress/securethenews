@@ -33,6 +33,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='scan',
             name='site',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='scans', to='scans.Site'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='sites', to='sites.Site'),
         ),
     ]

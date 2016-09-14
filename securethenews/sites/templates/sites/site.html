@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ site.name }}{% endblock %}
+
+{% block content %}
+<h1>{{ site.name }}</h1>
+<p>
+  <a href="http://{{ site.url }}">Homepage</a>
+</p>
+{% endblock %}

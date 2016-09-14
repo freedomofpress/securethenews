@@ -24,7 +24,7 @@ To load the fixtures:
 
     # in the VM
     $ cd /vagrant/securethenews
-    $ python3 manage.py loaddata scans/fixtures/0001_20160803T235828.json
+    $ python3 manage.py loaddata sites/fixtures/0002_20160913T155742.json
 
 ### Notes
 

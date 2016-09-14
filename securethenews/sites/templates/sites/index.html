@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}Leaderboard{% endblock %}
+
+{% block content %}
+<h1>Leaderboard</h1>
+{% if sites %}
+<ul>
+  {% for site in sites %}
+  <li>
+    <a href="{% url 'sites:site' site.slug %}">{{ site.name }}</a>
+  </li>
+  {% endfor %}
+</ul>
+{% endif %}
+{% endblock %}

@@ -6,7 +6,7 @@ from wagtail.wagtailcore.models import Page
 from wagtail.wagtailcore.fields import RichTextField
 from wagtail.wagtailadmin.edit_handlers import FieldPanel, MultiFieldPanel, InlinePanel
 
-from scans.models import Site
+from sites.models import Site
 
 class HomePage(Page):
     main_title = models.CharField(max_length=50, default="Every news site should be secure.")
