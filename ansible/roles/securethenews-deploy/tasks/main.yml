@@ -1,9 +1,4 @@
 ---
-- name: Add PPA for Ruby 2.3, which is required for site-inspector
-  become: yes
-  apt_repository:
-    repo: 'ppa:brightbox/ruby-ng'
-
 - name: Install apt dependencies.
   become: yes
   apt:
@@ -27,11 +22,6 @@
   pip:
     requirements: "/vagrant/securethenews/requirements.txt"
     executable: pip3
-
-- name: Install site-inspector
-  become: yes
-  gem:
-    name: site-inspector
 
 - name: Install Node dependencies
   npm:

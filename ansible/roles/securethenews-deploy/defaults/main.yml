@@ -6,8 +6,6 @@ apt_packages:
     - python-dev
     - python-pip
     - python3-pip
-    - ruby2.3
-    - ruby2.3-dev
     - tmux
     - vim
     - zlib1g-dev # Wagtail -> Pillow dependency
