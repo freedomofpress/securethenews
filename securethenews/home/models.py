@@ -21,3 +21,16 @@ class HomePage(Page):
         MultiFieldPanel([ FieldPanel('how_header'), FieldPanel('how_body') ], "How section"),
         MultiFieldPanel([ FieldPanel('why_header'), FieldPanel('why_body') ], "Why section"),
     ]
+
+
+class ContentPage(Page):
+    sub_header = models.CharField(max_length=50, default="")
+    body = RichTextField(default="")
+    button_text = models.CharField(max_length=50, default="")
+    button_url = models.CharField(max_length=255, default="")
+
+    content_panels = Page.content_panels + [
+        FieldPanel('sub_header'),
+        FieldPanel('body'),
+        MultiFieldPanel([ FieldPanel('button_text'), FieldPanel('button_url') ], "Call to action"),
+    ]

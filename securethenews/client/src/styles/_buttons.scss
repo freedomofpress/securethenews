@@ -56,4 +56,18 @@ $buttonHeight: 50px;
       color: #fff;
     }
   }
+
+  &.button-light {
+    background-color: transparent;
+    color: $blue;
+    border: 1px solid $lightBlue;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 1px;
+
+    &:hover {
+      background-color: $lightBlue;
+      color: #fff;
+    }
+  }
 }
