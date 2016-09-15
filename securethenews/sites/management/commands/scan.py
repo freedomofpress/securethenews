@@ -32,7 +32,10 @@ class Command(BaseCommand):
             if scan_results:
                 scan = Scan(
                     site=site,
-                    supports_https=bool(scan_results['Valid HTTPS']),
-                    enforces_https=bool(scan_results['Defaults to HTTPS']),
+                    live=scan_results['Live'],
+                    valid_https=scan_results['Valid HTTPS'],
+                    default_https=scan_results['Defaults to HTTPS'],
+                    enforces_https=scan_results['Strictly Forces HTTPS'],
+                    downgrades_https=scan_results['Downgrades HTTPS']
                 )
                 scan.save()
