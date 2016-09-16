@@ -11,4 +11,14 @@ section {
   max-width: $contentMaxWidth;
   margin: auto;
   padding: 2 * $spacingUnit 0;
+
+  &.rich-text {
+    max-width: $contentMaxWidth / 1.3;
+  }
+}
+
+.blue-section {
+  color: #fff;
+  background: linear-gradient(to top right, #000, #16273d);
+  padding-bottom: $spacingUnit * 3;
 }
