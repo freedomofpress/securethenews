@@ -28,19 +28,22 @@
 {% endblock %}
 
 {% block content %}
-  <section class="blue-section">
-    <div class="section-content">
-      <h1 class="home-header">{{ page.title }}</h1>
-      <h5 class="home-subhead">{{ page.sub_header }}</h5>
-      <div class="social-container align-center">
-        {% include 'shared/social.html' with url=request.build_absolute_uri %}
-      </div>
-    </div>
-  </section>
-
   <section class="white-section">
     <div class="section-content">
-      <div class="rich-text">{{ page.body|richtext }}</div>
+      <h1 class="blog-title">{{ page.title }}</h1>
+      <h5 class="blog-byline">{{ page.byline }} &middot; {{ page.date }}</h5>
+      <div class="social-container">
+        {% include 'shared/social.html' with url=request.build_absolute_uri %}
+      </div>
+      <div class="rich-text blog-body">{{ page.body|richtext }}</div>
+      <div class="social-container">
+        {% include 'shared/social.html' with url=request.build_absolute_uri %}
+      </div>
+      <a href="/blog">
+        <div class="button button-gray button-back" aria-role="button">
+          <i class="fa fa-chevron-left" aria-hidden="true"></i> Back to Blog
+        </div>
+      </a>
     </div>
   </section>
 {% endblock %}

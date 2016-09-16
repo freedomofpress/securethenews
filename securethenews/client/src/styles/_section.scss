@@ -19,6 +19,6 @@ section {
 
 .blue-section {
   color: #fff;
-  background: linear-gradient(to top right, #000, #16273d);
+  background: $blueGradient;
   padding-bottom: $spacingUnit * 3;
 }
