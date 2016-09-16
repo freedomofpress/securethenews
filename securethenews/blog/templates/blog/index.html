@@ -28,21 +28,19 @@
 {% endblock %}
 
 {% block content %}
-  <section class="blue-section">
-    <div class="section-content">
-      <h1 class="home-header">SecureTheNews Blog</h1>
-      <div class="social-container align-center">
-        {% include 'shared/social.html' with url=request.build_absolute_uri %}
-      </div>
-    </div>
-  </section>
-
   <section class="white-section">
     <div class="section-content">
       <div class="blog-post-list">
-        {% for post in posts %}
-          <a href="{{ post.url }}">{{ post.title }}</a>
-        {% endfor %}
+        <div class="blog-post-item">
+          {% for post in posts %}
+          <h2 class="blog-title">{{ post.title }}</h2>
+            <h5 class="blog-byline">{{ post.byline }} &middot; {{ post.date }}</h5>
+            <p class="blog-intro">{{ post.intro }}</p>
+            <a href="{{ post.url }}">
+              <div class="button button-light" aria-role="button">read more<i class="fa fa-chevron-right" aria-hidden="true"></i></div>
+            </a>
+          {% endfor %}
+        </div>
       </div>
     </div>
   </section>
