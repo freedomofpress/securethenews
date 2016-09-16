@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block body_class %}template-blog-index{% endblock %}
+
+{% load wagtailcore_tags %}
+
+{% block menu %}
+  <a href="#footer">
+    <span class="header-item about">
+      about
+    </span>
+  </a>
+  <a href="/leaderboard">
+    <span class="header-item stats" href="/leaderboard">
+      stats
+    </span>
+  </a>
+  <a href="/why">
+    <span class="header-item why" href="/why">
+      why
+    </span>
+  </a>
+  <a href="/how">
+    <span class="header-item how" href="/how">
+      how
+    </span>
+  </a>
+{% endblock %}
+
+{% block content %}
+  <section class="blue-section">
+    <div class="section-content">
+      <h1 class="home-header">SecureTheNews Blog</h1>
+      <div class="social-container align-center">
+        {% include 'shared/social.html' with url=request.build_absolute_uri %}
+      </div>
+    </div>
+  </section>
+
+  <section class="white-section">
+    <div class="section-content">
+      <div class="blog-post-list">
+        {% for post in posts %}
+          <a href="{{ post.url }}">{{ post.title }}</a>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+{% endblock %}
