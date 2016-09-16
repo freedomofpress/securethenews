@@ -1,9 +1,4 @@
 ---
-- name: Add PPA for Ruby 2.3, which is required for site-inspector
-  become: yes
-  apt_repository:
-    repo: 'ppa:brightbox/ruby-ng'
-
 - name: Install apt dependencies.
   become: yes
   apt:
@@ -28,11 +23,6 @@
     requirements: "/vagrant/securethenews/requirements.txt"
     executable: pip3
 
-- name: Install site-inspector
-  become: yes
-  gem:
-    name: site-inspector
-
 - name: Install Node dependencies
   npm:
     path: /vagrant/securethenews
@@ -42,3 +32,13 @@
   npm:
     global: yes
     name: gulp
+
+  # pshtt is a new tool to scan websites for HTTPS deployment best practices.
+  # It is still under active development, so the best way to install it for now
+  # is from my fork on GitHub, which has a working setup.py script that can
+  # install the Python package.
+- name: Install pshtt from fork
+  become: yes
+  pip:
+    editable: false
+    name: "git+https://github.com/garrettr/pshtt.git@package#egg=pshtt"
