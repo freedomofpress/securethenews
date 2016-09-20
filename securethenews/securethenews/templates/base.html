@@ -26,7 +26,28 @@
         {% block header %}
           <div class="header sticky">
             <span class="header-item logo">SECURETHENEWS</span>
-            {% block menu %}{% endblock %}
+            {% block menu %}
+              <a href="#footer">
+                <span class="header-item about">
+                  about
+                </span>
+              </a>
+              <a href="/leaderboard">
+                <span class="header-item stats" href="/leaderboard">
+                  stats
+                </span>
+              </a>
+              <a href="/why">
+                <span class="header-item why" href="/why">
+                  why
+                </span>
+              </a>
+              <a href="/how">
+                <span class="header-item how" href="/how">
+                  how
+                </span>
+              </a>
+            {% endblock %}
           </div>
         {% endblock %}
 
