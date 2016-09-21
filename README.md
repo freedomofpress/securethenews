@@ -13,18 +13,31 @@ environment. Run:
     $ gulp # Run this in a separate session to live reload js/css files
     $ python3 manage.py runserver 0.0.0.0:8000
 
-### Loading the development fixtures
+### Development fixtures
 
-I have generated fixtures using the sites from `prototype_data/domains.csv` and
-a single scan run generated with `python3 manage.py scan`. The fixtures are
-stored in the repository and can be quickly loaded into your database so you
-have something to work with during development.
+To encourage rapid development, the repository includes database fixtures that
+can be used to automatically populate the development database.
+
+The fixtures include:
+
+- ContentPages from the initial site design ("About", "How", "Why?")
+- A BlogIndexPage and some test BlogPosts.
+- An initial set of Sites based on `prototype_data/domains.csv`, with the
+  results of a single scan generated with `python3 manage.py scan`.
+- A default superuser that you can use to log in to the Admin Interface
+  (username: **admin**, password: **admin**).
 
 To load the fixtures:
 
-    # in the VM
-    $ cd /vagrant/securethenews
-    $ python3 manage.py loaddata sites/fixtures/0002_20160913T155742.json
+    $ cd /vagrant/securethenews # in the VM
+    # Make sure you've applied all of the migrations first
+    $ python3 manage.py migrate
+    $ python3 manage.py loaddata fixtures/dev.json
+
+If you want to update the fixtures, use the following command (and make sure you
+update the description of their contents in this README):
+
+    $ python3 manage.py dumpdata --natural-primary --natural-foreign --exclude contenttypes --exclude auth.Permission --indent 4 > fixtures/dev.json
 
 ### Notes
 

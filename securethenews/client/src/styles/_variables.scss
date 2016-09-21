@@ -6,15 +6,25 @@ $lightGray: #ededed;
 $blue: #16273d;
 $lightBlue: #3bbaf4;
 $textGray: #333;
+$titleGray: #444;
+$bylineGray: #939393;
+
+// Gradients
+$blueGradient: linear-gradient(to top right, #000, #16273d);
 
 // Spacing
-$headerHeight: 60px;
+$headerHeight: 120px;
 $contentMaxWidth: 970px;
 $spacingUnit: 20px;
 
 // Fonts
 $sans: 'Source Sans Pro', sans-serif;
 $fa-font-path: 'fonts';
+$fontSize: 1.2em;
+$h2Size: $fontSize * 1.5;
+$h3Size: $fontSize * 1.17;
+$h4Size: $fontSize * 1.12;
+$h5Size: $fontSize * 1.05;
 
 // Media Queries
 $mediaLarge: 1250px;

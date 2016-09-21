@@ -70,4 +70,23 @@ $buttonHeight: 50px;
       color: #fff;
     }
   }
+
+  &.button-gray {
+    background-color: $lightGray;
+    color: $blue;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 1px;
+
+    &:hover {
+      background-color: darken($lightGray, 10%);
+    }
+  }
+
+  &.button-back {
+    i {
+      margin-left: 0;
+      margin-right: $spacingUnit / 2;
+    }
+  }
 }
