@@ -25,6 +25,8 @@ class HomePage(Page):
         MultiFieldPanel([ FieldPanel('why_header'), FieldPanel('why_body') ], "Why section"),
     ]
 
+    parent_page_types = []
+
 
 class ContentPage(Page):
     sub_header = models.CharField(max_length=50, default="")

@@ -9,10 +9,10 @@
     <div class="section-content">
       <div class="blog-post-list">
         <div class="blog-post-item">
-          {% for post in posts %}
+          {% for post in page.posts %}
           <h2 class="blog-title">{{ post.title }}</h2>
             <h5 class="blog-byline">{{ post.byline }} &middot; {{ post.date }}</h5>
-            <p class="blog-intro">{{ post.intro }}</p>
+            <p class="blog-intro">{{ post.body|richtext|truncatewords_html:30 }}</p>
             <a href="{{ post.url }}">
               <div class="button button-light" aria-role="button">read more<i class="fa fa-chevron-right" aria-hidden="true"></i></div>
             </a>
