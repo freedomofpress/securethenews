@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block body_class %}template-content-page{% endblock %}
+
+{% block content %}
+  <section class="blue-section">
+    <div class="section-content">
+      <h1 class="home-header">{{ page.title }}</h1>
+      <h5 class="home-subhead">{{ page.sub_header }}</h5>
+      <div class="social-container align-center">
+        {% include 'shared/social.html' with url=request.build_absolute_uri %}
+      </div>
+    </div>
+  </section>
+
+  <section class="white-section">
+    <div class="section-content">
+      <div class="rich-text">{{ page.body|safe }}</div>
+      {% if page.button_text and page.button_target %}
+        <a href="{{ page.button_target.url }}">
+          <div class="button button-light" aria-role="button">
+            {{ page.button_text }}<i class="fa fa-chevron-right" aria-hidden="true"></i>
+          </div>
+        </a>
+      {% endif %}
+    </div>
+  </section>
+{% endblock %}

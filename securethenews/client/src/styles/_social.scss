@@ -1,0 +1,48 @@
+$facebookBlue: #354ba1;
+$twitterBlue: #139ae9;
+$gplusRed: #d5392f;
+
+.social-icon {
+  display: inline-block;
+  width: $spacingUnit * 1.5;
+  line-height: $spacingUnit * 1.5;
+  border-radius: 50%;
+  border: 1px solid #fff;
+  background-color: #fff;
+  text-align: center;
+  cursor: pointer;
+
+  &:not(:last-child) {
+    margin-right: $spacingUnit / 2;
+  }
+
+  &.facebook {
+    color: $facebookBlue;
+    border-color: $facebookBlue;
+
+    &:hover {
+      background-color: $facebookBlue;
+      color: #fff;
+    }
+  }
+
+  &.twitter {
+    color: $twitterBlue;
+    border-color: $twitterBlue;
+
+    &:hover {
+      background-color: $twitterBlue;
+      color: #fff;
+    }
+  }
+
+  &.gplus {
+    color: $gplusRed;
+    border-color: $gplusRed;
+
+    &:hover {
+      background-color: $gplusRed;
+      color: #fff;
+    }
+  }
+}
