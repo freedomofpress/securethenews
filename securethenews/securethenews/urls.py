@@ -19,6 +19,8 @@ urlpatterns = [
 
     url(r'^sites/', include('sites.urls')),
 
+    url(r'^news/', include('blog.urls')),
+
     url(r'', include(wagtail_urls)),
 ]
 

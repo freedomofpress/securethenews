@@ -1,0 +1,17 @@
+.template-blog-index {
+  .header {
+    background: $blueGradient;
+  }
+
+  .blog-byline {
+    margin-bottom: $spacingUnit;
+  }
+
+  .blog-intro {
+    margin-bottom: $spacingUnit;
+  }
+
+  .section-content {
+    max-width: 600px;
+  }
+}

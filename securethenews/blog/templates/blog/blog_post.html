@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block body_class %}template-blog-post{% endblock %}
+
+{% load wagtailcore_tags %}
+
+{% block content %}
+  <section class="white-section">
+    <div class="section-content">
+      <h1 class="blog-title">{{ page.title }}</h1>
+      <h5 class="blog-byline">{{ page.byline }} &middot; {{ page.date }}</h5>
+      <div class="social-container">
+        {% include 'shared/social.html' with url=request.build_absolute_uri %}
+      </div>
+      <div class="rich-text blog-body">{{ page.body|richtext }}</div>
+      <div class="social-container">
+        {% include 'shared/social.html' with url=request.build_absolute_uri %}
+      </div>
+      <a href="/news">
+        <div class="button button-gray button-back" aria-role="button">
+          <i class="fa fa-chevron-left" aria-hidden="true"></i> Back to Blog
+        </div>
+      </a>
+    </div>
+  </section>
+{% endblock %}

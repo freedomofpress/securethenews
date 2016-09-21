@@ -1,16 +1,18 @@
 $facebookBlue: #354ba1;
 $twitterBlue: #139ae9;
 $gplusRed: #d5392f;
+$socialIconBorderWidth: 2px;
 
 .social-icon {
   display: inline-block;
-  width: $spacingUnit * 1.5;
-  line-height: $spacingUnit * 1.5;
+  width: $spacingUnit * 2;
+  line-height: $spacingUnit * 2 - 2 * $socialIconBorderWidth;
   border-radius: 50%;
-  border: 1px solid #fff;
+  border: $socialIconBorderWidth solid #fff;
   background-color: #fff;
   text-align: center;
   cursor: pointer;
+  font-size: 20px;
 
   &:not(:last-child) {
     margin-right: $spacingUnit / 2;

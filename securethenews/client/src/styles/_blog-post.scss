@@ -1,0 +1,26 @@
+.template-blog-post {
+  .header {
+    background: $blueGradient;
+  }
+
+  .social-container {
+    margin-bottom: $spacingUnit * 2;
+    margin-top: 0;
+  }
+}
+
+.blog-title {
+  margin-top: $spacingUnit * 3;
+  margin-bottom: $spacingUnit;
+  color: $titleGray;
+  font-weight: lighter;
+  font-size: $fontSize * 2.4;
+  letter-spacing: -2px;
+}
+
+.blog-byline {
+  font-size: $fontSize;
+  font-weight: normal;
+  color: $bylineGray;
+  margin-bottom: $spacingUnit * 2;
+}
