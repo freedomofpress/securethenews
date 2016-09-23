@@ -1,4 +1,5 @@
 {% load static wagtailuserbar %}
+{% load menu_tags %}
 
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -25,29 +26,10 @@
 
         {% block header %}
           <div class="header sticky">
-            <span class="header-item logo">SECURETHENEWS</span>
-            {% block menu %}
-              <a href="#footer">
-                <span class="header-item about">
-                  about
-                </span>
-              </a>
-              <a href="/leaderboard">
-                <span class="header-item stats" href="/leaderboard">
-                  stats
-                </span>
-              </a>
-              <a href="/why">
-                <span class="header-item why" href="/why">
-                  why
-                </span>
-              </a>
-              <a href="/how">
-                <span class="header-item how" href="/how">
-                  how
-                </span>
-              </a>
-            {% endblock %}
+            <a href="/">
+              <span class="header-item logo">SECURETHENEWS</span>
+            </a>
+            {% block menu %}{% main_menu %}{% endblock %}
           </div>
         {% endblock %}
 
