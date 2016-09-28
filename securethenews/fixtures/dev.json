@@ -1580,6 +1580,68 @@
     }
 },
 {
+    "model": "wagtailmenus.mainmenu",
+    "pk": 1,
+    "fields": {
+        "site": [
+            "localhost",
+            80
+        ]
+    }
+},
+{
+    "model": "wagtailmenus.mainmenuitem",
+    "pk": 1,
+    "fields": {
+        "sort_order": 0,
+        "link_page": 5,
+        "link_url": "",
+        "link_text": "",
+        "url_append": "",
+        "menu": 1,
+        "allow_subnav": true
+    }
+},
+{
+    "model": "wagtailmenus.mainmenuitem",
+    "pk": 2,
+    "fields": {
+        "sort_order": 1,
+        "link_page": 4,
+        "link_url": "",
+        "link_text": "",
+        "url_append": "",
+        "menu": 1,
+        "allow_subnav": true
+    }
+},
+{
+    "model": "wagtailmenus.mainmenuitem",
+    "pk": 3,
+    "fields": {
+        "sort_order": 2,
+        "link_page": 6,
+        "link_url": "",
+        "link_text": "",
+        "url_append": "",
+        "menu": 1,
+        "allow_subnav": true
+    }
+},
+{
+    "model": "wagtailmenus.mainmenuitem",
+    "pk": 4,
+    "fields": {
+        "sort_order": 3,
+        "link_page": 7,
+        "link_url": "",
+        "link_text": "",
+        "url_append": "",
+        "menu": 1,
+        "allow_subnav": true
+    }
+},
+{
     "model": "auth.group",
     "fields": {
         "name": "Moderators",
@@ -1669,7 +1731,7 @@
     "model": "auth.user",
     "fields": {
         "password": "pbkdf2_sha256$24000$mQso0vJ3FBFT$pdvLkEKTvCc93TcP9rPGD7Vn7jkwYeC0/a5NYjpjD5k=",
-        "last_login": "2016-09-21T22:28:33.818Z",
+        "last_login": "2016-09-21T22:37:42.892Z",
         "is_superuser": true,
         "username": "admin",
         "first_name": "",
@@ -1680,6 +1742,14 @@
         "date_joined": "2016-09-21T22:28:09.581Z",
         "groups": [],
         "user_permissions": []
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "414wjgm1c30jcl79qtn40oylbr00kliq",
+    "fields": {
+        "session_data": "NzE1MTI3ZWE3ZjFhNmFiNzMyNjYxNzU2MDk2NTlhZWMwY2NkN2U5MTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9oYXNoIjoiNjY0MGExNjcxMTA4YzZhYWJiNzUwZjY0M2Q5MjY5ZWQ2NTVhZTY2OCIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIn0=",
+        "expire_date": "2016-10-05T22:37:42.907Z"
     }
 },
 {
@@ -1704,14 +1774,6 @@
     "fields": {
         "session_data": "YTZjMDZkY2Q2NDYwMzliYTcwYjQ1MTRhNGY2MDEwZGZjZWUyZTFmNDp7Il9hdXRoX3VzZXJfaGFzaCI6IjMyYzM3NDNjOWQzOTAwNjZkMzNiODdiZGIyNGZlNDM1ZWQwMmE1MzciLCJfYXV0aF91c2VyX2lkIjoiMSIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIn0=",
         "expire_date": "2016-09-29T22:38:25.219Z"
-    }
-},
-{
-    "model": "sessions.session",
-    "pk": "o53kwrbhd280ycinvmnzlaa3dsfvvqlu",
-    "fields": {
-        "session_data": "ZGRjM2Y5OWIyODYyNjRlYmY2OWRkZjQ0YzEyM2ZkZjQ2OTAxMjhiMTp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiNjY0MGExNjcxMTA4YzZhYWJiNzUwZjY0M2Q5MjY5ZWQ2NTVhZTY2OCIsIl9hdXRoX3VzZXJfaWQiOiIyIn0=",
-        "expire_date": "2016-10-05T22:28:33.831Z"
     }
 },
 {
@@ -2129,6 +2191,76 @@
     }
 },
 {
+    "model": "wagtailcore.pagerevision",
+    "pk": 20,
+    "fields": {
+        "page": 4,
+        "submitted_for_moderation": false,
+        "created_at": "2016-09-22T23:19:48.560Z",
+        "user": [
+            "admin"
+        ],
+        "content_json": "{\"owner\": null, \"go_live_at\": null, \"content_type\": 6, \"depth\": 3, \"show_in_menus\": true, \"locked\": false, \"live\": true, \"body\": \"<p>Intelligentsia pinterest ugh, letterpress hammock chartreuse woke swag direct trade deep v you probably haven't heard of them vaporware scenester. Meh flexitarian synth, master cleanse keffiyeh hell of brunch next level af pork belly. Skateboard etsy pinterest, flannel intelligentsia selvage hammock leggings tilde brooklyn dreamcatcher tumblr +1 vice. Gluten-free chambray chia vinyl, tousled flannel pinterest ethical. Scenester actually viral vaporware forage, brooklyn +1 freegan chartreuse quinoa banh mi. Heirloom paleo ramps vegan, marfa asymmetrical fap kale chips. Semiotics street art bicycle rights freegan.</p><p>Tacos shoreditch selvage vape, salvia skateboard trust fund 90's meditation. Pork belly subway tile wolf taxidermy. Gochujang drinking vinegar quinoa, shabby chic godard poke gentrify kale chips disrupt. Narwhal fixie aesthetic bespoke, typewriter pork belly put a bird on it pop-up green juice poke snackwave master cleanse organic gastropub. Blog microdosing polaroid pabst, bespoke master cleanse kombucha authentic kickstarter slow-carb. Poke coloring book selfies salvia, cliche street art whatever direct trade. Fingerstache sustainable occupy franzen, enamel pin mixtape vaporware cronut raclette.</p><p>Pop-up raclette man braid, blue bottle swag disrupt cornhole fashion axe VHS master cleanse tousled vinyl ennui ugh artisan. Blue bottle you probably haven't heard of them selfies chambray blog. Wolf sartorial cliche squid +1. Unicorn forage raw denim street art, irony tacos occupy williamsburg distillery ramps. Waistcoat 8-bit paleo raclette, gochujang blog cliche roof party. Echo park gastropub af schlitz 3 wolf moon celiac. Put a bird on it +1 intelligentsia, sartorial narwhal aesthetic quinoa.</p>\", \"title\": \"Why?\", \"seo_title\": \"\", \"path\": \"000100010001\", \"sub_header\": \"Why should news organizations deploy HTTPS?\", \"has_unpublished_changes\": false, \"first_published_at\": \"2016-09-15T22:45:31.503Z\", \"slug\": \"why\", \"latest_revision_created_at\": \"2016-09-19T23:29:36.931Z\", \"button_target\": null, \"button_text\": \"Deploy it now!\", \"expired\": false, \"pk\": 4, \"search_description\": \"\", \"url_path\": \"/home/why/\", \"numchild\": 0, \"expire_at\": null}",
+        "approved_go_live_at": null
+    }
+},
+{
+    "model": "wagtailcore.pagerevision",
+    "pk": 21,
+    "fields": {
+        "page": 3,
+        "submitted_for_moderation": false,
+        "created_at": "2016-09-22T23:21:19.277Z",
+        "user": [
+            "admin"
+        ],
+        "content_json": "{\"owner\": null, \"go_live_at\": null, \"content_type\": 2, \"depth\": 2, \"show_in_menus\": false, \"live\": true, \"why_body\": \"Blah blah\", \"locked\": false, \"main_title\": \"Edward Snowden should be pardoned.\", \"title\": \"Secure The News\", \"seo_title\": \"\", \"path\": \"00010001\", \"why_header\": \"Encryption protects your readers\", \"has_unpublished_changes\": false, \"first_published_at\": \"2016-09-20T20:02:52.717Z\", \"slug\": \"home\", \"sub_title\": \"It's critical for both journalists and readers.\", \"latest_revision_created_at\": \"2016-09-20T20:02:52.642Z\", \"how_header\": \"Switching to HTTPS is easier than ever\", \"how_body\": \"Blah blah\", \"expired\": false, \"pk\": 3, \"search_description\": \"\", \"url_path\": \"/home/\", \"numchild\": 5, \"expire_at\": null}",
+        "approved_go_live_at": null
+    }
+},
+{
+    "model": "wagtailcore.pagerevision",
+    "pk": 22,
+    "fields": {
+        "page": 3,
+        "submitted_for_moderation": false,
+        "created_at": "2016-09-22T23:21:40.294Z",
+        "user": [
+            "admin"
+        ],
+        "content_json": "{\"owner\": null, \"go_live_at\": null, \"content_type\": 2, \"depth\": 2, \"show_in_menus\": false, \"live\": true, \"why_body\": \"Blah blah\", \"locked\": false, \"main_title\": \"Every news site should be secure.\", \"title\": \"Secure The News\", \"seo_title\": \"\", \"path\": \"00010001\", \"why_header\": \"Encryption protects your readers\", \"has_unpublished_changes\": false, \"first_published_at\": \"2016-09-20T20:02:52.717Z\", \"slug\": \"home\", \"sub_title\": \"It's critical for both journalists and readers.\", \"latest_revision_created_at\": \"2016-09-22T23:21:19.277Z\", \"how_header\": \"Switching to HTTPS is easier than ever\", \"how_body\": \"Blah blah\", \"expired\": false, \"pk\": 3, \"search_description\": \"\", \"url_path\": \"/home/\", \"numchild\": 5, \"expire_at\": null}",
+        "approved_go_live_at": null
+    }
+},
+{
+    "model": "wagtailcore.pagerevision",
+    "pk": 23,
+    "fields": {
+        "page": 3,
+        "submitted_for_moderation": false,
+        "created_at": "2016-09-22T23:21:49.143Z",
+        "user": [
+            "admin"
+        ],
+        "content_json": "{\"owner\": null, \"go_live_at\": null, \"content_type\": 2, \"depth\": 2, \"show_in_menus\": false, \"live\": true, \"why_body\": \"Blah blah\", \"locked\": false, \"main_title\": \"Every news site should be secure.\", \"title\": \"Secure The News\", \"seo_title\": \"\", \"path\": \"00010001\", \"why_header\": \"Encryption protects your readers\", \"has_unpublished_changes\": true, \"first_published_at\": \"2016-09-20T20:02:52.717Z\", \"slug\": \"home\", \"sub_title\": \"It's critical for both journalists and readers.\", \"latest_revision_created_at\": \"2016-09-22T23:21:40.294Z\", \"how_header\": \"Switching to HTTPS is easier than ever\", \"how_body\": \"Blah blah\", \"expired\": false, \"pk\": 3, \"search_description\": \"\", \"url_path\": \"/home/\", \"numchild\": 5, \"expire_at\": null}",
+        "approved_go_live_at": null
+    }
+},
+{
+    "model": "wagtailcore.pagerevision",
+    "pk": 25,
+    "fields": {
+        "page": 5,
+        "submitted_for_moderation": false,
+        "created_at": "2016-09-22T23:46:55.786Z",
+        "user": [
+            "admin"
+        ],
+        "content_json": "{\"owner\": null, \"go_live_at\": null, \"content_type\": 6, \"depth\": 3, \"show_in_menus\": true, \"locked\": false, \"live\": true, \"body\": \"<p>Everyday carry kitsch portland, twee brunch four dollar toast mustache humblebrag. Succulents semiotics kale chips glossier. Chartreuse VHS meditation, put a bird on it schlitz roof party echo park chillwave shabby chic photo booth venmo wayfarers. Quinoa ugh enamel pin twee skateboard, vinyl bespoke fashion axe chambray. Organic lyft church-key, williamsburg authentic put a bird on it meggings tousled cliche craft beer cred chicharrones gluten-free tumblr. Ennui lomo chicharrones, viral gochujang freegan edison bulb hoodie kogi synth. Letterpress PBR&amp;B coloring book sriracha you probably haven't heard of them bicycle rights actually narwhal fixie tbh.</p><p>Green juice viral 8-bit, selfies put a bird on it swag live-edge authentic keffiyeh sriracha poke tofu. Paleo hexagon lumbersexual vice, raw denim dreamcatcher synth mlkshk iceland gluten-free ennui swag. Retro sartorial cronut, pop-up ugh lumbersexual salvia migas asymmetrical. Poutine chillwave neutra, prism ramps humblebrag health goth. Knausgaard godard lomo leggings, cardigan kombucha etsy banjo edison bulb. Gochujang flexitarian live-edge, occupy vape readymade biodiesel YOLO post-ironic tumblr lyft mumblecore. Bushwick church-key 90's, farm-to-table mustache kickstarter twee wayfarers tumeric neutra humblebrag meditation lumbersexual salvia etsy.</p><p>Sriracha YOLO forage health goth knausgaard pour-over. Man bun lumbersexual listicle pork belly fam sustainable. Try-hard live-edge lomo, swag retro vegan typewriter pitchfork selvage. XOXO yuccie cronut, hashtag farm-to-table small batch irony literally mlkshk shabby chic sartorial ethical subway tile synth. Swag 3 wolf moon neutra, migas yuccie slow-carb literally fam street art chartreuse tousled. Bicycle rights iPhone kale chips chambray mumblecore. Craft beer humblebrag subway tile, deep v slow-carb chambray aesthetic letterpress.</p><p>Lo-fi single-origin coffee scenester hella meggings put a bird on it. Biodiesel church-key XOXO, live-edge pop-up cold-pressed etsy hot chicken knausgaard copper mug taxidermy polaroid normcore microdosing fam. Salvia coloring book jianbing, blog freegan heirloom bespoke hammock portland tumeric. Jianbing gochujang iPhone, mixtape hella subway tile blog brunch. Godard typewriter subway tile, gentrify ethical etsy activated charcoal vaporware health goth occupy freegan kitsch drinking vinegar. Tumblr shoreditch organic, bicycle rights you probably haven't heard of them gochujang cronut keytar squid. Venmo pug meh sustainable small batch.</p>\", \"title\": \"How\", \"seo_title\": \"\", \"path\": \"000100010002\", \"sub_header\": \"How do we do stuff?\", \"has_unpublished_changes\": false, \"first_published_at\": \"2016-09-19T22:23:39.475Z\", \"slug\": \"how\", \"latest_revision_created_at\": \"2016-09-19T23:29:29.226Z\", \"button_target\": null, \"button_text\": \"Ugh\", \"expired\": false, \"pk\": 5, \"search_description\": \"\", \"url_path\": \"/home/how/\", \"numchild\": 0, \"expire_at\": null}",
+        "approved_go_live_at": null
+    }
+},
+{
     "model": "wagtailcore.page",
     "pk": 1,
     "fields": {
@@ -2181,7 +2313,7 @@
         "expired": false,
         "locked": false,
         "first_published_at": "2016-09-20T20:02:52.717Z",
-        "latest_revision_created_at": "2016-09-20T20:02:52.642Z"
+        "latest_revision_created_at": "2016-09-22T23:21:49.143Z"
     }
 },
 {
@@ -2209,7 +2341,7 @@
         "expired": false,
         "locked": false,
         "first_published_at": "2016-09-15T22:45:31.503Z",
-        "latest_revision_created_at": "2016-09-19T23:29:36.931Z"
+        "latest_revision_created_at": "2016-09-22T23:19:48.560Z"
     }
 },
 {
@@ -2237,7 +2369,7 @@
         "expired": false,
         "locked": false,
         "first_published_at": "2016-09-19T22:23:39.475Z",
-        "latest_revision_created_at": "2016-09-19T23:29:29.226Z"
+        "latest_revision_created_at": "2016-09-22T23:46:55.786Z"
     }
 },
 {
@@ -2408,7 +2540,7 @@
     "pk": 4,
     "fields": {
         "sub_header": "Why should news organizations deploy HTTPS?",
-        "body": "<p>Because it's the right thing to do!</p>",
+        "body": "<p>Intelligentsia pinterest ugh, letterpress hammock chartreuse woke swag direct trade deep v you probably haven't heard of them vaporware scenester. Meh flexitarian synth, master cleanse keffiyeh hell of brunch next level af pork belly. Skateboard etsy pinterest, flannel intelligentsia selvage hammock leggings tilde brooklyn dreamcatcher tumblr +1 vice. Gluten-free chambray chia vinyl, tousled flannel pinterest ethical. Scenester actually viral vaporware forage, brooklyn +1 freegan chartreuse quinoa banh mi. Heirloom paleo ramps vegan, marfa asymmetrical fap kale chips. Semiotics street art bicycle rights freegan.</p><p>Tacos shoreditch selvage vape, salvia skateboard trust fund 90's meditation. Pork belly subway tile wolf taxidermy. Gochujang drinking vinegar quinoa, shabby chic godard poke gentrify kale chips disrupt. Narwhal fixie aesthetic bespoke, typewriter pork belly put a bird on it pop-up green juice poke snackwave master cleanse organic gastropub. Blog microdosing polaroid pabst, bespoke master cleanse kombucha authentic kickstarter slow-carb. Poke coloring book selfies salvia, cliche street art whatever direct trade. Fingerstache sustainable occupy franzen, enamel pin mixtape vaporware cronut raclette.</p><p>Pop-up raclette man braid, blue bottle swag disrupt cornhole fashion axe VHS master cleanse tousled vinyl ennui ugh artisan. Blue bottle you probably haven't heard of them selfies chambray blog. Wolf sartorial cliche squid +1. Unicorn forage raw denim street art, irony tacos occupy williamsburg distillery ramps. Waistcoat 8-bit paleo raclette, gochujang blog cliche roof party. Echo park gastropub af schlitz 3 wolf moon celiac. Put a bird on it +1 intelligentsia, sartorial narwhal aesthetic quinoa.</p>",
         "button_text": "Deploy it now!",
         "button_target": null
     }
@@ -2418,7 +2550,7 @@
     "pk": 5,
     "fields": {
         "sub_header": "How do we do stuff?",
-        "body": "<p>How can stuff be done?</p>",
+        "body": "<p>Everyday carry kitsch portland, twee brunch four dollar toast mustache humblebrag. Succulents semiotics kale chips glossier. Chartreuse VHS meditation, put a bird on it schlitz roof party echo park chillwave shabby chic photo booth venmo wayfarers. Quinoa ugh enamel pin twee skateboard, vinyl bespoke fashion axe chambray. Organic lyft church-key, williamsburg authentic put a bird on it meggings tousled cliche craft beer cred chicharrones gluten-free tumblr. Ennui lomo chicharrones, viral gochujang freegan edison bulb hoodie kogi synth. Letterpress PBR&amp;B coloring book sriracha you probably haven't heard of them bicycle rights actually narwhal fixie tbh.</p><p>Green juice viral 8-bit, selfies put a bird on it swag live-edge authentic keffiyeh sriracha poke tofu. Paleo hexagon lumbersexual vice, raw denim dreamcatcher synth mlkshk iceland gluten-free ennui swag. Retro sartorial cronut, pop-up ugh lumbersexual salvia migas asymmetrical. Poutine chillwave neutra, prism ramps humblebrag health goth. Knausgaard godard lomo leggings, cardigan kombucha etsy banjo edison bulb. Gochujang flexitarian live-edge, occupy vape readymade biodiesel YOLO post-ironic tumblr lyft mumblecore. Bushwick church-key 90's, farm-to-table mustache kickstarter twee wayfarers tumeric neutra humblebrag meditation lumbersexual salvia etsy.</p><p>Sriracha YOLO forage health goth knausgaard pour-over. Man bun lumbersexual listicle pork belly fam sustainable. Try-hard live-edge lomo, swag retro vegan typewriter pitchfork selvage. XOXO yuccie cronut, hashtag farm-to-table small batch irony literally mlkshk shabby chic sartorial ethical subway tile synth. Swag 3 wolf moon neutra, migas yuccie slow-carb literally fam street art chartreuse tousled. Bicycle rights iPhone kale chips chambray mumblecore. Craft beer humblebrag subway tile, deep v slow-carb chambray aesthetic letterpress.</p><p>Lo-fi single-origin coffee scenester hella meggings put a bird on it. Biodiesel church-key XOXO, live-edge pop-up cold-pressed etsy hot chicken knausgaard copper mug taxidermy polaroid normcore microdosing fam. Salvia coloring book jianbing, blog freegan heirloom bespoke hammock portland tumeric. Jianbing gochujang iPhone, mixtape hella subway tile blog brunch. Godard typewriter subway tile, gentrify ethical etsy activated charcoal vaporware health goth occupy freegan kitsch drinking vinegar. Tumblr shoreditch organic, bicycle rights you probably haven't heard of them gochujang cronut keytar squid. Venmo pug meh sustainable small batch.</p>",
         "button_text": "Ugh",
         "button_target": null
     }
