@@ -20,6 +20,22 @@ class Site(models.Model):
         self.slug = slugify(self.name)
         super(Site, self).save(*args, **kwargs)
 
+    def to_dict(self):
+        # TODO figure out what this query should be/where to do it
+        scan = self.scans.all()[0]
+
+        return dict(
+            url=self.url,
+            name=self.name,
+            slug=self.slug,
+            live=scan.live,
+            valid_https=scan.valid_https,
+            default_https=scan.default_https,
+            enforces_https=scan.enforces_https,
+            downgrades_https=scan.downgrades_https,
+            score=scan.score,
+        )
+
 class Scan(models.Model):
     site = models.ForeignKey(
         Site,

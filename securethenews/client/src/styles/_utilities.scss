@@ -1,3 +1,23 @@
 .align-center {
   text-align: center;
 }
+
+.clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.align-middle {
+  vertical-align: middle;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+@media (max-width: $mediaSmall) {
+  .desktop-only {
+    display: none;
+  }
+}
