@@ -50,3 +50,12 @@
               span(class="grade grade-d")= "D"
             else
               span(class="grade grade-f")= "F"
+  if hasPages
+    .pagination
+      if state.page > 0
+        .previous
+          i.fa.fa-chevron-left
+      if hasNextPage
+        .next
+          i.fa.fa-chevron-right
+

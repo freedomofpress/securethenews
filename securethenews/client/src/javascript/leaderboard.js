@@ -4,6 +4,8 @@ const $ = require('jquery');
 const Sites = require('./sites.js');
 const template = require('./leaderboardtemplate.jade');
 
+const PAGE_SIZE = 25;
+
 module.exports = Backbone.View.extend({
   initialize() {
     // Instantiate collection using data injected into the template server-side
@@ -13,19 +15,22 @@ module.exports = Backbone.View.extend({
     this.state = new Backbone.Model({
       searchString: '',
       orderBy: 'score',
-      order: 'desc'
+      order: 'desc',
+      page: 0,
     });
 
     // Re-render the view whenever anything changes
     this.listenTo(this.state, 'change', this.render);
 
     // Update the sort when the headings are clicked
-    this.$el.on( 'click', '.sort-control', _.bind(this.updateSort, this));
+    this.$el.on('click', '.sort-control', this.updateSort.bind(this));
+
+    // Hook up pagination
+    this.$el.on('click', '.pagination .next', this.updatePage.bind(this, 1));
+    this.$el.on('click', '.pagination .previous', this.updatePage.bind(this, -1));
 
     // Update the search string whenever text is entered
-    $('[name=search]').on('input', (event) => {
-        this.state.set('searchString', event.target.value.toLowerCase());
-    });
+    $('[name=search]').on('input', this.updateSearch.bind(this));
   },
 
   render() {
@@ -46,8 +51,17 @@ module.exports = Backbone.View.extend({
       models = models.reverse();
     }
 
+    const hasNextPage = models.length > (PAGE_SIZE * (this.state.get('page') + 1));
+    const hasPages = models.length > PAGE_SIZE;
+
+    models = models.slice(
+      this.state.get('page') * PAGE_SIZE,
+      (this.state.get('page') + 1) * PAGE_SIZE);
+
     return {
       items: models,
+      hasNextPage,
+      hasPages,
       state: this.state.toJSON(),
     };
   },
@@ -55,13 +69,32 @@ module.exports = Backbone.View.extend({
   updateSort(event) {
     const sortKey = $(event.currentTarget).data('sort-key');
     if (this.state.get('orderBy') == sortKey) {
-      this.state.set('order', this.state.get('order') == 'desc' ? 'asc' : 'desc');
+      this.state.set({
+        order: this.state.get('order') == 'desc' ? 'asc' : 'desc',
+        page: 0
+      });
     } else {
       this.state.set({
         orderBy: sortKey,
         order: 'desc',
+        page: 0,
       });
     }
+  },
+
+  updateSearch(event) {
+    this.state.set({
+      searchString: event.target.value.toLowerCase(),
+      page: 0
+    });
+  },
+
+  updatePage(val) {
+    const maxPage = Math.floor(this.collection.length / PAGE_SIZE);
+    const newPage = Math.min(maxPage, Math.max(0, this.state.get('page') + val));
+    this.state.set({
+      page: newPage
+    });
   },
 
   // Map true/false/null values to 1/-1/0 to allow for easy sorting

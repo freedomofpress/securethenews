@@ -62,6 +62,33 @@
   .grade {
     margin: 0;
   }
+
+  .pagination {
+    position: relative;
+    height: $spacingUnit * 4;
+
+    .next, .previous {
+      position: absolute;
+      display: inline-block;
+      width: 50%;
+      text-align: center;
+      font-size: 30px;
+      color: $textGray;
+      line-height: $spacingUnit * 4;
+
+      &:hover {
+        color: $lightBlue;
+      }
+    }
+
+    .next {
+      right: 0;
+    }
+
+    .previous {
+      left: 0;
+    }
+  }
 }
 
 @media (max-width: $mediaMedium) {
