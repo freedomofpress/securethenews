@@ -29,4 +29,35 @@
       float: none;
     }
   }
+
+  .rating-section {
+    margin-top: $spacingUnit * 2;
+  }
+
+  .rating-section-header {
+    padding: $spacingUnit;
+    border-bottom: 1px solid $lightGray;
+    font-size: $h3Size;
+  }
+
+  .rating-section-title {
+    font-weight: bold;
+    color: $darkGray;
+  }
+
+  .rating-section-grade {
+    font-weight: bold;
+  }
+
+  .success {
+    color: $aColor;
+  }
+
+  .fail {
+    color: $fColor;
+  }
+
+  .rating-section-body {
+    padding: $spacingUnit;
+  }
 }

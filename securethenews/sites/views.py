@@ -16,6 +16,8 @@ def index(request):
 
 def site(request, slug):
     site = get_object_or_404(Site, slug=slug)
+    scan = site.scans.latest('timestamp')
     return render(request, 'sites/site.html', dict(
         site=site,
+        scan=scan,
     ))
