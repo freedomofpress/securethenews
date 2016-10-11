@@ -2,6 +2,8 @@ from django import template
 
 register = template.Library()
 
+# NOTE: This logic is duplicated in /client/src/javascript/leaderboardtemplate.jade
+# If you update it here, remember to make the corresponding change there.
 @register.inclusion_tag('sites/grade.html')
 def grade(site):
     scan = site.scans.latest('timestamp')
