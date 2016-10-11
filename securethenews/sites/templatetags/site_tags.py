@@ -5,8 +5,7 @@ register = template.Library()
 # NOTE: This logic is duplicated in /client/src/javascript/leaderboardtemplate.jade
 # If you update it here, remember to make the corresponding change there.
 @register.inclusion_tag('sites/grade.html')
-def grade(site):
-    scan = site.scans.latest('timestamp')
+def grade(scan):
     score = scan.score
     if score > 80:
         grade = 'A'
