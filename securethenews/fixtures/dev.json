@@ -651,10 +651,10 @@
 },
 {
     "model": "sites.scan",
-    "pk": 1,
+    "pk": 66,
     "fields": {
         "site": 23,
-        "timestamp": "2016-09-21T22:03:33.044Z",
+        "timestamp": "2016-10-12T16:04:40.499Z",
         "live": true,
         "valid_https": null,
         "default_https": false,
@@ -665,10 +665,10 @@
 },
 {
     "model": "sites.scan",
-    "pk": 2,
+    "pk": 67,
     "fields": {
         "site": 24,
-        "timestamp": "2016-09-21T22:03:37.028Z",
+        "timestamp": "2016-10-12T16:04:43.729Z",
         "live": true,
         "valid_https": true,
         "default_https": false,
@@ -679,24 +679,24 @@
 },
 {
     "model": "sites.scan",
-    "pk": 3,
+    "pk": 68,
     "fields": {
         "site": 25,
-        "timestamp": "2016-09-21T22:03:41.081Z",
+        "timestamp": "2016-10-12T16:04:47.362Z",
         "live": true,
         "valid_https": true,
         "default_https": true,
         "enforces_https": false,
-        "downgrades_https": false,
+        "downgrades_https": null,
         "score": 90
     }
 },
 {
     "model": "sites.scan",
-    "pk": 4,
+    "pk": 69,
     "fields": {
         "site": 26,
-        "timestamp": "2016-09-21T22:03:49.882Z",
+        "timestamp": "2016-10-12T16:04:53.877Z",
         "live": true,
         "valid_https": true,
         "default_https": false,
@@ -707,10 +707,10 @@
 },
 {
     "model": "sites.scan",
-    "pk": 5,
+    "pk": 70,
     "fields": {
         "site": 27,
-        "timestamp": "2016-09-21T22:03:56.619Z",
+        "timestamp": "2016-10-12T16:05:03.776Z",
         "live": true,
         "valid_https": false,
         "default_https": false,
@@ -721,10 +721,10 @@
 },
 {
     "model": "sites.scan",
-    "pk": 6,
+    "pk": 71,
     "fields": {
         "site": 28,
-        "timestamp": "2016-09-21T22:04:00.883Z",
+        "timestamp": "2016-10-12T16:05:07.805Z",
         "live": true,
         "valid_https": true,
         "default_https": false,
@@ -735,10 +735,10 @@
 },
 {
     "model": "sites.scan",
-    "pk": 7,
+    "pk": 72,
     "fields": {
         "site": 29,
-        "timestamp": "2016-09-21T22:04:05.274Z",
+        "timestamp": "2016-10-12T16:05:11.324Z",
         "live": true,
         "valid_https": null,
         "default_https": false,
@@ -749,10 +749,10 @@
 },
 {
     "model": "sites.scan",
-    "pk": 8,
+    "pk": 73,
     "fields": {
         "site": 30,
-        "timestamp": "2016-09-21T22:04:07.478Z",
+        "timestamp": "2016-10-12T16:05:15.689Z",
         "live": true,
         "valid_https": false,
         "default_https": false,
@@ -763,10 +763,10 @@
 },
 {
     "model": "sites.scan",
-    "pk": 9,
+    "pk": 74,
     "fields": {
         "site": 31,
-        "timestamp": "2016-09-21T22:04:11.706Z",
+        "timestamp": "2016-10-12T16:05:18.656Z",
         "live": true,
         "valid_https": true,
         "default_https": true,
@@ -777,10 +777,10 @@
 },
 {
     "model": "sites.scan",
-    "pk": 10,
+    "pk": 75,
     "fields": {
         "site": 32,
-        "timestamp": "2016-09-21T22:04:18.249Z",
+        "timestamp": "2016-10-12T16:05:22.246Z",
         "live": true,
         "valid_https": null,
         "default_https": false,
@@ -791,24 +791,24 @@
 },
 {
     "model": "sites.scan",
-    "pk": 11,
+    "pk": 76,
     "fields": {
         "site": 33,
-        "timestamp": "2016-09-21T22:04:21.877Z",
+        "timestamp": "2016-10-12T16:05:24.269Z",
         "live": true,
-        "valid_https": null,
+        "valid_https": true,
         "default_https": false,
         "enforces_https": null,
         "downgrades_https": true,
-        "score": 0
+        "score": 20
     }
 },
 {
     "model": "sites.scan",
-    "pk": 12,
+    "pk": 77,
     "fields": {
         "site": 34,
-        "timestamp": "2016-09-21T22:04:24.448Z",
+        "timestamp": "2016-10-12T16:05:26.343Z",
         "live": true,
         "valid_https": true,
         "default_https": true,
@@ -819,24 +819,24 @@
 },
 {
     "model": "sites.scan",
-    "pk": 13,
+    "pk": 78,
     "fields": {
         "site": 35,
-        "timestamp": "2016-09-21T22:04:28.547Z",
+        "timestamp": "2016-10-12T16:05:31.026Z",
         "live": true,
-        "valid_https": false,
+        "valid_https": true,
         "default_https": false,
         "enforces_https": false,
-        "downgrades_https": null,
-        "score": 0
+        "downgrades_https": true,
+        "score": 20
     }
 },
 {
     "model": "sites.scan",
-    "pk": 14,
+    "pk": 79,
     "fields": {
         "site": 36,
-        "timestamp": "2016-09-21T22:04:32.345Z",
+        "timestamp": "2016-10-12T16:05:33.906Z",
         "live": true,
         "valid_https": true,
         "default_https": true,
@@ -847,10 +847,10 @@
 },
 {
     "model": "sites.scan",
-    "pk": 15,
+    "pk": 80,
     "fields": {
         "site": 37,
-        "timestamp": "2016-09-21T22:04:34.950Z",
+        "timestamp": "2016-10-12T16:05:36.617Z",
         "live": true,
         "valid_https": null,
         "default_https": false,
@@ -861,10 +861,10 @@
 },
 {
     "model": "sites.scan",
-    "pk": 16,
+    "pk": 81,
     "fields": {
         "site": 38,
-        "timestamp": "2016-09-21T22:04:39.228Z",
+        "timestamp": "2016-10-12T16:05:40.099Z",
         "live": true,
         "valid_https": null,
         "default_https": false,
@@ -875,10 +875,10 @@
 },
 {
     "model": "sites.scan",
-    "pk": 17,
+    "pk": 82,
     "fields": {
         "site": 39,
-        "timestamp": "2016-09-21T22:04:53.659Z",
+        "timestamp": "2016-10-12T16:05:47.337Z",
         "live": true,
         "valid_https": null,
         "default_https": false,
@@ -889,24 +889,24 @@
 },
 {
     "model": "sites.scan",
-    "pk": 18,
+    "pk": 83,
     "fields": {
         "site": 40,
-        "timestamp": "2016-09-21T22:05:05.596Z",
+        "timestamp": "2016-10-12T16:05:53.789Z",
         "live": true,
-        "valid_https": null,
+        "valid_https": true,
         "default_https": false,
         "enforces_https": false,
         "downgrades_https": true,
-        "score": 0
+        "score": 20
     }
 },
 {
     "model": "sites.scan",
-    "pk": 19,
+    "pk": 84,
     "fields": {
         "site": 41,
-        "timestamp": "2016-09-21T22:05:10.954Z",
+        "timestamp": "2016-10-12T16:05:57.365Z",
         "live": true,
         "valid_https": false,
         "default_https": false,
@@ -917,10 +917,10 @@
 },
 {
     "model": "sites.scan",
-    "pk": 20,
+    "pk": 85,
     "fields": {
         "site": 42,
-        "timestamp": "2016-09-21T22:05:18.163Z",
+        "timestamp": "2016-10-12T16:06:03.782Z",
         "live": true,
         "valid_https": null,
         "default_https": false,
@@ -931,10 +931,10 @@
 },
 {
     "model": "sites.scan",
-    "pk": 21,
+    "pk": 86,
     "fields": {
         "site": 43,
-        "timestamp": "2016-09-21T22:05:22.299Z",
+        "timestamp": "2016-10-12T16:06:05.765Z",
         "live": true,
         "valid_https": true,
         "default_https": false,
@@ -945,12 +945,12 @@
 },
 {
     "model": "sites.scan",
-    "pk": 22,
+    "pk": 87,
     "fields": {
         "site": 44,
-        "timestamp": "2016-09-21T22:05:31.148Z",
+        "timestamp": "2016-10-12T16:06:10.072Z",
         "live": true,
-        "valid_https": null,
+        "valid_https": true,
         "default_https": true,
         "enforces_https": true,
         "downgrades_https": null,
@@ -959,10 +959,10 @@
 },
 {
     "model": "sites.scan",
-    "pk": 23,
+    "pk": 88,
     "fields": {
         "site": 45,
-        "timestamp": "2016-09-21T22:05:38.426Z",
+        "timestamp": "2016-10-12T16:06:15.553Z",
         "live": true,
         "valid_https": true,
         "default_https": true,
@@ -973,10 +973,10 @@
 },
 {
     "model": "sites.scan",
-    "pk": 24,
+    "pk": 89,
     "fields": {
         "site": 46,
-        "timestamp": "2016-09-21T22:05:43.609Z",
+        "timestamp": "2016-10-12T16:06:19.732Z",
         "live": true,
         "valid_https": false,
         "default_https": false,
@@ -987,10 +987,10 @@
 },
 {
     "model": "sites.scan",
-    "pk": 25,
+    "pk": 90,
     "fields": {
         "site": 47,
-        "timestamp": "2016-09-21T22:05:46.079Z",
+        "timestamp": "2016-10-12T16:06:22.033Z",
         "live": true,
         "valid_https": true,
         "default_https": false,
@@ -1001,12 +1001,12 @@
 },
 {
     "model": "sites.scan",
-    "pk": 26,
+    "pk": 91,
     "fields": {
         "site": 48,
-        "timestamp": "2016-09-21T22:05:53.022Z",
+        "timestamp": "2016-10-12T16:06:27.870Z",
         "live": true,
-        "valid_https": false,
+        "valid_https": null,
         "default_https": false,
         "enforces_https": false,
         "downgrades_https": false,
@@ -1015,10 +1015,10 @@
 },
 {
     "model": "sites.scan",
-    "pk": 27,
+    "pk": 92,
     "fields": {
         "site": 49,
-        "timestamp": "2016-09-21T22:05:57.931Z",
+        "timestamp": "2016-10-12T16:06:33.989Z",
         "live": true,
         "valid_https": null,
         "default_https": false,
@@ -1029,10 +1029,10 @@
 },
 {
     "model": "sites.scan",
-    "pk": 28,
+    "pk": 93,
     "fields": {
         "site": 50,
-        "timestamp": "2016-09-21T22:06:08.406Z",
+        "timestamp": "2016-10-12T16:06:40.751Z",
         "live": true,
         "valid_https": null,
         "default_https": false,
@@ -1043,10 +1043,10 @@
 },
 {
     "model": "sites.scan",
-    "pk": 29,
+    "pk": 94,
     "fields": {
         "site": 51,
-        "timestamp": "2016-09-21T22:06:12.185Z",
+        "timestamp": "2016-10-12T16:06:44.454Z",
         "live": true,
         "valid_https": null,
         "default_https": false,
@@ -1057,38 +1057,38 @@
 },
 {
     "model": "sites.scan",
-    "pk": 30,
+    "pk": 95,
     "fields": {
         "site": 52,
-        "timestamp": "2016-09-21T22:06:23.521Z",
+        "timestamp": "2016-10-12T16:06:53.197Z",
         "live": true,
         "valid_https": true,
         "default_https": false,
         "enforces_https": false,
-        "downgrades_https": null,
+        "downgrades_https": true,
         "score": 20
     }
 },
 {
     "model": "sites.scan",
-    "pk": 31,
+    "pk": 96,
     "fields": {
         "site": 53,
-        "timestamp": "2016-09-21T22:06:28.381Z",
+        "timestamp": "2016-10-12T16:06:55.154Z",
         "live": true,
-        "valid_https": false,
+        "valid_https": true,
         "default_https": false,
         "enforces_https": null,
         "downgrades_https": null,
-        "score": 0
+        "score": 20
     }
 },
 {
     "model": "sites.scan",
-    "pk": 32,
+    "pk": 97,
     "fields": {
         "site": 54,
-        "timestamp": "2016-09-21T22:06:34.966Z",
+        "timestamp": "2016-10-12T16:07:01.436Z",
         "live": true,
         "valid_https": false,
         "default_https": false,
@@ -1099,24 +1099,24 @@
 },
 {
     "model": "sites.scan",
-    "pk": 33,
+    "pk": 98,
     "fields": {
         "site": 55,
-        "timestamp": "2016-09-21T22:06:40.073Z",
+        "timestamp": "2016-10-12T16:07:05.692Z",
         "live": true,
         "valid_https": false,
         "default_https": false,
         "enforces_https": false,
-        "downgrades_https": false,
+        "downgrades_https": null,
         "score": 0
     }
 },
 {
     "model": "sites.scan",
-    "pk": 34,
+    "pk": 99,
     "fields": {
         "site": 56,
-        "timestamp": "2016-09-21T22:06:50.665Z",
+        "timestamp": "2016-10-12T16:07:12.303Z",
         "live": true,
         "valid_https": null,
         "default_https": false,
@@ -1127,10 +1127,10 @@
 },
 {
     "model": "sites.scan",
-    "pk": 35,
+    "pk": 100,
     "fields": {
         "site": 57,
-        "timestamp": "2016-09-21T22:06:55.724Z",
+        "timestamp": "2016-10-12T16:07:17.659Z",
         "live": true,
         "valid_https": true,
         "default_https": false,
@@ -1141,10 +1141,10 @@
 },
 {
     "model": "sites.scan",
-    "pk": 36,
+    "pk": 101,
     "fields": {
         "site": 58,
-        "timestamp": "2016-09-21T22:07:00.014Z",
+        "timestamp": "2016-10-12T16:07:22.536Z",
         "live": true,
         "valid_https": null,
         "default_https": false,
@@ -1155,10 +1155,10 @@
 },
 {
     "model": "sites.scan",
-    "pk": 37,
+    "pk": 102,
     "fields": {
         "site": 59,
-        "timestamp": "2016-09-21T22:07:05.468Z",
+        "timestamp": "2016-10-12T16:07:26.305Z",
         "live": true,
         "valid_https": null,
         "default_https": false,
@@ -1169,12 +1169,12 @@
 },
 {
     "model": "sites.scan",
-    "pk": 38,
+    "pk": 103,
     "fields": {
         "site": 60,
-        "timestamp": "2016-09-21T22:07:09.259Z",
+        "timestamp": "2016-10-12T16:07:29.433Z",
         "live": true,
-        "valid_https": null,
+        "valid_https": true,
         "default_https": true,
         "enforces_https": true,
         "downgrades_https": null,
@@ -1183,10 +1183,10 @@
 },
 {
     "model": "sites.scan",
-    "pk": 39,
+    "pk": 104,
     "fields": {
         "site": 61,
-        "timestamp": "2016-09-21T22:07:14.380Z",
+        "timestamp": "2016-10-12T16:07:32.788Z",
         "live": true,
         "valid_https": true,
         "default_https": false,
@@ -1197,10 +1197,10 @@
 },
 {
     "model": "sites.scan",
-    "pk": 40,
+    "pk": 105,
     "fields": {
         "site": 62,
-        "timestamp": "2016-09-21T22:07:19.650Z",
+        "timestamp": "2016-10-12T16:07:35.261Z",
         "live": true,
         "valid_https": true,
         "default_https": true,
@@ -1211,10 +1211,10 @@
 },
 {
     "model": "sites.scan",
-    "pk": 41,
+    "pk": 106,
     "fields": {
         "site": 63,
-        "timestamp": "2016-09-21T22:07:22.094Z",
+        "timestamp": "2016-10-12T16:07:37.927Z",
         "live": true,
         "valid_https": false,
         "default_https": false,
@@ -1225,10 +1225,10 @@
 },
 {
     "model": "sites.scan",
-    "pk": 42,
+    "pk": 107,
     "fields": {
         "site": 64,
-        "timestamp": "2016-09-21T22:07:32.312Z",
+        "timestamp": "2016-10-12T16:07:46.448Z",
         "live": true,
         "valid_https": true,
         "default_https": false,
@@ -1239,10 +1239,10 @@
 },
 {
     "model": "sites.scan",
-    "pk": 43,
+    "pk": 108,
     "fields": {
         "site": 65,
-        "timestamp": "2016-09-21T22:07:44.243Z",
+        "timestamp": "2016-10-12T16:07:58.614Z",
         "live": true,
         "valid_https": null,
         "default_https": false,
@@ -1253,10 +1253,10 @@
 },
 {
     "model": "sites.scan",
-    "pk": 44,
+    "pk": 109,
     "fields": {
         "site": 66,
-        "timestamp": "2016-09-21T22:07:48.700Z",
+        "timestamp": "2016-10-12T16:08:01.668Z",
         "live": true,
         "valid_https": null,
         "default_https": false,
@@ -1267,10 +1267,10 @@
 },
 {
     "model": "sites.scan",
-    "pk": 45,
+    "pk": 110,
     "fields": {
         "site": 67,
-        "timestamp": "2016-09-21T22:07:53.159Z",
+        "timestamp": "2016-10-12T16:08:04.517Z",
         "live": true,
         "valid_https": true,
         "default_https": false,
@@ -1281,10 +1281,10 @@
 },
 {
     "model": "sites.scan",
-    "pk": 46,
+    "pk": 111,
     "fields": {
         "site": 68,
-        "timestamp": "2016-09-21T22:07:57.246Z",
+        "timestamp": "2016-10-12T16:08:13.920Z",
         "live": true,
         "valid_https": false,
         "default_https": false,
@@ -1295,10 +1295,10 @@
 },
 {
     "model": "sites.scan",
-    "pk": 47,
+    "pk": 112,
     "fields": {
         "site": 69,
-        "timestamp": "2016-09-21T22:08:02.162Z",
+        "timestamp": "2016-10-12T16:08:17.872Z",
         "live": true,
         "valid_https": true,
         "default_https": false,
@@ -1309,10 +1309,10 @@
 },
 {
     "model": "sites.scan",
-    "pk": 48,
+    "pk": 113,
     "fields": {
         "site": 70,
-        "timestamp": "2016-09-21T22:08:06.414Z",
+        "timestamp": "2016-10-12T16:08:21.190Z",
         "live": true,
         "valid_https": true,
         "default_https": false,
@@ -1323,66 +1323,10 @@
 },
 {
     "model": "sites.scan",
-    "pk": 49,
+    "pk": 114,
     "fields": {
         "site": 71,
-        "timestamp": "2016-09-21T22:08:17.032Z",
-        "live": true,
-        "valid_https": null,
-        "default_https": true,
-        "enforces_https": true,
-        "downgrades_https": false,
-        "score": 100
-    }
-},
-{
-    "model": "sites.scan",
-    "pk": 50,
-    "fields": {
-        "site": 72,
-        "timestamp": "2016-09-21T22:08:21.209Z",
-        "live": true,
-        "valid_https": false,
-        "default_https": false,
-        "enforces_https": false,
-        "downgrades_https": false,
-        "score": 0
-    }
-},
-{
-    "model": "sites.scan",
-    "pk": 51,
-    "fields": {
-        "site": 73,
-        "timestamp": "2016-09-21T22:08:23.935Z",
-        "live": true,
-        "valid_https": false,
-        "default_https": false,
-        "enforces_https": false,
-        "downgrades_https": false,
-        "score": 0
-    }
-},
-{
-    "model": "sites.scan",
-    "pk": 52,
-    "fields": {
-        "site": 74,
-        "timestamp": "2016-09-21T22:08:29.149Z",
-        "live": true,
-        "valid_https": false,
-        "default_https": false,
-        "enforces_https": false,
-        "downgrades_https": false,
-        "score": 0
-    }
-},
-{
-    "model": "sites.scan",
-    "pk": 53,
-    "fields": {
-        "site": 75,
-        "timestamp": "2016-09-21T22:08:37.105Z",
+        "timestamp": "2016-10-12T16:08:24.736Z",
         "live": true,
         "valid_https": true,
         "default_https": true,
@@ -1393,10 +1337,10 @@
 },
 {
     "model": "sites.scan",
-    "pk": 54,
+    "pk": 115,
     "fields": {
-        "site": 76,
-        "timestamp": "2016-09-21T22:08:40.113Z",
+        "site": 72,
+        "timestamp": "2016-10-12T16:08:31.845Z",
         "live": true,
         "valid_https": true,
         "default_https": false,
@@ -1407,24 +1351,80 @@
 },
 {
     "model": "sites.scan",
-    "pk": 55,
+    "pk": 116,
     "fields": {
-        "site": 77,
-        "timestamp": "2016-09-21T22:08:43.816Z",
+        "site": 73,
+        "timestamp": "2016-10-12T16:08:35.784Z",
         "live": true,
-        "valid_https": null,
+        "valid_https": false,
         "default_https": false,
         "enforces_https": false,
-        "downgrades_https": true,
+        "downgrades_https": false,
         "score": 0
     }
 },
 {
     "model": "sites.scan",
-    "pk": 56,
+    "pk": 117,
+    "fields": {
+        "site": 74,
+        "timestamp": "2016-10-12T16:08:43.675Z",
+        "live": true,
+        "valid_https": false,
+        "default_https": false,
+        "enforces_https": false,
+        "downgrades_https": false,
+        "score": 0
+    }
+},
+{
+    "model": "sites.scan",
+    "pk": 118,
+    "fields": {
+        "site": 75,
+        "timestamp": "2016-10-12T16:08:47.099Z",
+        "live": true,
+        "valid_https": true,
+        "default_https": true,
+        "enforces_https": true,
+        "downgrades_https": null,
+        "score": 100
+    }
+},
+{
+    "model": "sites.scan",
+    "pk": 119,
+    "fields": {
+        "site": 76,
+        "timestamp": "2016-10-12T16:08:50.129Z",
+        "live": true,
+        "valid_https": true,
+        "default_https": false,
+        "enforces_https": false,
+        "downgrades_https": true,
+        "score": 20
+    }
+},
+{
+    "model": "sites.scan",
+    "pk": 120,
+    "fields": {
+        "site": 77,
+        "timestamp": "2016-10-12T16:08:53.899Z",
+        "live": true,
+        "valid_https": true,
+        "default_https": false,
+        "enforces_https": false,
+        "downgrades_https": null,
+        "score": 20
+    }
+},
+{
+    "model": "sites.scan",
+    "pk": 121,
     "fields": {
         "site": 78,
-        "timestamp": "2016-09-21T22:08:48.553Z",
+        "timestamp": "2016-10-12T16:09:00.052Z",
         "live": true,
         "valid_https": null,
         "default_https": false,
@@ -1435,26 +1435,26 @@
 },
 {
     "model": "sites.scan",
-    "pk": 57,
+    "pk": 122,
     "fields": {
         "site": 79,
-        "timestamp": "2016-09-21T22:08:53.587Z",
+        "timestamp": "2016-10-12T16:09:07.516Z",
         "live": true,
         "valid_https": true,
         "default_https": false,
-        "enforces_https": false,
+        "enforces_https": null,
         "downgrades_https": true,
         "score": 20
     }
 },
 {
     "model": "sites.scan",
-    "pk": 58,
+    "pk": 123,
     "fields": {
         "site": 80,
-        "timestamp": "2016-09-21T22:08:59.324Z",
+        "timestamp": "2016-10-12T16:09:19.604Z",
         "live": true,
-        "valid_https": true,
+        "valid_https": false,
         "default_https": true,
         "enforces_https": false,
         "downgrades_https": null,
@@ -1463,10 +1463,10 @@
 },
 {
     "model": "sites.scan",
-    "pk": 59,
+    "pk": 124,
     "fields": {
         "site": 81,
-        "timestamp": "2016-09-21T22:09:06.883Z",
+        "timestamp": "2016-10-12T16:09:30.522Z",
         "live": true,
         "valid_https": true,
         "default_https": false,
@@ -1477,10 +1477,10 @@
 },
 {
     "model": "sites.scan",
-    "pk": 60,
+    "pk": 125,
     "fields": {
         "site": 82,
-        "timestamp": "2016-09-21T22:09:10.502Z",
+        "timestamp": "2016-10-12T16:09:33.042Z",
         "live": true,
         "valid_https": true,
         "default_https": false,
@@ -1491,10 +1491,10 @@
 },
 {
     "model": "sites.scan",
-    "pk": 61,
+    "pk": 126,
     "fields": {
         "site": 83,
-        "timestamp": "2016-09-21T22:09:15.804Z",
+        "timestamp": "2016-10-12T16:09:39.413Z",
         "live": true,
         "valid_https": null,
         "default_https": false,
@@ -1505,10 +1505,10 @@
 },
 {
     "model": "sites.scan",
-    "pk": 62,
+    "pk": 127,
     "fields": {
         "site": 84,
-        "timestamp": "2016-09-21T22:09:21.098Z",
+        "timestamp": "2016-10-12T16:09:45.372Z",
         "live": true,
         "valid_https": null,
         "default_https": false,
@@ -1519,10 +1519,10 @@
 },
 {
     "model": "sites.scan",
-    "pk": 63,
+    "pk": 128,
     "fields": {
         "site": 85,
-        "timestamp": "2016-09-21T22:09:35.763Z",
+        "timestamp": "2016-10-12T16:09:49.445Z",
         "live": true,
         "valid_https": false,
         "default_https": false,
@@ -1533,10 +1533,10 @@
 },
 {
     "model": "sites.scan",
-    "pk": 64,
+    "pk": 129,
     "fields": {
         "site": 86,
-        "timestamp": "2016-09-21T22:09:43.082Z",
+        "timestamp": "2016-10-12T16:09:54.280Z",
         "live": true,
         "valid_https": false,
         "default_https": false,
@@ -1547,16 +1547,16 @@
 },
 {
     "model": "sites.scan",
-    "pk": 65,
+    "pk": 130,
     "fields": {
         "site": 87,
-        "timestamp": "2016-09-21T22:09:51.708Z",
+        "timestamp": "2016-10-12T16:10:02.307Z",
         "live": true,
-        "valid_https": false,
+        "valid_https": true,
         "default_https": false,
         "enforces_https": false,
         "downgrades_https": null,
-        "score": 0
+        "score": 20
     }
 },
 {
@@ -1597,6 +1597,7 @@
         "link_page": 5,
         "link_url": "",
         "link_text": "",
+        "handle": "",
         "url_append": "",
         "menu": 1,
         "allow_subnav": true
@@ -1610,6 +1611,7 @@
         "link_page": 4,
         "link_url": "",
         "link_text": "",
+        "handle": "",
         "url_append": "",
         "menu": 1,
         "allow_subnav": true
@@ -1623,6 +1625,7 @@
         "link_page": 6,
         "link_url": "",
         "link_text": "",
+        "handle": "",
         "url_append": "",
         "menu": 1,
         "allow_subnav": true
@@ -1636,6 +1639,7 @@
         "link_page": 7,
         "link_url": "",
         "link_text": "",
+        "handle": "",
         "url_append": "",
         "menu": 1,
         "allow_subnav": true
