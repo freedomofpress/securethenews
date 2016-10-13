@@ -10,11 +10,13 @@ var sass = require('gulp-sass');
 var plumber = require('gulp-plumber');
 var autoprefixer = require('gulp-autoprefixer');
 var livereload = require('gulp-livereload');
+var jadeify = require('jadeify');
 
 
 function compile(watch) {
   var bundler = watchify(browserify('./client/src/javascript/index.js', { debug: true })
-      .transform(babel));
+    .transform(jadeify)
+    .transform(babel));
 
   function rebundle() {
     bundler.bundle()

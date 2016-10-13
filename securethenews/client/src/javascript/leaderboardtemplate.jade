@@ -1,0 +1,52 @@
+- var iconClass = "fa-caret-" + (state.order == "desc" ? "down" : "up");
+.leaderboard
+  table
+    thead
+      tr.leaderboard-row
+        th
+        th.sort-control.desktop-only(data-sort-key='downgrades_https')
+          .inline-block.align-middle Downgrades HTTPS
+          if state.orderBy == 'downgrades_https'
+            i.sort-icon.fa(class=iconClass)
+        th.sort-control.desktop-only(data-sort-key='valid_https')
+          .inline-block.align-middle Uses HTTPS
+          if state.orderBy == 'valid_https'
+            i.sort-icon.fa(class=iconClass)
+        th.sort-control.desktop-only(data-sort-key='default_https')
+          .inline-block.align-middle Defaults to HTTPS
+          if state.orderBy == 'default_https'
+            i.sort-icon.fa(class=iconClass)
+        th.sort-control.desktop-only(data-sort-key='enforces_https')
+          .inline-block.align-middle Enforces HTTPS
+          if state.orderBy == 'enforces_https'
+            i.sort-icon.fa(class=iconClass)
+        th.sort-control(data-sort-key='score')
+          .inline-block.align-middle Grade
+          if state.orderBy == 'score'
+            i.sort-icon.fa(class=iconClass)
+    tbody
+      for item in items
+        tr.leaderboard-row
+          td
+            a(href=item.slug)= item.name
+          td.desktop-only
+            i.fa(class='#{ !item.downgrades_https ? "fa-check grade-a" : "fa-close grade-f" }')
+          td.desktop-only
+            i.fa(class='#{ item.valid_https ? "fa-check grade-a" : "fa-close grade-f" }')
+          td.desktop-only
+            i.fa(class='#{ item.default_https ? "fa-check grade-a" : "fa-close grade-f" }')
+          td.desktop-only
+            i.fa(class='#{ item.enforces_https ? "fa-check grade-a" : "fa-close grade-f" }')
+          td
+            if (item.score === 100)
+              span(class="grade grade-a")= "A+"
+            else if (item.score >= 75)
+              span(class="grade grade-a")= "A"
+            else if (item.score >= 50)
+              span(class="grade grade-b")= "B"
+            else if (item.score >= 25)
+              span(class="grade grade-c")= "C"
+            else if (item.score > 0)
+              span(class="grade grade-d")= "D"
+            else
+              span(class="grade grade-f")= "F"

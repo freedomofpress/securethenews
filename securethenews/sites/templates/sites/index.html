@@ -2,15 +2,33 @@
 
 {% block title %}Leaderboard{% endblock %}
 
+{% block body_class %}template-site-index{% endblock %}
+
 {% block content %}
-<h1>Leaderboard</h1>
-{% if sites %}
-<ul>
-  {% for site in sites %}
-  <li>
-    <a href="{% url 'sites:site' site.slug %}">{{ site.name }}</a>
-  </li>
-  {% endfor %}
-</ul>
-{% endif %}
+  <section class="blue-section">
+    <div class="section-content">
+      <h1 class="home-header">Leaderboard</h1>
+      <h5 class="home-subhead">See which news publications have the most secure HTTPS implementation</h5>
+    </div>
+  </section>
+
+  <section class="white-section">
+    <div class="section-content">
+      <div class="clearfix align-middle">
+        <div class="input-group search-input">
+          <input type="text" name="search" placeholder="Search for a specific news publication">
+          <i class="input-group-addon fa fa-search"></i>
+        </div>
+        <div class="social-container">
+          {% include 'shared/social.html' with url=request.build_absolute_uri %}
+        </div>
+      </div>
+      <div id="leaderboard"><!-- JS renders the leaderboard here --></div>
+    </div>
+  </section>
+
+  <!-- Dump the site data to be rendered client-side. -->
+  <script type="text/javascript">
+    var STNsiteData = {{ sites_json|safe }};
+  </script>
 {% endblock %}

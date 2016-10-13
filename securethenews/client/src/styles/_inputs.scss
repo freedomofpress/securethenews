@@ -1,0 +1,46 @@
+.input-group {
+  position: relative;
+
+  .input-group-addon {
+    position: absolute;
+    left: $spacingUnit;
+    top: $spacingUnit;
+    color: $bylineGray;
+    font-size: $spacingUnit;
+    transition: color ease-in-out .15s;
+  }
+
+  input {
+    padding-left: $spacingUnit * 3;
+  }
+
+}
+
+input {
+  display: block;
+  width: 100%;
+  padding: $spacingUnit $spacingUnit * 2;
+  font-size: 0.8em;
+  color: $textGray;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid $lightGray;
+  border-radius: 40px;
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+  text-align: center;
+  outline: none;
+  transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+
+  &:focus {
+    border-color: $lightBlue;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px $lightBlue;
+  }
+
+  &:focus + .input-group-addon {
+    color: $lightBlue;
+  }
+
+  &::placeholder {
+    color: $bylineGray;
+  }
+}

@@ -3,20 +3,73 @@
   font-weight: bold;
   color: $textGray;
 
+  table {
+    table-layout: fixed;
+    width: 100%;
+  }
+
   th {
     font-size: 14px;
     max-width: 150px;
     text-transform: uppercase;
   }
 
+  th:not(:first-child) {
+    width: 15%;
+    position: relative;
+  }
+
   th,
   td:not(:first-child) {
-    padding: $spacingUnit / 2 $spacingUnit * 2;
+    padding: $spacingUnit / 2 $spacingUnit;
     text-align: center;
   }
 
-  tr {
+  th {
+    padding: $spacingUnit;
+  }
+
+  tr.leaderboard-row {
     padding: $spacingUnit 0;
-    border-bottom: 1px solid $gray;
+    border-bottom: 1px solid $textGray;
+  }
+
+  a {
+    color: $textGray;
+    text-decoration: none;
+  }
+
+  .sort-control {
+    cursor: pointer;
+  }
+
+  .sort-icon {
+    font-size: 18px;
+    color: $lightBlue;
+    position: absolute;
+    left: 50%;
+    margin-left: -4px;
+  }
+
+  .sort-icon.fa-caret-down {
+    bottom: 0;
+  }
+
+  .sort-icon.fa-caret-up {
+    top: 0;
+  }
+
+  .grade {
+    margin: 0;
+  }
+}
+
+@media (max-width: $mediaMedium) {
+  .leaderboard {
+
+    td, th {
+      max-width: 15%;
+      width: 15%;
+    }
   }
 }
