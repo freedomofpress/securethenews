@@ -16,7 +16,8 @@ var jadeify = require('jadeify');
 function compile(watch) {
   var bundler = watchify(browserify('./client/src/javascript/index.js', { debug: true })
     .transform(jadeify)
-    .transform(babel));
+    .transform(babel),
+    { poll: true });
 
   function rebundle() {
     bundler.bundle()

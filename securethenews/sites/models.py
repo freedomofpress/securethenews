@@ -21,8 +21,8 @@ class Site(models.Model):
         super(Site, self).save(*args, **kwargs)
 
     def to_dict(self):
-        # TODO figure out what this query should be/where to do it
-        scan = self.scans.all()[0]
+        # TODO figure out the best way to optimize this
+        scan = self.scans.latest('timestamp')
 
         return dict(
             url=self.url,
