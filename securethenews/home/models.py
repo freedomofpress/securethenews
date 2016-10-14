@@ -2,14 +2,19 @@ from __future__ import absolute_import, unicode_literals
 
 from django.db import models
 
+from wagtail.wagtailcore import blocks
 from wagtail.wagtailcore.models import Page
-from wagtail.wagtailcore.fields import RichTextField
+from wagtail.wagtailcore.fields import (RichTextField,
+                                        StreamField)
 from wagtail.wagtailadmin.edit_handlers import (FieldPanel,
                                                 MultiFieldPanel,
                                                 InlinePanel,
-                                                PageChooserPanel)
+                                                PageChooserPanel,
+                                                StreamFieldPanel)
+from wagtail.wagtailimages.blocks import ImageChooserBlock
 
 from sites.models import Site
+
 
 class HomePage(Page):
     main_title = models.CharField(max_length=50, default="Every news site should be secure.")
@@ -30,7 +35,11 @@ class HomePage(Page):
 
 class ContentPage(Page):
     sub_header = models.CharField(max_length=50, default="")
-    body = RichTextField(default="")
+    body = StreamField([
+        ('heading', blocks.CharBlock()),
+        ('rich_text', blocks.RichTextBlock()),
+        ('image', ImageChooserBlock()),
+    ])
     button_text = models.CharField(max_length=50, null=True, blank=True)
     button_target = models.ForeignKey(
         'wagtailcore.Page',
@@ -41,6 +50,6 @@ class ContentPage(Page):
 
     content_panels = Page.content_panels + [
         FieldPanel('sub_header'),
-        FieldPanel('body'),
+        StreamFieldPanel('body'),
         MultiFieldPanel([ FieldPanel('button_text'), PageChooserPanel('button_target') ], "Call to action"),
     ]

@@ -12,7 +12,7 @@
       <div class="social-container">
         {% include 'shared/social.html' with url=request.build_absolute_uri %}
       </div>
-      <div class="rich-text blog-body">{{ page.body|richtext }}</div>
+      <div class="blog-body">{{ page.body }}</div>
       <div class="social-container">
         {% include 'shared/social.html' with url=request.build_absolute_uri %}
       </div>
