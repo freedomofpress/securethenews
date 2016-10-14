@@ -54,6 +54,11 @@ module.exports = Backbone.View.extend({
     const hasNextPage = models.length > (PAGE_SIZE * (this.state.get('page') + 1));
     const hasPages = models.length > PAGE_SIZE;
 
+    // +1 because pages are 0-indexed, but should be displayed 1-indexed because
+    // that is more familiar to non-programmers.
+    const pageNumber = this.state.get('page') + 1;
+    const totalPages = Math.floor(models.length / PAGE_SIZE) + 1;
+
     models = models.slice(
       this.state.get('page') * PAGE_SIZE,
       (this.state.get('page') + 1) * PAGE_SIZE);
@@ -62,7 +67,9 @@ module.exports = Backbone.View.extend({
       items: models,
       hasNextPage,
       hasPages,
+      pageNumber,
       state: this.state.toJSON(),
+      totalPages,
     };
   },
 
