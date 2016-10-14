@@ -4,7 +4,7 @@ const $ = require('jquery');
 const Sites = require('./sites.js');
 const template = require('./leaderboardtemplate.jade');
 
-const PAGE_SIZE = 25;
+const PAGE_SIZE = 10;
 
 module.exports = Backbone.View.extend({
   initialize() {
