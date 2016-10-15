@@ -74,6 +74,7 @@
       font-size: 30px;
       color: $textGray;
       line-height: $spacingUnit * 4;
+      cursor: pointer;
 
       &:hover {
         color: $lightBlue;
