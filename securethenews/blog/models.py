@@ -1,15 +1,24 @@
 from django.db import models
+from django.template.defaultfilters import striptags, truncatewords
 
+from wagtail.wagtailcore import blocks
 from wagtail.wagtailcore.models import Page
-from wagtail.wagtailcore.fields import RichTextField
-from wagtail.wagtailadmin.edit_handlers import FieldPanel
+from wagtail.wagtailcore.fields import (RichTextField,
+                                        StreamField)
+from wagtail.wagtailadmin.edit_handlers import (FieldPanel,
+                                                StreamFieldPanel)
+from wagtail.wagtailimages.blocks import ImageChooserBlock
 from wagtail.wagtailsearch import index
 
 
 class BlogPost(Page):
     date = models.DateField('Publication Date')
     byline = models.CharField(max_length=40)
-    body = RichTextField(blank=True)
+    body = StreamField([
+        ('heading', blocks.CharBlock()),
+        ('rich_text', blocks.RichTextBlock()),
+        ('image', ImageChooserBlock()),
+    ])
 
     search_fields = Page.search_fields + [
         index.SearchField('body'),
@@ -18,12 +27,22 @@ class BlogPost(Page):
     content_panels = Page.content_panels + [
         FieldPanel('date'),
         FieldPanel('byline'),
-        FieldPanel('body', classname='full')
+        StreamFieldPanel('body')
     ]
 
     parent_page_types = [
         'BlogIndexPage',
     ]
+
+    @property
+    def preview(self):
+        """Returns the beginning of the post, truncated, to be used for the post preview on the index page."""
+        body_text = ''.join([
+            child.value.source for child in self.body
+            if child.block_type == 'rich_text'
+        ])
+        preview_length = 30 # TODO: parameterize in template tag
+        return truncatewords(striptags(body_text), preview_length)
 
 
 class BlogIndexPage(Page):
