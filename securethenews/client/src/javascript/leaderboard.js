@@ -5,6 +5,12 @@ const Sites = require('./sites.js');
 const template = require('./leaderboardtemplate.jade');
 
 const PAGE_SIZE = 10;
+const DEFAULT_STATE = {
+  searchString: '',
+  orderBy: 'score',
+  order: 'desc',
+  page: 0,
+};
 
 module.exports = Backbone.View.extend({
   initialize() {
@@ -12,15 +18,12 @@ module.exports = Backbone.View.extend({
     this.collection = new Sites(window.STNsiteData);
 
     // Model to hold the current state of the leaderboard controls
-    this.state = new Backbone.Model({
-      searchString: '',
-      orderBy: 'score',
-      order: 'desc',
-      page: 0,
-    });
+    this.state = new Backbone.Model(_.defaults(this.getStateFromUrl(), DEFAULT_STATE));
 
     // Re-render the view whenever anything changes
     this.listenTo(this.state, 'change', this.render);
+    // Update the url whenever whenever anything changes
+    this.listenTo(this.state, 'change', this.updateUrl);
 
     // Update the sort when the headings are clicked
     this.$el.on('click', '.sort-control', this.updateSort.bind(this));
@@ -104,27 +107,27 @@ module.exports = Backbone.View.extend({
     });
   },
 
-  // Map true/false/null values to 1/-1/0 to allow for easy sorting
-  transformData(rawData) {
-    return _.map(rawData, (d) => {
-      return _.extend({}, d, {
-        downgrades_https: mapValue(d.downgrades_https),
-        valid_https: mapValue(d.valid_https),
-        default_https: mapValue(d.default_https),
-        enforces_https: mapValue(d.enforces_https),
-      });
+  updateUrl() {
+    const currentPath = window.location.pathname;
+    const query = [];
+
+    _.keys(this.state.attributes).forEach((key) => {
+      const value = this.state.get(key);
+      if (value && value !== DEFAULT_STATE[key]) {
+        query.push(`${key}=${value}`);
+      }
     });
-  }
 
+    window.history.replaceState({}, '', `${currentPath}?${query.join('&')}`);
+  },
+
+  getStateFromUrl() {
+    const query = window.location.search.replace(/^\?/, '');
+    const state = _.object(query.split('&').map((param) => param.split('=')));
+
+    if (state.page !== undefined) {
+      state.page = parseInt(state.page, 10);
+    }
+    return state;
+  }
 });
-
-
-const mapValue = function(value) {
-  if (value === true) {
-    return 1;
-  } else if (value === false) {
-      return -1;
-  } else {
-    return 0;
-  }
-};
