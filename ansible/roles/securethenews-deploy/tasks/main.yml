@@ -33,7 +33,42 @@
     global: yes
     name: gulp
 
+  # http://stackoverflow.com/questions/27341064/how-do-i-fix-importerror-cannot-import-name-incompleteread
+- name: Upgrade pip for Python 2 to avoid ImportError
+  become: yes
+  easy_install:
+    name: pip
+    state: latest
+
 - name: Install pshtt
   become: yes
   pip:
     name: pshtt
+
+- name: Install teamocil
+  become: yes
+  gem:
+    name: teamocil
+    user_install: no
+
+- name: Ensures teamocil layout directory exists
+  file:
+    path: ~/.teamocil
+    state: directory
+
+- name: Copy teamocil layout for Secure The News development
+  copy:
+    src: teamocil/dev.yml
+    dest: ~/.teamocil/dev.yml
+
+- name: Configure .bashrc to jump into dev environment on login
+  blockinfile:
+    dest: ~/.bashrc
+    insertafter: EOF
+    marker: "# {mark} ANSIBLE MANAGED BLOCK"
+    block: |
+      # Auto-start tmux and teamocil environment
+      if which tmux >/dev/null 2>&1; then
+          # if not inside a tmux session, and if no session is started, start a new session
+          test -z "$TMUX" && (tmux attach || tmux new-session -d "teamocil dev" \; attach)
+      fi
