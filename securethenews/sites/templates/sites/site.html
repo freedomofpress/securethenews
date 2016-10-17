@@ -1,10 +1,98 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 
-{% block title %}{{ site.name }}{% endblock %}
+{% load site_tags %}
+
+{% block body_class %}template-site-page{% endblock %}
 
 {% block content %}
-<h1>{{ site.name }}</h1>
-<p>
-  <a href="http://{{ site.url }}">Homepage</a>
-</p>
+  <section class="blue-section">
+    <div class="section-content">
+      <h1 class="page-header">{{ site.name }}</h1>
+      <h5 class="page-subhead">Security Rating: {% grade scan %}</h5>
+    </div>
+  </section>
+
+  <section class="white-section">
+    <div class="section-content">
+      <div class="clearfix align-middle">
+        <div class="back-button-container">
+          <a href="/sites">
+            <div class="button-back button button-light" aria-role="button">
+              <i class="fa fa-chevron-left" aria-hidden="true"></i>See all publications
+            </div>
+          </a>
+        </div>
+        <div class="social-container">
+          {% include 'shared/social.html' with url=request.build_absolute_uri %}
+        </div>
+      </div>
+
+      <div class="rating-section">
+        <div class="rating-section-header clearfix align-middle">
+          <div class="rating-section-title pull-left inline-block">
+            Supports HTTPS
+          </div>
+          <div class="rating-section-grade pull-right inline-block">
+            {% if scan.valid_https and not scan.downgrades_https %}
+              <span class="success">YES</span>
+            {% else %}
+              <span class="fail">NO</span>
+            {% endif %}
+          </div>
+        </div>
+        <div class="rating-section-body">
+          {% if scan.valid_https and not scan.downgrades_https %}
+            Supports HTTPS and has a valid configuration.
+          {% else %}
+            Does not support HTTPS or automatically redirects to the insecure url.
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="rating-section">
+        <div class="rating-section-header clearfix align-middle">
+          <div class="rating-section-title pull-left inline-block">
+            Default HTTPS
+          </div>
+          <div class="rating-section-grade pull-right inline-block">
+            {% if scan.default_https %}
+              <span class="success">YES</span>
+            {% else %}
+              <span class="fail">NO</span>
+            {% endif %}
+          </div>
+        </div>
+        <div class="rating-section-body">
+          {% if scan.default_https %}
+            The default for this website is secure.
+          {% else %}
+            This website defaults to insecure, unencrypted plain HTTPS.
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="rating-section">
+        <div class="rating-section-header clearfix align-middle">
+          <div class="rating-section-title pull-left inline-block">
+            Enforces HTTPS
+          </div>
+          <div class="rating-section-grade pull-right inline-block">
+            {% if scan.enforces_https %}
+              <span class="success">YES</span>
+            {% else %}
+              <span class="fail">NO</span>
+            {% endif %}
+          </div>
+        </div>
+        <div class="rating-section-body">
+          {% if scan.enforces_https %}
+            This website prevents you from accessing it without encryption.
+          {% else %}
+            You can access this website in an unencrypted manner.
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+  </section>
 {% endblock %}
