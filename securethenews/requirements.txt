@@ -1,3 +1,4 @@
 Django>=1.9,<1.10
 Pillow==3.3.0
 wagtail>=1.5,<1.6
+wagtailmenus

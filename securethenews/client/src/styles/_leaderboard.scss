@@ -68,25 +68,23 @@
     height: $spacingUnit * 4;
 
     .next, .previous {
-      position: absolute;
       display: inline-block;
-      width: 50%;
+      width: 45%;
       text-align: center;
       font-size: 30px;
       color: $textGray;
       line-height: $spacingUnit * 4;
+      cursor: pointer;
 
       &:hover {
         color: $lightBlue;
       }
     }
 
-    .next {
-      right: 0;
-    }
-
-    .previous {
-      left: 0;
+    .context {
+      display: inline-block;
+      text-align: center;
+      width:10%;
     }
   }
 }

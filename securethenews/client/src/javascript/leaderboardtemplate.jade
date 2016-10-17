@@ -52,9 +52,8 @@
               span(class="grade grade-f")= "F"
   if hasPages
     .pagination
-      if state.page > 0
-        .previous
-          i.fa.fa-chevron-left
-      if hasNextPage
-        .next
-          i.fa.fa-chevron-right
+      .previous(class='#{ state.page == 0 ? "hidden" : "" }')
+        i.fa.fa-chevron-left
+      span.context #{pageNumber} / #{totalPages}
+      .next(class='#{ !hasNextPage ? "hidden" : "" }')
+        i.fa.fa-chevron-right

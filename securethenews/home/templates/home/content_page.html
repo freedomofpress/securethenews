@@ -15,7 +15,7 @@
 
   <section class="white-section">
     <div class="section-content">
-      <div class="rich-text">{{ page.body|safe }}</div>
+      <div>{{ page.body }}</div>
       {% if page.button_text and page.button_target %}
         <a href="{{ page.button_target.url }}">
           <div class="button button-light" aria-role="button">

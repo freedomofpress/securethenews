@@ -18,19 +18,27 @@
   a:hover {
     color: #fff;
   }
+
+  ul.nav {
+    float: right;
+    list-style-type: none;
+
+    li {
+      display: inline-block;
+      min-width: 4 * $spacingUnit;
+      font-size: 14px;
+      letter-spacing: 2px;
+
+      &.active a {
+        border-bottom: 2px solid $lightBlue;
+        padding-bottom: 5px;
+      }
+    }
+  }
 }
 
 .header + * {
   padding-top: $headerHeight;
-}
-
-.header-item {
-  float: right;
-  display: inline-block;
-  min-width: 4 * $spacingUnit;
-  padding: 0 $spacingUnit / 2;
-  font-size: 14px;
-  letter-spacing: 2px;
 }
 
 .header-item.logo {

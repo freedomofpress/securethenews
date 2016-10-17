@@ -1,0 +1,10 @@
+windows:
+  - name: dev
+    root: /vagrant/securethenews
+    layout: main-vertical
+    panes:
+      - commands:
+          - git status -sb
+        focus: true
+      - python3 manage.py runserver 0.0.0.0:8000
+      - gulp
