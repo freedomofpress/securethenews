@@ -69,7 +69,8 @@ class Scan(models.Model):
     score = models.IntegerField(default=0, editable=False)
 
     def __str__(self):
-        return "Scan for %s on %s" % (self.site.name, self.timestamp)
+        return "{} from {:%Y-%m-%d %H:%M}".format(self.site.name,
+                                                  self.timestamp)
 
     def save(self, *args, **kwargs):
         self._score()
