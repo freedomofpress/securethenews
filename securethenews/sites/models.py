@@ -5,6 +5,7 @@ from django.utils.text import slugify
 class Site(models.Model):
     name = models.CharField('Name', max_length=255, unique=True)
     slug = models.SlugField('Slug', unique=True, editable=False)
+
     url = models.CharField(
         'URL',
         max_length=255,
@@ -43,6 +44,18 @@ class Scan(models.Model):
         related_name='scans')
 
     timestamp = models.DateTimeField(auto_now_add=True)
+
+    # To aid debugging, we:
+    #
+    #   1. Store the stdout and stderr from pshtt
+    #   2. `curl -v` the four possible endpoints
+    pshtt_stdout = models.TextField()
+    pshtt_stderr = models.TextField()
+
+    curl_http = models.TextField()
+    curl_http_www = models.TextField()
+    curl_https = models.TextField()
+    curl_https_www = models.TextField()
 
     # Scan results
     live = models.BooleanField()
