@@ -31,68 +31,32 @@ class Command(BaseCommand):
                 'pshtt returned invalid JSON: %s'
                 % (json_output,))
 
-        return dict(results=pshtt_results, stdout=stdout, stderr=stderr)
-
-    def curl(self, domain):
-        endpoints = [
-            ('http', ''),
-            ('http', 'www'),
-            ('https', ''),
-            ('https', 'www'),
-        ]
-        curl_results = {}
-        for endpoint in endpoints:
-            url = '{}://{}{}/'.format(endpoint[0],
-                                      endpoint[1] + '.' if endpoint[1] else '',
-                                      domain)
-
-            # curl flags explanation:
-            #
-            # -v gives verbose output, including request and response headers.
-            #
-            # -m 10 limits curl's total runtime to minimize time wasted due to
-            # eventual connection failures.
-            #
-            # --compressed helps an edge case where a server unexpectedly
-            # returns compressed data (Content-Encoding: gzip). I observed this
-            # issue intermittently on http://www.nydailynews.com. When it
-            # happened, curl's stdout would include the compressed data, which
-            # was binary data and thus would trigger a UnicodeDecodeError. This
-            # flag ensures curl will decompress the data before returning it.
-            curl_cmd = ['curl', '-v', '-m', '10', '--compressed', url]
-
-            self.stdout.write('  Running: {}'.format(' '.join(curl_cmd)))
-            p = subprocess.Popen(curl_cmd,
-                                 stdout=subprocess.PIPE,
-                                 stderr=subprocess.STDOUT,
-                                 universal_newlines=True)
-            stdout, _ = p.communicate()
-            curl_results[endpoint] = stdout
-
-        return curl_results
+        return pshtt_results, stdout, stderr
 
     def handle(self, *args, **options):
         for site in Site.objects.all():
             self.stdout.write('Scanning: %s' % site.domain)
 
             # Scan the domain with pshtt
-            pshtt = self.pshtt(site.domain)
-
-            # curl the domain's four endpoints to collect data in case we need # to debug the results from pshtt
-            curl = self.curl(site.domain)
+            results, stdout, stderr = self.pshtt(site.domain)
 
             scan = Scan(
                 site=site,
-                live=pshtt['results']['Live'],
-                valid_https=pshtt['results']['Valid HTTPS'],
-                default_https=pshtt['results']['Defaults to HTTPS'],
-                enforces_https=pshtt['results']['Strictly Forces HTTPS'],
-                downgrades_https=pshtt['results']['Downgrades HTTPS'],
-                pshtt_stdout=pshtt['stdout'],
-                pshtt_stderr=pshtt['stderr'],
-                curl_http=curl[('http', '')],
-                curl_http_www=curl[('http', 'www')],
-                curl_https=curl[('https', '')],
-                curl_https_www=curl[('https', 'www')],
+
+                live=results['Live'],
+
+                valid_https=results['Valid HTTPS'],
+                downgrades_https=results['Downgrades HTTPS'],
+                defaults_to_https=results['Defaults to HTTPS'],
+                strictly_forces_https=results['Strictly Forces HTTPS'],
+
+                hsts=results['HSTS'],
+                hsts_max_age=results['HSTS Max Age'],
+                hsts_entire_domain=results['HSTS Entire Domain'],
+                hsts_preload_ready=results['HSTS Preload Ready'],
+                hsts_preloaded=results['HSTS Preloaded'],
+
+                pshtt_stdout=stdout,
+                pshtt_stderr=stderr,
             )
             scan.save()
