@@ -73,13 +73,13 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         for site in Site.objects.all():
-            self.stdout.write('Scanning: %s' % site.url)
+            self.stdout.write('Scanning: %s' % site.domain)
 
             # Scan the domain with pshtt
-            pshtt = self.pshtt(site.url)
+            pshtt = self.pshtt(site.domain)
 
             # curl the domain's four endpoints to collect data in case we need # to debug the results from pshtt
-            curl = self.curl(site.url)
+            curl = self.curl(site.domain)
 
             scan = Scan(
                 site=site,

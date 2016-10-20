@@ -6,8 +6,8 @@ class Site(models.Model):
     name = models.CharField('Name', max_length=255, unique=True)
     slug = models.SlugField('Slug', unique=True, editable=False)
 
-    url = models.CharField(
-        'URL',
+    domain = models.CharField(
+        'Domain Name',
         max_length=255,
         unique=True,
         help_text='Specify the domain name without the scheme, e.g. "example.com" instead of "https://example.com"')
@@ -26,7 +26,7 @@ class Site(models.Model):
         scan = self.scans.latest('timestamp')
 
         return dict(
-            url=self.url,
+            domain=self.domain,
             name=self.name,
             slug=self.slug,
             live=scan.live,
