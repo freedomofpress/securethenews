@@ -23,7 +23,7 @@ class Site(models.Model):
 
     def to_dict(self):
         # TODO figure out the best way to optimize this
-        scan = self.scans.latest('timestamp')
+        scan = self.scans.latest()
 
         return dict(
             domain=self.domain,
@@ -69,6 +69,9 @@ class Scan(models.Model):
     # To aid debugging, we store the full stdout and stderr from pshtt.
     pshtt_stdout = models.TextField()
     pshtt_stderr = models.TextField()
+
+    class Meta:
+        get_latest_by = 'timestamp'
 
     def __str__(self):
         return "{} from {:%Y-%m-%d %H:%M}".format(self.site.name,

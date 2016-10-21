@@ -39,7 +39,7 @@ class HomePage(Page):
         context = super(HomePage, self).get_context(request)
 
         total_sites = Site.objects.count()
-        latest_scans = [ site.scans.latest('timestamp')
+        latest_scans = [ site.scans.latest()
                          for site in Site.objects.all() ]
 
         sites_offering_https = [ scan.site
