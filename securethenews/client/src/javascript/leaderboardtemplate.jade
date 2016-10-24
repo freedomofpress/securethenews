@@ -4,12 +4,8 @@
     thead
       tr.leaderboard-row
         th
-        th.sort-control.desktop-only(data-sort-key='downgrades_https')
-          .inline-block.align-middle Downgrades HTTPS
-          if state.orderBy == 'downgrades_https'
-            i.sort-icon.fa(class=iconClass)
         th.sort-control.desktop-only(data-sort-key='valid_https')
-          .inline-block.align-middle Uses HTTPS
+          .inline-block.align-middle Valid HTTPS
           if state.orderBy == 'valid_https'
             i.sort-icon.fa(class=iconClass)
         th.sort-control.desktop-only(data-sort-key='default_https')
@@ -19,6 +15,14 @@
         th.sort-control.desktop-only(data-sort-key='enforces_https')
           .inline-block.align-middle Enforces HTTPS
           if state.orderBy == 'enforces_https'
+            i.sort-icon.fa(class=iconClass)
+        th.sort-control.desktop-only(data-sort-key='hsts')
+          .inline-block.align-middle HSTS
+          if state.orderBy == 'hsts'
+            i.sort-icon.fa(class=iconClass)
+        th.sort-control.desktop-only(data-sort-key='hsts_preloaded')
+          .inline-block.align-middle HSTS Preloaded
+          if state.orderBy == 'hsts_preloaded'
             i.sort-icon.fa(class=iconClass)
         th.sort-control(data-sort-key='score')
           .inline-block.align-middle Grade
@@ -30,15 +34,15 @@
           td
             a(href=item.slug)= item.name
           td.desktop-only
-            i.fa(class='#{ !item.downgrades_https ? "fa-check grade-a" : "fa-close grade-f" }')
-          td.desktop-only
             i.fa(class='#{ item.valid_https ? "fa-check grade-a" : "fa-close grade-f" }')
           td.desktop-only
             i.fa(class='#{ item.defaults_to_https ? "fa-check grade-a" : "fa-close grade-f" }')
           td.desktop-only
             i.fa(class='#{ item.strictly_forces_https ? "fa-check grade-a" : "fa-close grade-f" }')
           td.desktop-only
-            i.fa(class='#{ item.enforces_https ? "fa-check grade-a" : "fa-close grade-f" }')
+            i.fa(class='#{ item.hsts ? "fa-check grade-a" : "fa-close grade-f" }')
+          td.desktop-only
+            i.fa(class='#{ item.hsts_preloaded ? "fa-check grade-a" : "fa-close grade-f" }')
           td
             // NOTE: This logic is duplicated in /home/templatetags/site_tags.py
             // If you update it here remember to make the corresponding change there.
