@@ -51,7 +51,6 @@ class Scan(models.Model):
     valid_https = models.NullBooleanField()
     downgrades_https = models.NullBooleanField()
     defaults_to_https = models.NullBooleanField()
-    strictly_forces_https = models.NullBooleanField()
 
     hsts = models.NullBooleanField()
     hsts_max_age = models.IntegerField(null=True)
@@ -84,9 +83,10 @@ class Scan(models.Model):
         if self.valid_https:
             if self.downgrades_https:
                 score = 30
-            if self.defaults_to_https:
+            else:
                 score = 50
-            if self.strictly_forces_https:
+
+            if self.defaults_to_https:
                 score = 70
 
                 if self.hsts:
@@ -114,7 +114,6 @@ class Scan(models.Model):
             valid_https=self.valid_https,
             downgrades_https=self.downgrades_https,
             defaults_to_https=self.defaults_to_https,
-            strictly_forces_https=self.strictly_forces_https,
             hsts=self.hsts,
             hsts_max_age=self.hsts_max_age,
             hsts_entire_domain=self.hsts_entire_domain,

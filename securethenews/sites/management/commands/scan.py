@@ -48,7 +48,6 @@ class Command(BaseCommand):
                 valid_https=results['Valid HTTPS'],
                 downgrades_https=results['Downgrades HTTPS'],
                 defaults_to_https=results['Defaults to HTTPS'],
-                strictly_forces_https=results['Strictly Forces HTTPS'],
 
                 hsts=results['HSTS'],
                 hsts_max_age=results['HSTS Max Age'],
