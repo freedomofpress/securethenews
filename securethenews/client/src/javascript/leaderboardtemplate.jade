@@ -34,7 +34,9 @@
           td.desktop-only
             i.fa(class='#{ item.valid_https ? "fa-check grade-a" : "fa-close grade-f" }')
           td.desktop-only
-            i.fa(class='#{ item.default_https ? "fa-check grade-a" : "fa-close grade-f" }')
+            i.fa(class='#{ item.defaults_to_https ? "fa-check grade-a" : "fa-close grade-f" }')
+          td.desktop-only
+            i.fa(class='#{ item.strictly_forces_https ? "fa-check grade-a" : "fa-close grade-f" }')
           td.desktop-only
             i.fa(class='#{ item.enforces_https ? "fa-check grade-a" : "fa-close grade-f" }')
           td

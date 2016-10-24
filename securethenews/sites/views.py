@@ -7,10 +7,8 @@ from .models import Site
 
 def index(request):
     sites = Site.objects.all()
-    sites_dicts = [s.to_dict() for s in sites]
     return render(request, 'sites/index.html', dict(
-        sites=sites,
-        sites_json=json.dumps(sites_dicts),
+        sites_json=json.dumps([site.to_dict() for site in sites]),
     ))
 
 

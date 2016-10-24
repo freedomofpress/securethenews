@@ -22,19 +22,14 @@ class Site(models.Model):
         super(Site, self).save(*args, **kwargs)
 
     def to_dict(self):
-        # TODO figure out the best way to optimize this
-        scan = self.scans.latest()
-
+        """Generate a JSON-serializable dict of this object's attributes,
+        including the results of the most recent scan."""
+        # TODO optimize this (denormalize latest scan into Site?)
         return dict(
-            domain=self.domain,
             name=self.name,
             slug=self.slug,
-            live=scan.live,
-            valid_https=scan.valid_https,
-            default_https=scan.defaults_to_https,
-            enforces_https=scan.strictly_forces_https,
-            downgrades_https=scan.downgrades_https,
-            score=scan.score,
+            domain=self.domain,
+            **self.scans.latest().to_dict()
         )
 
 class Scan(models.Model):
@@ -112,3 +107,18 @@ class Scan(models.Model):
         assert 0 <= score <= 100, \
             "score must be between 0 and 100 (inclusive), is: {}".format(score)
         self.score = score
+
+    def to_dict(self):
+        return dict(
+            live=self.live,
+            valid_https=self.valid_https,
+            downgrades_https=self.downgrades_https,
+            defaults_to_https=self.defaults_to_https,
+            strictly_forces_https=self.strictly_forces_https,
+            hsts=self.hsts,
+            hsts_max_age=self.hsts_max_age,
+            hsts_entire_domain=self.hsts_entire_domain,
+            hsts_preload_ready=self.hsts_preload_ready,
+            hsts_preloaded=self.hsts_preloaded,
+            score=self.score
+        )
