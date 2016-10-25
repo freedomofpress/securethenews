@@ -8,6 +8,10 @@
           .inline-block.align-middle Valid HTTPS
           if state.orderBy == 'valid_https'
             i.sort-icon.fa(class=iconClass)
+        th.sort-control.desktop-only(data-sort-key='available_over_https')
+          .inline-block.align-middle Available Over HTTPS
+          if state.orderBy == 'available_over_https'
+            i.sort-icon.fa(class=iconClass)
         th.sort-control.desktop-only(data-sort-key='default_https')
           .inline-block.align-middle Defaults to HTTPS
           if state.orderBy == 'default_https'
@@ -31,6 +35,8 @@
             a(href=item.slug)= item.name
           td.desktop-only
             i.fa(class='#{ item.valid_https ? "fa-check grade-a" : "fa-close grade-f" }')
+          td.desktop-only
+            i.fa(class='#{ item.valid_https && !item.downgrades_https ? "fa-check grade-a" : "fa-close grade-f" }')
           td.desktop-only
             i.fa(class='#{ item.defaults_to_https ? "fa-check grade-a" : "fa-close grade-f" }')
           td.desktop-only
