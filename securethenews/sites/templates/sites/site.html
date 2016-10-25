@@ -7,7 +7,9 @@
 {% block content %}
   <section class="blue-section">
     <div class="section-content">
-      <h1 class="page-header">{{ site.name }}</h1>
+      <h1 class="page-header">
+        <a href="http://{{site.domain}}">{{ site.name }}</a>
+      </h1>
       <h5 class="page-subhead">Security Rating: {% grade scan %}</h5>
     </div>
   </section>
@@ -30,7 +32,29 @@
       <div class="rating-section">
         <div class="rating-section-header clearfix align-middle">
           <div class="rating-section-title pull-left inline-block">
-            Supports HTTPS
+            Valid HTTPS
+          </div>
+          <div class="rating-section-grade pull-right inline-block">
+            {% if scan.valid_https %}
+              <span class="success">YES</span>
+            {% else %}
+              <span class="fail">NO</span>
+            {% endif %}
+          </div>
+        </div>
+        <div class="rating-section-body">
+          {% if scan.valid_https %}
+            Supports HTTPS and has a valid certificate.
+          {% else %}
+            Does not support HTTPS or has an invalid certificate.
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="rating-section">
+        <div class="rating-section-header clearfix align-middle">
+          <div class="rating-section-title pull-left inline-block">
+            Available over HTTPS
           </div>
           <div class="rating-section-grade pull-right inline-block">
             {% if scan.valid_https and not scan.downgrades_https %}
@@ -42,9 +66,13 @@
         </div>
         <div class="rating-section-body">
           {% if scan.valid_https and not scan.downgrades_https %}
-            Supports HTTPS and has a valid configuration.
+            HTTPS is available.
           {% else %}
-            Does not support HTTPS or automatically redirects to the insecure url.
+            {% if scan.valid_https %}
+              HTTPS is not available because the site redirects secure HTTPS endpoints to insecure HTTP (also known as <em>downgrading</em> HTTPS).
+            {% else %}
+              HTTPS is not available.
+            {% endif %}
           {% endif %}
         </div>
       </div>
@@ -52,10 +80,10 @@
       <div class="rating-section">
         <div class="rating-section-header clearfix align-middle">
           <div class="rating-section-title pull-left inline-block">
-            Default HTTPS
+            Defaults to HTTPS
           </div>
           <div class="rating-section-grade pull-right inline-block">
-            {% if scan.default_https %}
+            {% if scan.defaults_to_https %}
               <span class="success">YES</span>
             {% else %}
               <span class="fail">NO</span>
@@ -63,10 +91,10 @@
           </div>
         </div>
         <div class="rating-section-body">
-          {% if scan.default_https %}
+          {% if scan.defaults_to_https %}
             The default for this website is secure.
           {% else %}
-            This website defaults to insecure, unencrypted plain HTTPS.
+            This website defaults to insecure HTTP.
           {% endif %}
         </div>
       </div>
@@ -74,10 +102,10 @@
       <div class="rating-section">
         <div class="rating-section-header clearfix align-middle">
           <div class="rating-section-title pull-left inline-block">
-            Enforces HTTPS
+            Strict Transport Security (HSTS)
           </div>
           <div class="rating-section-grade pull-right inline-block">
-            {% if scan.enforces_https %}
+            {% if scan.hsts %}
               <span class="success">YES</span>
             {% else %}
               <span class="fail">NO</span>
@@ -85,14 +113,101 @@
           </div>
         </div>
         <div class="rating-section-body">
-          {% if scan.enforces_https %}
-            This website prevents you from accessing it without encryption.
+          {% if scan.hsts %}
+            This website allows clients to enforce HTTPS on the primary domain.
           {% else %}
-            You can access this website in an unencrypted manner.
+            This website does not allow clients to enforce HTTPS.
           {% endif %}
         </div>
       </div>
-    </div>
+
+      <div class="rating-section">
+        <div class="rating-section-header clearfix align-middle">
+          <div class="rating-section-title pull-left inline-block">
+            Strict Transport Security (HSTS) on entire domain
+          </div>
+          <div class="rating-section-grade pull-right inline-block">
+            {% if scan.hsts_entire_domain %}
+              <span class="success">YES</span>
+            {% else %}
+              <span class="fail">NO</span>
+            {% endif %}
+          </div>
+        </div>
+        <div class="rating-section-body">
+          {% if scan.hsts_entire_domain %}
+            This website allows clients to enforce HTTPS on the entire site, including subdomains.
+          {% else %}
+            This website does not allow clients to enforce HTTPS on subdomains.
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="rating-section">
+        <div class="rating-section-header clearfix align-middle">
+          <div class="rating-section-title pull-left inline-block">
+            Strict Transport Security (HSTS) max-age over 18 weeks
+          </div>
+          <div class="rating-section-grade pull-right inline-block">
+            {% if scan.hsts_max_age and scan.hsts_max_age >= 10886400 %}
+              <span class="success">YES</span>
+            {% else %}
+              <span class="fail">NO</span>
+            {% endif %}
+          </div>
+        </div>
+        <div class="rating-section-body">
+          {% if scan.hsts_max_age and scan.hsts_max_age >= 10886400 %}
+            This website sets an HSTS max-age greater than or equal to 18 weeks, which is the minimum required for preloading.
+          {% else %}
+            This website does not set an HSTS max-age greater than or equal to 18 weeks, which is the minimum required for preloading.
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="rating-section">
+        <div class="rating-section-header clearfix align-middle">
+          <div class="rating-section-title pull-left inline-block">
+            HSTS Preload-Ready
+          </div>
+          <div class="rating-section-grade pull-right inline-block">
+            {% if scan.hsts_preload_ready %}
+              <span class="success">YES</span>
+            {% else %}
+              <span class="fail">NO</span>
+            {% endif %}
+          </div>
+        </div>
+        <div class="rating-section-body">
+          {% if scan.hsts_preload_ready %}
+            This website is ready to be HSTS preloaded.
+          {% else %}
+            This website is not ready to be HSTS preloaded.
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="rating-section">
+        <div class="rating-section-header clearfix align-middle">
+          <div class="rating-section-title pull-left inline-block">
+            HSTS Preloaded
+          </div>
+          <div class="rating-section-grade pull-right inline-block">
+            {% if scan.hsts_preloaded %}
+              <span class="success">YES</span>
+            {% else %}
+              <span class="fail">NO</span>
+            {% endif %}
+          </div>
+        </div>
+        <div class="rating-section-body">
+          {% if scan.hsts_preloaded %}
+            This website is HSTS preloaded.
+          {% else %}
+            This website is not HSTS preloaded.
+          {% endif %}
+        </div>
+      </div>
 
   </section>
 {% endblock %}

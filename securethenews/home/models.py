@@ -1,5 +1,7 @@
 from __future__ import absolute_import, unicode_literals
 
+import math
+
 from django.db import models
 
 from wagtail.wagtailcore import blocks
@@ -32,6 +34,29 @@ class HomePage(Page):
 
     parent_page_types = []
 
+    def get_context(self, request):
+        """Special Wagtail method used to add more variables to the template context."""
+        context = super(HomePage, self).get_context(request)
+
+        total_sites = Site.objects.count()
+        latest_scans = [ site.scans.latest()
+                         for site in Site.objects.all() ]
+
+        sites_offering_https = [ scan.site
+                                 for scan in latest_scans
+                                 if scan.valid_https
+                                 and not scan.downgrades_https ]
+
+        sites_defaulting_to_https = [ scan.site
+                                      for scan in latest_scans
+                                      if scan.defaults_to_https ]
+
+        context['percent_offering_https'] = math.floor(
+            len(sites_offering_https) / total_sites * 100)
+        context['percent_defaulting_to_https'] = math.floor(
+            len(sites_defaulting_to_https) / total_sites * 100)
+
+        return context
 
 class ContentPage(Page):
     sub_header = models.CharField(max_length=50, default="")

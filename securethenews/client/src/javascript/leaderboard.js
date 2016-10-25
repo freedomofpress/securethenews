@@ -41,7 +41,7 @@ module.exports = Backbone.View.extend({
     let models = this.collection.toJSON();
     models = _.filter(models, (site) => {
       return site.name.toLowerCase().indexOf(this.state.get('searchString')) !== -1
-        || site.url.toLowerCase().indexOf(this.state.get('searchString')) !== -1;
+        || site.domain.toLowerCase().indexOf(this.state.get('searchString')) !== -1;
     });
 
     // This will sort false first, and lowest number first
