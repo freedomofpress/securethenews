@@ -12,6 +12,15 @@
 
   .page-header {
     font-weight: bold;
+
+    a {
+      color: #ededed;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
   }
 
   .page-subhead {

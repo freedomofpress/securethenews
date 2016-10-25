@@ -7,7 +7,9 @@
 {% block content %}
   <section class="blue-section">
     <div class="section-content">
-      <h1 class="page-header">{{ site.name }}</h1>
+      <h1 class="page-header">
+        <a href="http://{{site.domain}}">{{ site.name }}</a>
+      </h1>
       <h5 class="page-subhead">Security Rating: {% grade scan %}</h5>
     </div>
   </section>
