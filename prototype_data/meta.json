@@ -1,5 +1,0 @@
-{
-  "command": "./scan domains.csv --scan=inspect,sslyze",
-  "end_time": "2016-07-08T20:37:36Z",
-  "start_time": "2016-07-08T20:28:30Z"
-}
