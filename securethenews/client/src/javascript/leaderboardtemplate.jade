@@ -4,26 +4,16 @@
     thead
       tr.leaderboard-row
         th
-        th.sort-control.desktop-only(data-sort-key='valid_https')
+        th.desktop-only
           .inline-block.align-middle Valid HTTPS
-          if state.orderBy == 'valid_https'
-            i.sort-icon.fa(class=iconClass)
-        th.sort-control.desktop-only(data-sort-key='available_over_https')
+        th.desktop-only
           .inline-block.align-middle Available Over HTTPS
-          if state.orderBy == 'available_over_https'
-            i.sort-icon.fa(class=iconClass)
-        th.sort-control.desktop-only(data-sort-key='default_https')
+        th.desktop-only
           .inline-block.align-middle Defaults to HTTPS
-          if state.orderBy == 'default_https'
-            i.sort-icon.fa(class=iconClass)
-        th.sort-control.desktop-only(data-sort-key='hsts')
+        th.desktop-only
           .inline-block.align-middle HSTS
-          if state.orderBy == 'hsts'
-            i.sort-icon.fa(class=iconClass)
-        th.sort-control.desktop-only(data-sort-key='hsts_preloaded')
+        th.desktop-only
           .inline-block.align-middle HSTS Preloaded
-          if state.orderBy == 'hsts_preloaded'
-            i.sort-icon.fa(class=iconClass)
         th.sort-control(data-sort-key='score')
           .inline-block.align-middle Grade
           if state.orderBy == 'score'

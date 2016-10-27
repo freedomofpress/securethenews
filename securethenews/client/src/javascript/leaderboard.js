@@ -69,27 +69,4 @@ module.exports = Backbone.View.extend({
     });
   },
 
-  // Map true/false/null values to 1/-1/0 to allow for easy sorting
-  transformData(rawData) {
-    return _.map(rawData, (d) => {
-      return _.extend({}, d, {
-        downgrades_https: mapValue(d.downgrades_https),
-        valid_https: mapValue(d.valid_https),
-        default_https: mapValue(d.default_https),
-        enforces_https: mapValue(d.enforces_https),
-      });
-    });
-  }
-
 });
-
-
-const mapValue = function(value) {
-  if (value === true) {
-    return 1;
-  } else if (value === false) {
-      return -1;
-  } else {
-    return 0;
-  }
-};
