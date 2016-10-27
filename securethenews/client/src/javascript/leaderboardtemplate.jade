@@ -56,10 +56,3 @@
               span(class="grade grade-d")= "D"
             else
               span(class="grade grade-f")= "F"
-  if hasPages
-    .pagination
-      .previous(class='#{ state.page == 0 ? "hidden" : "" }')
-        i.fa.fa-chevron-left
-      span.context #{pageNumber} / #{totalPages}
-      .next(class='#{ !hasNextPage ? "hidden" : "" }')
-        i.fa.fa-chevron-right
