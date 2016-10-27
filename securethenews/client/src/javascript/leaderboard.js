@@ -37,10 +37,9 @@ module.exports = Backbone.View.extend({
         || site.domain.toLowerCase().indexOf(this.state.get('searchString')) !== -1;
     });
 
-    // This will sort false first, and lowest number first
     models = _.sortBy(models, this.state.get('orderBy'))
 
-    if (this.state.get('order') == 'asc') {
+    if (this.state.get('order') == 'desc') {
       models = models.reverse();
     }
 
