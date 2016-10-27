@@ -34,15 +34,4 @@
           td.desktop-only
             i.fa(class='#{ item.hsts_preloaded ? "fa-check grade-a" : "fa-close grade-f" }')
           td
-            // NOTE: This logic is duplicated in /home/templatetags/site_tags.py
-            // If you update it here remember to make the corresponding change there.
-            if (item.score > 80)
-              span(class="grade grade-a")= "A"
-            else if (item.score > 60)
-              span(class="grade grade-b")= "B"
-            else if (item.score > 40)
-              span(class="grade grade-c")= "C"
-            else if (item.score > 20)
-              span(class="grade grade-d")= "D"
-            else
-              span(class="grade grade-f")= "F"
+            span(class='grade #{item.grade.class_name}')= item.grade.grade
