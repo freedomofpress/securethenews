@@ -1,37 +1,40 @@
 - var iconClass = "fa-caret-" + (state.order == "desc" ? "down" : "up");
 .leaderboard
-  table
-    thead
-      tr.leaderboard-row
-        th
-        th.desktop-only
-          .inline-block.align-middle Valid HTTPS
-        th.desktop-only
-          .inline-block.align-middle Available Over HTTPS
-        th.desktop-only
-          .inline-block.align-middle Defaults to HTTPS
-        th.desktop-only
-          .inline-block.align-middle HSTS
-        th.desktop-only
-          .inline-block.align-middle HSTS Preloaded
-        th.sort-control(data-sort-key='score')
-          .inline-block.align-middle Grade
-          if state.orderBy == 'score'
-            i.sort-icon.fa(class=iconClass)
-    tbody
-      for item in items
+  if items.length > 0
+    table
+      thead
         tr.leaderboard-row
-          td
-            a(href=item.slug)= item.name
-          td.desktop-only
-            i.fa(class='#{ item.valid_https ? "fa-check grade-a" : "fa-close grade-f" }')
-          td.desktop-only
-            i.fa(class='#{ item.valid_https && !item.downgrades_https ? "fa-check grade-a" : "fa-close grade-f" }')
-          td.desktop-only
-            i.fa(class='#{ item.defaults_to_https ? "fa-check grade-a" : "fa-close grade-f" }')
-          td.desktop-only
-            i.fa(class='#{ item.hsts ? "fa-check grade-a" : "fa-close grade-f" }')
-          td.desktop-only
-            i.fa(class='#{ item.hsts_preloaded ? "fa-check grade-a" : "fa-close grade-f" }')
-          td
-            span(class='grade #{item.grade.class_name}')= item.grade.grade
+          th
+          th.desktop-only
+            .inline-block.align-middle Valid HTTPS
+          th.desktop-only
+            .inline-block.align-middle Available Over HTTPS
+          th.desktop-only
+            .inline-block.align-middle Defaults to HTTPS
+          th.desktop-only
+            .inline-block.align-middle HSTS
+          th.desktop-only
+            .inline-block.align-middle HSTS Preloaded
+          th.sort-control(data-sort-key='score')
+            .inline-block.align-middle Grade
+            if state.orderBy == 'score'
+              i.sort-icon.fa(class=iconClass)
+      tbody
+        for item in items
+          tr.leaderboard-row
+            td
+              a(href=item.slug)= item.name
+            td.desktop-only
+              i.fa(class='#{ item.valid_https ? "fa-check grade-a" : "fa-close grade-f" }')
+            td.desktop-only
+              i.fa(class='#{ item.valid_https && !item.downgrades_https ? "fa-check grade-a" : "fa-close grade-f" }')
+            td.desktop-only
+              i.fa(class='#{ item.defaults_to_https ? "fa-check grade-a" : "fa-close grade-f" }')
+            td.desktop-only
+              i.fa(class='#{ item.hsts ? "fa-check grade-a" : "fa-close grade-f" }')
+            td.desktop-only
+              i.fa(class='#{ item.hsts_preloaded ? "fa-check grade-a" : "fa-close grade-f" }')
+            td
+              span(class='grade #{item.grade.class_name}')= item.grade.grade
+  else
+    p.align-center Sorry, no sites match your search query.
