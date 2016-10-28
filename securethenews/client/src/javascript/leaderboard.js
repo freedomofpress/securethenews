@@ -28,6 +28,7 @@ module.exports = Backbone.View.extend({
 
   render() {
     this.$el.html(template(this.templateData()));
+    this.trigger('render');
   },
 
   templateData() {

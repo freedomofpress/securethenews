@@ -15,6 +15,15 @@
     width: 100%;
   }
 
+  thead {
+    background-color: white;
+  }
+
+  // Necessary to avoid small gap at the top of floated thead
+  div.floatThead-container {
+    background-color: white;
+  }
+
   th {
     font-size: 14px;
     max-width: 150px;
