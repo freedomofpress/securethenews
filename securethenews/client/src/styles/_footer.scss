@@ -16,6 +16,15 @@
     display: inline-block;
     width: 300px;
   }
+
+  a {
+    color: $textGray;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 }
 
 .fine-print {
