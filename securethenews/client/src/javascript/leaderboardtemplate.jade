@@ -1,7 +1,8 @@
 - var iconClass = "fa-caret-" + (state.order == "desc" ? "down" : "up");
 .leaderboard
   if items.length > 0
-    table
+    table#header-fixed
+    table#header-normal
       thead
         tr.leaderboard-row
           th

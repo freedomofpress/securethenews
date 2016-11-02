@@ -24,11 +24,16 @@ module.exports = Backbone.View.extend({
 
     // Update the search string whenever text is entered
     $('[name=search]').on('input', this.updateSearch.bind(this));
+
+    // Bind scroll listener to float leaderboard table header when we're
+    // scrolled past it
+    $(window).bind('scroll', this.floatThead.bind(this));
   },
 
   render() {
     this.$el.html(template(this.templateData()));
-    this.trigger('render');
+    // When the template is re-rendered, the old DOM nodes are lost. Reset!
+    this.resetHeader();
   },
 
   templateData() {
@@ -68,6 +73,43 @@ module.exports = Backbone.View.extend({
     this.state.set({
       searchString: event.target.value.toLowerCase(),
     });
+  },
+
+  floatThead(event) {
+    let $header = $('#header-normal > thead');
+
+    // Scroll listener may fire before the template has been rendered - return
+    // without doing anything (nothing to do).
+    if ($header.length === 0) {
+      return;
+    }
+
+    if (!this.$fixedHeader) {
+      this.$fixedHeader = $('#header-fixed').append($header.clone());
+    }
+
+    let tableOffset = $header.offset().top;
+    let offset = $(window).scrollTop();
+    let $fixedHeader = this.$fixedHeader;
+
+    if (offset >= tableOffset && $fixedHeader.is(":hidden")) {
+      $fixedHeader.show();
+      // Update the fixed header with th widths from the normal header. In the
+      // normal header, the widths are computed based on the table contents, but
+      // the #fixed-header table only has the header, so we need to explicitly
+      // copy the correct widths.
+      $.each($header.find('tr > th'), function(i, el) {
+        let originalWidth = $(el).width();
+        $($fixedHeader.find('tr > th')[i]).width(originalWidth);
+      });
+    } else if (offset < tableOffset && $fixedHeader.is(":visible")) {
+      $fixedHeader.hide();
+    }
+  },
+
+  resetHeader() {
+    this.$fixedHeader = null;
+    this.floatThead();
   },
 
 });

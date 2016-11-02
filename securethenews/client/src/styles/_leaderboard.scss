@@ -12,21 +12,14 @@
 
   table {
     table-layout: fixed;
-    width: 100%;
   }
 
   thead {
     background-color: white;
   }
 
-  // Necessary to avoid small gap at the top of floated thead
-  div.floatThead-container {
-    background-color: white;
-  }
-
   th {
     font-size: 14px;
-    max-width: 150px;
     text-transform: uppercase;
   }
 
@@ -88,4 +81,12 @@
       width: 15%;
     }
   }
+}
+
+table#header-fixed {
+  position: fixed;
+  top: 0px;
+  display: none;
+  background-color: white;
+  z-index: 1;
 }
