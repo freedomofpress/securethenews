@@ -14,6 +14,9 @@ class Site(models.Model):
 
     added = models.DateTimeField(auto_now_add=True)
 
+    class Meta:
+        ordering = ['name']
+
     def __str__(self):
         return self.name
 
@@ -121,3 +124,18 @@ class Scan(models.Model):
             hsts_preloaded=self.hsts_preloaded,
             score=self.score
         )
+
+class Pledge(models.Model):
+    site = models.ForeignKey(
+        Site,
+        on_delete=models.CASCADE,
+        related_name='pledges'
+    )
+    url = models.URLField()
+    contact_email = models.EmailField()
+
+    approved = models.BooleanField(default=False)
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return "Pledge: {}".format(self.site.name)
