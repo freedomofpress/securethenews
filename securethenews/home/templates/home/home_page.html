@@ -23,10 +23,8 @@
         </div>
       </div>
 
-      <div class="score-teaser">
-        <span class="graded-news-org">New York Times <span class="grade grade-a">A+</span></span>
-        <span class="graded-news-org">Wall Street Journal <span class="grade grade-b">B</span></span>
-        <span class="graded-news-org">Buzzfeed <span class="grade grade-b">B-</span></span>
+      <div id="teaser">
+        <!-- JS renders site score teaser here -->
       </div>
 
       <div class="align-center">
@@ -89,4 +87,9 @@
       </div>
     </div>
   </section>
+
+  <!-- Dump the site data to be rendered client-side. -->
+  <script type="text/javascript">
+    var STNsiteData = {{ sites_json|safe }};
+  </script>
 {% endblock %}
