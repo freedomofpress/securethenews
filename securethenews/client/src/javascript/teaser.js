@@ -47,7 +47,20 @@ module.exports = Backbone.View.extend({
   },
 
   randomizeTeaser() {
-    let teaserSites = new Sites(this.collection.sample(TEASER_SAMPLE_SIZE));
+    // Choose a random set of sites to display teaser grades for. If the sum of
+    // the site's names is too great, the spans will wrap around within the
+    // containing div, which looks weird. This code avoids that problem by
+    // re-sampling until a sample that does not trigger the issue is found.
+    const maxSiteNamesLength = 50; // Determined empirically
+    let teaserSites = null;
+    let siteNamesLength = null;
+    do {
+      teaserSites = new Sites(this.collection.sample(TEASER_SAMPLE_SIZE));
+      siteNamesLength = teaserSites.reduce(function(memo, site) {
+        return memo + site.get('name').length;
+      }, 0);
+    } while (siteNamesLength > maxSiteNamesLength);
+
     this.state.set({
       teaserSites: teaserSites,
     })
