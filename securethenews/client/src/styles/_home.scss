@@ -49,6 +49,11 @@ $statBlockMaxWidth: 140px;
   // has rendered)
   min-height: 60px;
   margin-bottom: $spacingUnit * 3;
+
+  noscript p {
+    padding-top: $spacingUnit;
+    text-align: center;
+  }
 }
 
 .teaser {
