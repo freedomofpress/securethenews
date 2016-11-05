@@ -2,6 +2,7 @@ from django.core.mail import mail_admins
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
+from django.template.loader import render_to_string
 
 import json
 
@@ -25,11 +26,6 @@ def site(request, slug):
         scan=latest_scan,
     ))
 
-PLEDGE_SUBMITTED_ADMIN_EMAIL = """
-A new pledge has been submitted for {}.
-
-Moderation link: {}
-"""
 
 def pledge(request):
     if request.method == 'POST':
@@ -37,21 +33,29 @@ def pledge(request):
         if form.is_valid():
             new_pledge = form.save()
 
+            # Notify the admins that a new pledge is ready for review
+            admin_notification_subject = 'New Pledge: {}'.format(
+                new_pledge.site.name
+            )
             # Get the wagtailmodeladmin PledgeAdmin so we can derive the edit
             # url for the newly submitted pledge.
             pledge_admin = PledgeAdmin()
-
-            mail_admins(
-                subject='New Pledge: {}'.format(form.cleaned_data['site'].name),
-                message=PLEDGE_SUBMITTED_ADMIN_EMAIL.format(
-                    form.cleaned_data['site'].name,
-                    request.build_absolute_uri(
-                        pledge_admin.url_helper.get_action_url(
-                            'edit',
-                            new_pledge.pk
-                        )
+            ctx = {
+                'site': new_pledge.site,
+                'moderation_link': request.build_absolute_uri(
+                    pledge_admin.url_helper.get_action_url(
+                        'edit',
+                        new_pledge.pk
                     )
-                )
+                ),
+            }
+            admin_notification_body = render_to_string(
+                'sites/pledge_submitted_admin_notification_email.txt',
+                ctx
+            )
+            mail_admins(
+                admin_notification_subject,
+                admin_notification_body
             )
 
             return HttpResponseRedirect(reverse('sites:pledge_thanks'))

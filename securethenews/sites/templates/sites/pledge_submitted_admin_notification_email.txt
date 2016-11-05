@@ -1,0 +1,3 @@
+A new pledge has been submitted for {{ site.name }}.
+
+Moderation link: {{ moderation_link }}
