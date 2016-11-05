@@ -1,4 +1,4 @@
-from django.core.mail import mail_admins
+from django.core.mail import mail_admins, send_mail
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
@@ -56,6 +56,19 @@ def pledge(request):
             mail_admins(
                 admin_notification_subject,
                 admin_notification_body
+            )
+
+            # Send a confirmation email to the user who submitted the pledge
+            confirmation_subject = \
+                "Thanks for pledging to secure your site on Secure the News!"
+            confirmation_body = render_to_string(
+                'sites/pledge_submitted_confirmation_email.txt'
+            )
+            send_mail(
+                subject=confirmation_subject,
+                message=confirmation_body,
+                from_email='contact@securethe.news',
+                recipient_list=[new_pledge.contact_email,]
             )
 
             return HttpResponseRedirect(reverse('sites:pledge_thanks'))
