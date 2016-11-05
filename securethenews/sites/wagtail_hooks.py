@@ -22,9 +22,8 @@ class PledgeAdmin(ModelAdmin):
     menu_icon = 'form'
     add_to_settings_menu = False
 
-    list_display = ('site', 'timestamp', 'approved')
-    list_filter = ('approved',)
-    ordering = ('approved',)
+    list_display = ('site', 'timestamp', 'status')
+    list_filter = ('status',)
 
     search_fields = ('url', 'contact_email')
 

@@ -134,7 +134,20 @@ class Pledge(models.Model):
     url = models.URLField()
     contact_email = models.EmailField()
 
-    approved = models.BooleanField(default=False)
+    STATUS_NEEDS_REVIEW = 'N'
+    STATUS_APPROVED = 'A'
+    STATUS_REJECTED = 'R'
+    STATUS_CHOICES = (
+        (STATUS_NEEDS_REVIEW, 'Needs Review'),
+        (STATUS_APPROVED, 'Approved'),
+        (STATUS_REJECTED, 'Rejected'),
+    )
+    status = models.CharField(
+        max_length=1,
+        choices=STATUS_CHOICES,
+        default=STATUS_NEEDS_REVIEW
+    )
+
     timestamp = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
