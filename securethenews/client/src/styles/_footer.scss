@@ -9,13 +9,21 @@
 }
 
 .footer-logos {
-  height: 100px;
+  height: 50px;
 
   // Placeholder
-  .fpf-logo,
-  .cpj-logo {
+  .fpf-logo {
     display: inline-block;
-    width: 200px;
+    width: 300px;
+  }
+
+  a {
+    color: $textGray;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 }
 

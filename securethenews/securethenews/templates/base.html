@@ -13,6 +13,8 @@
         <meta name="description" content="" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+        <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}">
+
         {# Global stylesheets #}
         <link rel="stylesheet" type="text/css" href="{% static 'main.css' %}">
         <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,200,700' rel='stylesheet' type='text/css'>
@@ -27,6 +29,7 @@
         {% block header %}
           <div class="header sticky">
             <a href="/">
+              <img src="{% static 'images/logo.svg' %}">
               <span class="header-item logo">SECURETHENEWS</span>
             </a>
             <i class="mobile-header-js fa fa-bars mobile-only"></i>
@@ -41,11 +44,12 @@
           <section class="footer align-center" id="footer">
             <div class="section-content">
               <h3 class="footer-header align-center">
-                A JOINT PROJECT OF:
+                A PROJECT OF:
               </h3>
               <div class="footer-logos">
-                <span class="fpf-logo">FREEDOM OF THE PRESS</span>
-                <span class="cpj-logo">COMMITTEE TO PROTECT JOURNALISTS</span>
+                  <span class="fpf-logo">
+                    <a href="https://freedom.press">FREEDOM OF THE PRESS FOUNDATION</a>
+                  </span>
               </div>
               <p class="fine-print">
                 This work is licensed under a Creative Commons Attribution 4.0 International License
