@@ -78,7 +78,10 @@
   <section class="leaderboard-section" id="stats">
     <div class="section-content">
       <h1 class="leaderboard-header align-center">Leaderboard</h1>
-      {% include "home/leaderboard.html" %}
+      <div id="leaderboard" data-interactive="false" data-limit="10">
+        <!-- JS renders the leaderboard here -->
+        <noscript><p>Sorry, you must have Javascript enabled to view the leaderboard.</p></noscript>
+      </div>
       <div class="align-center leaderboard-button-container">
         <a href="{% url 'sites:index' %}">
           <div class="button button-primary button-dark" aria-role="button">
