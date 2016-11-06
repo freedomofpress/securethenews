@@ -14,3 +14,15 @@ if ($leaderboard.length !== 0) {
 }
 
 
+$('.mobile-header-js').on('touchstart click', (event) => {
+  $('.nav').addClass('uncollapsed');
+  $('.tap-catcher-js').show();
+});
+
+$('.tap-catcher-js').on('touchend click', (e) => {
+  $('.nav').removeClass('uncollapsed');
+  // Delay the removal of the tap catcher so that the subsequently fired
+  // click event is also caught. Typically this happens with a 300ms delay
+  // after touchend.
+  setTimeout(() => $('.tap-catcher-js').hide(), 350);
+});
