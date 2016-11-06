@@ -44,6 +44,14 @@ $statBlockMaxWidth: 140px;
   letter-spacing: 1px;
 }
 
+@media (max-width: $mediaSmall) {
+  .stat-block {
+    display: block;
+    margin: auto;
+    margin-bottom: $spacingUnit * 2;
+  }
+}
+
 #teaser {
   // Set min-height so this takes up space initially (before the Backbone View
   // has rendered)

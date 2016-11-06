@@ -23,7 +23,7 @@ if ($teaser.length !== 0) {
   teaser.render();
 }
 
-$('.mobile-header-js').on('touchstart click', (event) => {
+$('.mobile-header-js').on('click', (event) => {
   $('.nav').addClass('uncollapsed');
   $('.tap-catcher-js').show();
 });

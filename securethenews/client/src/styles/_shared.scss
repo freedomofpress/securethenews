@@ -12,3 +12,13 @@
   font-size: 20px;
   color: $darkGray;
 }
+
+@media (max-width: $mediaXs) {
+  .page-header {
+    font-size: 50px;
+  }
+  .page-subhead {
+    font-size: 18px;
+  }
+}
+

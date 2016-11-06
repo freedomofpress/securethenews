@@ -90,3 +90,9 @@ $buttonHeight: 50px;
     }
   }
 }
+
+@media (max-width: $mediaXs) {
+  .button {
+    padding: 0 $spacingUnit;
+  }
+}
