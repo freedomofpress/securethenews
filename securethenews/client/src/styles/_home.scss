@@ -83,6 +83,25 @@ $statBlockMaxWidth: 140px;
   }
 }
 
+// Go down to two teasers on small desktops/tablets.
+@media (max-width: $mediaMedium) {
+  .teaser a:last-child {
+    display: none;
+  }
+}
+
+// Hide the teaser on mobile.
+@media (max-width: $mediaSmall) {
+  #teaser {
+    min-height: 0;
+  }
+
+  .teaser {
+    display: none;
+  }
+}
+
+
 .leaderboard-header {
   font-weight: 200;
   font-size: 30px;
