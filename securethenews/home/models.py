@@ -1,5 +1,6 @@
 from __future__ import absolute_import, unicode_literals
 
+import json
 import math
 
 from django.db import models
@@ -38,6 +39,7 @@ class HomePage(Page):
         """Special Wagtail method used to add more variables to the template context."""
         context = super(HomePage, self).get_context(request)
 
+        # Compute summary statistics
         total_sites = Site.objects.count()
         latest_scans = [ site.scans.latest()
                          for site in Site.objects.all() ]
@@ -55,6 +57,11 @@ class HomePage(Page):
             len(sites_offering_https) / total_sites * 100)
         context['percent_defaulting_to_https'] = math.floor(
             len(sites_defaulting_to_https) / total_sites * 100)
+
+        # Serialize the sites with the results of their latest scans for the
+        # teaser
+        sites = Site.objects.all()
+        context['sites_json'] = json.dumps([site.to_dict() for site in sites])
 
         return context
 

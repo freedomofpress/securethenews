@@ -1,4 +1,5 @@
 const Leaderboard = require('./leaderboard.js');
+const Teaser = require('./teaser.js');
 const Backbone = require('backbone');
 const $ = require('jquery');
 
@@ -13,6 +14,13 @@ if ($leaderboard.length !== 0) {
   leaderboard.render();
 }
 
+const $teaser = $('#teaser');
+if ($teaser.length !== 0) {
+  const teaser = new Teaser({
+    el: $teaser,
+  });
+  teaser.render();
+}
 
 $('.mobile-header-js').on('touchstart click', (event) => {
   $('.nav').addClass('uncollapsed');

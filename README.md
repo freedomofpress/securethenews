@@ -2,16 +2,29 @@
 
 ## Getting Started with the Development Environment
 
-Make sure you have Vagrant (>=2.0) and Ansible (>=1.9.4) installed. A
+Make sure you have Vagrant (>=1.8.5) and Ansible (>=2.0) installed. A
 Makefile is provided to automate the setup of the development
 environment. Run:
 
     $ make dev
     $ vagrant ssh
-    # in the VM
-    $ cd /vagrant/securethenews
-    $ gulp # Run this in a separate session to live reload js/css files
-    $ python3 manage.py runserver 0.0.0.0:8000
+
+The interactive session will automatically launch a tmux environment designed
+for developers working on Secure the News. There are 3 panes:
+
+1. A shell for interactive work.
+2. The Django development web server. If you quit the web server, you can start
+   it again with: `python3 manage.py runserver 0.0.0.0:8000`. The development
+   server will live reload whenever it detects changes to the source files.
+3. gulp, to build frontend assets (CSS and JS). gulp is setup to live reload
+   whenever it detects changes to the source files.
+
+If this is your first login after creating the virtual development environment,
+you will notice the development web server warning you about "unapplied
+migrations". To apply the migrations, run `python3 manage.py migrate`.
+
+Once you've successfully set up your new development environment, you should
+continue to the next section to load the development fixtures.
 
 ### Development fixtures
 
@@ -39,7 +52,7 @@ update the description of their contents in this README):
 
     $ python3 manage.py dumpdata --natural-primary --natural-foreign --exclude contenttypes --exclude auth.Permission --indent 4 > fixtures/dev.json
 
-### Notes
+## Notes
 
 * Port 8000 is forwarded from the guest to the host. By default, `runserver`
   runs on `127.0.0.1`, so you need to specify `0.0.0.0` for the port forwarding
