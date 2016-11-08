@@ -4,8 +4,7 @@ const $ = require('jquery');
 const Sites = require('./sites.js');
 const template = require('./teasertemplate.jade');
 
-const TEASER_SAMPLE_SIZE = 3;
-const TEASER_REFRESH_INTERVAL = 5000;
+const teaserRefreshInterval = 5000;
 
 module.exports = Backbone.View.extend({
 
@@ -13,16 +12,17 @@ module.exports = Backbone.View.extend({
     // Instantiate collection using data injected into the template server-side
     this.collection = new Sites(window.STNsiteData);
 
-    // Model to hold the current state of the leaderboard controls
-    this.state = new Backbone.Model({
-      teaserSites: new Sites(),
-    });
+    // Subset of sites from the collection to display
+    this.sites = new Sites();
+
+    // Timer to periodically refresh the set of random sites in the teaser
+    this.timer = null;
 
     // Initial set of random sites
     this.randomizeTeaser();
 
     // Re-render the view whenever anything changes
-    this.listenTo(this.state, 'change', this.render);
+    this.listenTo(this.sites, 'reset', this.rotateTeaser);
 
     // Start periodically refreshing the set of random sites in the teaser
     this.startRandomizingTeaser();
@@ -34,36 +34,41 @@ module.exports = Backbone.View.extend({
   },
 
   render() {
-    this.$el.fadeOut(500, function () {
-      this.$el.html(template(this.templateData()));
-      this.$el.fadeIn(500);
-    }.bind(this));
+    this.$el.html(template(this.templateData()));
   },
 
   templateData() {
     return {
-      sites: this.state.get('teaserSites').toJSON(),
+      sites: this.sites.toJSON(),
     };
   },
 
+  rotateTeaser() {
+    const fadeDuration = 500;
+    this.$el.fadeOut(fadeDuration, () => {
+      this.render();
+      this.$el.fadeIn(fadeDuration);
+    })
+  },
+
   randomizeTeaser() {
+    const teaserSampleSize = 3;
+    const teaserSites = new Sites();
+
     // Choose a random set of sites to display teaser grades for. If the sum of
     // the site's names is too great, the spans will wrap around within the
     // containing div, which looks weird. This code avoids that problem by
     // re-sampling until a sample that does not trigger the issue is found.
     const maxSiteNamesLength = 50; // Determined empirically
-    let teaserSites = null;
     let siteNamesLength = null;
     do {
-      teaserSites = new Sites(this.collection.sample(TEASER_SAMPLE_SIZE));
+      teaserSites.reset(this.collection.sample(teaserSampleSize));
       siteNamesLength = teaserSites.reduce(function(memo, site) {
         return memo + site.get('name').length;
       }, 0);
     } while (siteNamesLength > maxSiteNamesLength);
 
-    this.state.set({
-      teaserSites: teaserSites,
-    })
+    this.sites.reset(teaserSites.models);
   },
 
   stopRandomizingTeaser() {
@@ -72,7 +77,7 @@ module.exports = Backbone.View.extend({
 
   startRandomizingTeaser() {
     this.timer = setInterval(this.randomizeTeaser.bind(this),
-                             TEASER_REFRESH_INTERVAL);
+                             teaserRefreshInterval);
   },
 
 });
