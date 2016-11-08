@@ -54,4 +54,10 @@
   vertical-align: middle;
   width: 48px;
   height: 48px;
+
+  transition: 0.5s ease-in-out;
+
+  &:hover {
+    transform: rotate(-45deg);
+  }
 }
