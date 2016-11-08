@@ -29,8 +29,8 @@ class HomePage(Page):
 
     content_panels = Page.content_panels + [
         MultiFieldPanel([ FieldPanel('main_title'), FieldPanel('sub_title') ], "Main header"),
-        MultiFieldPanel([ FieldPanel('how_header'), FieldPanel('how_body') ], "How section"),
         MultiFieldPanel([ FieldPanel('why_header'), FieldPanel('why_body') ], "Why section"),
+        MultiFieldPanel([ FieldPanel('how_header'), FieldPanel('how_body') ], "How section"),
     ]
 
     parent_page_types = []
