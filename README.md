@@ -50,7 +50,7 @@ To load the fixtures:
 If you want to update the fixtures, use the following command (and make sure you
 update the description of their contents in this README):
 
-    $ python3 manage.py dumpdata --natural-primary --natural-foreign --exclude contenttypes --exclude auth.Permission --indent 4 > fixtures/dev.json
+    $ python3 manage.py dumpdata --natural-primary --natural-foreign --exclude contenttypes --exclude auth.Permission --exclude sessions --indent 4 > fixtures/dev.json
 
 ## Notes
 
