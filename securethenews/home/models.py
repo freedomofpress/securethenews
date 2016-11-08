@@ -22,15 +22,31 @@ from sites.models import Site
 class HomePage(Page):
     main_title = models.TextField(default="")
     sub_title = models.TextField(default="")
-    how_header = models.TextField(default="")
+
     why_header = models.TextField(default="")
-    how_body = models.TextField(default="")
     why_body = models.TextField(default="")
+    why_learn_more = models.ForeignKey(
+        'wagtailcore.Page',
+        null=True,
+        blank=True,
+        related_name='+',
+        on_delete=models.SET_NULL
+    )
+
+    how_header = models.TextField(default="")
+    how_body = models.TextField(default="")
+    how_learn_more = models.ForeignKey(
+        'wagtailcore.Page',
+        null=True,
+        blank=True,
+        related_name='+',
+        on_delete=models.SET_NULL
+    )
 
     content_panels = Page.content_panels + [
         MultiFieldPanel([ FieldPanel('main_title'), FieldPanel('sub_title') ], "Main header"),
-        MultiFieldPanel([ FieldPanel('why_header'), FieldPanel('why_body') ], "Why section"),
-        MultiFieldPanel([ FieldPanel('how_header'), FieldPanel('how_body') ], "How section"),
+        MultiFieldPanel([ FieldPanel('why_header'), FieldPanel('why_body'), PageChooserPanel('why_learn_more') ], "Why section"),
+        MultiFieldPanel([ FieldPanel('how_header'), FieldPanel('how_body'), PageChooserPanel('how_learn_more') ], "How section"),
     ]
 
     parent_page_types = []

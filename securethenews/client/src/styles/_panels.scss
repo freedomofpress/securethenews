@@ -9,6 +9,14 @@
   &.blue-panel {
     background: linear-gradient(to top, #153350, #2d5275);
   }
+
+  .button {
+    a {
+      color: white;
+      text-decoration: none;
+      cursor: pointer;
+    }
+  }
 }
 
 .inner-panel {
