@@ -42,9 +42,16 @@
 }
 
 .header-item.logo {
-  float: left;
   font-size: 20px;
   color: #fff;
   font-weight: normal;
   letter-spacing: 1px;
+  vertical-align: middle;
+  padding-left: 8px;
+}
+
+.header img {
+  vertical-align: middle;
+  width: 48px;
+  height: 48px;
 }

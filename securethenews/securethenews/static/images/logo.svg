@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="61px" height="60px" viewBox="0 0 61 60" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 40.3 (33839) - http://www.bohemiancoding.com/sketch -->
+    <title>logo_penonly@3x</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M30.5,55.1568117 C44.5832611,55.1568117 56,43.9560944 56,30.1393094 C56,16.3225243 44.5832611,5.121807 30.5,5.121807 C16.4167389,5.121807 5,16.3225243 5,30.1393094 C5,43.9560944 16.4167389,55.1568117 30.5,55.1568117 Z" id="path-1"></path>
+        <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="51" height="50.0350047" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+        <path d="M12.7444501,0.279230397 L15.2686936,14.3983477 C15.2686936,14.3983477 10.7722256,19.3470284 8.71139754,27.3073798 L8.71203498,9.87428895 C9.01991619,9.49073125 9.21624623,8.94029536 9.21815854,8.33132106 C9.21624623,7.18414278 8.54152082,6.97967623 7.70456838,6.97705511 C6.87080313,6.97880253 6.19161615,7.18501649 6.19034127,8.33132106 C6.19034127,8.9446639 6.38667132,9.49335237 6.69710227,9.87341524 L6.6977397,27.3082535 C4.63563679,19.3461547 0.140443665,14.397474 0.140443665,14.397474 L2.65703789,0.285346352 L12.7444501,0.279230397 Z" id="path-3"></path>
+        <filter x="-50%" y="-50%" width="200%" height="200%" filterUnits="objectBoundingBox" id="filter-4">
+            <feGaussianBlur stdDeviation="0.5" in="SourceAlpha" result="shadowBlurInner1"></feGaussianBlur>
+            <feOffset dx="0" dy="1" in="shadowBlurInner1" result="shadowOffsetInner1"></feOffset>
+            <feComposite in="shadowOffsetInner1" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner1"></feComposite>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.5 0" type="matrix" in="shadowInnerInner1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" opacity="0.895522388">
+        <g id="Nav" transform="translate(-86.000000, -37.000000)">
+            <g id="Logo" transform="translate(85.000000, 35.827815)">
+                <g id="Icon" transform="translate(1.000000, 1.000000)">
+                    <path d="M30.5,58.1000473 C46.2401154,58.1000473 59,45.5815985 59,30.1393094 C59,14.6970202 46.2401154,2.17857143 30.5,2.17857143 C14.7598846,2.17857143 2,14.6970202 2,30.1393094 C2,45.5815985 14.7598846,58.1000473 30.5,58.1000473 Z" id="Oval-1" stroke="#E5E5E5" fill="#FFFFFF"></path>
+                    <use id="Oval-1" stroke="#31BEF8" mask="url(#mask-2)" stroke-width="10" fill="#FFFFFF" xlink:href="#path-1"></use>
+                    <g id="Group-3-Copy-3" transform="translate(29.723713, 31.911882) rotate(-315.000000) translate(-29.723713, -31.911882) translate(21.723713, 17.751168)">
+                        <g id="Shape">
+                            <use fill="#555555" fill-rule="evenodd" xlink:href="#path-3"></use>
+                            <use fill="black" fill-opacity="1" filter="url(#filter-4)" xlink:href="#path-3"></use>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
