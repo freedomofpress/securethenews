@@ -3295,7 +3295,7 @@
     "model": "auth.user",
     "fields": {
         "password": "pbkdf2_sha256$30000$vyV41ha5MNCM$jrLTcLybToChR6p/Ekd29Kexdve9A42cP+mV1WiRJD8=",
-        "last_login": "2016-11-08T20:44:40.967Z",
+        "last_login": "2016-11-08T21:01:16.247Z",
         "is_superuser": true,
         "username": "admin",
         "first_name": "",
@@ -3807,6 +3807,34 @@
     }
 },
 {
+    "model": "wagtailcore.pagerevision",
+    "pk": 27,
+    "fields": {
+        "page": 3,
+        "submitted_for_moderation": false,
+        "created_at": "2016-11-08T21:27:38.154Z",
+        "user": [
+            "admin"
+        ],
+        "content_json": "{\"path\": \"00010001\", \"url_path\": \"/home/\", \"slug\": \"home\", \"pk\": 3, \"owner\": null, \"expire_at\": null, \"why_body\": \"<p>From protecting reader\\u2019s security and privacy, to preventing targeted censorship, to improving search rankings, to gaining the ability to use powerful Web platform features, there are many reasons why you should consider encrypting your site.</p>\", \"first_published_at\": \"2016-09-20T20:02:52.717Z\", \"search_description\": \"\", \"go_live_at\": null, \"live\": true, \"numchild\": 5, \"expired\": false, \"content_type\": 2, \"show_in_menus\": false, \"latest_revision_created_at\": \"2016-09-22T23:21:49.143Z\", \"how_body\": \"<p>While switching over to HTTPS isn\\u2019t as simple as flicking a switch, a handful of news organizations have already pioneered the effort, and shared their tips and tricks for making the process as smooth as possible.</p>\", \"seo_title\": \"\", \"has_unpublished_changes\": false, \"main_title\": \"Every news site should be secure.\", \"locked\": false, \"depth\": 2, \"sub_title\": \"HTTPS should be the industry standard. We\\u2019re tracking its adoption.\", \"why_header\": \"Encryption has many benefits\", \"title\": \"Secure The News\", \"how_header\": \"Switching to HTTPS is easier than ever\"}",
+        "approved_go_live_at": null
+    }
+},
+{
+    "model": "wagtailcore.pagerevision",
+    "pk": 28,
+    "fields": {
+        "page": 3,
+        "submitted_for_moderation": false,
+        "created_at": "2016-11-08T21:44:06.681Z",
+        "user": [
+            "admin"
+        ],
+        "content_json": "{\"search_description\": \"\", \"first_published_at\": \"2016-09-20T20:02:52.717Z\", \"expired\": false, \"why_body\": \"From protecting reader\\u2019s security and privacy, to preventing targeted censorship, to improving search rankings, to gaining the ability to use powerful Web platform features, there are many reasons why you should consider encrypting your site.\", \"has_unpublished_changes\": false, \"url_path\": \"/home/\", \"content_type\": 2, \"how_body\": \"While switching over to HTTPS isn\\u2019t as simple as flicking a switch, a handful of news organizations have already pioneered the effort, and shared their tips and tricks for making the process as smooth as possible.\", \"why_header\": \"Encryption has many benefits\", \"live\": true, \"sub_title\": \"HTTPS should be the industry standard. We\\u2019re tracking its adoption.\", \"show_in_menus\": false, \"main_title\": \"Every news site should be secure.\", \"latest_revision_created_at\": \"2016-11-08T21:27:38.154Z\", \"path\": \"00010001\", \"seo_title\": \"\", \"locked\": false, \"owner\": null, \"numchild\": 5, \"slug\": \"home\", \"title\": \"Secure The News\", \"how_header\": \"Switching to HTTPS is easier than ever\", \"pk\": 3, \"go_live_at\": null, \"depth\": 2, \"expire_at\": null}",
+        "approved_go_live_at": null
+    }
+},
+{
     "model": "wagtailcore.page",
     "pk": 1,
     "fields": {
@@ -3859,7 +3887,7 @@
         "expired": false,
         "locked": false,
         "first_published_at": "2016-09-20T20:02:52.717Z",
-        "latest_revision_created_at": "2016-09-22T23:21:49.143Z"
+        "latest_revision_created_at": "2016-11-08T21:44:06.681Z"
     }
 },
 {
@@ -4126,11 +4154,11 @@
     "pk": 3,
     "fields": {
         "main_title": "Every news site should be secure.",
-        "sub_title": "It's critical for both journalists and readers.",
+        "sub_title": "HTTPS should be the industry standard. We\u2019re tracking its adoption.",
         "how_header": "Switching to HTTPS is easier than ever",
-        "why_header": "Encryption protects your readers",
-        "how_body": "Blah blah",
-        "why_body": "Blah blah"
+        "why_header": "Encryption has many benefits",
+        "how_body": "While switching over to HTTPS isn\u2019t as simple as flicking a switch, a handful of news organizations have already pioneered the effort, and shared their tips and tricks for making the process as smooth as possible.",
+        "why_body": "From protecting reader\u2019s security and privacy, to preventing targeted censorship, to improving search rankings, to gaining the ability to use powerful Web platform features, there are many reasons why you should consider encrypting your site."
     }
 }
 ]

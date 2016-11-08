@@ -20,12 +20,12 @@ from sites.models import Site
 
 
 class HomePage(Page):
-    main_title = models.CharField(max_length=50, default="Every news site should be secure.")
-    sub_title = models.CharField(max_length=50, default="It's critical for both journalists and readers.")
-    how_header = models.CharField(max_length=50, default="Switching to HTTPS is easier than ever")
-    why_header = models.CharField(max_length=50, default="Encryption protects your readers")
-    how_body = RichTextField(default="Blah blah")
-    why_body = RichTextField(default="Blah blah")
+    main_title = models.TextField(default="")
+    sub_title = models.TextField(default="")
+    how_header = models.TextField(default="")
+    why_header = models.TextField(default="")
+    how_body = models.TextField(default="")
+    why_body = models.TextField(default="")
 
     content_panels = Page.content_panels + [
         MultiFieldPanel([ FieldPanel('main_title'), FieldPanel('sub_title') ], "Main header"),
