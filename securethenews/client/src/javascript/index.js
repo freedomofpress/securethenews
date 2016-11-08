@@ -9,9 +9,10 @@ Backbone.$ = $;
 const $leaderboard = $('#leaderboard');
 
 if ($leaderboard.length !== 0) {
-  const leaderboard = new Leaderboard(_.extend({
-    el: $leaderboard,
-  }, $leaderboard.data()));
+  const leaderboard = new Leaderboard(Object.assign({},
+    $leaderboard.data(),
+    { el: $leaderboard, }
+  ));
   leaderboard.render();
 }
 
