@@ -1,6 +1,7 @@
 const Leaderboard = require('./leaderboard.js');
 const Teaser = require('./teaser.js');
 const Backbone = require('backbone');
+const _ = require('underscore');
 const $ = require('jquery');
 
 Backbone.$ = $;
@@ -8,9 +9,10 @@ Backbone.$ = $;
 const $leaderboard = $('#leaderboard');
 
 if ($leaderboard.length !== 0) {
-  const leaderboard = new Leaderboard({
-    el: $leaderboard,
-  });
+  const leaderboard = new Leaderboard(Object.assign({},
+    $leaderboard.data(),
+    { el: $leaderboard, }
+  ));
   leaderboard.render();
 }
 

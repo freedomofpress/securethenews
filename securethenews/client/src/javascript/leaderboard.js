@@ -5,7 +5,15 @@ const Sites = require('./sites.js');
 const template = require('./leaderboardtemplate.jade');
 
 module.exports = Backbone.View.extend({
-  initialize() {
+  initialize(options) {
+    const optionsDefaults = {
+      // Display this many results; if null, show all
+      limit: null,
+      // Enable interactive features; on by default
+      interactive: true,
+    };
+    this.options = _.defaults(options, optionsDefaults);
+
     // Instantiate collection using data injected into the template server-side
     this.collection = new Sites(window.STNsiteData);
 
@@ -19,21 +27,26 @@ module.exports = Backbone.View.extend({
     // Re-render the view whenever anything changes
     this.listenTo(this.state, 'change', this.render);
 
-    // Update the sort when the headings are clicked
-    this.$el.on('click', '.sort-control', this.updateSort.bind(this));
+    // Register event handlers for interactive functionality, if enabled
+    if (this.options.interactive) {
+      // Update the sort when the headings are clicked
+      this.$el.on('click', '.sort-control', this.updateSort.bind(this));
 
-    // Update the search string whenever text is entered
-    $('[name=search]').on('input', this.updateSearch.bind(this));
+      // Update the search string whenever text is entered
+      $('[name=search]').on('input', this.updateSearch.bind(this));
 
-    // Bind scroll listener to float leaderboard table header when we're
-    // scrolled past it
-    $(window).bind('scroll', this.floatThead.bind(this));
+      // Bind scroll listener to float leaderboard table header when we're
+      // scrolled past it
+      $(window).bind('scroll', this.floatThead.bind(this));
+    }
   },
 
   render() {
     this.$el.html(template(this.templateData()));
-    // When the template is re-rendered, the old DOM nodes are lost. Reset!
-    this.resetHeader();
+    if (this.options.interactive === true) {
+      // When the template is re-rendered, the old DOM nodes are lost. Reset!
+      this.resetHeader();
+    }
   },
 
   templateData() {
@@ -47,6 +60,10 @@ module.exports = Backbone.View.extend({
 
     if (this.state.get('order') == 'desc') {
       models = models.reverse();
+    }
+
+    if (this.options.limit !== null) {
+      models = models.slice(0, this.options.limit);
     }
 
     return {
