@@ -3294,8 +3294,8 @@
 {
     "model": "auth.user",
     "fields": {
-        "password": "pbkdf2_sha256$24000$mQso0vJ3FBFT$pdvLkEKTvCc93TcP9rPGD7Vn7jkwYeC0/a5NYjpjD5k=",
-        "last_login": "2016-10-21T18:25:58.042Z",
+        "password": "pbkdf2_sha256$30000$vyV41ha5MNCM$jrLTcLybToChR6p/Ekd29Kexdve9A42cP+mV1WiRJD8=",
+        "last_login": "2016-11-08T20:44:40.967Z",
         "is_superuser": true,
         "username": "admin",
         "first_name": "",
