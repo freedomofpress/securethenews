@@ -108,6 +108,58 @@ class Scan(models.Model):
             "score must be between 0 and 100 (inclusive), is: {}".format(score)
         self.score = score
 
+    @property
+    def grade(self):
+        """Return a letter grade for this scan's score"""
+        # TODO: We might consider storing this in the database as well to avoid
+        # having to frequntly recompute this value.
+        score = self.score
+        grade = None
+
+        if score > 95:
+            grade = 'A+'
+        elif score >= 85:
+            grade = 'A'
+        elif score >= 80:
+            grade = 'A-'
+        elif score >= 75:
+            grade = 'B+'
+        elif score >= 65:
+            grade = 'B'
+        elif score >= 60:
+            grade = 'B-'
+        elif score >= 55:
+            grade = 'C+'
+        elif score >= 45:
+            grade = 'C'
+        elif score >= 40:
+            grade = 'C-'
+        elif score >= 35:
+            grade = 'D+'
+        elif score >= 25:
+            grade = 'D'
+        elif score >= 20:
+            grade = 'D-'
+        else:
+            grade = 'F'
+
+        # TODO Determining the CSS class name here in the model feels like a
+        # violation of MVC, but I want to avoid duplicating this logic in Python
+        # (for the score breakdown pages) and Javascript (for the leaderboard).
+        class_name = None
+        if score >= 80:
+            class_name = 'grade-a'
+        elif score >= 60:
+            class_name = 'grade-b'
+        elif score >= 40:
+            class_name = 'grade-c'
+        elif score >= 20:
+            class_name = 'grade-d'
+        elif score >= 0:
+            class_name = 'grade-f'
+
+        return dict(grade=grade, class_name=class_name)
+
     def to_dict(self):
         return dict(
             live=self.live,
@@ -119,5 +171,6 @@ class Scan(models.Model):
             hsts_entire_domain=self.hsts_entire_domain,
             hsts_preload_ready=self.hsts_preload_ready,
             hsts_preloaded=self.hsts_preloaded,
-            score=self.score
+            score=self.score,
+            grade=self.grade
         )

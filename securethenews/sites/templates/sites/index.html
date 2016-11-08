@@ -23,7 +23,10 @@
           {% include 'shared/social.html' with url=request.build_absolute_uri %}
         </div>
       </div>
-      <div id="leaderboard"><!-- JS renders the leaderboard here --></div>
+      <div id="leaderboard">
+        <!-- JS renders the leaderboard here -->
+        <noscript><p>Sorry, you must have Javascript enabled to view the leaderboard.</p></noscript>
+      </div>
     </div>
   </section>
 

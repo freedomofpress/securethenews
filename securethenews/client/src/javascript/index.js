@@ -12,5 +12,3 @@ if ($leaderboard.length !== 0) {
   });
   leaderboard.render();
 }
-
-

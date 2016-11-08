@@ -4,8 +4,6 @@ const $ = require('jquery');
 const Sites = require('./sites.js');
 const template = require('./leaderboardtemplate.jade');
 
-const PAGE_SIZE = 10;
-
 module.exports = Backbone.View.extend({
   initialize() {
     // Instantiate collection using data injected into the template server-side
@@ -16,7 +14,6 @@ module.exports = Backbone.View.extend({
       searchString: '',
       orderBy: 'score',
       order: 'desc',
-      page: 0,
     });
 
     // Re-render the view whenever anything changes
@@ -25,16 +22,18 @@ module.exports = Backbone.View.extend({
     // Update the sort when the headings are clicked
     this.$el.on('click', '.sort-control', this.updateSort.bind(this));
 
-    // Hook up pagination
-    this.$el.on('click', '.pagination .next', this.updatePage.bind(this, 1));
-    this.$el.on('click', '.pagination .previous', this.updatePage.bind(this, -1));
-
     // Update the search string whenever text is entered
     $('[name=search]').on('input', this.updateSearch.bind(this));
+
+    // Bind scroll listener to float leaderboard table header when we're
+    // scrolled past it
+    $(window).bind('scroll', this.floatThead.bind(this));
   },
 
   render() {
     this.$el.html(template(this.templateData()));
+    // When the template is re-rendered, the old DOM nodes are lost. Reset!
+    this.resetHeader();
   },
 
   templateData() {
@@ -44,32 +43,15 @@ module.exports = Backbone.View.extend({
         || site.domain.toLowerCase().indexOf(this.state.get('searchString')) !== -1;
     });
 
-    // This will sort false first, and lowest number first
     models = _.sortBy(models, this.state.get('orderBy'))
 
-    if (this.state.get('order') == 'asc') {
+    if (this.state.get('order') == 'desc') {
       models = models.reverse();
     }
 
-    const hasNextPage = models.length > (PAGE_SIZE * (this.state.get('page') + 1));
-    const hasPages = models.length > PAGE_SIZE;
-
-    // +1 because pages are 0-indexed, but should be displayed 1-indexed because
-    // that is more familiar to non-programmers.
-    const pageNumber = this.state.get('page') + 1;
-    const totalPages = Math.floor(models.length / PAGE_SIZE) + 1;
-
-    models = models.slice(
-      this.state.get('page') * PAGE_SIZE,
-      (this.state.get('page') + 1) * PAGE_SIZE);
-
     return {
       items: models,
-      hasNextPage,
-      hasPages,
-      pageNumber,
       state: this.state.toJSON(),
-      totalPages,
     };
   },
 
@@ -78,13 +60,11 @@ module.exports = Backbone.View.extend({
     if (this.state.get('orderBy') == sortKey) {
       this.state.set({
         order: this.state.get('order') == 'desc' ? 'asc' : 'desc',
-        page: 0
       });
     } else {
       this.state.set({
         orderBy: sortKey,
         order: 'desc',
-        page: 0,
       });
     }
   },
@@ -92,39 +72,44 @@ module.exports = Backbone.View.extend({
   updateSearch(event) {
     this.state.set({
       searchString: event.target.value.toLowerCase(),
-      page: 0
     });
   },
 
-  updatePage(val) {
-    const maxPage = Math.floor(this.collection.length / PAGE_SIZE);
-    const newPage = Math.min(maxPage, Math.max(0, this.state.get('page') + val));
-    this.state.set({
-      page: newPage
-    });
-  },
+  floatThead(event) {
+    let $header = $('#header-normal > thead');
 
-  // Map true/false/null values to 1/-1/0 to allow for easy sorting
-  transformData(rawData) {
-    return _.map(rawData, (d) => {
-      return _.extend({}, d, {
-        downgrades_https: mapValue(d.downgrades_https),
-        valid_https: mapValue(d.valid_https),
-        default_https: mapValue(d.default_https),
-        enforces_https: mapValue(d.enforces_https),
+    // Scroll listener may fire before the template has been rendered - return
+    // without doing anything (nothing to do).
+    if ($header.length === 0) {
+      return;
+    }
+
+    if (!this.$fixedHeader) {
+      this.$fixedHeader = $('#header-fixed').append($header.clone());
+    }
+
+    let tableOffset = $header.offset().top;
+    let offset = $(window).scrollTop();
+    let $fixedHeader = this.$fixedHeader;
+
+    if (offset >= tableOffset && $fixedHeader.is(":hidden")) {
+      $fixedHeader.show();
+      // Update the fixed header with th widths from the normal header. In the
+      // normal header, the widths are computed based on the table contents, but
+      // the #fixed-header table only has the header, so we need to explicitly
+      // copy the correct widths.
+      $.each($header.find('tr > th'), function(i, el) {
+        let originalWidth = $(el).width();
+        $($fixedHeader.find('tr > th')[i]).width(originalWidth);
       });
-    });
-  }
+    } else if (offset < tableOffset && $fixedHeader.is(":visible")) {
+      $fixedHeader.hide();
+    }
+  },
+
+  resetHeader() {
+    this.$fixedHeader = null;
+    this.floatThead();
+  },
 
 });
-
-
-const mapValue = function(value) {
-  if (value === true) {
-    return 1;
-  } else if (value === false) {
-      return -1;
-  } else {
-    return 0;
-  }
-};

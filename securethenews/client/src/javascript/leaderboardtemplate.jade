@@ -1,65 +1,41 @@
 - var iconClass = "fa-caret-" + (state.order == "desc" ? "down" : "up");
 .leaderboard
-  table
-    thead
-      tr.leaderboard-row
-        th
-        th.sort-control.desktop-only(data-sort-key='valid_https')
-          .inline-block.align-middle Valid HTTPS
-          if state.orderBy == 'valid_https'
-            i.sort-icon.fa(class=iconClass)
-        th.sort-control.desktop-only(data-sort-key='available_over_https')
-          .inline-block.align-middle Available Over HTTPS
-          if state.orderBy == 'available_over_https'
-            i.sort-icon.fa(class=iconClass)
-        th.sort-control.desktop-only(data-sort-key='default_https')
-          .inline-block.align-middle Defaults to HTTPS
-          if state.orderBy == 'default_https'
-            i.sort-icon.fa(class=iconClass)
-        th.sort-control.desktop-only(data-sort-key='hsts')
-          .inline-block.align-middle HSTS
-          if state.orderBy == 'hsts'
-            i.sort-icon.fa(class=iconClass)
-        th.sort-control.desktop-only(data-sort-key='hsts_preloaded')
-          .inline-block.align-middle HSTS Preloaded
-          if state.orderBy == 'hsts_preloaded'
-            i.sort-icon.fa(class=iconClass)
-        th.sort-control(data-sort-key='score')
-          .inline-block.align-middle Grade
-          if state.orderBy == 'score'
-            i.sort-icon.fa(class=iconClass)
-    tbody
-      for item in items
+  if items.length > 0
+    table#header-fixed
+    table#header-normal
+      thead
         tr.leaderboard-row
-          td
-            a(href=item.slug)= item.name
-          td.desktop-only
-            i.fa(class='#{ item.valid_https ? "fa-check grade-a" : "fa-close grade-f" }')
-          td.desktop-only
-            i.fa(class='#{ item.valid_https && !item.downgrades_https ? "fa-check grade-a" : "fa-close grade-f" }')
-          td.desktop-only
-            i.fa(class='#{ item.defaults_to_https ? "fa-check grade-a" : "fa-close grade-f" }')
-          td.desktop-only
-            i.fa(class='#{ item.hsts ? "fa-check grade-a" : "fa-close grade-f" }')
-          td.desktop-only
-            i.fa(class='#{ item.hsts_preloaded ? "fa-check grade-a" : "fa-close grade-f" }')
-          td
-            // NOTE: This logic is duplicated in /home/templatetags/site_tags.py
-            // If you update it here remember to make the corresponding change there.
-            if (item.score > 80)
-              span(class="grade grade-a")= "A"
-            else if (item.score > 60)
-              span(class="grade grade-b")= "B"
-            else if (item.score > 40)
-              span(class="grade grade-c")= "C"
-            else if (item.score > 20)
-              span(class="grade grade-d")= "D"
-            else
-              span(class="grade grade-f")= "F"
-  if hasPages
-    .pagination
-      .previous(class='#{ state.page == 0 ? "hidden" : "" }')
-        i.fa.fa-chevron-left
-      span.context #{pageNumber} / #{totalPages}
-      .next(class='#{ !hasNextPage ? "hidden" : "" }')
-        i.fa.fa-chevron-right
+          th
+          th.desktop-only
+            .inline-block.align-middle Valid HTTPS
+          th.desktop-only
+            .inline-block.align-middle Available Over HTTPS
+          th.desktop-only
+            .inline-block.align-middle Defaults to HTTPS
+          th.desktop-only
+            .inline-block.align-middle HSTS
+          th.desktop-only
+            .inline-block.align-middle HSTS Preloaded
+          th.sort-control(data-sort-key='score')
+            .inline-block.align-middle Grade
+            if state.orderBy == 'score'
+              i.sort-icon.fa(class=iconClass)
+      tbody
+        for item in items
+          tr.leaderboard-row
+            td
+              a(href=item.slug)= item.name
+            td.desktop-only
+              i.fa(class='#{ item.valid_https ? "fa-check grade-a" : "fa-close grade-f" }')
+            td.desktop-only
+              i.fa(class='#{ item.valid_https && !item.downgrades_https ? "fa-check grade-a" : "fa-close grade-f" }')
+            td.desktop-only
+              i.fa(class='#{ item.defaults_to_https ? "fa-check grade-a" : "fa-close grade-f" }')
+            td.desktop-only
+              i.fa(class='#{ item.hsts ? "fa-check grade-a" : "fa-close grade-f" }')
+            td.desktop-only
+              i.fa(class='#{ item.hsts_preloaded ? "fa-check grade-a" : "fa-close grade-f" }')
+            td
+              span(class='grade #{item.grade.class_name}')= item.grade.grade
+  else
+    p.align-center Sorry, no sites match your search query.

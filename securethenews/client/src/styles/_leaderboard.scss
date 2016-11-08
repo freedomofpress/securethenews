@@ -1,3 +1,10 @@
+#leaderboard {
+  noscript p {
+    margin-top: 3em;
+    text-align: center;
+  }
+}
+
 .leaderboard {
   font-size: 20px;
   font-weight: bold;
@@ -5,12 +12,14 @@
 
   table {
     table-layout: fixed;
-    width: 100%;
+  }
+
+  thead {
+    background-color: white;
   }
 
   th {
     font-size: 14px;
-    max-width: 150px;
     text-transform: uppercase;
   }
 
@@ -62,31 +71,6 @@
   .grade {
     margin: 0;
   }
-
-  .pagination {
-    position: relative;
-    height: $spacingUnit * 4;
-
-    .next, .previous {
-      display: inline-block;
-      width: 45%;
-      text-align: center;
-      font-size: 30px;
-      color: $textGray;
-      line-height: $spacingUnit * 4;
-      cursor: pointer;
-
-      &:hover {
-        color: $lightBlue;
-      }
-    }
-
-    .context {
-      display: inline-block;
-      text-align: center;
-      width:10%;
-    }
-  }
 }
 
 @media (max-width: $mediaMedium) {
@@ -97,4 +81,12 @@
       width: 15%;
     }
   }
+}
+
+table#header-fixed {
+  position: fixed;
+  top: 0px;
+  display: none;
+  background-color: white;
+  z-index: 1;
 }
