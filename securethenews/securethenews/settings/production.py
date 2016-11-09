@@ -23,9 +23,6 @@ DATABASES = {
 }
 
 STATIC_ROOT = os.environ['DJANGO_STATIC_ROOT']
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'client', 'build')
-]
 
 try:
     es_host = os.environ.get('DJANGO_ES_HOST', 'disable')
