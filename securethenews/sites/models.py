@@ -142,7 +142,7 @@ class Pledge(models.Model):
         (STATUS_APPROVED, 'Approved'),
         (STATUS_REJECTED, 'Rejected'),
     )
-    status = models.CharField(
+    review_status = models.CharField(
         max_length=1,
         choices=STATUS_CHOICES,
         default=STATUS_NEEDS_REVIEW
