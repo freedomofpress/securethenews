@@ -27,5 +27,10 @@ class PledgeAdmin(ModelAdmin):
 
     search_fields = ('url', 'contact_email')
 
+    def get_queryset(self, request):
+        """Only display confirmed pledges."""
+        qs = super(PledgeAdmin, self).get_queryset(request)
+        return qs.filter(confirmed=True)
+
 modeladmin_register(SiteAdmin)
 modeladmin_register(PledgeAdmin)
