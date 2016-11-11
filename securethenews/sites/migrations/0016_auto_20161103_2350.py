@@ -13,23 +13,8 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.CreateModel(
-            name='Pledge',
-            fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('url', models.URLField()),
-                ('contact_email', models.EmailField(max_length=254)),
-                ('approved', models.BooleanField(default=False)),
-                ('timestamp', models.DateTimeField(auto_now_add=True)),
-            ],
-        ),
         migrations.AlterModelOptions(
             name='site',
             options={'ordering': ['name']},
-        ),
-        migrations.AddField(
-            model_name='pledge',
-            name='site',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='pledges', to='sites.Site'),
         ),
     ]
