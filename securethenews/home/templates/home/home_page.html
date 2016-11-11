@@ -23,10 +23,9 @@
         </div>
       </div>
 
-      <div class="score-teaser">
-        <span class="graded-news-org">New York Times <span class="grade grade-a">A+</span></span>
-        <span class="graded-news-org">Wall Street Journal <span class="grade grade-b">B</span></span>
-        <span class="graded-news-org">Buzzfeed <span class="grade grade-b">B-</span></span>
+      <div id="teaser">
+        <!-- JS renders site score teaser here -->
+        <noscript><p>Sorry, you must have Javascript enabled to view the teaser.</p></noscript>
       </div>
 
       <div class="align-center">
@@ -79,7 +78,10 @@
   <section class="leaderboard-section" id="stats">
     <div class="section-content">
       <h1 class="leaderboard-header align-center">Leaderboard</h1>
-      {% include "home/leaderboard.html" %}
+      <div id="leaderboard" data-interactive="false" data-limit="10">
+        <!-- JS renders the leaderboard here -->
+        <noscript><p>Sorry, you must have Javascript enabled to view the leaderboard.</p></noscript>
+      </div>
       <div class="align-center leaderboard-button-container">
         <a href="{% url 'sites:index' %}">
           <div class="button button-primary button-dark" aria-role="button">
@@ -89,4 +91,9 @@
       </div>
     </div>
   </section>
+
+  <!-- Dump the site data to be rendered client-side. -->
+  <script type="text/javascript">
+    var STNsiteData = {{ sites_json|safe }};
+  </script>
 {% endblock %}

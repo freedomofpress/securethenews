@@ -44,12 +44,34 @@ $statBlockMaxWidth: 140px;
   letter-spacing: 1px;
 }
 
-.score-teaser {
-  margin-bottom: $spacingUnit * 2;
+#teaser {
+  // Set min-height so this takes up space initially (before the Backbone View
+  // has rendered)
+  min-height: 60px;
+  margin-bottom: $spacingUnit * 3;
+
+  noscript p {
+    padding-top: $spacingUnit;
+    text-align: center;
+  }
+}
+
+.teaser {
   text-align: center;
 
-  .graded-news-org:not(:last-child) {
-    margin-right: $spacingUnit * 2;
+  a {
+    color: #fff;
+    text-decoration: none;
+    display: inline-block;
+
+    &:hover {
+      color: #d9d9d9;
+      cursor: pointer;
+    }
+
+    &:not(:last-child) {
+      margin-right: $spacingUnit * 2;
+    }
   }
 }
 
