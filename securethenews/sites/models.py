@@ -214,3 +214,24 @@ class Pledge(models.Model):
         })
 
         mail_admins(subject, body)
+
+    def send_review_confirmation_email(self):
+        subject = 'Secure the News Pledge Review: {}'.format(
+            self.get_review_status_display())
+
+        message = render_to_string(
+            'sites/pledge_review_confirmation_email.txt',
+            { 'pledge': self }
+        )
+
+        send_mail(
+            subject=subject,
+            message=message,
+            from_email='contact@securethe.news',
+            recipient_list=[self.contact_email,]
+        )
+
+    def save(self, *args, **kwargs):
+        if self.review_status in (self.STATUS_APPROVED, self.STATUS_REJECTED):
+            self.send_review_confirmation_email()
+        super(Pledge, self).save(*args, **kwargs)
