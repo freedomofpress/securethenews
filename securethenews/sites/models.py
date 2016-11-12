@@ -26,6 +26,15 @@ class Site(models.Model):
         self.slug = slugify(self.name)
         super(Site, self).save(*args, **kwargs)
 
+    @property
+    def pledge(self):
+        """Return the latest approved pledge, or None"""
+        return self.pledges.filter(
+            review_status=Pledge.STATUS_APPROVED
+        ).order_by(
+            '-submitted'
+        ).first()
+
     def to_dict(self):
         """Generate a JSON-serializable dict of this object's attributes,
         including the results of the most recent scan."""
