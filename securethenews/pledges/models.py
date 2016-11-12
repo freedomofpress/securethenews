@@ -7,7 +7,6 @@ from django.core.urlresolvers import reverse
 from django.db import models
 from django.template.loader import render_to_string
 
-from sites.models import Site
 
 # Create your models here.
 def generate_confirmation_nonce():
@@ -16,7 +15,7 @@ def generate_confirmation_nonce():
 
 class Pledge(models.Model):
     site = models.ForeignKey(
-        Site,
+        'sites.Site',
         on_delete=models.CASCADE,
         related_name='pledges'
     )

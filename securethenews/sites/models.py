@@ -1,6 +1,8 @@
 from django.db import models
 from django.utils.text import slugify
 
+from pledges.models import Pledge
+
 
 class Site(models.Model):
     name = models.CharField('Name', max_length=255, unique=True)
