@@ -44,7 +44,7 @@ class Pledge(models.Model):
         default=STATUS_NEEDS_REVIEW
     )
 
-    timestamp = models.DateTimeField(auto_now_add=True)
+    submitted = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return "Pledge: {}".format(self.site.name)
