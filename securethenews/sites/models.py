@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 from django.utils.text import slugify
 
 from pledges.models import Pledge
@@ -46,6 +47,8 @@ class Site(models.Model):
             **self.scans.latest().to_dict()
         )
 
+    def get_absolute_url(self):
+        return reverse('sites:site', kwargs={'slug': self.slug})
 
 class Scan(models.Model):
     site = models.ForeignKey(

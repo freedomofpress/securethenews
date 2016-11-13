@@ -32,7 +32,7 @@
       {% if site.pledge %}
       <div class="pledge">
         <i class="fa fa-handshake-o fa-lg" aria-hidden="true"></i>
-        {{ site.name }} <a href="{% url 'pledges:pledge' %}">pledged</a> to secure their site on <strong>{{ site.pledge.submitted|date:"F j, Y"}}</strong>.
+        {{ site.name }} <a href="{{ site.pledge.url }}">pledged to secure their site</a> on <strong>{{ site.pledge.submitted|date:"F j, Y"}}</strong>.
       </div>
       {% endif %}
 
