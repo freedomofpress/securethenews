@@ -10,4 +10,45 @@
   .section-content {
     max-width: $contentPageMaxWidth;
   }
+
+
+  // Blockquote styling stolen shamelessly from http://stackoverflow.com/a/16326442
+
+  blockquote {
+    font-family: $serif;
+    font-size: $fontSize;
+    font-style: italic;
+    width: 650px;
+    margin: 0.25em 0;
+    padding: 0.35em 40px;
+    line-height: 1.45;
+    position: relative;
+    color: #383838;
+    display: block;
+    margin: 0 auto;
+    margin-bottom: $spacingUnit;
+  }
+
+  blockquote:before {
+    display: block;
+    padding-left: 10px;
+    content: "\201C";
+    font-size: $fontSize * 4;
+    position: absolute;
+    left: -25px;
+    top: -40px;
+    color: #7a7a7a;
+  }
+
+  blockquote cite {
+    color: #999999;
+    font-size: $fontSize * 0.75;
+    display: block;
+    margin-top: 5px;
+    text-align: right;
+  }
+
+  blockquote cite:before {
+    content: "\2014 \2009";
+  }
 }

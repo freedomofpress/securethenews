@@ -80,12 +80,24 @@ class HomePage(Page):
 
         return context
 
+
+class QuoteBlock(blocks.StructBlock):
+    quote = blocks.TextBlock()
+    source = blocks.CharBlock()
+    link = blocks.URLBlock(required=False)
+
+    class Meta:
+        icon = 'openquote'
+        template = 'home/blocks/quote.html'
+
+
 class ContentPage(Page):
     sub_header = models.CharField(max_length=50, default="")
     body = StreamField([
         ('heading', blocks.CharBlock()),
         ('rich_text', blocks.RichTextBlock()),
         ('image', ImageChooserBlock()),
+        ('quote', QuoteBlock()),
     ])
     button_text = models.CharField(max_length=50, null=True, blank=True)
     button_target = models.ForeignKey(
