@@ -37,4 +37,12 @@
     color: lighten($textGray, 20%);
     margin-bottom: $spacingUnit * 1.5;
   }
+
+  .richtext-image {
+    &.full-width {
+      // Center "full width" images
+      display: block;
+      margin: 0 auto;
+    }
+  }
 }
