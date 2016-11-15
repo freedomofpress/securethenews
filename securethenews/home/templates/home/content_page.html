@@ -16,13 +16,6 @@
   <section class="white-section">
     <div class="section-content">
       <div>{{ page.body }}</div>
-      {% if page.button_text and page.button_target %}
-        <a href="{{ page.button_target.url }}">
-          <div class="button button-light" aria-role="button">
-            {{ page.button_text }}<i class="fa fa-chevron-right" aria-hidden="true"></i>
-          </div>
-        </a>
-      {% endif %}
     </div>
   </section>
 {% endblock %}

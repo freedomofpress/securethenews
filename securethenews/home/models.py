@@ -99,16 +99,8 @@ class ContentPage(Page):
         ('image', ImageChooserBlock()),
         ('quote', QuoteBlock()),
     ])
-    button_text = models.CharField(max_length=50, null=True, blank=True)
-    button_target = models.ForeignKey(
-        'wagtailcore.Page',
-        null=True,
-        blank=True,
-        related_name='+',
-        on_delete=models.SET_NULL)
 
     content_panels = Page.content_panels + [
         FieldPanel('sub_header'),
         StreamFieldPanel('body'),
-        MultiFieldPanel([ FieldPanel('button_text'), PageChooserPanel('button_target') ], "Call to action"),
     ]
