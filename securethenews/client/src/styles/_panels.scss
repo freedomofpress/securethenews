@@ -35,9 +35,9 @@
 
   .panel {
     display: inline-block;
-    max-width: $panelContainerMaxWidth / 2 - $spacingUnit * 6;
+    max-width: $panelContainerMaxWidth / 2 - $spacingUnit * 4;
     vertical-align: top;
-    margin: $spacingUnit * 3;
+    margin: $spacingUnit * 3 $spacingUnit * 2;
 
     &:not(:last-child) {
       margin-right: $spacingUnit ;
