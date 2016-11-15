@@ -6,4 +6,8 @@
   .blue-section {
     padding-bottom: 0;
   }
+
+  .section-content {
+    max-width: $contentPageMaxWidth;
+  }
 }

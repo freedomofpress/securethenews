@@ -1,8 +1,8 @@
 .rich-text {
   font-size: $fontSize;
   line-height: 1.5;
-  color: lighten($textGray, 10%);
-  margin-bottom: $spacingUnit * 4;
+  color: $textGray;
+  margin-bottom: $spacingUnit;
 
   p {
     margin-bottom: $spacingUnit * 1.5;
@@ -32,6 +32,8 @@
   }
 
   h2, h3, h4, h5 {
-    margin-bottom: $spacingUnit / 2;
+    border-bottom: 1px solid $lightGray;
+    color: lighten($textGray, 20%);
+    margin-bottom: $spacingUnit * 1.5;
   }
 }
