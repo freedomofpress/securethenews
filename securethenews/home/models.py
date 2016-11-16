@@ -6,6 +6,7 @@ import math
 from django.db import models
 from django.utils.html import format_html
 
+from wagtail.contrib.table_block.blocks import TableBlock
 from wagtail.wagtailcore import blocks, hooks
 from wagtail.wagtailcore.models import Page
 from wagtail.wagtailcore.fields import (RichTextField,
@@ -99,6 +100,7 @@ class ContentPage(Page):
         ('rich_text', blocks.RichTextBlock()),
         ('image', ImageChooserBlock()),
         ('quote', QuoteBlock()),
+        ('table', TableBlock()),
     ])
 
     content_panels = Page.content_panels + [

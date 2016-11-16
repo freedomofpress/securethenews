@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'wagtail.wagtailcore',
 
     'wagtail.contrib.modeladmin',
+    'wagtail.contrib.table_block',
 
     'wagtailmenus',
 

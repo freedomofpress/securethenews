@@ -97,6 +97,20 @@
       }
     }
 
+    table {
+      border-collapse: collapse;
+      margin-bottom: $spacingUnit * 1.5;
+    }
+
+    td, th {
+      border: 1px solid $darkGray;
+      padding: 0.75rem;
+      text-align: left;
+    }
+
+    tbody tr:nth-child(odd) {
+      background: #eee;
+    }
   }
 
 }
