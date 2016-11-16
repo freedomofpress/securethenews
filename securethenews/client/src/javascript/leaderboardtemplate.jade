@@ -1,13 +1,10 @@
 - var iconClass = "fa-caret-" + (state.order == "desc" ? "down" : "up");
-
-mixin pledgable(item, condition)
+  
+mixin check(condition)
   if condition
     i.fa.fa-check.grade-a
   else
-    if item.pledge
-      i.fa.fa-handshake-o.grade-c(title="#{ item.name } doesn't support this yet, but they have pledged to secure their site.")
-    else
-      i.fa.fa-close.grade-f
+    i.fa.fa-close.grade-f
 
 .leaderboard
   if items.length > 0
@@ -35,16 +32,19 @@ mixin pledgable(item, condition)
           tr.leaderboard-row
             td
               a(href=item.slug)= item.name
+              if item.pledge
+                a(href=item.pledge.url)
+                  i.pledged.fa.fa-handshake-o(title="#{ item.name } have pledged to secure their site.")
             td.desktop-only
-              +pledgable(item, item.valid_https)
+              +check(item.valid_https)
             td.desktop-only
-              +pledgable(item, item.valid_https && !item.downgrades_https)
+              +check(item.valid_https && !item.downgrades_https)
             td.desktop-only
-              +pledgable(item, item.defaults_to_https)
+              +check(item.defaults_to_https)
             td.desktop-only
-              i.fa(class='#{ item.hsts ? "fa-check grade-a" : "fa-close grade-f" }')
+              +check(item.hsts)
             td.desktop-only
-              i.fa(class='#{ item.hsts_preloaded ? "fa-check grade-a" : "fa-close grade-f" }')
+              +check(item.hsts_preloaded)
             td
               span(class='grade #{item.grade.class_name}')= item.grade.grade
   else

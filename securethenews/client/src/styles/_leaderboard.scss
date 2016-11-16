@@ -24,7 +24,7 @@
   }
 
   th:not(:first-child) {
-    width: 13%;
+    width: 12.8%;
     position: relative;
   }
 
@@ -70,6 +70,10 @@
 
   .grade {
     margin: 0;
+  }
+
+  i.pledged {
+    margin-left: 10px;
   }
 }
 
