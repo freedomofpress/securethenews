@@ -44,3 +44,9 @@ class Pledge(models.Model):
 
     def __str__(self):
         return "Pledge: {}".format(self.site.name)
+
+    def to_dict(self):
+        return {
+            'submitted': self.submitted.isoformat(),
+            'url': self.url,
+        }

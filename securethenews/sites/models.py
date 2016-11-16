@@ -44,6 +44,7 @@ class Site(models.Model):
             name=self.name,
             slug=self.slug,
             domain=self.domain,
+            pledge=self.pledge.to_dict() if self.pledge else None,
             **self.scans.latest().to_dict()
         )
 
