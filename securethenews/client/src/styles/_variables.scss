@@ -18,19 +18,18 @@ $blueGradient: linear-gradient(to top right, #000, #16273d);
 // Spacing
 $headerHeight: 120px;
 $contentMaxWidth: 970px;
-$contentPageMaxWidth: 750px;
+$contentPageMaxWidth: 800px;
 $spacingUnit: 20px;
 
 // Fonts
 $sans: 'Source Sans Pro', sans-serif;
-$serif: 'Alegreya', Georgia, serif;
 $fa-font-path: 'fonts';
-$fontSize: 1.2em;
-$h1Size: $fontSize * 1.5;
-$h2Size: $fontSize * 1.25;
-$h3Size: $fontSize * 1.17;
-$h4Size: $fontSize * 1.12;
-$h5Size: $fontSize * 1.05;
+$fontSize: 1.25em;
+$h1Size: 2em;
+$h2Size: 1.5em;
+$h3Size: 1.25em;
+$h4Size: 1.17em;
+$h5Size: 1.12em;
 
 // Media Queries
 $mediaLarge: 1250px;

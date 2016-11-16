@@ -36,17 +36,17 @@
 
     h1, h2, h3, h4, h5 {
       border-bottom: 1px solid $lightGray;
-      color: lighten($textGray, 20%);
+      color: lighten($textGray, 15%);
       margin-bottom: $spacingUnit * 1.5;
+      font-weight: 300;
     }
 
     // Blockquote styling stolen shamelessly from http://stackoverflow.com/a/16326442
 
     blockquote {
-      font-family: $serif;
       font-size: $fontSize;
       font-style: italic;
-      width: 650px;
+      max-width: 650px;
       margin: 0.25em 0;
       padding: 0.35em 40px;
       line-height: 1.45;
@@ -61,10 +61,10 @@
       display: block;
       padding-left: 10px;
       content: "\201C";
-      font-size: $fontSize * 4;
+      font-size: 4em;
       position: absolute;
-      left: -25px;
-      top: -40px;
+      left: -20px;
+      top: -30px;
       color: #7a7a7a;
     }
 
