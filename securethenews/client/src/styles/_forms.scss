@@ -1,0 +1,52 @@
+.template-form-page {
+  form {
+    margin-top: $spacingUnit * 2;
+
+    button, input, select, textarea {
+      font-family : inherit;
+      font-size   : 100%;
+    }
+
+    p {
+      margin-bottom: $spacingUnit;
+    }
+
+    label {
+      font-weight: bold;
+      font-size: 1.25em;
+      display: inline-block;
+      width: 15%;
+      vertical-align: top;
+    }
+
+    input {
+      display: inline-block;
+      width: 50%;
+    }
+
+    input[type='text'], input[type='email'] {
+      text-align: left;
+    }
+
+    input[type='submit'] {
+      width: 25%;
+      text-align: center;
+      display: block;
+      margin: 0 auto;
+      cursor: pointer;
+    }
+
+    span {
+      display:block;
+      margin-left: 18%;
+      color: lighten($textGray, 20%);
+      font-style: italic;
+    }
+
+    textarea {
+      width: 50%;
+      max-width: 80%;
+      padding: $spacingUnit;
+    }
+  }
+}

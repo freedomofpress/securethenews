@@ -3,6 +3,10 @@ $twitterBlue: #139ae9;
 $gplusRed: #d5392f;
 $socialIconBorderWidth: 2px;
 
+.social-container {
+  margin-top: $spacingUnit * 2;
+}
+
 .social-icon {
   display: inline-block;
   width: $spacingUnit * 2;
