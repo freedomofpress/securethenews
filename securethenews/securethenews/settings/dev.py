@@ -10,7 +10,11 @@ SECRET_KEY = 'fz08^an-s((swaouk(l+q)$ou2iina8w+1)t2yy0y9laahjh_('
 
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_SUBJECT_PREFIX = '[Secure the News] '
 
+ADMINS = [
+    ('John Q. Admin', 'admin@securethe.news'),
+]
 
 try:
     from .local import *

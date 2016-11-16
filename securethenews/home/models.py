@@ -77,6 +77,8 @@ class HomePage(Page):
         context['percent_defaulting_to_https'] = math.floor(
             len(sites_defaulting_to_https) / total_sites * 100)
 
+        context['num_pledged'] = len([ site for site in sites if site.pledge ])
+
         # Serialize sites with the results of their latest scans for the teaser
         context['sites_json'] = json.dumps([site.to_dict() for site in sites])
 

@@ -1,7 +1,7 @@
 .rich-text {
   font-size: $fontSize;
   line-height: 1.5;
-  color: $textGray;
+  color: lighten($textGray, 10%);
   margin-bottom: $spacingUnit;
 
   p {

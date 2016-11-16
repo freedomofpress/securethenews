@@ -1,5 +1,8 @@
 from django.db import models
+from django.urls import reverse
 from django.utils.text import slugify
+
+from pledges.models import Pledge
 
 
 class Site(models.Model):
@@ -14,12 +17,24 @@ class Site(models.Model):
 
     added = models.DateTimeField(auto_now_add=True)
 
+    class Meta:
+        ordering = ['name']
+
     def __str__(self):
         return self.name
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
         super(Site, self).save(*args, **kwargs)
+
+    @property
+    def pledge(self):
+        """Return the latest approved pledge, or None"""
+        return self.pledges.filter(
+            review_status=Pledge.STATUS_APPROVED
+        ).order_by(
+            '-submitted'
+        ).first()
 
     def to_dict(self):
         """Generate a JSON-serializable dict of this object's attributes,
@@ -29,8 +44,12 @@ class Site(models.Model):
             name=self.name,
             slug=self.slug,
             domain=self.domain,
+            pledge=self.pledge.to_dict() if self.pledge else None,
             **self.scans.latest().to_dict()
         )
+
+    def get_absolute_url(self):
+        return reverse('sites:site', kwargs={'slug': self.slug})
 
 class Scan(models.Model):
     site = models.ForeignKey(
