@@ -12,6 +12,10 @@
   }
 
   .section-content {
-    max-width: 600px;
+    max-width: $contentPageMaxWidth;
+  }
+
+  .blog-post-item:not(:last-child) {
+    margin-bottom: $spacingUnit * 2;
   }
 }
