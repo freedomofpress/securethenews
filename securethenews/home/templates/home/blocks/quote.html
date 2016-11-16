@@ -1,0 +1,10 @@
+<blockquote>
+  {{ value.quote }}
+  <cite>
+    {% if value.link %}
+    <a href="{{ value.link }}">{{ value.source }}</a>
+    {% else %}
+    {{ value.source }}
+    {% endif %}
+  </cite>
+</blockquote>

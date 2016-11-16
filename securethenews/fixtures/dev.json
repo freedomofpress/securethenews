@@ -3153,7 +3153,7 @@
     "model": "wagtailmenus.mainmenuitem",
     "pk": 1,
     "fields": {
-        "sort_order": 0,
+        "sort_order": 1,
         "link_page": 5,
         "link_url": "",
         "link_text": "",
@@ -3167,7 +3167,7 @@
     "model": "wagtailmenus.mainmenuitem",
     "pk": 2,
     "fields": {
-        "sort_order": 1,
+        "sort_order": 0,
         "link_page": 4,
         "link_url": "",
         "link_text": "",
@@ -3182,7 +3182,7 @@
     "pk": 3,
     "fields": {
         "sort_order": 2,
-        "link_page": 6,
+        "link_page": 9,
         "link_url": "",
         "link_text": "",
         "handle": "",
@@ -3294,8 +3294,8 @@
 {
     "model": "auth.user",
     "fields": {
-        "password": "pbkdf2_sha256$24000$mQso0vJ3FBFT$pdvLkEKTvCc93TcP9rPGD7Vn7jkwYeC0/a5NYjpjD5k=",
-        "last_login": "2016-10-21T18:25:58.042Z",
+        "password": "pbkdf2_sha256$30000$vyV41ha5MNCM$jrLTcLybToChR6p/Ekd29Kexdve9A42cP+mV1WiRJD8=",
+        "last_login": "2016-11-08T21:01:16.247Z",
         "is_superuser": true,
         "username": "admin",
         "first_name": "",
@@ -3306,70 +3306,6 @@
         "date_joined": "2016-09-21T22:28:09.581Z",
         "groups": [],
         "user_permissions": []
-    }
-},
-{
-    "model": "sessions.session",
-    "pk": "414wjgm1c30jcl79qtn40oylbr00kliq",
-    "fields": {
-        "session_data": "NzE1MTI3ZWE3ZjFhNmFiNzMyNjYxNzU2MDk2NTlhZWMwY2NkN2U5MTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9oYXNoIjoiNjY0MGExNjcxMTA4YzZhYWJiNzUwZjY0M2Q5MjY5ZWQ2NTVhZTY2OCIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIn0=",
-        "expire_date": "2016-10-05T22:37:42.907Z"
-    }
-},
-{
-    "model": "sessions.session",
-    "pk": "a9186qestb7fmzqooij5q1z27lqswq3n",
-    "fields": {
-        "session_data": "ZjQ5ODlkMjhlYzI1NjA1MWRkNjlkZTc5MWRhNmU2OTNhYjVkODYwYjp7Il9hdXRoX3VzZXJfaGFzaCI6IjY2NDBhMTY3MTEwOGM2YWFiYjc1MGY2NDNkOTI2OWVkNjU1YWU2NjgiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIxIn0=",
-        "expire_date": "2016-11-03T00:15:17.794Z"
-    }
-},
-{
-    "model": "sessions.session",
-    "pk": "e0ft4395yzif5h2esj4jvljfna1vs9jm",
-    "fields": {
-        "session_data": "ZjQ5ODlkMjhlYzI1NjA1MWRkNjlkZTc5MWRhNmU2OTNhYjVkODYwYjp7Il9hdXRoX3VzZXJfaGFzaCI6IjY2NDBhMTY3MTEwOGM2YWFiYjc1MGY2NDNkOTI2OWVkNjU1YWU2NjgiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIxIn0=",
-        "expire_date": "2016-10-14T18:43:51.337Z"
-    }
-},
-{
-    "model": "sessions.session",
-    "pk": "ewec488n5um3q10b9kckm5sn70coi9u4",
-    "fields": {
-        "session_data": "ZWUyODEyMGQ5MDU0NTU1ZWY4N2I4NDczMjkzYTMwZTQ1ZmZiNWFmNDp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiIzMmMzNzQzYzlkMzkwMDY2ZDMzYjg3YmRiMjRmZTQzNWVkMDJhNTM3In0=",
-        "expire_date": "2016-10-04T18:05:53.072Z"
-    }
-},
-{
-    "model": "sessions.session",
-    "pk": "guewrkh3dmbplqjyvv9nepzqnk3e2fvs",
-    "fields": {
-        "session_data": "MDk0YWY4YTA2YjcxZDdlMDg1NjBhZGE5ZWQwM2IyOGU5ZDVlYjA3ODp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiMzJjMzc0M2M5ZDM5MDA2NmQzM2I4N2JkYjI0ZmU0MzVlZDAyYTUzNyIsIl9hdXRoX3VzZXJfaWQiOiIxIn0=",
-        "expire_date": "2016-10-05T16:51:19.981Z"
-    }
-},
-{
-    "model": "sessions.session",
-    "pk": "ie0of1bcc6bnmibw7hxicp12mehvqsa7",
-    "fields": {
-        "session_data": "YTZjMDZkY2Q2NDYwMzliYTcwYjQ1MTRhNGY2MDEwZGZjZWUyZTFmNDp7Il9hdXRoX3VzZXJfaGFzaCI6IjMyYzM3NDNjOWQzOTAwNjZkMzNiODdiZGIyNGZlNDM1ZWQwMmE1MzciLCJfYXV0aF91c2VyX2lkIjoiMSIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIn0=",
-        "expire_date": "2016-09-29T22:38:25.219Z"
-    }
-},
-{
-    "model": "sessions.session",
-    "pk": "vs6tr73pk0uie9x3ygc72rstlqqxa7y7",
-    "fields": {
-        "session_data": "M2Q1M2MzZjEwN2IxOThlM2RjODM3NzNmZDkxMjc4ZjNlN2IyMTMyZjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI2NjQwYTE2NzExMDhjNmFhYmI3NTBmNjQzZDkyNjllZDY1NWFlNjY4In0=",
-        "expire_date": "2016-11-04T18:25:58.046Z"
-    }
-},
-{
-    "model": "sessions.session",
-    "pk": "ye5muswk1g9vq0xl7z2ev1pxv5glz7al",
-    "fields": {
-        "session_data": "ZTQyMWMwYjYwMjhhYjczMWI1NTJhZGJmN2YzZWM4NDE1MzNmZmJkNTp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6IjEiLCJfYXV0aF91c2VyX2hhc2giOiI2NjQwYTE2NzExMDhjNmFhYmI3NTBmNjQzZDkyNjllZDY1NWFlNjY4In0=",
-        "expire_date": "2016-10-14T17:17:31.257Z"
     }
 },
 {
@@ -3857,6 +3793,62 @@
     }
 },
 {
+    "model": "wagtailcore.pagerevision",
+    "pk": 26,
+    "fields": {
+        "page": 9,
+        "submitted_for_moderation": false,
+        "created_at": "2016-11-08T20:44:55.898Z",
+        "user": [
+            "admin"
+        ],
+        "content_json": "{\"has_unpublished_changes\": false, \"live\": true, \"path\": \"000100010006\", \"show_in_menus\": true, \"url_path\": \"/home/blog/\", \"title\": \"Blog\", \"search_description\": \"\", \"go_live_at\": null, \"content_type\": 9, \"seo_title\": \"\", \"depth\": 3, \"slug\": \"blog\", \"owner\": null, \"expire_at\": null, \"pk\": 9, \"locked\": false, \"first_published_at\": \"2016-09-20T20:03:18.683Z\", \"latest_revision_created_at\": \"2016-09-20T20:03:18.603Z\", \"expired\": false, \"numchild\": 2}",
+        "approved_go_live_at": null
+    }
+},
+{
+    "model": "wagtailcore.pagerevision",
+    "pk": 27,
+    "fields": {
+        "page": 3,
+        "submitted_for_moderation": false,
+        "created_at": "2016-11-08T21:27:38.154Z",
+        "user": [
+            "admin"
+        ],
+        "content_json": "{\"path\": \"00010001\", \"url_path\": \"/home/\", \"slug\": \"home\", \"pk\": 3, \"owner\": null, \"expire_at\": null, \"why_body\": \"<p>From protecting reader\\u2019s security and privacy, to preventing targeted censorship, to improving search rankings, to gaining the ability to use powerful Web platform features, there are many reasons why you should consider encrypting your site.</p>\", \"first_published_at\": \"2016-09-20T20:02:52.717Z\", \"search_description\": \"\", \"go_live_at\": null, \"live\": true, \"numchild\": 5, \"expired\": false, \"content_type\": 2, \"show_in_menus\": false, \"latest_revision_created_at\": \"2016-09-22T23:21:49.143Z\", \"how_body\": \"<p>While switching over to HTTPS isn\\u2019t as simple as flicking a switch, a handful of news organizations have already pioneered the effort, and shared their tips and tricks for making the process as smooth as possible.</p>\", \"seo_title\": \"\", \"has_unpublished_changes\": false, \"main_title\": \"Every news site should be secure.\", \"locked\": false, \"depth\": 2, \"sub_title\": \"HTTPS should be the industry standard. We\\u2019re tracking its adoption.\", \"why_header\": \"Encryption has many benefits\", \"title\": \"Secure The News\", \"how_header\": \"Switching to HTTPS is easier than ever\"}",
+        "approved_go_live_at": null
+    }
+},
+{
+    "model": "wagtailcore.pagerevision",
+    "pk": 28,
+    "fields": {
+        "page": 3,
+        "submitted_for_moderation": false,
+        "created_at": "2016-11-08T21:44:06.681Z",
+        "user": [
+            "admin"
+        ],
+        "content_json": "{\"search_description\": \"\", \"first_published_at\": \"2016-09-20T20:02:52.717Z\", \"expired\": false, \"why_body\": \"From protecting reader\\u2019s security and privacy, to preventing targeted censorship, to improving search rankings, to gaining the ability to use powerful Web platform features, there are many reasons why you should consider encrypting your site.\", \"has_unpublished_changes\": false, \"url_path\": \"/home/\", \"content_type\": 2, \"how_body\": \"While switching over to HTTPS isn\\u2019t as simple as flicking a switch, a handful of news organizations have already pioneered the effort, and shared their tips and tricks for making the process as smooth as possible.\", \"why_header\": \"Encryption has many benefits\", \"live\": true, \"sub_title\": \"HTTPS should be the industry standard. We\\u2019re tracking its adoption.\", \"show_in_menus\": false, \"main_title\": \"Every news site should be secure.\", \"latest_revision_created_at\": \"2016-11-08T21:27:38.154Z\", \"path\": \"00010001\", \"seo_title\": \"\", \"locked\": false, \"owner\": null, \"numchild\": 5, \"slug\": \"home\", \"title\": \"Secure The News\", \"how_header\": \"Switching to HTTPS is easier than ever\", \"pk\": 3, \"go_live_at\": null, \"depth\": 2, \"expire_at\": null}",
+        "approved_go_live_at": null
+    }
+},
+{
+    "model": "wagtailcore.pagerevision",
+    "pk": 29,
+    "fields": {
+        "page": 3,
+        "submitted_for_moderation": false,
+        "created_at": "2016-11-08T22:03:22.341Z",
+        "user": [
+            "admin"
+        ],
+        "content_json": "{\"how_body\": \"While switching over to HTTPS isn\\u2019t as simple as flicking a switch, a handful of news organizations have already pioneered the effort, and shared their tips and tricks for making the process as smooth as possible.\", \"has_unpublished_changes\": false, \"main_title\": \"Every news site should be secure.\", \"why_learn_more\": 4, \"content_type\": 2, \"search_description\": \"\", \"slug\": \"home\", \"numchild\": 5, \"locked\": false, \"expire_at\": null, \"why_body\": \"From protecting reader\\u2019s security and privacy, to preventing targeted censorship, to improving search rankings, to gaining the ability to use powerful Web platform features, there are many reasons why you should consider encrypting your site.\", \"live\": true, \"pk\": 3, \"why_header\": \"Encryption has many benefits\", \"depth\": 2, \"go_live_at\": null, \"path\": \"00010001\", \"first_published_at\": \"2016-09-20T20:02:52.717Z\", \"title\": \"Secure The News\", \"seo_title\": \"\", \"how_learn_more\": 5, \"expired\": false, \"latest_revision_created_at\": \"2016-11-08T21:44:06.681Z\", \"sub_title\": \"HTTPS should be the industry standard. We\\u2019re tracking its adoption.\", \"show_in_menus\": false, \"url_path\": \"/home/\", \"how_header\": \"Switching to HTTPS is easier than ever\", \"owner\": null}",
+        "approved_go_live_at": null
+    }
+},
+{
     "model": "wagtailcore.page",
     "pk": 1,
     "fields": {
@@ -3909,7 +3901,7 @@
         "expired": false,
         "locked": false,
         "first_published_at": "2016-09-20T20:02:52.717Z",
-        "latest_revision_created_at": "2016-09-22T23:21:49.143Z"
+        "latest_revision_created_at": "2016-11-08T22:03:22.341Z"
     }
 },
 {
@@ -4070,14 +4062,14 @@
         "url_path": "/home/blog/",
         "owner": null,
         "seo_title": "",
-        "show_in_menus": false,
+        "show_in_menus": true,
         "search_description": "",
         "go_live_at": null,
         "expire_at": null,
         "expired": false,
         "locked": false,
         "first_published_at": "2016-09-20T20:03:18.683Z",
-        "latest_revision_created_at": "2016-09-20T20:03:18.603Z"
+        "latest_revision_created_at": "2016-11-08T20:44:55.898Z"
     }
 },
 {
@@ -4176,11 +4168,13 @@
     "pk": 3,
     "fields": {
         "main_title": "Every news site should be secure.",
-        "sub_title": "It's critical for both journalists and readers.",
+        "sub_title": "HTTPS should be the industry standard. We\u2019re tracking its adoption.",
+        "why_header": "Encryption has many benefits",
+        "why_body": "From protecting reader\u2019s security and privacy, to preventing targeted censorship, to improving search rankings, to gaining the ability to use powerful Web platform features, there are many reasons why you should consider encrypting your site.",
+        "why_learn_more": 4,
         "how_header": "Switching to HTTPS is easier than ever",
-        "why_header": "Encryption protects your readers",
-        "how_body": "Blah blah",
-        "why_body": "Blah blah"
+        "how_body": "While switching over to HTTPS isn\u2019t as simple as flicking a switch, a handful of news organizations have already pioneered the effort, and shared their tips and tricks for making the process as smooth as possible.",
+        "how_learn_more": 5
     }
 }
 ]

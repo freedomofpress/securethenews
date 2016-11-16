@@ -2,6 +2,7 @@
   font-size: $fontSize;
   line-height: 1.5;
   color: lighten($textGray, 10%);
+  margin-bottom: $spacingUnit;
 
   p {
     margin-bottom: $spacingUnit * 1.5;
@@ -12,25 +13,11 @@
     margin-bottom: $spacingUnit * 1.5;
   }
 
-  h2 {
-    font-size: $h2Size;
-  }
-
-  h3 {
-    font-size: $h3Size;
-  }
-
-  h4 {
-    font-size: $h4Size;
-    color: $darkGray;
-  }
-
-  h5 {
-    font-size: $h5Size;
-    color: $darkGray;
-  }
-
-  h2, h3, h4, h5 {
-    margin-bottom: $spacingUnit / 2;
+  .richtext-image {
+    &.full-width {
+      // Center "full width" images
+      display: block;
+      margin: 0 auto;
+    }
   }
 }

@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% load wagtailcore_tags %}
+
 {% block body_class %}template-content-page{% endblock %}
 
 {% block content %}
@@ -15,14 +17,16 @@
 
   <section class="white-section">
     <div class="section-content">
-      <div>{{ page.body }}</div>
-      {% if page.button_text and page.button_target %}
-        <a href="{{ page.button_target.url }}">
-          <div class="button button-light" aria-role="button">
-            {{ page.button_text }}<i class="fa fa-chevron-right" aria-hidden="true"></i>
-          </div>
-        </a>
-      {% endif %}
+      {% for block in page.body %}
+        {% if block.block_type == 'heading' %}
+          <h1 class="heading" id="{{ block.value|slugify }}">
+            {{ block.value }}
+            <a class="headerlink" href="#{{ block.value|slugify }}" title="Permalink to this headline"><i class="fa fa-link"></i></a>
+          </h1>
+        {% else %}
+          {% include_block block %}
+        {% endif %}
+      {% endfor %}
     </div>
   </section>
 {% endblock %}

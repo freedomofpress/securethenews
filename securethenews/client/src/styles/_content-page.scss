@@ -6,4 +6,111 @@
   .blue-section {
     padding-bottom: 0;
   }
+
+  .section-content {
+    max-width: $contentPageMaxWidth;
+  }
+
+  .white-section .section-content {
+    h1 {
+      font-size: $h1Size;
+    }
+
+    h2 {
+      font-size: $h2Size;
+    }
+
+    h3 {
+      font-size: $h3Size;
+    }
+
+    h4 {
+      font-size: $h4Size;
+      color: $darkGray;
+    }
+
+    h5 {
+      font-size: $h5Size;
+      color: $darkGray;
+    }
+
+    h1, h2, h3, h4, h5 {
+      border-bottom: 1px solid $lightGray;
+      color: lighten($textGray, 15%);
+      margin-bottom: $spacingUnit * 1.5;
+      font-weight: 300;
+    }
+
+    // Blockquote styling stolen shamelessly from http://stackoverflow.com/a/16326442
+
+    blockquote {
+      font-size: $fontSize;
+      font-style: italic;
+      max-width: 650px;
+      margin: 0.25em 0;
+      padding: 0.35em 40px;
+      line-height: 1.45;
+      position: relative;
+      color: #383838;
+      display: block;
+      margin: 0 auto;
+      margin-bottom: $spacingUnit;
+    }
+
+    blockquote:before {
+      display: block;
+      padding-left: 10px;
+      content: "\201C";
+      font-size: 4em;
+      position: absolute;
+      left: -20px;
+      top: -30px;
+      color: #7a7a7a;
+    }
+
+    blockquote cite {
+      color: #999999;
+      font-size: $fontSize * 0.75;
+      display: block;
+      margin-top: 5px;
+      text-align: right;
+    }
+
+    blockquote cite:before {
+      content: "\2014 \2009";
+    }
+
+    a {
+      color: lighten($textGray, 20%);
+      cursor: pointer;
+    }
+
+    .headerlink {
+      visibility: hidden;
+      font-size: $fontSize * 0.5;
+      cursor: pointer;
+    }
+
+    .heading:hover {
+      .headerlink {
+        visibility: visible;
+      }
+    }
+
+    table {
+      border-collapse: collapse;
+      margin-bottom: $spacingUnit * 1.5;
+    }
+
+    td, th {
+      border: 1px solid $darkGray;
+      padding: 0.75rem;
+      text-align: left;
+    }
+
+    tbody tr:nth-child(odd) {
+      background: #eee;
+    }
+  }
+
 }

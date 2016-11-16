@@ -40,7 +40,25 @@
 
   <section class="gray-section panel-section">
     <div class="panel-container">
-      <div class="panel green-panel panel-inline" id="how">
+      <div class="panel green-panel panel-inline" id="why">
+        <div class="inner-panel">
+          <span class="panel-label">
+            why?
+          </span>
+          <h3 class="panel-title">
+            {{ page.why_header }}
+          </h3>
+          <p class="panel-content">
+            {{ page.why_body }}
+          </p>
+          <a href="{{ page.why_learn_more.url }}">
+            <div class="panel-cta button button-default">
+            Learn more <i class="fa fa-chevron-right" aria-hidden="true"></i>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="panel blue-panel panel-inline" id="how">
         <div class="inner-panel">
           <span class="panel-label">
             how
@@ -51,25 +69,11 @@
           <p class="panel-content">
             {{ page.how_body }}
           </p>
-          <div class="panel-cta button button-default">
-            Learn more
-          </div>
-        </div>
-      </div>
-      <div class="panel blue-panel panel-inline" id="why">
-        <div class="inner-panel">
-          <span class="panel-label">
-            why
-          </span>
-          <h3 class="panel-title">
-            {{ page.why_header }}
-          </h3>
-          <p class="panel-content">
-            {{ page.why_body }}
-          </p>
-          <div class="panel-cta button button-default">
-            Learn more
-          </div>
+          <a href="{{ page.how_learn_more.url }}">
+            <div class="panel-cta button button-default">
+            Learn more <i class="fa fa-chevron-right" aria-hidden="true"></i>
+            </div>
+          </a>
         </div>
       </div>
     </div>

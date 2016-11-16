@@ -9,6 +9,14 @@
   &.blue-panel {
     background: linear-gradient(to top, #153350, #2d5275);
   }
+
+  .button {
+    a {
+      color: white;
+      text-decoration: none;
+      cursor: pointer;
+    }
+  }
 }
 
 .inner-panel {
@@ -27,9 +35,9 @@
 
   .panel {
     display: inline-block;
-    max-width: $panelContainerMaxWidth / 2 - $spacingUnit * 6;
+    max-width: $panelContainerMaxWidth / 2 - $spacingUnit * 4;
     vertical-align: top;
-    margin: $spacingUnit * 3;
+    margin: $spacingUnit * 3 $spacingUnit * 2;
 
     &:not(:last-child) {
       margin-right: $spacingUnit ;
@@ -50,7 +58,7 @@
 }
 
 .panel-content {
-  margin-bottom: $spacingUnit * 3;
+  margin-bottom: $spacingUnit * 2;
   font-weight: 200;
   font-size: 18px;
   line-height: 26px;

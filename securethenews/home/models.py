@@ -4,8 +4,10 @@ import json
 import math
 
 from django.db import models
+from django.utils.html import format_html
 
-from wagtail.wagtailcore import blocks
+from wagtail.contrib.table_block.blocks import TableBlock
+from wagtail.wagtailcore import blocks, hooks
 from wagtail.wagtailcore.models import Page
 from wagtail.wagtailcore.fields import (RichTextField,
                                         StreamField)
@@ -20,17 +22,33 @@ from sites.models import Site
 
 
 class HomePage(Page):
-    main_title = models.CharField(max_length=50, default="Every news site should be secure.")
-    sub_title = models.CharField(max_length=50, default="It's critical for both journalists and readers.")
-    how_header = models.CharField(max_length=50, default="Switching to HTTPS is easier than ever")
-    why_header = models.CharField(max_length=50, default="Encryption protects your readers")
-    how_body = RichTextField(default="Blah blah")
-    why_body = RichTextField(default="Blah blah")
+    main_title = models.TextField(default="")
+    sub_title = models.TextField(default="")
+
+    why_header = models.TextField(default="")
+    why_body = models.TextField(default="")
+    why_learn_more = models.ForeignKey(
+        'wagtailcore.Page',
+        null=True,
+        blank=True,
+        related_name='+',
+        on_delete=models.SET_NULL
+    )
+
+    how_header = models.TextField(default="")
+    how_body = models.TextField(default="")
+    how_learn_more = models.ForeignKey(
+        'wagtailcore.Page',
+        null=True,
+        blank=True,
+        related_name='+',
+        on_delete=models.SET_NULL
+    )
 
     content_panels = Page.content_panels + [
         MultiFieldPanel([ FieldPanel('main_title'), FieldPanel('sub_title') ], "Main header"),
-        MultiFieldPanel([ FieldPanel('how_header'), FieldPanel('how_body') ], "How section"),
-        MultiFieldPanel([ FieldPanel('why_header'), FieldPanel('why_body') ], "Why section"),
+        MultiFieldPanel([ FieldPanel('why_header'), FieldPanel('why_body'), PageChooserPanel('why_learn_more') ], "Why section"),
+        MultiFieldPanel([ FieldPanel('how_header'), FieldPanel('how_body'), PageChooserPanel('how_learn_more') ], "How section"),
     ]
 
     parent_page_types = []
@@ -66,23 +84,46 @@ class HomePage(Page):
 
         return context
 
+
+class QuoteBlock(blocks.StructBlock):
+    quote = blocks.TextBlock()
+    source = blocks.CharBlock()
+    link = blocks.URLBlock(required=False)
+
+    class Meta:
+        icon = 'openquote'
+        template = 'home/blocks/quote.html'
+
+
 class ContentPage(Page):
     sub_header = models.CharField(max_length=50, default="")
     body = StreamField([
-        ('heading', blocks.CharBlock()),
+        ('heading', blocks.CharBlock(icon='title')),
         ('rich_text', blocks.RichTextBlock()),
         ('image', ImageChooserBlock()),
+        ('quote', QuoteBlock()),
+        ('table', TableBlock()),
     ])
-    button_text = models.CharField(max_length=50, null=True, blank=True)
-    button_target = models.ForeignKey(
-        'wagtailcore.Page',
-        null=True,
-        blank=True,
-        related_name='+',
-        on_delete=models.SET_NULL)
 
     content_panels = Page.content_panels + [
         FieldPanel('sub_header'),
         StreamFieldPanel('body'),
-        MultiFieldPanel([ FieldPanel('button_text'), PageChooserPanel('button_target') ], "Call to action"),
     ]
+
+
+@hooks.register('insert_editor_css')
+def editor_css():
+    # Make 'heading' StreamField blocks look like h2 in RichTextBlocks in the
+    # Wagtail Admin.
+    return (
+        '''
+        <style>
+            .fieldname-heading input {
+                color: #666;
+                font-family: Roboto Slab, Georgia, serif;
+                font-size: 2.4em;
+                font-weight: bold;
+            }
+        </style>
+        '''
+    )
