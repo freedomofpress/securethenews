@@ -3,8 +3,15 @@ from __future__ import absolute_import, unicode_literals
 from .base import *
 import os
 
+
 DEBUG = False
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
+ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS').split(' ')
+
+try:
+    CSRF_TRUSTED_ORIGINS = os.environ['DJANGO_CSRF_TRUSTED_ORIGINS'].split(' ')
+except KeyError:
+    pass
 
 try:
     from .local import *
