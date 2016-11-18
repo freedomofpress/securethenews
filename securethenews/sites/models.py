@@ -42,8 +42,8 @@ class Site(models.Model):
         # TODO optimize this (denormalize latest scan into Site?)
         return dict(
             name=self.name,
-            slug=self.slug,
             domain=self.domain,
+            absolute_url=self.get_absolute_url(),
             pledge=self.pledge.to_dict() if self.pledge else None,
             **self.scans.latest().to_dict()
         )
