@@ -1,2 +1,8 @@
+# Node dependencies
 node_modules
+
+# gulp build artifacts
 client/build/
+
+# Django/Wagtail user-uploaded files
+media/
