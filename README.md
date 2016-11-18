@@ -52,6 +52,17 @@ update the description of their contents in this README):
 
     $ python3 manage.py dumpdata --natural-primary --natural-foreign --exclude contenttypes --exclude auth.Permission --exclude sessions --indent 4 > fixtures/dev.json
 
+### Live reload
+
+The default gulp `watch` task uses `gulp-livereload` to automatically trigger a
+browser refresh when changes to the frontend code are detected. In order to take
+advantage of this, you will need to install the [LiveReload Chrome
+extension](https://chrome.google.com/webstore/detail/livereload/jnihajbhpnppcggbcgedagnkighmdlei?hl=en).
+
+Once you've installed the extension, simply load the development site in your
+browser (`localhost:8000`) and click the LiveReload extension icon to initiate
+live reloading.
+
 ## Notes
 
 * Port 8000 is forwarded from the guest to the host. By default, `runserver`
