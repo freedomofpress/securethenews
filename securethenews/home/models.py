@@ -72,10 +72,15 @@ class HomePage(Page):
 
         total_sites = Site.objects.count()
 
-        context['percent_offering_https'] = math.floor(
-            len(sites_offering_https) / total_sites * 100)
-        context['percent_defaulting_to_https'] = math.floor(
-            len(sites_defaulting_to_https) / total_sites * 100)
+        # Avoid divide by 0 if no Sites have been set up yet
+        if total_sites > 0:
+            context['percent_offering_https'] = math.floor(
+                len(sites_offering_https) / total_sites * 100)
+            context['percent_defaulting_to_https'] = math.floor(
+                len(sites_defaulting_to_https) / total_sites * 100)
+        else:
+            context['percent_offering_https'] = 0
+            context['percent_defaulting_to_https'] = 0
 
         context['num_pledged'] = len([ site for site in sites if site.pledge ])
 
