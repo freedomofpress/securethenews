@@ -11,6 +11,8 @@ var plumber = require('gulp-plumber');
 var autoprefixer = require('gulp-autoprefixer');
 var livereload = require('gulp-livereload');
 var jadeify = require('jadeify');
+var streamify = require('gulp-streamify');
+var uglify = require('gulp-uglify');
 
 const buildDir = './client/build';
 
@@ -52,6 +54,7 @@ gulp.task('js:production', function() {
     .transform('babelify', {presets: ["es2015"]})
     .bundle()
     .pipe(source('build.js'))
+    .pipe(streamify(uglify()))
     .pipe(gulp.dest(buildDir))
     .on('error', function() {
       gulpUtil.log('JS error: <%= error.message %>')
