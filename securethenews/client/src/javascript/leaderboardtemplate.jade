@@ -31,7 +31,7 @@ mixin check(condition)
         for item in items
           tr.leaderboard-row
             td
-              a(href=item.slug)= item.name
+              a(href=item.absolute_url)= item.name
               if item.pledge
                 a(href=item.pledge.url)
                   i.pledged.fa.fa-handshake-o(title="#{ item.name } have pledged to secure their site.")

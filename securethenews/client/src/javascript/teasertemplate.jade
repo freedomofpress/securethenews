@@ -1,8 +1,5 @@
 .teaser
   for site in sites
-    //- TODO We should pass through the absolute URL from the model instead of
-    //- constructing it ourselves because the current approach is prone to
-    //- breakage if we ever change the URLconf.
-    a(href='/sites/#{site.slug}')
+    a(href=site.absolute_url)
       span(class='graded-news-org')= site.name
         span(class='grade #{site.grade.class_name}')= site.grade.grade
