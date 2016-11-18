@@ -6,16 +6,16 @@ import math
 from django.db import models
 from django.utils.html import format_html
 
+from modelcluster.fields import ParentalKey
 from wagtail.contrib.table_block.blocks import TableBlock
 from wagtail.wagtailcore import blocks, hooks
 from wagtail.wagtailcore.models import Page
 from wagtail.wagtailcore.fields import (RichTextField,
                                         StreamField)
-from wagtail.wagtailadmin.edit_handlers import (FieldPanel,
-                                                MultiFieldPanel,
-                                                InlinePanel,
-                                                PageChooserPanel,
-                                                StreamFieldPanel)
+from wagtail.wagtailadmin.edit_handlers import (FieldPanel, FieldRowPanel,
+    MultiFieldPanel, InlinePanel, PageChooserPanel, StreamFieldPanel)
+from wagtail.wagtailforms.edit_handlers import FormSubmissionsPanel
+from wagtail.wagtailforms.models import AbstractEmailForm, AbstractFormField
 from wagtail.wagtailimages.blocks import ImageChooserBlock
 
 from sites.models import Site
@@ -127,3 +127,28 @@ def editor_css():
         </style>
         '''
     )
+
+
+class FormField(AbstractFormField):
+    page = ParentalKey('FormPage', related_name='form_fields')
+
+
+class FormPage(AbstractEmailForm):
+    sub_header = models.TextField(default="")
+    intro = RichTextField(blank=True)
+    thank_you_text = RichTextField(blank=True)
+
+    content_panels = AbstractEmailForm.content_panels + [
+        FormSubmissionsPanel(),
+        FieldPanel('sub_header'),
+        FieldPanel('intro', classname='full'),
+        InlinePanel('form_fields', label='Form fields'),
+        FieldPanel('thank_you_text', classname='full'),
+        MultiFieldPanel([
+            FieldRowPanel([
+                FieldPanel('from_address', classname='col6'),
+                FieldPanel('to_address', classname='col6'),
+            ]),
+            FieldPanel('subject')
+        ], 'Email'),
+    ]

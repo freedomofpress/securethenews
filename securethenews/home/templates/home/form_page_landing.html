@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% load wagtailcore_tags %}
+
+{% block body_class %}template-form-landing-page{% endblock %}
+
+{% block content %}
+<section class="blue-section">
+  <div class="section-content">
+    <h1 class="page-header">{{ page.title }}</h1>
+    <h5 class="page-subhead">{{ page.sub_header }}</h5>
+    <div class="social-container align-center">
+      {% include 'shared/social.html' with url=request.build_absolute_uri %}
+    </div>
+  </div>
+</section>
+
+<section class="white-section">
+  <div class="section-content">
+    {{ page.thank_you_text|richtext }}
+  </div>
+</section>
+{% endblock %}

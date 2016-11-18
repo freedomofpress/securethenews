@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% load wagtailcore_tags %}
+
+{% block body_class %}template-form-page{% endblock %}
+
+{% block content %}
+<section class="blue-section">
+  <div class="section-content">
+    <h1 class="page-header">{{ page.title }}</h1>
+    <h5 class="page-subhead">{{ page.sub_header }}</h5>
+    <div class="social-container align-center">
+      {% include 'shared/social.html' with url=request.build_absolute_uri %}
+    </div>
+  </div>
+</section>
+
+<section class="white-section">
+  <div class="section-content">
+    {{ page.intro|richtext }}
+    <form action="{% pageurl page %}" method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <input type="Submit" class="clearfix">
+    </form>
+  </div>
+</section>
+{% endblock %}
