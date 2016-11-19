@@ -1,9 +1,17 @@
 from django.db import models
+from django.db.models import Count
 from django.forms import ValidationError
 from django.urls import reverse
 from django.utils.text import slugify
 
 from pledges.models import Pledge
+
+
+class ScannedSitesManager(models.Manager):
+    def get_queryset(self):
+        return super(ScannedSitesManager, self).get_queryset().annotate(
+            num_scans=Count('scans')
+        ).filter(num_scans__gt=0)
 
 
 class Site(models.Model):
@@ -17,6 +25,9 @@ class Site(models.Model):
         help_text='Specify the domain name without the scheme, e.g. "example.com" instead of "https://example.com"')
 
     added = models.DateTimeField(auto_now_add=True)
+
+    objects = models.Manager()
+    scanned = ScannedSitesManager()
 
     class Meta:
         ordering = ['name']
@@ -59,6 +70,7 @@ class Site(models.Model):
 
     def get_absolute_url(self):
         return reverse('sites:site', kwargs={'slug': self.slug})
+
 
 class Scan(models.Model):
     site = models.ForeignKey(
