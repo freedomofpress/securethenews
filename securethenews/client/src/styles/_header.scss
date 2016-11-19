@@ -86,11 +86,14 @@
       right: 0;
       height: 100%;
       transform: translateX(100%);
-      transition: transform 0.14s ease-in-out;
       float: none;
       width: 200px;
       background: #333;
       z-index: 10;
+
+      &.transition {
+        transition: transform 0.14s ease-in-out;
+      }
 
       li {
         display: block;

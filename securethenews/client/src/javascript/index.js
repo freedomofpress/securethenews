@@ -24,12 +24,16 @@ if ($teaser.length !== 0) {
 }
 
 $('.mobile-header-js').on('click', (event) => {
-  $('.nav').addClass('uncollapsed');
+  $('.nav').addClass('uncollapsed transition');
   $('.tap-catcher-js').show();
 });
 
 $('.tap-catcher-js').on('touchend click', (e) => {
-  $('.nav').removeClass('uncollapsed');
+  const $nav = $('.nav');
+  $nav.removeClass('uncollapsed');
+  $nav.one('transitionend', () => {
+    $nav.removeClass('transition')
+  })
   // Delay the removal of the tap catcher so that the subsequently fired
   // click event is also caught. Typically this happens with a 300ms delay
   // after touchend.
