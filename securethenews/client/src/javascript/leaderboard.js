@@ -6,7 +6,7 @@ const template = require('./leaderboardtemplate.jade');
 
 module.exports = Backbone.View.extend({
   initialize(options) {
-    let optionsDefaults = {
+    const optionsDefaults = {
       // Display this many results; if null, show all
       limit: null,
       // Enable interactive features; on by default

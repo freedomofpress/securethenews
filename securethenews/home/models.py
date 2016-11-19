@@ -40,9 +40,8 @@ class HomePage(Page):
         context = super(HomePage, self).get_context(request)
 
         # Compute summary statistics
-        total_sites = Site.objects.count()
-        latest_scans = [ site.scans.latest()
-                         for site in Site.objects.all() ]
+        sites = Site.objects.all()
+        latest_scans = [ site.scans.latest() for site in sites ]
 
         sites_offering_https = [ scan.site
                                  for scan in latest_scans
@@ -53,14 +52,14 @@ class HomePage(Page):
                                       for scan in latest_scans
                                       if scan.defaults_to_https ]
 
+        total_sites = Site.objects.count()
+
         context['percent_offering_https'] = math.floor(
             len(sites_offering_https) / total_sites * 100)
         context['percent_defaulting_to_https'] = math.floor(
             len(sites_defaulting_to_https) / total_sites * 100)
 
-        # Serialize the sites with the results of their latest scans for the
-        # teaser
-        sites = Site.objects.all()
+        # Serialize sites with the results of their latest scans for the teaser
         context['sites_json'] = json.dumps([site.to_dict() for site in sites])
 
         return context
