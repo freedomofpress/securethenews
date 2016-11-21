@@ -2,6 +2,5 @@ Django>=1.10,<1.11
 gunicorn==19.6.0
 Pillow==3.4.2
 psycopg2==2.6.2
-unicode-slugify==0.1.3
 wagtail>=1.7,<1.8
 wagtailmenus>=1.6,<1.7

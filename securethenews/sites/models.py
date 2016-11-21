@@ -1,8 +1,7 @@
 from django.db import models
 from django.forms import ValidationError
 from django.urls import reverse
-
-from slugify import slugify
+from django.utils.text import slugify
 
 from pledges.models import Pledge
 
