@@ -25,7 +25,7 @@ class Site(models.Model):
         return self.name
 
     def clean(self):
-        self.slug = slugify(self.name)
+        self.slug = slugify(self.name, allow_unicode=True)
         if len(self.slug) == 0:
             raise ValidationError('Slug must not be an empty string')
 
