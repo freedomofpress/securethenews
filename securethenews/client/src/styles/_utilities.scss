@@ -22,6 +22,12 @@
   }
 }
 
+@media (min-width: $mediaSmall) {
+  .mobile-only {
+    display: none !important;
+  }
+}
+
 .hidden {
   visibility: hidden;
 }

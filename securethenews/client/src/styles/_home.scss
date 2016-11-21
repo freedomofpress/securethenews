@@ -44,6 +44,14 @@ $statBlockMaxWidth: 140px;
   letter-spacing: 1px;
 }
 
+@media (max-width: $mediaSmall) {
+  .stat-block {
+    display: block;
+    margin: auto;
+    margin-bottom: $spacingUnit * 2;
+  }
+}
+
 #teaser {
   // Set min-height so this takes up space initially (before the Backbone View
   // has rendered)
@@ -74,6 +82,25 @@ $statBlockMaxWidth: 140px;
     }
   }
 }
+
+// Go down to two teasers on small desktops/tablets.
+@media (max-width: $mediaMedium) {
+  .teaser a:last-child {
+    display: none;
+  }
+}
+
+// Hide the teaser on mobile.
+@media (max-width: $mediaSmall) {
+  #teaser {
+    min-height: 0;
+  }
+
+  .teaser {
+    display: none;
+  }
+}
+
 
 .leaderboard-header {
   font-weight: 200;
