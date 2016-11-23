@@ -58,7 +58,7 @@ class HomePage(Page):
         context = super(HomePage, self).get_context(request)
 
         # Compute summary statistics
-        sites = Site.objects.all()
+        sites = Site.scanned.all()
         latest_scans = [ site.scans.latest() for site in sites ]
 
         sites_offering_https = [ scan.site
@@ -70,12 +70,15 @@ class HomePage(Page):
                                       for scan in latest_scans
                                       if scan.defaults_to_https ]
 
-        total_sites = Site.objects.count()
-
-        context['percent_offering_https'] = math.floor(
-            len(sites_offering_https) / total_sites * 100)
-        context['percent_defaulting_to_https'] = math.floor(
-            len(sites_defaulting_to_https) / total_sites * 100)
+        # Avoid divide by 0 if no Sites have been set up yet
+        if sites.count() > 0:
+            context['percent_offering_https'] = math.floor(
+                len(sites_offering_https) / sites.count() * 100)
+            context['percent_defaulting_to_https'] = math.floor(
+                len(sites_defaulting_to_https) / sites.count() * 100)
+        else:
+            context['percent_offering_https'] = 0
+            context['percent_defaulting_to_https'] = 0
 
         context['num_pledged'] = len([ site for site in sites if site.pledge ])
 
