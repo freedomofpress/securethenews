@@ -30,6 +30,7 @@ DATABASES = {
 }
 
 STATIC_ROOT = os.environ['DJANGO_STATIC_ROOT']
+MEDIA_ROOT = os.environ['DJANGO_MEDIA_ROOT']
 
 try:
     es_host = os.environ.get('DJANGO_ES_HOST', 'disable')
