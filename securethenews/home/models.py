@@ -101,7 +101,7 @@ class QuoteBlock(blocks.StructBlock):
 class ContentPage(Page):
     sub_header = models.CharField(max_length=50, default="")
     body = StreamField([
-        ('heading', blocks.CharBlock(icon='title')),
+        ('heading', blocks.CharBlock(icon='title', classname='title')),
         ('rich_text', blocks.RichTextBlock()),
         ('image', ImageChooserBlock()),
         ('quote', QuoteBlock()),
@@ -112,24 +112,6 @@ class ContentPage(Page):
         FieldPanel('sub_header'),
         StreamFieldPanel('body'),
     ]
-
-
-@hooks.register('insert_editor_css')
-def editor_css():
-    # Make 'heading' StreamField blocks look like h2 in RichTextBlocks in the
-    # Wagtail Admin.
-    return (
-        '''
-        <style>
-            .fieldname-heading input {
-                color: #666;
-                font-family: Roboto Slab, Georgia, serif;
-                font-size: 2.4em;
-                font-weight: bold;
-            }
-        </style>
-        '''
-    )
 
 
 class FormField(AbstractFormField):
