@@ -88,6 +88,25 @@ class HomePage(Page):
         return context
 
 
+class HeadingLevelChoiceBlock(blocks.ChoiceBlock):
+    choices = (
+        ('h1', 'H1'),
+        ('h2', 'H2'),
+        ('h3', 'H3'),
+        ('h4', 'H4'),
+        ('h5', 'H5'),
+        ('h6', 'H6'),
+    )
+
+
+class HeadingBlock(blocks.StructBlock):
+    heading = blocks.CharBlock(classname='title')
+    level = HeadingLevelChoiceBlock(default='h1')
+
+    class Meta:
+        icon = 'title'
+
+
 class QuoteBlock(blocks.StructBlock):
     quote = blocks.TextBlock()
     source = blocks.CharBlock()
@@ -101,7 +120,7 @@ class QuoteBlock(blocks.StructBlock):
 class ContentPage(Page):
     sub_header = models.CharField(max_length=50, default="")
     body = StreamField([
-        ('heading', blocks.CharBlock(icon='title', classname='title')),
+        ('heading', HeadingBlock()),
         ('rich_text', blocks.RichTextBlock()),
         ('image', ImageChooserBlock()),
         ('quote', QuoteBlock()),
