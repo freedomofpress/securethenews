@@ -51,3 +51,14 @@ try:
         WAGTAILSEARCH_BACKENDS['default']['use_ssl'] = True
 except KeyError:
     pass
+
+# Django json logging
+#
+if os.environ.get('DJANGO_LOG', 'no').lower() in ['true', 'yes']:
+    INSTALLED_APPS.append('django_logging')
+    MIDDLEWARE_CLASSES.append('django_logging.middleware.DjangoLoggingMiddleware')
+    DJANGO_LOGGING = {
+        "CONSOLE_LOG": False,
+        "SQL_LOG": False,
+        "LOG_LEVEL": os.environ.get('DJANGO_LOG_LEVEL', 'info')
+    }
