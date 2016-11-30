@@ -1,7 +1,7 @@
 from django.forms import ValidationError
 from django.test import TestCase
 
-from sites.models import Site
+from sites.models import Site, Scan
 
 
 class TestSite(TestCase):
@@ -42,3 +42,18 @@ class TestSite(TestCase):
     def test_site_without_pledge(self):
         """Site.pledge should return None if there are no approved pledges for the Site."""
         self.assertIsNone(self.site.pledge)
+
+
+class TestScannedSitesManager(TestCase):
+
+    def setUp(self):
+        self.site = Site.objects.create(name='Test Site', domain='test.com')
+
+    def test_unscanned_sites_unavailable(self):
+        """If a Site hasn't been scanned yet, it shouldn't be available through the ScannedSitesManager."""
+        self.assertNotIn(self.site, Site.scanned.all())
+
+    def test_scanned_sites_available(self):
+        """Once a Site has been scanned, it should be available through the ScannedSitesManager."""
+        scan = Scan.objects.create(site=self.site, live=False)
+        self.assertIn(self.site, Site.scanned.all())
