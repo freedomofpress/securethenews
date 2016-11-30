@@ -12,3 +12,6 @@ env/
 
 # Development database backups
 db_backups/
+
+# Log files
+logs/
