@@ -7,4 +7,5 @@ install:
   - pip install -r securethenews/requirements.txt
 
 script:
-  - securethenews/manage.py test
+  - cd securethenews # Why is this necessary??
+  - ./manage.py test
