@@ -1,0 +1,10 @@
+language: python
+
+python:
+  - "3.4"
+
+install:
+  - pip install -r securethenews/requirements.txt
+
+script:
+  - securethenews/manage.py test
