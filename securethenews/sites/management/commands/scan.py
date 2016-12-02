@@ -53,7 +53,9 @@ class Command(BaseCommand):
 
 
     def add_arguments(self, parser):
-        parser.add_argument('sites', nargs='*', type=str, default='')
+        parser.add_argument('sites', nargs='*', type=str, default='',
+            help=("Specify one or more domain names of sites to scan. "
+                  "If unspecified, scan all sites."))
 
 
     def handle(self, *args, **options):
