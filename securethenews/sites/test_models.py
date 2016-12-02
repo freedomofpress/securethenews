@@ -44,6 +44,20 @@ class TestSite(TestCase):
         self.assertIsNone(self.site.pledge)
 
 
+class TestScan(TestCase):
+
+    def setUp(self):
+        self.site = Site.objects.create(name='Test Site', domain='test.com')
+
+    def test_score_computed_on_save(self):
+        """A Site's score should be automatically computed on save."""
+        # Set scan attributes such that the score will be greater than 0.
+        scan = Scan(site=self.site, live=True, valid_https=True)
+        self.assertEqual(scan.score, 0)
+        scan.save()
+        self.assertGreater(scan.score, 0)
+
+
 class TestScannedSitesManager(TestCase):
 
     def setUp(self):
