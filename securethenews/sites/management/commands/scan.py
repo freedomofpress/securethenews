@@ -51,8 +51,25 @@ def scan(site):
 class Command(BaseCommand):
     help = 'Rescan all sites and store the results in the database'
 
+    def add_arguments(self, parser):
+        parser.add_argument('site', nargs='+', type=str, default='')
+
+
     def handle(self, *args, **options):
+        # Support targeting a specific site to scan.
+        if options['site']:
+            sites = []
+            for domain_name in options['site']:
+                try:
+                    site = Site.objects.get(domain=domain_name)
+                    sites.append(site)
+                except Site.DoesNotExist:
+                    msg = "Site with domain '{}' does not exist".format(domain_name)
+                    raise CommandError(msg)
+        else:
+            sites = Site.objects.all()
+
         with transaction.atomic():
-            for site in Site.objects.all():
+            for site in sites:
                 self.stdout.write('Scanning: {}'.format(site.domain))
                 scan(site)
