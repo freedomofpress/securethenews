@@ -51,15 +51,16 @@ def scan(site):
 class Command(BaseCommand):
     help = 'Rescan all sites and store the results in the database'
 
+
     def add_arguments(self, parser):
-        parser.add_argument('site', nargs='+', type=str, default='')
+        parser.add_argument('sites', nargs='+', type=str, default='')
 
 
     def handle(self, *args, **options):
         # Support targeting a specific site to scan.
-        if options['site']:
+        if options['sites']:
             sites = []
-            for domain_name in options['site']:
+            for domain_name in options['sites']:
                 try:
                     site = Site.objects.get(domain=domain_name)
                     sites.append(site)
