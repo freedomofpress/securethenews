@@ -53,7 +53,7 @@ class Command(BaseCommand):
 
 
     def add_arguments(self, parser):
-        parser.add_argument('sites', nargs='+', type=str, default='')
+        parser.add_argument('sites', nargs='*', type=str, default='')
 
 
     def handle(self, *args, **options):
