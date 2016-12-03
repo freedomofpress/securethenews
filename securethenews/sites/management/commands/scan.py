@@ -8,7 +8,7 @@ from sites.models import Site, Scan
 
 
 def pshtt(domain):
-    pshtt_cmd = ['pshtt', '--json', domain]
+    pshtt_cmd = ['pshtt', '--json', '--timeout', '5', domain]
 
     p = subprocess.Popen(
         pshtt_cmd,
