@@ -1,0 +1,11 @@
+language: python
+
+python:
+  - "3.4"
+
+install:
+  - pip install -r securethenews/requirements.txt
+
+script:
+  - cd securethenews # Why is this necessary??
+  - ./manage.py test
