@@ -7,6 +7,18 @@
 	viewBox="0 0 563.7 85"
 	xml:space="preserve"
 >
+  <defs>
+    <style type="text/css"><![CDATA[
+      .logo-rect--red {
+        fill: #C70000;
+      }
+
+      .logo-heading-text--gray {
+        fill: #7C7C7C;
+      }
+    ]]></style>
+  </defs>
+
 	<rect class="logo-rect" width="84" height="23"/>
 	<rect class="logo-rect logo-rect--red" x="92" width="23" height="23"/>
 	<rect class="logo-rect" x="46" y="31" width="69" height="23"/>
