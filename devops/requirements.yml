@@ -1,0 +1,12 @@
+---
+- src: https://github.com/freedomofpress/ansible-role-openssl-node.git
+  name: freedomofpress.openssl_node
+
+- name: jdauphant.nginx
+
+- name: ANXS.postgresql
+
+- name: geerlingguy.nodejs
+
+- src: https://github.com/freedomofpress/ansible-elasticsearch
+  name: elastic.elasticsearch
