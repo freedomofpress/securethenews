@@ -88,6 +88,7 @@ elif os.environ.get('DJANGO_LOG', 'no').lower() in ['true', 'yes']:
 # Cloudflare caching
 #
 if os.environ.get('CLOUDFLARE_TOKEN') and os.environ.get('CLOUDFLARE_EMAIL'):
+    INSTALLED_APPS.append('wagtail.contrib.wagtailfrontendcache')
     WAGTAILFRONTENDCACHE = {
         'cloudflare': {
             'BACKEND': 'ops.utils.CloudflareBackend',
