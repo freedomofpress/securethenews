@@ -84,3 +84,15 @@ elif os.environ.get('DJANGO_LOG', 'no').lower() in ['true', 'yes']:
             },
         },
     }
+
+# Cloudflare caching
+#
+if os.environ.get('CLOUDFLARE_TOKEN') and os.environ.get('CLOUDFLARE_EMAIL'):
+    WAGTAILFRONTENDCACHE = {
+        'cloudflare': {
+            'BACKEND': 'ops.utils.CloudflareBackend',
+            'EMAIL': os.environ.get('CLOUDFLARE_EMAIL'),
+            'TOKEN': os.environ.get('CLOUDFLARE_TOKEN'),
+            'ZONEID': os.environ.get('CLOUDFLARE_ZONEID')
+        },
+    }
