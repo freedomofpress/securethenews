@@ -14,7 +14,7 @@ devops/venv:
 	virtualenv venv
 
 molecule: galaxy
-	. ./venv/bin/activate && cd devops && molecule create; \
+	. ./venv/bin/activate && molecule create; \
 	molecule converge
 
 galaxy: pip

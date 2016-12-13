@@ -32,7 +32,7 @@
         owner: django_user
     postgresql_user_privileges:
       - name: django_user
-        db: fpf
+        db: stn
         priv: "ALL"
         role_attr_flags: "CREATEDB"
     postgresql_ssl: on
