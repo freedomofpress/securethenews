@@ -69,8 +69,8 @@ elif os.environ.get('DJANGO_LOG', 'no').lower() in ['true', 'yes']:
         'handlers': {
             'rotate': {
                 'level': os.environ.get('DJANGO_LOG_LEVEL', 'info').upper(),
-                'class': 'logging.RotatingFileHandler',
-                'backupCounter': 5,
+                'class': 'logging.handlers.RotatingFileHandler',
+                'backupCount': 5,
                 'maxBytes': 10000000,
                 'filename': os.environ.get('DJANGO_LOGFILE',
                                            '/var/log/securethenews/django.log')
@@ -78,7 +78,7 @@ elif os.environ.get('DJANGO_LOG', 'no').lower() in ['true', 'yes']:
         },
         'loggers': {
             'django': {
-                'handlers': ['file'],
+                'handlers': ['rotate'],
                 'level': os.environ.get('DJANGO_LOG_LEVEL', 'info').upper(),
                 'propagate': True,
             },
