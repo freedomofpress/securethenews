@@ -77,7 +77,7 @@ elif os.environ.get('DJANGO_LOG', 'no').lower() in ['true', 'yes']:
             },
         },
         'loggers': {
-            'django': {
+            '': {
                 'handlers': ['rotate'],
                 'level': os.environ.get('DJANGO_LOG_LEVEL', 'info').upper(),
                 'propagate': True,
