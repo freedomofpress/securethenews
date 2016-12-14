@@ -21,3 +21,5 @@ devops/.ansible
 devops/.molecule
 devops/venv
 devops/deploy_key
+devops/django_stack
+devops/roles

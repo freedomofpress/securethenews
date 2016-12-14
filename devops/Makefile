@@ -2,15 +2,15 @@ all: molecule
 
 .PHONY: clone
 clone:
-	if [ ! -d ../django_stack ]; then \
-		git checkout git@github.com:freedomofpress/django_stack.git ../../django_stack; \
+	if [ ! -d django_stack ]; then \
+		git clone git@github.com:freedomofpress/django_stack.git; \
 	fi
 
 pip: devops/venv
 	. ./venv/bin/activate; \
-	pip install -r ../../django_stack/requirements.txt 
+	pip install -r django_stack/requirements.txt
 
-devops/venv:
+devops/venv: clone
 	virtualenv venv
 
 molecule: galaxy
