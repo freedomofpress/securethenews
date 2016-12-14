@@ -1,5 +1,8 @@
 {% extends "base.html" %}
 
+{% block og_title %}{{ page.title }}{% endblock %}
+{% block og_description %}{{ page.preview }}{% endblock %}
+
 {% block twitter_card_title %}{{ page.title }}{% endblock %}
 {% block twitter_card_description %}{{ page.preview }}{% endblock %}
 
