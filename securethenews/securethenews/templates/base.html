@@ -26,14 +26,14 @@
         <meta property="og:type" content="website" />
         <meta property="og:title" content="{% block og_title %}Secure the News{% endblock %}" />
         <meta property="og:description" content="{% block og_description %}Every news site should be secure.{% endblock %}" />
-        <meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{% static 'images/logo.svg' %}" />
+        <meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{% static 'images/logo.png' %}" />
 
         <!-- Twitter Cards -->
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:site" content="@SecureTheNews" />
         <meta name="twitter:title" content="{% block twitter_card_title %}Secure the News{% endblock %}" />
         <meta name="twitter:description" content="{% block twitter_card_description %}Every news site should be secure.{% endblock %}" />
-        <meta name="twitter:image" content="{{ request.scheme }}://{{ request.get_host }}{% static 'images/logo.svg' %}" />
+        <meta name="twitter:image" content="{{ request.scheme }}://{{ request.get_host }}{% static 'images/logo.png' %}" />
 
     </head>
 
