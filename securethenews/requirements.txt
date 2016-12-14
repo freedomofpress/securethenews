@@ -5,3 +5,4 @@ Pillow==3.4.2
 psycopg2==2.6.2
 wagtail>=1.7,<1.8
 wagtailmenus>=1.6,<1.7
+requests==2.12.3

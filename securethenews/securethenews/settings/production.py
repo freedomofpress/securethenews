@@ -54,11 +54,46 @@ except KeyError:
 
 # Django json logging
 #
-if os.environ.get('DJANGO_LOG', 'no').lower() in ['true', 'yes']:
+if os.environ.get('DJANGO_JSON_LOG', 'no').lower() in ['true', 'yes']:
     INSTALLED_APPS.append('django_logging')
     MIDDLEWARE_CLASSES.append('django_logging.middleware.DjangoLoggingMiddleware')
     DJANGO_LOGGING = {
         "CONSOLE_LOG": False,
         "SQL_LOG": False,
         "LOG_LEVEL": os.environ.get('DJANGO_LOG_LEVEL', 'info')
+    }
+elif os.environ.get('DJANGO_LOG', 'no').lower() in ['true', 'yes']:
+    LOGGING = {
+        'version': 1,
+        'disable_existing_loggers': False,
+        'handlers': {
+            'rotate': {
+                'level': os.environ.get('DJANGO_LOG_LEVEL', 'info').upper(),
+                'class': 'logging.handlers.RotatingFileHandler',
+                'backupCount': 5,
+                'maxBytes': 10000000,
+                'filename': os.environ.get('DJANGO_LOGFILE',
+                                           '/var/log/securethenews/django.log')
+            },
+        },
+        'loggers': {
+            '': {
+                'handlers': ['rotate'],
+                'level': os.environ.get('DJANGO_LOG_LEVEL', 'info').upper(),
+                'propagate': True,
+            },
+        },
+    }
+
+# Cloudflare caching
+#
+if os.environ.get('CLOUDFLARE_TOKEN') and os.environ.get('CLOUDFLARE_EMAIL'):
+    INSTALLED_APPS.append('wagtail.contrib.wagtailfrontendcache')
+    WAGTAILFRONTENDCACHE = {
+        'cloudflare': {
+            'BACKEND': 'ops.utils.CloudflareBackend',
+            'EMAIL': os.environ.get('CLOUDFLARE_EMAIL'),
+            'TOKEN': os.environ.get('CLOUDFLARE_TOKEN'),
+            'ZONEID': os.environ.get('CLOUDFLARE_ZONEID')
+        },
     }
