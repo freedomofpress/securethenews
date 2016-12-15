@@ -36,13 +36,13 @@ class BlogPost(Page):
 
     @property
     def preview(self):
-        """Returns the beginning of the post, truncated, to be used for the post preview on the index page."""
-        body_text = ''.join([
+        """Returns the first sentence of the post, with HTML tags stripped, for use as a preview blurb."""
+        body_text = striptags(' '.join([
             child.value.source for child in self.body
             if child.block_type == 'rich_text'
-        ])
-        preview_length = 30 # TODO: parameterize in template tag
-        return truncatewords(striptags(body_text), preview_length)
+        ]))
+        sentences = body_text.split('.')
+        return '.'.join(sentences[:1]) + '.'
 
 
 class BlogIndexPage(Page):
