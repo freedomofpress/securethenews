@@ -1,4 +1,13 @@
 body {
   font-family: $sans;
   text-rendering: geometricPrecision;
+
+  // Make the background color of the body match the footer to create the
+  // illusion that the footer extends to the bottom of the viewport even if the
+  // page content is too short.
+  background-color: $footerBackgroundColor;
+}
+
+.all-content {
+  background-color: white;
 }

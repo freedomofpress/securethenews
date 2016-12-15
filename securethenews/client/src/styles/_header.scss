@@ -25,9 +25,10 @@
 
     li {
       display: inline-block;
-      min-width: 4 * $spacingUnit;
       font-size: 14px;
       letter-spacing: 2px;
+      margin: 0 $spacingUnit;
+      text-align: center;
 
       &.active a {
         border-bottom: 2px solid $lightBlue;
@@ -105,6 +106,7 @@
         font-size: 14px;
         //font-weight: bold;
         line-height: $spacingUnit * 2;
+        margin: 0;
         text-rendering: geometricPrecision;
         letter-spacing: 2px;
         border-bottom: 1px solid #fff;
