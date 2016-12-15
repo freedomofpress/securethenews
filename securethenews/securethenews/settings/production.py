@@ -7,6 +7,7 @@ import os
 DEBUG = False
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS').split(' ')
+BASE_URL = os.environ.get('DJANGO_BASE_URL', 'https://securethe.news')
 
 try:
     CSRF_TRUSTED_ORIGINS = os.environ['DJANGO_CSRF_TRUSTED_ORIGINS'].split(' ')
