@@ -1,5 +1,11 @@
 {% extends "base.html" %}
 
+{% block og_title %}Secure the News | {{ site.name }}{% endblock %}
+{% block og_description %}Security Rating: {{ scan.grade.grade }}{% endblock %}
+
+{% block twitter_card_title %}Secure the News | {{ site.name }}{% endblock %}
+{% block twitter_card_description %}Security Rating: {{ scan.grade.grade }}{% endblock %}
+
 {% load site_tags %}
 
 {% block body_class %}template-site-page{% endblock %}
