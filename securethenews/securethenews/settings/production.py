@@ -107,3 +107,9 @@ if os.environ.get('CLOUDFLARE_TOKEN') and os.environ.get('CLOUDFLARE_EMAIL'):
             'ZONEID': os.environ.get('CLOUDFLARE_ZONEID')
         },
     }
+
+# Piwik analytics, via django-analytical
+# https://pythonhosted.org/django-analytical/install.html
+if os.environ.get('PIWIK_DOMAIN_PATH'):
+    PIWIK_DOMAIN_PATH = os.environ.get('PIWIK_DOMAIN_PATH')
+    PIWIK_SITE_ID = os.environ.get('PIWIK_SITE_ID', '1')
