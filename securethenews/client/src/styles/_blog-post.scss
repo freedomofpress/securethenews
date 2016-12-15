@@ -27,3 +27,14 @@
   color: $bylineGray;
   margin-bottom: $spacingUnit * 2;
 }
+
+.blog-body {
+  img {
+    width: 100%;
+    height: auto;
+  }
+
+  .block-image {
+    margin-bottom: $spacingUnit * 1.5;
+  }
+}

@@ -85,6 +85,16 @@ elif os.environ.get('DJANGO_LOG', 'no').lower() in ['true', 'yes']:
         },
     }
 
+# Mailgun integration
+#
+if os.environ.get('MAILGUN_ACCESS_KEY'):
+    EMAIL_BACKEND = 'django_mailgun.MailgunBackend'
+    MAILGUN_ACCESS_KEY = os.environ.get('MAILGUN_ACCESS_KEY')
+    MAILGUN_SERVER_NAME = os.environ.get('MAILGUN_SERVER_NAME')
+    DEFAULT_FROM_EMAIL = os.environ.get('MAILGUN_FROM_ADDR',
+                                        'webmaster@mg.securethe.news')
+
+
 # Cloudflare caching
 #
 if os.environ.get('CLOUDFLARE_TOKEN') and os.environ.get('CLOUDFLARE_EMAIL'):
@@ -97,3 +107,9 @@ if os.environ.get('CLOUDFLARE_TOKEN') and os.environ.get('CLOUDFLARE_EMAIL'):
             'ZONEID': os.environ.get('CLOUDFLARE_ZONEID')
         },
     }
+
+# Piwik analytics, via django-analytical
+# https://pythonhosted.org/django-analytical/install.html
+if os.environ.get('PIWIK_DOMAIN_PATH'):
+    PIWIK_DOMAIN_PATH = os.environ.get('PIWIK_DOMAIN_PATH')
+    PIWIK_SITE_ID = os.environ.get('PIWIK_SITE_ID', '1')

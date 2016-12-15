@@ -1,5 +1,6 @@
 from urllib.parse import urlencode
 
+from django.conf import settings
 from django.core.mail import mail_admins, send_mail
 from django.core.exceptions import SuspiciousOperation
 from django.core.urlresolvers import reverse
@@ -86,7 +87,7 @@ def send_confirmation_email(request, pledge):
     send_mail(
         subject=subject,
         message=message,
-        from_email='contact@securethe.news',
+        from_email=settings.DEFAULT_FROM_EMAIL,
         recipient_list=[pledge.contact_email,]
     )
 
@@ -118,6 +119,6 @@ def send_review_confirmation_email(pledge):
     send_mail(
         subject=subject,
         message=message,
-        from_email='contact@securethe.news',
+        from_email=settings.DEFAULT_FROM_EMAIL,
         recipient_list=[pledge.contact_email,]
     )
