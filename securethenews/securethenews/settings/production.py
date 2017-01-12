@@ -44,12 +44,13 @@ try:
                 'BACKEND': 'wagtail.wagtailsearch.backends.elasticsearch2',
                 'URLS': [es_host],
                 'INDEX': 'wagtail',
-                'TIMEOUT': 5
+                'TIMEOUT': 5,
+                'OPTIONS': {
+                    'ca_certs': os.environ['DJANGO_ES_CA_PATH'],
+                    'use_ssl': True,
+                },
             }
         }
-
-        WAGTAILSEARCH_BACKENDS['default']['ca_certs'] = os.environ['DJANGO_ES_CA_PATH']
-        WAGTAILSEARCH_BACKENDS['default']['use_ssl'] = True
 except KeyError:
     pass
 
