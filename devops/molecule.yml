@@ -11,9 +11,10 @@ vagrant:
       box: debian/jessie64
 
   providers:
-    - name: virtualbox
-      type: virtualbox
+    - name: libvirt
+      type: libvirt
       options:
+        driver: kvm
         memory: 2048
 
   instances:
