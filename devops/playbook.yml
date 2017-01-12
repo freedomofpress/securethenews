@@ -117,5 +117,5 @@
       - zlib1g-dev
     django_stack_gunicorn_opt_envs:
       DJANGO_ALLOWED_HOSTS: "'*'"
-      DJANGO_LOG: yes
+      DJANGO_LOG: no
       DJANGO_LOG_LEVEL: debug
