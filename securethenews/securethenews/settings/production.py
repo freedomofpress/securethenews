@@ -103,7 +103,7 @@ if os.environ.get('CLOUDFLARE_TOKEN') and os.environ.get('CLOUDFLARE_EMAIL'):
     INSTALLED_APPS.append('wagtail.contrib.wagtailfrontendcache')
     WAGTAILFRONTENDCACHE = {
         'cloudflare': {
-            'BACKEND': 'ops.utils.CloudflareBackend',
+            'BACKEND': 'wagtail.contrib.wagtailfrontendcache.backends.CloudflareBackend',
             'EMAIL': os.environ.get('CLOUDFLARE_EMAIL'),
             'TOKEN': os.environ.get('CLOUDFLARE_TOKEN'),
             'ZONEID': os.environ.get('CLOUDFLARE_ZONEID')
