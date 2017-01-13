@@ -14,5 +14,8 @@ Vagrant.configure("2") do |config|
       # Building nodejs packages triggers the OOM killer with 512MB of RAM.
       vb.memory = 1024
     end
+    securethenews.vm.provider "libvirt" do |lv|
+      lv.memory = 1024
+    end
   end
 end
