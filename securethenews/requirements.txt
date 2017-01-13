@@ -5,6 +5,6 @@ django-mailgun==0.9.1
 gunicorn==19.6.0
 Pillow==3.4.2
 psycopg2==2.6.2
-wagtail>=1.7,<1.8
+wagtail>=1.8,<1.9
 wagtailmenus>=1.6,<1.7
 requests==2.12.3
