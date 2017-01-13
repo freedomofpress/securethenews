@@ -1,0 +1,3 @@
+[submodule "devops/django_stack"]
+	path = devops/django_stack
+	url = git@github.com:freedomofpress/django_stack.git

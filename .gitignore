@@ -15,3 +15,10 @@ db_backups/
 
 # Log files
 logs/
+
+# Local deploy testing
+devops/.ansible
+devops/.molecule
+devops/venv
+devops/deploy_key
+devops/roles
