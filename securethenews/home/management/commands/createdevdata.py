@@ -106,19 +106,8 @@ class Command(BaseCommand):
             link_page=blog_index_page
         )
 
-        # Load sites from CSV file stored in Git repo
-        self.stdout.write('Loading sites from news_sites.csv... ', '')
-        news_sites_csv = abspath(join(dirname(__file__), '../../../../news_sites.csv'))
-        management.call_command('loadsites', news_sites_csv)
-
-        # TODO There are several limitations with this approach:
-        # 1. `manage.py createdevdata` now requires internet access, in order to run the scan command.
-        # 2. Scanning all of the sites in news_sites.csv takes several minutes. Ideally, createdevdata would be as fast
-        #    as possible to facilitate rapid development and testing.
-        # 3. This only creates one set of scans in the database. For some functionality, it is or will be useful to
-        #    have multiple sets of scans set up initially.
-        self.stdout.write('Scanning sites from news_sites.csv (this may take a while)...')
-        management.call_command('scan')
+        # Load sites and scans from fixtures
+        management.call_command('loaddata', 'dev.json')
 
         # Create superuser
         User.objects.create_superuser(
