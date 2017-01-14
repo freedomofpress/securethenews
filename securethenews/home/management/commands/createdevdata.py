@@ -70,6 +70,12 @@ class Command(BaseCommand):
         )
         home_page.add_child(instance=how_page)
 
+        # Update the "learn more" links on home page now that we've created the
+        # "How" and "Why" pages for them to link to.
+        home_page.why_learn_more = why_page
+        home_page.how_learn_more = how_page
+        home_page.save()
+
         # Add a BlogIndexPage and an example BlogPost
         blog_index_page = BlogIndexPage(
             title='Blog',
