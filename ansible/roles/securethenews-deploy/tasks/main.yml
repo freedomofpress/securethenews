@@ -16,6 +16,20 @@
     update_cache: yes
     cache_valid_time: 86400
 
+  # http://stackoverflow.com/questions/27341064/how-do-i-fix-importerror-cannot-import-name-incompleteread
+- name: Upgrade pip for Python 2 to avoid ImportError
+  become: yes
+  easy_install:
+    name: pip
+    state: latest
+
+- name: Upgrade pip for Python 3 to avoid ImportError
+  become: yes
+  easy_install:
+    executable: easy_install3
+    name: pip
+    state: latest
+
   # https://www.digitalocean.com/community/tutorials/how-to-install-the-django-web-framework-on-ubuntu-14-04
 - name: Install Django project requirements
   become: yes
@@ -32,13 +46,6 @@
   npm:
     global: yes
     name: gulp
-
-  # http://stackoverflow.com/questions/27341064/how-do-i-fix-importerror-cannot-import-name-incompleteread
-- name: Upgrade pip for Python 2 to avoid ImportError
-  become: yes
-  easy_install:
-    name: pip
-    state: latest
 
 - name: Install pshtt
   become: yes
