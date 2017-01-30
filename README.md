@@ -21,36 +21,30 @@ for developers working on Secure the News. There are 3 panes:
 
 If this is your first login after creating the virtual development environment,
 you will notice the development web server warning you about "unapplied
-migrations". To apply the migrations, run `python3 manage.py migrate`.
+migrations". To set up the development environment, run:
 
-Once you've successfully set up your new development environment, you should
-continue to the next section to load the development fixtures.
-
-### Development fixtures
-
-To encourage rapid development, the repository includes database fixtures that
-can be used to automatically populate the development database.
-
-The fixtures include:
-
-- ContentPages from the initial site design ("About", "How", "Why?")
-- A BlogIndexPage and some test BlogPosts.
-- An initial set of Sites based on `prototype_data/domains.csv`, with the
-  results of a single scan generated with `python3 manage.py scan`.
-- A default superuser that you can use to log in to the Admin Interface
-  (username: **admin**, password: **admin**).
-
-To load the fixtures:
-
-    $ cd /vagrant/securethenews # in the VM
-    # Make sure you've applied all of the migrations first
     $ python3 manage.py migrate
-    $ python3 manage.py loaddata fixtures/dev.json
+    $ python3 manage.py createdevdata
 
-If you want to update the fixtures, use the following command (and make sure you
-update the description of their contents in this README):
+`createdevdata` creates a default superuser (username: `test`, password: 
+`test`) that you can use to log in to the Admin interface at `/admin`.
 
-    $ python3 manage.py dumpdata --natural-primary --natural-foreign --exclude contenttypes --exclude auth.Permission --exclude sessions --indent 4 > fixtures/dev.json
+### Development Fixtures
+
+The `createdevdata` management commands loads Site and Scan data from the
+fixtures in `sites/fixtures/dev.json`. If you change the schema of `sites.Site`
+or `sites.Scan`, you will need to update these fixtures, **or future
+invocations of `createdevdata` will fail.**
+
+The general process for updating the development fixtures is:
+
+1. Migrate your database to the last migration where the fixtures were updated.
+2. Load the fixtures.
+3. Run the migrations that you've added.
+4. Export the migrated fixtures:
+
+
+    $ python3 manage.py dumpdata sites.{Site,Scan} > sites/fixtures/dev.json
 
 ### Live reload
 
