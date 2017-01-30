@@ -9,10 +9,7 @@ Need the following local requirements:
 * `virtualbox`
 * `virtualenv`
 
-Hooray! Now perform the following:
-
-* Copy a github private deploy key to `devops/deploy_key`
-* From the `devops` directory run `make`
+Hooray! Now from the `devops` directory run `make`
 
 This should setup a vagrant box and run an ansible play against it.
 You will then be able to get to a local STN instance @ `https://localhost:4443` in

@@ -87,11 +87,9 @@
         - ssl_certificate_key /etc/ssl/private/{{ansible_fqdn}}-key.pem
     nodejs_version: "4.x"
     nodejs_install_npm_user: "{{ django_stack_gcorn_user }}"
-    django_stack_git_deploy:
-      - key: "{{ lookup('file','deploy_key') }}"
+    django_stack_git_deploy: []
     django_stack_git_repo:
-      - url: git@github.com:freedomofpress/securethenews.git
-        key: "/home/gcorn/.ssh/github_deploy"
+      - url: https://github.com/freedomofpress/securethenews.git
     django_stack_manage_post:
       - loaddata fixtures/prod.json
     django_stack_shell_commands:
