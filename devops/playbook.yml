@@ -97,7 +97,7 @@
     django_stack_npm_global_pkgs:
       - gulp
     django_stack_optional_pip:
-      - name: pshtt
+      - name: git+git://github.com/dhs-ncats/pshtt@7362a8bdabe7190a933e4c5e18561ba9d07dc561#egg=pshtt
         python: python2
     django_stack_pkgs:
       - aptitude
