@@ -7,10 +7,7 @@ from django.db import migrations
 
 def fix_downgrades_https_None_values(apps, schema_editor):
     Scan = apps.get_model("sites", "Scan")
-    for scan in Scan.objects.all():
-        if scan.downgrades_https == None:
-            scan.downgrades_https = False
-            scan.save()
+    Scan.objects.filter(downgrades_https=None).update(downgrades_https=False)
 
 
 class Migration(migrations.Migration):
