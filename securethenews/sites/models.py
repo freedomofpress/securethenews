@@ -117,8 +117,6 @@ class Scan(models.Model):
 
     def _score(self):
         """Compute a score between 0-100 for the quality of the HTTPS implementation observed by this scan."""
-        # TODO: this is a very basic metric, just so we have something for
-        # testing. Revisit.
         score = 0
         if self.valid_https:
             if self.downgrades_https:
