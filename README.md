@@ -2,9 +2,16 @@
 
 ## Getting Started with the Development Environment
 
-Make sure you have Vagrant (>=1.8.5) and Ansible (>=2.0) installed. A
-Makefile is provided to automate the setup of the development
-environment. Run:
+Make sure you have Vagrant (>=1.8.5), Ansible (>=2.0), and either VirtualBox or
+[Docker](https://docs.docker.com/engine/installation/)
+installed. A Makefile is provided to automate the setup of the development
+environment.
+
+First, set the environmental variable `VAGRANT_DEFAULT_PROVIDER` to `docker`
+or `virtualbox` to specify the provider. If you're on Qubes, use `docker`, else
+you can select either (as long as it's installed).
+
+Then run:
 
     $ make dev
     $ vagrant ssh
@@ -26,7 +33,7 @@ migrations". To set up the development environment, run:
     $ python3 manage.py migrate
     $ python3 manage.py createdevdata
 
-`createdevdata` creates a default superuser (username: `test`, password: 
+`createdevdata` creates a default superuser (username: `test`, password:
 `test`) that you can use to log in to the Admin interface at `/admin`.
 
 ### Development Fixtures
