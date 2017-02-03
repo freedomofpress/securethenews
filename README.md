@@ -1,5 +1,7 @@
 # Secure the News
 
+[![Build Status](https://travis-ci.org/freedomofpress/securethenews.svg?branch=master)](https://travis-ci.org/freedomofpress/securethenews)
+
 ## Getting Started with the Development Environment
 
 Make sure you have Vagrant (>=1.8.5), Ansible (>=2.0), and either VirtualBox or
