@@ -55,8 +55,13 @@ The general process for updating the development fixtures is:
 3. Run the migrations that you've added.
 4. Export the migrated fixtures:
 
-
+    ```
     $ python3 manage.py dumpdata sites.{Site,Scan} > sites/fixtures/dev.json
+    ```
+
+The test suite includes a smoke test for `createdevdata`, so you can easily
+verify that the command is working without disrupting your own development
+environment.
 
 ### Live reload
 
