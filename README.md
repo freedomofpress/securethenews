@@ -7,9 +7,14 @@ Make sure you have Vagrant (>=1.8.5), Ansible (>=2.0), and either VirtualBox or
 installed. A Makefile is provided to automate the setup of the development
 environment.
 
-First, set the environmental variable `VAGRANT_DEFAULT_PROVIDER` to `docker`
-or `virtualbox` to specify the provider. If you're on Qubes, use `docker`, else
-you can select either (as long as it's installed).
+By [default](https://www.vagrantup.com/docs/providers/default.html), Vagrant
+will use the `virtualbox` provider. The Vagrantfile currently also supports the
+`libvirt` and `docker` providers. The Docker provider is useful on host
+platforms such as Qubes, which do not support virtualized providers. If you
+want to use a non-default provider, set the environment variable
+`VAGRANT_DEFAULT_PROVIDER` to `docker` or `libvirt`. Alternatively you may pass
+the `--provider` flag to Vagrant, but it's easier to set the environment
+variable.
 
 Then run:
 
