@@ -56,6 +56,6 @@ class BlogIndexPage(Page):
         posts = BlogPost.objects.live().descendant_of(self)
 
         # Order by most recent date first
-        posts = posts.order_by('-date')
+        posts = posts.order_by('-id')
 
         return posts
