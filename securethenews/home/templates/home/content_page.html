@@ -19,10 +19,10 @@
     <div class="section-content">
       {% for block in page.body %}
         {% if block.block_type == 'heading' %}
-          <h1 class="heading" id="{{ block.value|slugify }}">
-            {{ block.value }}
-            <a class="headerlink" href="#{{ block.value|slugify }}" title="Permalink to this headline"><i class="fa fa-link"></i></a>
-          </h1>
+          <{{ block.value.level }} class="heading" id="{{ block.value.heading|slugify }}">
+            {{ block.value.heading }}
+            <a class="headerlink" href="#{{ block.value.heading|slugify }}" title="Permalink to this headline"><i class="fa fa-link"></i></a>
+          </{{ block.value.level }}>
         {% else %}
           {% include_block block %}
         {% endif %}

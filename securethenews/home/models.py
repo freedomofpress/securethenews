@@ -88,6 +88,25 @@ class HomePage(Page):
         return context
 
 
+class HeadingLevelChoiceBlock(blocks.ChoiceBlock):
+    choices = (
+        ('h1', 'H1'),
+        ('h2', 'H2'),
+        ('h3', 'H3'),
+        ('h4', 'H4'),
+        ('h5', 'H5'),
+        ('h6', 'H6'),
+    )
+
+
+class HeadingBlock(blocks.StructBlock):
+    heading = blocks.CharBlock(classname='title')
+    level = HeadingLevelChoiceBlock(default='h1')
+
+    class Meta:
+        icon = 'title'
+
+
 class QuoteBlock(blocks.StructBlock):
     quote = blocks.TextBlock()
     source = blocks.CharBlock()
@@ -101,7 +120,7 @@ class QuoteBlock(blocks.StructBlock):
 class ContentPage(Page):
     sub_header = models.CharField(max_length=50, default="")
     body = StreamField([
-        ('heading', blocks.CharBlock(icon='title')),
+        ('heading', HeadingBlock()),
         ('rich_text', blocks.RichTextBlock()),
         ('image', ImageChooserBlock()),
         ('quote', QuoteBlock()),
@@ -112,24 +131,6 @@ class ContentPage(Page):
         FieldPanel('sub_header'),
         StreamFieldPanel('body'),
     ]
-
-
-@hooks.register('insert_editor_css')
-def editor_css():
-    # Make 'heading' StreamField blocks look like h2 in RichTextBlocks in the
-    # Wagtail Admin.
-    return (
-        '''
-        <style>
-            .fieldname-heading input {
-                color: #666;
-                font-family: Roboto Slab, Georgia, serif;
-                font-size: 2.4em;
-                font-weight: bold;
-            }
-        </style>
-        '''
-    )
 
 
 class FormField(AbstractFormField):
