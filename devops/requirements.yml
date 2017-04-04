@@ -10,3 +10,6 @@
 
 - src: https://github.com/freedomofpress/ansible-elasticsearch
   name: elastic.elasticsearch
+
+- src: https://github.com/freedomofpress/django_stack.git
+  name: freedomofpress.django_stack
