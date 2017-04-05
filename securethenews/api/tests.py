@@ -1,0 +1,90 @@
+from rest_framework.test import  APITestCase
+from rest_framework import status
+from django.urls import reverse
+from sites.models import Site, Scan
+from urllib.parse import urljoin
+
+urlroot = reverse('api-root')
+
+"""
+Tests basic API operations against simple test data.
+"""
+
+def create_site():
+    """
+    Make an example site + scans
+    """
+    site = Site.objects.create(
+        name='Secure the News', domain='securethe.news')
+    Scan.objects.create(site=site, live=True)
+
+
+class APIDirectoryTests(APITestCase):
+    def test_get_directory(self):
+        """
+        API root should return a directory of API operations
+        """
+        response = self.client.get(urlroot, format='json')
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        # We're deliberately just testing one key so the directory can be
+        # modified without breaking tests
+        self.assertIn('sites', response.data)
+
+
+class APISiteTests(APITestCase):
+
+    def setUp(self):
+        create_site()
+
+    def test_get_sites(self):
+        """
+        <api root>/sites should list sites/scans that have been created
+        """
+        url = urljoin(urlroot, 'sites/')
+        response = self.client.get(url, format='json')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertIn('results', response.data)
+        self.assertEqual(len(response.data['results']), 1)
+        sitedata = response.data['results'][0]
+        self.assertEqual(sitedata['name'], 'Secure the News')
+        self.assertIn('scans', sitedata)
+        self.assertTrue(sitedata['scans'][0]['live'])
+
+
+class APISiteDetailTests(APITestCase):
+
+    def setUp(self):
+        create_site()
+
+    def test_get_site(self):
+        """
+        <api root>/sites/securethe.news should return created site details
+        """
+        url = urljoin(urlroot, 'sites/securethe.news/')
+        response = self.client.get(url, format='json')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+
+class APIPermissionTests(APITestCase):
+    def setUp(self):
+        create_site()
+
+    def test_forbidden_actions(self):
+        """
+        <api root>/sites/ should not permit POST, PUT or DELETE operations
+        """
+        url = urljoin(urlroot, 'sites/securethe.news/')
+        response1 = self.client.post(url, json={'name': 'Insecure the News?', 'domain': 'insecurethe.news'})
+        self.assertEqual(response1.status_code,
+                         status.HTTP_405_METHOD_NOT_ALLOWED)
+
+        response2 = self.client.delete(url)
+        self.assertEqual(response2.status_code,
+                         status.HTTP_405_METHOD_NOT_ALLOWED)
+
+        url = urljoin(urlroot, 'sites/insecurethe.news/')
+        response3 = self.client.put(url, json={'name': 'Insecure the News?', 'domain': 'insecurethe.news'})
+        self.assertEqual(response3.status_code,
+                         status.HTTP_405_METHOD_NOT_ALLOWED)

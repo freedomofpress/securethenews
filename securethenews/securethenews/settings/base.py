@@ -61,9 +61,15 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'analytical',
+
+    'django_filters',
+    'crispy_forms',
+    'rest_framework',
+    'corsheaders'
 ]
 
 MIDDLEWARE_CLASSES = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -76,6 +82,11 @@ MIDDLEWARE_CLASSES = [
     'wagtail.wagtailcore.middleware.SiteMiddleware',
     'wagtail.wagtailredirects.middleware.RedirectMiddleware',
 ]
+
+# Anyone can use the API via CORS
+CORS_ORIGIN_ALLOW_ALL = True
+# API is read-only
+CORS_ALLOW_METHODS = ('GET','HEAD','OPTIONS',)
 
 ROOT_URLCONF = 'securethenews.urls'
 
@@ -153,3 +164,15 @@ WAGTAIL_SITE_NAME = "securethenews"
 # Base URL to use when referring to full URLs within the Wagtail admin backend -
 # e.g. in notification emails. Don't include '/admin' or a trailing slash
 BASE_URL = 'https://securethe.news'
+
+
+# API framework settings, relevant only for /api
+REST_FRAMEWORK = {
+    # For any query, users can set both limit and offset.
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    # A page has 100 results by default, but there's no upper limit.
+    'PAGE_SIZE': 100,
+}
+
+# Shiny forms for the web view of the API
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
