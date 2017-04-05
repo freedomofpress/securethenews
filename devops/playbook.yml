@@ -62,8 +62,11 @@
     - role: geerlingguy.nodejs
       tags: ['node']
 
-    - role: django_stack
+    - role: freedomofpress.django_stack
       tags: ['django']
+  post_tasks:
+    - debug:
+        msg: "You can hit the www interface at https://{{ ansible_default_ipv4.address }} or https://localhost:4443"
   vars:
     django_stack_superuser_admin: admin
     django_stack_superuser_email: webmaster@freedom.press
@@ -88,8 +91,7 @@
     nodejs_version: "4.x"
     nodejs_install_npm_user: "{{ django_stack_gcorn_user }}"
     django_stack_git_deploy: []
-    django_stack_git_repo:
-      - url: https://github.com/freedomofpress/securethenews.git
+    django_stack_git_repo: []
     django_stack_manage_post:
       - loaddata fixtures/prod.json
     django_stack_shell_commands:
@@ -117,3 +119,7 @@
       DJANGO_ALLOWED_HOSTS: "'*'"
       DJANGO_LOG: no
       DJANGO_LOG_LEVEL: debug
+    django_stack_gcorn_home: /home/vagrant
+    django_stack_gcorn_user: vagrant
+    django_stack_gcorn_group: vagrant
+    django_stack_force_refresh: true

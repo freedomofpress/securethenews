@@ -2,16 +2,16 @@ all: molecule
 
 pip: venv
 	. ./venv/bin/activate; \
-	pip install -r django_stack/requirements.txt
+	pip install -r roles/freedomofpress.djang_stack/requirements.txt
 
-venv:
+venv: galaxy
 	virtualenv venv
 
-molecule: galaxy
+molecule: pip
 	. ./venv/bin/activate && molecule create; \
 	molecule converge
 
-galaxy: pip
+galaxy:
 	ansible-galaxy install -r requirements.yml
 
 syncdjango:
@@ -19,3 +19,6 @@ syncdjango:
 
 destroy:
 	. ./venv/bin/activate && molecule destroy
+
+login:
+	. ./venv/bin/activate && molecule login
