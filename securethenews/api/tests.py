@@ -66,6 +66,7 @@ class APISiteDetailTests(APITestCase):
         response = self.client.get(url, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
+
 class APIPermissionTests(APITestCase):
     def setUp(self):
         create_site()
