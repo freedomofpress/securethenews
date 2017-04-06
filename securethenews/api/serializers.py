@@ -1,12 +1,12 @@
-from django.core.exceptions import ObjectDoesNotExist
-from rest_framework import serializers
-from sites.models import Site, Scan
-
 """
 Serializers are used by the REST framework to generate the API output
 (and potentially to deserialize input, if we want to make the API writable
 in future).
 """
+from django.core.exceptions import ObjectDoesNotExist
+from rest_framework import serializers
+from sites.models import Site, Scan
+
 
 class ScanSerializer(serializers.ModelSerializer):
     """
@@ -18,6 +18,7 @@ class ScanSerializer(serializers.ModelSerializer):
         # We don't need to expose the detailed program output, or the internal
         # IDs
         exclude = ('pshtt_stdout', 'pshtt_stderr', 'site', 'id')
+
 
 class SiteSerializer(serializers.ModelSerializer):
 

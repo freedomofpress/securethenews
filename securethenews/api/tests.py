@@ -1,4 +1,7 @@
-from rest_framework.test import  APITestCase
+"""
+Tests basic API operations against simple test data.
+"""
+from rest_framework.test import APITestCase
 from rest_framework import status
 from django.urls import reverse
 from sites.models import Site, Scan
@@ -6,9 +9,6 @@ from urllib.parse import urljoin
 
 urlroot = reverse('api-root')
 
-"""
-Tests basic API operations against simple test data.
-"""
 
 def create_site():
     """
@@ -76,7 +76,8 @@ class APIPermissionTests(APITestCase):
         <api root>/sites/ should not permit POST, PUT or DELETE operations
         """
         url = urljoin(urlroot, 'sites/securethe.news/')
-        response1 = self.client.post(url, json={'name': 'Insecure the News?', 'domain': 'insecurethe.news'})
+        response1 = self.client.post(
+            url, json={'name': 'Insecure the News?', 'domain': 'insecurethe.news'})
         self.assertEqual(response1.status_code,
                          status.HTTP_405_METHOD_NOT_ALLOWED)
 
@@ -85,6 +86,7 @@ class APIPermissionTests(APITestCase):
                          status.HTTP_405_METHOD_NOT_ALLOWED)
 
         url = urljoin(urlroot, 'sites/insecurethe.news/')
-        response3 = self.client.put(url, json={'name': 'Insecure the News?', 'domain': 'insecurethe.news'})
+        response3 = self.client.put(
+            url, json={'name': 'Insecure the News?', 'domain': 'insecurethe.news'})
         self.assertEqual(response3.status_code,
                          status.HTTP_405_METHOD_NOT_ALLOWED)

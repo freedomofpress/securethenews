@@ -1,3 +1,6 @@
+"""
+Django REST Framework views for the API
+"""
 from . import serializers, filters
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import routers, viewsets, generics, filters as rest_framework_filters
@@ -6,10 +9,8 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
 
-"""
-NOTE: Method docstrings in this file are used by the framework to generate
-page subtitles
-"""
+# NOTE: Method docstrings in this file are used by the framework to generate
+# page subtitles
 
 
 @api_view(['GET'])
