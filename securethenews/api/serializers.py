@@ -1,3 +1,4 @@
+from django.core.exceptions import ObjectDoesNotExist
 from rest_framework import serializers
 from sites.models import Site, Scan
 
@@ -19,7 +20,22 @@ class ScanSerializer(serializers.ModelSerializer):
         exclude = ('pshtt_stdout', 'pshtt_stderr', 'site', 'id')
 
 class SiteSerializer(serializers.ModelSerializer):
-    scans = ScanSerializer(many=True)
+
+    # In production, a site can have a lot of scans, so we don't want to expose
+    # all of them in most cases. SerializerMethodField lets us add a filtered
+    # query set to the output.
+    latest_scan = serializers.SerializerMethodField()
+
     class Meta:
         model = Site
-        fields = ('name', 'slug', 'domain', 'added', 'scans')
+        fields = ('name', 'slug', 'domain', 'added', 'latest_scan')
+
+    def get_latest_scan(self, data):
+        try:
+            latest = data.scans.latest()
+        except ObjectDoesNotExist:
+            return None
+
+        # Run the data through the standard serializer above
+        serializer_latest = ScanSerializer(instance=latest)
+        return serializer_latest.data

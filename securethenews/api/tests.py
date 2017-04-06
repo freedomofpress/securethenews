@@ -40,7 +40,7 @@ class APISiteTests(APITestCase):
 
     def test_get_sites(self):
         """
-        <api root>/sites should list sites/scans that have been created
+        <api root>/sites should list sites/scan that have been created
         """
         url = urljoin(urlroot, 'sites/')
         response = self.client.get(url, format='json')
@@ -49,8 +49,8 @@ class APISiteTests(APITestCase):
         self.assertEqual(len(response.data['results']), 1)
         sitedata = response.data['results'][0]
         self.assertEqual(sitedata['name'], 'Secure the News')
-        self.assertIn('scans', sitedata)
-        self.assertTrue(sitedata['scans'][0]['live'])
+        self.assertIn('latest_scan', sitedata)
+        self.assertTrue(sitedata['latest_scan']['live'])
 
 
 class APISiteDetailTests(APITestCase):
@@ -65,7 +65,6 @@ class APISiteDetailTests(APITestCase):
         url = urljoin(urlroot, 'sites/securethe.news/')
         response = self.client.get(url, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-
 
 class APIPermissionTests(APITestCase):
     def setUp(self):

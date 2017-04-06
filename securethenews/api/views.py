@@ -25,7 +25,7 @@ def api_root(request, format=None):
 
 class SiteList(generics.ListAPIView):
     """
-    List of all SecureTheNews sites and the scan results for them
+    List of all SecureTheNews sites and the latest scan results for them
     """
     queryset = Site.objects.all()
     serializer_class = serializers.SiteSerializer
@@ -41,7 +41,7 @@ class SiteList(generics.ListAPIView):
 
 class SiteDetail(generics.RetrieveAPIView):
     """
-    Individual SecureTheNews site and its scan results
+    Individual SecureTheNews site and its latest scan results
     """
     serializer_class = serializers.SiteSerializer
 
