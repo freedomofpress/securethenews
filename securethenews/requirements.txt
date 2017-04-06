@@ -1,4 +1,4 @@
-Django>=1.10,<1.11
+Django==1.10.7
 git+https://github.com/jcassee/django-analytical.git@e8e2d841588ad3d60ba602a79b8feca632ca99a3#egg=django-analytical
 django-logging-json==1.5.3
 django-mailgun==0.9.1
