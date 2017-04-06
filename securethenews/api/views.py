@@ -4,7 +4,7 @@ Django REST Framework views for the API
 from . import serializers, filters
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import routers, viewsets, generics, filters as rest_framework_filters
-from sites.models import Site
+from sites.models import Site, Scan
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
@@ -54,3 +54,20 @@ class SiteDetail(generics.RetrieveAPIView):
         # Passed in via URL regexp in urls.py
         domain = self.kwargs['domain']
         return Site.objects.filter(domain=domain)
+
+
+class ScanList(generics.ListAPIView):
+    """
+    List of all scans associated with a domain
+    """
+    serializer_class = serializers.ScanSerializer
+    filter_class = filters.ScanFilter
+
+    filter_backends = (rest_framework_filters.OrderingFilter,
+                       DjangoFilterBackend,)
+    ordering_fields = ('timestamp',)
+
+    def get_queryset(self):
+        # Passed in via URL regexp in urls.py
+        domain = self.kwargs['domain']
+        return Scan.objects.filter(site__domain=domain).order_by('-timestamp')

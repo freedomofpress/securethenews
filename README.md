@@ -87,6 +87,10 @@ for a given site (e.g., `/api/v1/sites` will return a directory, and
 and sort options are supported; click the "filters" dialog in the UI to explore
 them.
 
+To get all scans for a given site, you can use a path like
+`/api/v1/sites/bbc.co.uk/scans`. This URL can also be found in the all_scans
+field for a given site result.
+
 If you run a public site, note that read access to the API is available to any
 origin via CORS.
 

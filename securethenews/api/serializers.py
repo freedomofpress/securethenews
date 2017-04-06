@@ -6,12 +6,14 @@ in future).
 from django.core.exceptions import ObjectDoesNotExist
 from rest_framework import serializers
 from sites.models import Site, Scan
+from urllib.parse import urljoin
+from django.urls import reverse
 
 
 class ScanSerializer(serializers.ModelSerializer):
     """
-    We don't allow direct API access to scans; this serializer is only used
-    to generate the nested representation within a site object.
+    Used for the latest_scan representation in a site view, as well as for
+    the /sites/<domain>/scans list of all scans for a given domain.
     """
     class Meta:
         model = Scan
@@ -26,10 +28,12 @@ class SiteSerializer(serializers.ModelSerializer):
     # all of them in most cases. SerializerMethodField lets us add a filtered
     # query set to the output.
     latest_scan = serializers.SerializerMethodField()
+    all_scans = serializers.SerializerMethodField()
 
     class Meta:
         model = Site
-        fields = ('name', 'slug', 'domain', 'added', 'latest_scan')
+        fields = ('name', 'slug', 'domain', 'added',
+                  'latest_scan', 'all_scans')
 
     def get_latest_scan(self, data):
         try:
@@ -40,3 +44,8 @@ class SiteSerializer(serializers.ModelSerializer):
         # Run the data through the standard serializer above
         serializer_latest = ScanSerializer(instance=latest)
         return serializer_latest.data
+
+    def get_all_scans(self, data):
+        urlroot = reverse('api-root-v1')
+        relative_url = urljoin(urlroot, 'sites/' + data.domain + '/scans/')
+        return self.context['request'].build_absolute_uri(relative_url)

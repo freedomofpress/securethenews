@@ -7,7 +7,7 @@ from django.urls import reverse
 from sites.models import Site, Scan
 from urllib.parse import urljoin
 
-urlroot = reverse('api-root')
+urlroot = reverse('api-root-v1')
 
 
 def create_site():
@@ -16,7 +16,8 @@ def create_site():
     """
     site = Site.objects.create(
         name='Secure the News', domain='securethe.news')
-    Scan.objects.create(site=site, live=True)
+    Scan.objects.create(site=site, live=True, defaults_to_https=False)
+    Scan.objects.create(site=site, live=True, defaults_to_https=True)
 
 
 class APIDirectoryTests(APITestCase):
@@ -50,11 +51,11 @@ class APISiteTests(APITestCase):
         sitedata = response.data['results'][0]
         self.assertEqual(sitedata['name'], 'Secure the News')
         self.assertIn('latest_scan', sitedata)
+        self.assertIn('all_scans', sitedata)
         self.assertTrue(sitedata['latest_scan']['live'])
 
 
 class APISiteDetailTests(APITestCase):
-
     def setUp(self):
         create_site()
 
@@ -65,6 +66,23 @@ class APISiteDetailTests(APITestCase):
         url = urljoin(urlroot, 'sites/securethe.news/')
         response = self.client.get(url, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data['name'], 'Secure the News')
+
+
+class APISiteScansTests(APITestCase):
+    def setUp(self):
+        create_site()
+
+    def test_get_site_scans(self):
+        """
+        <api root>/sites/securethe.news/scans should return two scans
+        """
+        url = urljoin(urlroot, 'sites/securethe.news/scans/')
+        response = self.client.get(url, format='json')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        # The API itself should return a result count
+        self.assertEqual(response.data['count'], 2)
+        self.assertTrue(response.data['results'][0]['live'])
 
 
 class APIPermissionTests(APITestCase):
