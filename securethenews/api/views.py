@@ -18,7 +18,6 @@ def api_root(request, format=None):
     """
     Index of available API calls
     """
-
     return Response({
         'sites': reverse('site-list', request=request, format=format),
     })
