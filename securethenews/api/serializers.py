@@ -15,11 +15,16 @@ class ScanSerializer(serializers.ModelSerializer):
     Used for the latest_scan representation in a site view, as well as for
     the /sites/<domain>/scans list of all scans for a given domain.
     """
+    grade = serializers.SerializerMethodField()
+
     class Meta:
         model = Scan
         # We don't need to expose the detailed program output, or the internal
         # IDs
         exclude = ('pshtt_stdout', 'pshtt_stderr', 'site', 'id')
+
+    def get_grade(self, data):
+        return data.grade['grade']
 
 
 class SiteSerializer(serializers.ModelSerializer):
