@@ -76,6 +76,29 @@ Once you've installed the extension, simply load the development site in your
 browser (`localhost:8000`) and click the LiveReload extension icon to initiate
 live reloading.
 
+## API
+
+If everything is working correctly, you should be able to find an API endpoint
+at `localhost:8000/api` (it will redirect to the current API version).
+
+The API is read-only and can be used to obtain site metadata and the latest scan
+for a given site (e.g., `/api/v1/sites` will return a directory, and
+`/api/v1/sites/bbc.co.uk` will return details about the BBC). Various filters
+and sort options are supported; click the "filters" dialog in the UI to explore
+them.
+
+To get all scans for a given site, you can use a path like
+`/api/v1/sites/bbc.co.uk/scans`. This URL can also be found in the all_scans
+field for a given site result.
+
+If you run a public site, note that read access to the API is available to any
+origin via CORS.
+
+The API is implemented using the Django REST framework; documentation for it can
+be found here:
+
+http://www.django-rest-framework.org/
+
 ## Notes
 
 * Port 8000 is forwarded from the guest to the host. By default, `runserver`
