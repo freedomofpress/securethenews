@@ -34,6 +34,10 @@ class BlogPost(Page):
         'BlogIndexPage',
     ]
 
+    # It doesn't make sense for BlogPosts to have subpages, and if they did
+    # they would not be accessible through any of the navigation anyway.
+    subpage_types = []
+
     @property
     def preview(self):
         """Returns the first sentence of the post, with HTML tags stripped, for use as a preview blurb."""
@@ -52,8 +56,8 @@ class BlogIndexPage(Page):
 
     @property
     def posts(self):
-        """Return a list of live blog posts that are descendants of this page."""
-        posts = BlogPost.objects.live().descendant_of(self)
+        """Return a list of live blog posts that are children of this BlogIndexPage."""
+        posts = BlogPost.objects.live().child_of(self)
 
         # Order by most recent date first
         posts = posts.order_by('-id')

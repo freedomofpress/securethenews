@@ -7,6 +7,9 @@
 {% block content %}
   <section class="white-section">
     <div class="section-content">
+      {% if not page.posts %}
+        <p>No blog posts have been published yet!</p>
+      {% endif %}
       <div class="blog-post-list">
         {% for post in page.posts %}
         <div class="blog-post-item">
