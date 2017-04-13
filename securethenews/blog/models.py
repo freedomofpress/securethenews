@@ -34,6 +34,10 @@ class BlogPost(Page):
         'BlogIndexPage',
     ]
 
+    # It doesn't make sense for BlogPosts to have subpages, and if they did
+    # they would not be accessible through any of the navigation anyway.
+    subpage_types = []
+
     @property
     def preview(self):
         """Returns the first sentence of the post, with HTML tags stripped, for use as a preview blurb."""
