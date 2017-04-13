@@ -56,8 +56,8 @@ class BlogIndexPage(Page):
 
     @property
     def posts(self):
-        """Return a list of live blog posts that are descendants of this page."""
-        posts = BlogPost.objects.live().descendant_of(self)
+        """Return a list of live blog posts that are children of this BlogIndexPage."""
+        posts = BlogPost.objects.live().child_of(self)
 
         # Order by most recent date first
         posts = posts.order_by('-id')
