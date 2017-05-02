@@ -38,7 +38,7 @@ mixin check(condition)
             td.desktop-only
               +check(item.valid_https)
             td.desktop-only
-              +check(item.valid_https && !item.downgrades_https)
+              +check(item.valid_https && item.downgrades_https === false)
             td.desktop-only
               +check(item.defaults_to_https)
             td.desktop-only
