@@ -47,6 +47,13 @@
     global: yes
     name: gulp
 
+- name: Upgrade setuptools to avoid error while installing SSLyze
+  become: yes
+  pip:
+    name: setuptools
+    state: latest
+    executable: pip2.7
+
 - name: Install pshtt
   become: yes
   pip:
