@@ -1,0 +1,58 @@
+---
+
+- name: Run django environment
+  hosts: django
+  become: yes
+  pre_tasks:
+    - name: Make sure paxctld is started
+      service:
+        name: paxctld
+        state: started
+      when: ansible_kernel.endswith('grsec')
+
+    - name: Create postgres DB
+      postgresql_db:
+        name: securethenews
+        owner: "{{ django_db_user }}"
+      register: pg_db_results
+      until: pg_db_results|succeeded
+      retries: 5
+      delay: 20
+  post_tasks:
+    - debug:
+        msg: "You can hit the www interface at https://localhost:{{ lookup('pipe', 'docker port debian_jessie_sd.org_ci 443 | cut -d\":\" -f 2') }}"
+  roles:
+    - role: freedomofpress.django
+      tags: django
+  vars:
+    django_stack_superuser_admin: admin
+    django_stack_superuser_email: mike@freedom.press
+    django_db_user: django_user
+    django_db_password: django_password
+    django_stack_app_name: securethenews
+    django_secret_key: f1822d2fe58daeadc88e0e4eef2f155fc3edd3713ff9a5d1e27696afd9231d905db51c98dc
+    django_stack_es_host_url: disable
+    django_stack_deploy_src: "{{ lookup('pipe', 'pwd') }}/../../"
+    django_stack_manage_post:
+      - createdevdata
+    django_stack_npm_install_cmd: "npm install; npm run build"
+    django_stack_gunicorn_opt_envs:
+      DJANGO_ALLOWED_HOSTS: "'*'"
+      DJANGO_SETTINGS_MODULE: securethenews.settings.production-ci
+      DJANGO_JSON_LOG: True
+      DJANGO_DB_NAME: securethenews
+      GITHUB_HOOK_SECRET_KEY: test
+    django_stack_gcorn_app_settings: securethenews.settings.production-ci
+    django_stack_force_refresh: true
+    django_stack_rsync_opts:
+      - "--exclude=ansible"
+      - "--exclude=devops"
+      - "--exclude=molecule"
+      - "--exclude=node_modules"
+      - "--exclude=src"
+    # The default packages are preinstalled on the base dockerimage
+    django_stack_pkgs: []
+    # Keep output verbose during Molecule v2 transition
+    django_stack_global_no_log: no
+    django_stack_manage_no_log: no
+    django_stack_rsync_no_log: no

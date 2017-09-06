@@ -17,6 +17,7 @@ db_backups/
 logs/
 
 # Local deploy testing
+.molecule/
 devops/.ansible
 devops/.molecule
 devops/venv

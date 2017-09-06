@@ -1,0 +1,21 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: docker
+lint:
+  name: yamllint
+platforms:
+  - name: stn_local_dev
+provisioner:
+  name: ansible
+  lint:
+    name: ansible-lint
+scenario:
+  name: dev
+  converge_sequence:
+    - converge
+verifier:
+  name: testinfra
+  lint:
+    name: flake8
