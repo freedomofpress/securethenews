@@ -38,11 +38,11 @@
     django_stack_npm_install_cmd: "npm install; npm run build"
     django_stack_gunicorn_opt_envs:
       DJANGO_ALLOWED_HOSTS: "'*'"
-      DJANGO_SETTINGS_MODULE: securethenews.settings.production-ci
+      DJANGO_SETTINGS_MODULE: securethenews.settings.production
       DJANGO_JSON_LOG: True
       DJANGO_DB_NAME: securethenews
       GITHUB_HOOK_SECRET_KEY: test
-    django_stack_gcorn_app_settings: securethenews.settings.production-ci
+    django_stack_gcorn_app_settings: securethenews.settings.production
     django_stack_force_refresh: true
     django_stack_rsync_opts:
       - "--exclude=ansible"

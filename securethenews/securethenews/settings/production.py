@@ -22,7 +22,7 @@ except ImportError:
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'stn',
+        'NAME': os.environ.get('DJANGO_DB_NAME', 'stn'),
         'USER': os.environ['DJANGO_DB_USER'],
         'PASSWORD': os.environ['DJANGO_DB_PASSWORD'],
         'HOST': os.environ['DJANGO_DB_HOST'],
