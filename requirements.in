@@ -1,0 +1,13 @@
+Django
+django-analytical
+django-cors-headers
+django-crispy-forms
+django-filter
+-e git+https://github.com/freedomofpress/django-logging.git@Remove_Elastic#egg=django-logging-json
+django-mailgun
+elasticsearch
+gunicorn
+pshtt
+psycopg2
+wagtail
+wagtailmenus
