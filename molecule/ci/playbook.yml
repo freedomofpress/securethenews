@@ -3,6 +3,9 @@
 - name: Run django environment
   hosts: django
   become: yes
+  environment:
+    # Required to install pshtt
+    LC_ALL: "en_US.UTF-8"
   pre_tasks:
     - name: Make sure paxctld is started
       service:
@@ -51,8 +54,12 @@
       - "--exclude=node_modules"
       - "--exclude=src"
     # The default packages are preinstalled on the base dockerimage
-    django_stack_pkgs: []
+    django_stack_pkgs:
+      - libssl-dev # required for pshtt
     # Keep output verbose during Molecule v2 transition
     django_stack_global_no_log: no
     django_stack_manage_no_log: no
     django_stack_rsync_no_log: no
+    # Upgrade setuptools within virtualenv to satisfy sslyze
+    django_stack_venv_base_pkgs:
+      - setuptools
