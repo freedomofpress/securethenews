@@ -32,6 +32,15 @@ dev-chownroot: ## Fixes root-owner permissions created by docker.
 dev-killapp: ## Destroys dev environment.
 	molecule destroy -s dev
 
+.PHONY: update-pip-dependencies
+update-pip-dependencies: ## Uses pip-compile to update requirements.txt
+# It is critical that we run pip-compile via the same Python version
+# that we're generating requirements for, otherwise the versions may
+# be resolved differently.
+	docker run -v "$(DIR):/code" -it quay.io/freedomofpress/ci-python \
+		bash -c 'pip install pip-tools && pip-compile \
+		--output-file /code/requirements.txt /code/requirements.in'
+
 .PHONY: dev-debug
 dev-debug: ## Creates local docker container to troubleshoot dev env.
 	docker build -t stn_django -f molecule/dev/DjangoDockerfile .
