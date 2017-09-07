@@ -4,44 +4,29 @@
 
 ## Getting Started with the Development Environment
 
-Make sure you have Vagrant (>=1.8.5), Ansible (>=2.0), and either VirtualBox or
-[Docker](https://docs.docker.com/engine/installation/)
-installed. A Makefile is provided to automate the setup of the development
-environment.
+The installation instructions below assume you have the following software on your machine:
 
-By [default](https://www.vagrantup.com/docs/providers/default.html), Vagrant
-will use the `virtualbox` provider. The Vagrantfile currently also supports the
-`libvirt` and `docker` providers. The Docker provider is useful on host
-platforms such as Qubes, which do not support virtualized providers. If you
-want to use a non-default provider, set the environment variable
-`VAGRANT_DEFAULT_PROVIDER` to `docker` or `libvirt`. Alternatively you may pass
-the `--provider` flag to Vagrant, but it's easier to set the environment
-variable.
+* [virtualenv](http://www.virtualenv.org/en/latest/virtualenv.html#installation)
+* [docker](https://docs.docker.com/engine/installation/)
+
+Create a Python2 virtualenv and install `molecule/requirements.txt`/.
 
 Then run:
 
-    $ make dev
-    $ vagrant ssh
+```bash
+make dev-go
+```
 
-The interactive session will automatically launch a tmux environment designed
-for developers working on Secure the News. There are 3 panes:
-
-1. A shell for interactive work.
-2. The Django development web server. If you quit the web server, you can start
-   it again with: `python3 manage.py runserver 0.0.0.0:8000`. The development
-   server will live reload whenever it detects changes to the source files.
-3. gulp, to build frontend assets (CSS and JS). gulp is setup to live reload
-   whenever it detects changes to the source files.
-
-If this is your first login after creating the virtual development environment,
-you will notice the development web server warning you about "unapplied
-migrations". To set up the development environment, run:
-
-    $ python3 manage.py migrate
-    $ python3 manage.py createdevdata
-
-`createdevdata` creates a default superuser (username: `test`, password:
+The development environment creates a default superuser (username: `test`, password:
 `test`) that you can use to log in to the Admin interface at `/admin`.
+
+To update all the sites in the development environment, run:
+
+```bash
+make dev-scan
+```
+
+For a full list of all helper commands in the Makefile, run `make help`.
 
 ### Development Fixtures
 
@@ -98,13 +83,3 @@ The API is implemented using the Django REST framework; documentation for it can
 be found here:
 
 http://www.django-rest-framework.org/
-
-## Notes
-
-* Port 8000 is forwarded from the guest to the host. By default, `runserver`
-  runs on `127.0.0.1`, so you need to specify `0.0.0.0` for the port forwarding
-  to work.
-* We are working with Python 3, but Python 2 is the default Python on Ubuntu
-  14.04, which is the platform we are using for the development VM for now.
-  Therefore, you will need to specify `python3 manage.py` instead of
-  `./manage.py` which you may be used to.
