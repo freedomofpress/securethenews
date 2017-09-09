@@ -28,6 +28,7 @@
     - role: freedomofpress.django
       tags: django
   vars:
+    molecule_scenario_directory: "{{ lookup('env', 'MOLECULE_SCENARIO_DIRECTORY') }}"
     django_stack_superuser_admin: admin
     django_stack_superuser_email: mike@freedom.press
     django_db_user: django_user
@@ -35,10 +36,8 @@
     django_stack_app_name: securethenews
     django_secret_key: f1822d2fe58daeadc88e0e4eef2f155fc3edd3713ff9a5d1e27696afd9231d905db51c98dc
     django_stack_es_host_url: disable
-    django_stack_deploy_src: "{{ lookup('pipe', 'pwd') }}/../../"
-    django_stack_manage_post:
-      - createdevdata
-    django_stack_npm_install_cmd: "npm install; npm run build"
+    django_stack_deploy_src: "{{ molecule_scenario_directory }}/../../"
+    django_stack_npm_install_cmd: "npm install; gulp build:production"
     django_stack_gunicorn_opt_envs:
       DJANGO_ALLOWED_HOSTS: "'*'"
       DJANGO_SETTINGS_MODULE: securethenews.settings.production
@@ -46,13 +45,13 @@
       DJANGO_DB_NAME: securethenews
       GITHUB_HOOK_SECRET_KEY: test
     django_stack_gcorn_app_settings: securethenews.settings.production
-    django_stack_force_refresh: true
     django_stack_rsync_opts:
       - "--exclude=ansible"
       - "--exclude=devops"
       - "--exclude=molecule"
       - "--exclude=node_modules"
-      - "--exclude=src"
+    # NodeJS code was written against 4.x
+    django_stack_node_ver: 4.8.2-alpine
     # The default packages are preinstalled on the base dockerimage
     django_stack_pkgs:
       - libssl-dev # required for pshtt
