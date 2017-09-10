@@ -52,6 +52,8 @@
       - "--exclude=node_modules"
     # NodeJS code was written against 4.x
     django_stack_node_ver: 4.8.2-alpine
+    # Override default Node container with extra build deps for node-sass.
+    django_stack_node_dockerfile: "{{ molecule_scenario_directory }}/NodeDockerfile-stn"
     # The default packages are preinstalled on the base dockerimage
     django_stack_pkgs:
       - libssl-dev # required for pshtt
