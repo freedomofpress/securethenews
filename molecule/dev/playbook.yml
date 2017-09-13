@@ -4,7 +4,8 @@
   become: no
   vars:
     molecule_scenario_directory: "{{ lookup('env', 'MOLECULE_SCENARIO_DIRECTORY') }}"
-    node_tag: 6.11.0-alpine
+    # Intentionally using older NodeJS for compatibility.
+    node_tag: 4.8.2-alpine
     root_dir: "{{ molecule_scenario_directory }}/../../"
   tasks:
     # Trying to avoid `find` b/c not certain about OSX compatibility
@@ -56,10 +57,10 @@
     - name: Build node image with pax flags
       docker_image:
         name: "node_grsec:{{ node_tag }}"
-        dockerfile: "{{ molecule_scenario_directory }}/NodeDockerfile"
+        # Reuse custom NodeJS Dockerfile from CI
+        dockerfile: "{{ molecule_scenario_directory }}/../ci/NodeDockerfile-stn"
         path: ../../
         tag: "{{ node_tag }}"
-      when: ansible_kernel.endswith('grsec')
 
     - name: Start node
       docker_container:
@@ -69,7 +70,7 @@
           - ../../:/var/www/django
         state: started
         working_dir: /var/www/django
-        command: /bin/ash -c "npm install; npm run start"
+        command: /bin/ash -c "npm install; gulp build:production"
         user: node
         recreate: yes
 
