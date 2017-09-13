@@ -1,0 +1,4 @@
+---
+- src: https://github.com/freedomofpress/ansible-role-django.git
+  name: freedomofpress.django
+  version: master

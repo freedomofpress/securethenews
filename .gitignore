@@ -17,8 +17,21 @@ db_backups/
 logs/
 
 # Local deploy testing
+.molecule/
 devops/.ansible
 devops/.molecule
 devops/venv
 devops/deploy_key
 devops/roles
+
+# Node dependencies
+node_modules
+
+# gulp build artifacts
+client/build/
+
+# Django/Wagtail user-uploaded files
+media/
+
+# Node container
+npm-debug.log

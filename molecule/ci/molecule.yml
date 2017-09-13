@@ -1,0 +1,39 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: docker
+lint:
+  name: yamllint
+platforms:
+  - name: debian_jessie_sd.org_ci
+    image: quay.io/freedomofpress/ci-webserver
+    command: /lib/systemd/systemd
+    capabilities:
+      - SYS_ADMIN
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    published_ports:
+      - 443
+    groups:
+      - django
+provisioner:
+  name: ansible
+  playbooks:
+    side_effect: side_effect.yml
+  lint:
+    name: ansible-lint
+scenario:
+  name: ci
+  test_sequence:
+    - destroy
+    - dependency
+    - create
+    - converge
+    - side_effect
+    - verify
+    - destroy
+verifier:
+  name: testinfra
+  lint:
+    name: flake8

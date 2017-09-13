@@ -1,2 +1,0 @@
-# External roles are included from Ansible Galaxy, don't version control.
-geerlingguy.nodejs
