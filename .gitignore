@@ -32,3 +32,6 @@ client/build/
 
 # Django/Wagtail user-uploaded files
 media/
+
+# Node container
+npm-debug.log
