@@ -67,9 +67,9 @@
         name: stn_node
         image: "{{ node_grsec_image|default('node') }}:{{ node_tag }}"
         volumes:
-          - ../../:/var/www/django
+          - ../../:/django
         state: started
-        working_dir: /var/www/django
+        working_dir: /django
         command: /bin/ash -c "npm install; gulp build:production"
         user: node
         recreate: yes
