@@ -4,9 +4,6 @@
 __pycache__/
 *.pyc
 
-# Development database
-db.sqlite3
-
 # virtualenv
 env/
 
