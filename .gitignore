@@ -33,3 +33,4 @@ media/
 
 # Node container
 npm-debug.log
+.node_complete

@@ -62,6 +62,11 @@
         path: ../../
         tag: "{{ node_tag }}"
 
+    - name: Purge existing node container wait flag
+      file:
+        state: absent
+        path: "{{ molecule_scenario_directory }}../../.node_complete"
+
     - name: Start node
       docker_container:
         name: stn_node
@@ -70,9 +75,13 @@
           - ../../:/django
         state: started
         working_dir: /django
-        command: /bin/ash -c "npm install; gulp build:production"
+        command: /bin/ash -c "npm install && touch .node_complete && gulp watch"
         user: node
         recreate: yes
+
+    - name: Wait for node to finish installing deps
+      wait_for:
+        path: "{{ molecule_scenario_directory }}/../../.node_complete"
 
     - name: Establish postgres port
       set_fact:
