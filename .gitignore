@@ -23,6 +23,7 @@ devops/.molecule
 devops/venv
 devops/deploy_key
 devops/roles
+molecule/.cache/
 
 # Node dependencies
 node_modules
