@@ -15,7 +15,14 @@ scenario:
   name: dev
   converge_sequence:
     - converge
+    - verify
 verifier:
   name: testinfra
+  directory: ../shared_tests
+  options:
+    connection: docker
+    hosts: stn_django
+  env:
+    pshtt_location: /usr/local/bin/pshtt
   lint:
     name: flake8

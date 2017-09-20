@@ -45,6 +45,11 @@ update-pip-dependencies: ## Uses pip-compile to update requirements.txt
 dev-debug: ## Creates local docker container to troubleshoot dev env.
 	docker build -t stn_django -f molecule/dev/DjangoDockerfile .
 	docker run -v $(DIR):/django -it stn_django bash
+
+.PHONY: clean
+clean: ## Removes temporary gitignored development artifacts
+	rm -rvf db.sqlite3 node_modules client/build
+
 # Explaination of the below shell command should it ever break.
 # 1. Set the field separator to ": ##" to parse lines for make targets.
 # 2. Check for second field matching, skip otherwise.

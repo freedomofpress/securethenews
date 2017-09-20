@@ -4,9 +4,6 @@
 __pycache__/
 *.pyc
 
-# Development database
-db.sqlite3
-
 # virtualenv
 env/
 
@@ -23,6 +20,7 @@ devops/.molecule
 devops/venv
 devops/deploy_key
 devops/roles
+molecule/.cache/
 
 # Node dependencies
 node_modules
@@ -35,3 +33,4 @@ media/
 
 # Node container
 npm-debug.log
+.node_complete

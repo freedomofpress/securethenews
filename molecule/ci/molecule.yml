@@ -35,5 +35,9 @@ scenario:
     - destroy
 verifier:
   name: testinfra
+  additional_files_or_dirs:
+    - ../shared_tests
+  env:
+    pshtt_location: /home/gcorn/securethenews-alpha/bin/pshtt
   lint:
     name: flake8
