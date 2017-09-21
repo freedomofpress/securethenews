@@ -56,21 +56,22 @@
 
     - name: Build node image with pax flags
       docker_image:
-        name: "node_grsec:{{ node_tag }}"
+        name: "fpf-node:{{ node_tag }}"
         # Reuse custom NodeJS Dockerfile from CI
         dockerfile: "{{ molecule_scenario_directory }}/../ci/NodeDockerfile-stn"
         path: ../../
         tag: "{{ node_tag }}"
+        force: yes
 
     - name: Purge existing node container wait flag
       file:
         state: absent
-        path: "{{ molecule_scenario_directory }}../../.node_complete"
+        path: "{{ molecule_scenario_directory }}/../../.node_complete"
 
     - name: Start node
       docker_container:
         name: stn_node
-        image: "{{ node_grsec_image|default('node') }}:{{ node_tag }}"
+        image: "fpf-node:{{ node_tag }}"
         volumes:
           - ../../:/django
         state: started
@@ -82,6 +83,7 @@
     - name: Wait for node to finish installing deps
       wait_for:
         path: "{{ molecule_scenario_directory }}/../../.node_complete"
+        timeout: 3600
 
     - name: Establish postgres port
       set_fact:
