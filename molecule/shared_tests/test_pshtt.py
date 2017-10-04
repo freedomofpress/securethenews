@@ -4,8 +4,7 @@ import os
 
 PSHTT_CLI_PATH = os.environ['pshtt_location']
 PSHTT_DOMAINS = [
-    'freedom.press',
-    'securedrop.org'
+    'freedom.press'
 ]
 
 
