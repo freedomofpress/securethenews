@@ -38,6 +38,10 @@
     django_stack_es_host_url: disable
     django_stack_deploy_src: "{{ molecule_scenario_directory }}/../../"
     django_stack_npm_install_cmd: "npm install; gulp build:production"
+    django_stack_venv_docker_image: "quay.io/freedomofpress/debian-jessie-venv:latest"
+    django_stack_venv_docker_cmd: sleep infinity
+    django_stack_venv_cmds:
+      - "/sbin/paxctl -cm {{ django_stack_venv_dir }}/bin/python"
     django_stack_gunicorn_opt_envs:
       DJANGO_ALLOWED_HOSTS: "'*'"
       DJANGO_SETTINGS_MODULE: securethenews.settings.production
