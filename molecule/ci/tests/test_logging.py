@@ -24,8 +24,6 @@ def request_and_scrape(url, filter_key, host):
     return filtered_json
 
 
-# Django JSON logging integration needs work
-@pytest.mark.xfail
 def test_json_log_exception(host):
     """
     Ensure json logging is working for exception
@@ -58,7 +56,7 @@ def test_json_log_200(host):
     """
 
     should_return = {"request":
-                        {"data": {}, 
+                        {"data": {},
                              "meta": {"http_host": "localhost:8000",
                                       "http_user_agent": "testinfra",
                                       "path_info": "/",
