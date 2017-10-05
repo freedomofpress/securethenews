@@ -20,6 +20,11 @@ dev-createdevdata: ## Imports site data in dev environment.
 	docker exec -it stn_django bash -c "./manage.py migrate"
 	docker exec -it stn_django bash -c "./manage.py createdevdata"
 
+.PHONY: dev-makemigrations
+dev-migrate: ## Generates new db migrations and applies them.
+	docker exec -it stn_django bash -c "./manage.py makemigrations"
+	docker exec -it stn_django bash -c "./manage.py migrate"
+
 .PHONY: dev-scan
 dev-scan: ## Rescans all websites in dev environment.
 	docker exec -it stn_django bash -c "./manage.py scan"
