@@ -53,7 +53,7 @@ dev-debug: ## Creates local docker container to troubleshoot dev env.
 
 .PHONY: clean
 clean: ## Removes temporary gitignored development artifacts
-	rm -rvf db.sqlite3 node_modules client/build
+	rm -rvf db.sqlite3 node_modules client/build static
 
 # Explaination of the below shell command should it ever break.
 # 1. Set the field separator to ": ##" to parse lines for make targets.
