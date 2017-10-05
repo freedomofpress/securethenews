@@ -16,7 +16,8 @@ class ScannedSitesManager(models.Manager):
 
 class Site(models.Model):
     name = models.CharField('Name', max_length=255, unique=True)
-    slug = models.SlugField('Slug', unique=True, editable=False)
+    slug = models.SlugField('Slug', unique=True, editable=False,
+                            allow_unicode=True)
 
     domain = models.CharField(
         'Domain Name',

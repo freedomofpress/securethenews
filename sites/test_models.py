@@ -39,6 +39,17 @@ class TestSite(TestCase):
         site = Site.objects.create(name='El País', domain='elpais.es')
         self.assertIn('í', site.slug)
 
+    def test_unicode_aware_slugs_can_be_modified(self):
+        """Non-ASCII characters in a Site's name will be revalidated
+        on model save, so let's make a change to an unrelated field
+        and confirm no exceptions are raised."""
+        site = Site.objects.create(name='El País', domain='elpais.es')
+        # Discovered a 500 via save operation, see #130.
+        site.domain = 'elpais.com'
+        # Will raise Exception if slug doesn't support Unicode.
+        site.save()
+        self.assertIn('í', site.slug)
+
     def test_site_without_pledge(self):
         """Site.pledge should return None if there are no approved pledges for the Site."""
         self.assertIsNone(self.site.pledge)
