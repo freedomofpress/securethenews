@@ -20,6 +20,11 @@ dev-createdevdata: ## Imports site data in dev environment.
 	docker exec -it stn_django bash -c "./manage.py migrate"
 	docker exec -it stn_django bash -c "./manage.py createdevdata"
 
+.PHONY: dev-makemigrations
+dev-migrate: ## Generates new db migrations and applies them.
+	docker exec -it stn_django bash -c "./manage.py makemigrations"
+	docker exec -it stn_django bash -c "./manage.py migrate"
+
 .PHONY: dev-scan
 dev-scan: ## Rescans all websites in dev environment.
 	docker exec -it stn_django bash -c "./manage.py scan"
@@ -48,7 +53,7 @@ dev-debug: ## Creates local docker container to troubleshoot dev env.
 
 .PHONY: clean
 clean: ## Removes temporary gitignored development artifacts
-	rm -rvf db.sqlite3 node_modules client/build
+	rm -rvf db.sqlite3 node_modules client/build static
 
 # Explaination of the below shell command should it ever break.
 # 1. Set the field separator to ": ##" to parse lines for make targets.
