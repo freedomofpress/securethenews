@@ -7,11 +7,16 @@
     # Required to install pshtt
     LC_ALL: "en_US.UTF-8"
   pre_tasks:
+    - name: Check for existence of grsec kernel
+      stat:
+        path: /proc/sys/kernel/grsecurity/
+      register: check_grsec_kernel_results
+
     - name: Make sure paxctld is started
       service:
         name: paxctld
         state: started
-      when: ansible_kernel.endswith('grsec')
+      when: check_grsec_kernel_results.stat.exists
 
     - name: Create postgres DB
       postgresql_db:

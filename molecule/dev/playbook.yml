@@ -64,10 +64,15 @@
         user: postgres
       register: pg_container_results
 
+    - name: Check for existence of grsec kernel
+      stat:
+        path: /proc/sys/kernel/grsecurity/
+      register: check_grsec_kernel_results
+
     - name: If grsec, add paxflags cmd to node
       set_fact:
         node_grsec_image: "node_grsec"
-      when: ansible_kernel.endswith('grsec')
+      when: check_grsec_kernel_results.stat.exists
 
     - name: Build node image with pax flags
       docker_image:
@@ -134,7 +139,7 @@
 
     - name: Slap paxflags onto pshtt and python when under grsec
       command: docker exec -u root stn_django /bin/bash -c "paxctl -Cm $(which python)"
-      when: ansible_kernel.endswith('grsec')
+      when: check_grsec_kernel_results.stat.exists
 
     - name: Establish www port
       set_fact:
