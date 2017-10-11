@@ -15,6 +15,12 @@ jobs:
             pip install -r molecule/requirements.txt
 
       - run:
+          name: flake8 lint on the source
+          command: |
+            . ~/.venv/bin/activate
+            make flake8
+
+      - run:
           name: Ensure Django service stands up
           command: |
             . ~/.venv/bin/activate
