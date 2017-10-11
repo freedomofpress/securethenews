@@ -2,7 +2,7 @@
 Registers API URLs
 """
 from . import views
-from django.conf.urls import url, include
+from django.conf.urls import url
 from django.views.generic import RedirectView
 
 urlpatterns = [

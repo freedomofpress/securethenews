@@ -3,7 +3,7 @@ Django REST Framework views for the API
 """
 from . import serializers, filters
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework import routers, viewsets, generics, filters as rest_framework_filters
+from rest_framework import generics, filters as rest_framework_filters
 from sites.models import Site, Scan
 from rest_framework.decorators import api_view
 from rest_framework.response import Response

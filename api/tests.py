@@ -95,7 +95,8 @@ class APIPermissionTests(APITestCase):
         """
         url = urljoin(urlroot, 'sites/securethe.news/')
         response1 = self.client.post(
-            url, json={'name': 'Insecure the News?', 'domain': 'insecurethe.news'})
+            url, json={'name': 'Insecure the News?',
+                       'domain': 'insecurethe.news'})
         self.assertEqual(response1.status_code,
                          status.HTTP_405_METHOD_NOT_ALLOWED)
 
@@ -105,6 +106,7 @@ class APIPermissionTests(APITestCase):
 
         url = urljoin(urlroot, 'sites/insecurethe.news/')
         response3 = self.client.put(
-            url, json={'name': 'Insecure the News?', 'domain': 'insecurethe.news'})
+            url, json={'name': 'Insecure the News?',
+                       'domain': 'insecurethe.news'})
         self.assertEqual(response3.status_code,
                          status.HTTP_405_METHOD_NOT_ALLOWED)

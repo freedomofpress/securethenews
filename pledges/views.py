@@ -88,11 +88,13 @@ def send_confirmation_email(request, pledge):
         subject=subject,
         message=message,
         from_email=settings.DEFAULT_FROM_EMAIL,
-        recipient_list=[pledge.contact_email,]
+        recipient_list=[pledge.contact_email, ]
     )
 
+
 def send_admin_notification_email(request, pledge):
-    """Notify the admins that a submitted pledge has been confirmed and is ready for review."""
+    """Notify the admins that a submitted pledge has been
+    confirmed and is ready for review."""
     subject = 'Pledge Ready for Review: {}'.format(pledge.site.name)
 
     # Get the wagtailmodeladmin PledgeAdmin so we can derive the edit
@@ -108,17 +110,18 @@ def send_admin_notification_email(request, pledge):
 
     mail_admins(subject, body)
 
+
 def send_review_confirmation_email(pledge):
     subject = 'Secure the News Pledge Review: {}'.format(
-        pledge.get_review_status_display())
+                pledge.get_review_status_display())
 
-    message = render_to_string('pledges/emails/reviewed.txt',
-        { 'pledge': pledge }
-    )
+    message = render_to_string(
+        'pledges/emails/reviewed.txt',
+        {'pledge': pledge})
 
     send_mail(
         subject=subject,
         message=message,
         from_email=settings.DEFAULT_FROM_EMAIL,
-        recipient_list=[pledge.contact_email,]
+        recipient_list=[pledge.contact_email, ]
     )

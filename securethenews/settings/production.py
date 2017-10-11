@@ -1,6 +1,6 @@
 from __future__ import absolute_import, unicode_literals
 
-from .base import *
+from .base import *  # noqa: F403,F401
 import os
 
 
@@ -15,7 +15,7 @@ except KeyError:
     pass
 
 try:
-    from .local import *
+    from .local import *  # noqa: F403,F401
 except ImportError:
     pass
 
@@ -57,8 +57,9 @@ except KeyError:
 # Django json logging
 #
 if os.environ.get('DJANGO_JSON_LOG', 'no').lower() in ['true', 'yes']:
-    INSTALLED_APPS.append('django_logging')
-    MIDDLEWARE_CLASSES.append('django_logging.middleware.DjangoLoggingMiddleware')
+    INSTALLED_APPS.append('django_logging')  # noqa: F405
+    MIDDLEWARE_CLASSES.append(  # noqa: F405
+        'django_logging.middleware.DjangoLoggingMiddleware')
     DJANGO_LOGGING = {
         "CONSOLE_LOG": False,
         "SQL_LOG": False,
@@ -100,10 +101,10 @@ if os.environ.get('MAILGUN_ACCESS_KEY'):
 # Cloudflare caching
 #
 if os.environ.get('CLOUDFLARE_TOKEN') and os.environ.get('CLOUDFLARE_EMAIL'):
-    INSTALLED_APPS.append('wagtail.contrib.wagtailfrontendcache')
+    INSTALLED_APPS.append('wagtail.contrib.wagtailfrontendcache')  # noqa: F405
     WAGTAILFRONTENDCACHE = {
         'cloudflare': {
-            'BACKEND': 'wagtail.contrib.wagtailfrontendcache.backends.CloudflareBackend',
+            'BACKEND': 'wagtail.contrib.wagtailfrontendcache.backends.CloudflareBackend',  # noqa: E501
             'EMAIL': os.environ.get('CLOUDFLARE_EMAIL'),
             'TOKEN': os.environ.get('CLOUDFLARE_TOKEN'),
             'ZONEID': os.environ.get('CLOUDFLARE_ZONEID')

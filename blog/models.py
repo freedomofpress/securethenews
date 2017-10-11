@@ -1,10 +1,9 @@
 from django.db import models
-from django.template.defaultfilters import striptags, truncatewords
+from django.template.defaultfilters import striptags
 
 from wagtail.wagtailcore import blocks
 from wagtail.wagtailcore.models import Page
-from wagtail.wagtailcore.fields import (RichTextField,
-                                        StreamField)
+from wagtail.wagtailcore.fields import (StreamField)
 from wagtail.wagtailadmin.edit_handlers import (FieldPanel,
                                                 StreamFieldPanel)
 from wagtail.wagtailimages.blocks import ImageChooserBlock
@@ -40,7 +39,8 @@ class BlogPost(Page):
 
     @property
     def preview(self):
-        """Returns the first sentence of the post, with HTML tags stripped, for use as a preview blurb."""
+        """Returns the first sentence of the post, with HTML tags
+        stripped, for use as a preview blurb."""
         body_text = striptags(' '.join([
             child.value.source for child in self.body
             if child.block_type == 'rich_text'
@@ -56,7 +56,8 @@ class BlogIndexPage(Page):
 
     @property
     def posts(self):
-        """Return a list of live blog posts that are children of this BlogIndexPage."""
+        """Return a list of live blog posts that are children of this
+        BlogIndexPage."""
         posts = BlogPost.objects.live().child_of(self)
 
         # Order by most recent date first

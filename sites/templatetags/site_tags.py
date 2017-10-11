@@ -2,6 +2,7 @@ from django import template
 
 register = template.Library()
 
+
 @register.inclusion_tag('sites/grade.html')
 def grade(scan):
     return {

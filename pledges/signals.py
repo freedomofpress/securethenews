@@ -1,6 +1,6 @@
 # Signals are meant to be used as a last resort.  We want to send an email when
-# a pledge is approved, but since this happens through wagtailmodeladmin and not
-# one of the views in the pledges app, we cannot just call
+# a pledge is approved, but since this happens through wagtailmodeladmin and
+# not one of the views in the pledges app, we cannot just call
 # send_review_confirmation_email from the view.  Therefore, this seems like a
 # reasonable use case for signals.
 
