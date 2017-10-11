@@ -6,6 +6,7 @@ from django.forms import ModelForm, ValidationError
 
 from .models import Pledge
 
+
 class PledgeForm(ModelForm):
     class Meta:
         model = Pledge
@@ -32,7 +33,7 @@ class PledgeForm(ModelForm):
 
         # 3. The URL of the statement of intent should point to a live page
         try:
-            res = urlopen(self.cleaned_data['url'])
+            urlopen(self.cleaned_data['url'])
         except HTTPError:
             raise ValidationError(
                 'URL must be accessible.'

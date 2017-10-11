@@ -35,7 +35,8 @@ class TestBlogIndexPage(TestCase):
             blog_index_page.add_child(instance=blog_post)
 
     def test_ordering_of_same_day_blogs_on_index(self):
-        """Verify that blog posts posted on the same day are ordered with the most recent at the top of the page."""
+        """Verify that blog posts posted on the same day are ordered with
+        the most recent at the top of the page."""
 
         blog_index = BlogIndexPage.objects.first()
 
@@ -65,7 +66,8 @@ class TestBlogIndexPage(TestCase):
         # .page_ptr, or go the other way with .specific. For more, see:
         # http://docs.wagtail.io/en/v1.8/topics/pages.html#working-with-pages
         new_blog_post.save_revision().publish()
-        mock_purge_page_from_cache.assert_called_once_with(blog_index_page.page_ptr)
+        mock_purge_page_from_cache.assert_called_once_with(
+                                            blog_index_page.page_ptr)
 
         # Unpublishing the BlogPost should also trigger frontend cache
         # invalidation for the corresponding BlogIndexPage.

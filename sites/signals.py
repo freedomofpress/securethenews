@@ -15,5 +15,6 @@ def invalidate_frontend_cache_for_site(sender, instance, **kwargs):
     # Purge the leaderboard
     purge_url_from_cache(reverse('sites:index'))
 
-    # Purge the home page because it displays a subset of the leaderboard, as well as some summary statistics.
+    # Purge the home page because it displays a subset of
+    # the leaderboard, as well as some summary statistics.
     purge_url_from_cache('/')

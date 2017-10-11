@@ -13,7 +13,7 @@ ci-tests: ## Runs test suite against prod-like setup.
 
 .PHONY: flake8
 flake8: ## Runs flake8 on source.
-	flake8 api blog home pledges search securethenews sites --exclude 'migrations/' --count
+	flake8 api blog home pledges search securethenews sites --exclude 'migrations/'
 
 .PHONY: dev-go
 dev-go: ## Creates dev environment.

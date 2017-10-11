@@ -8,7 +8,8 @@ from sites.models import Site, Scan
 
 class SiteFilter(django_filters.rest_framework.FilterSet):
     """
-    Filter for selected site fields and the date range in which a site was added
+    Filter for selected site fields and the date range in which a
+    site was added.
     """
     # This is nicer than the default, which only lets you input a specific
     # date.

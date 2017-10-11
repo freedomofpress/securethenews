@@ -5,4 +5,4 @@ class PledgesConfig(AppConfig):
     name = 'pledges'
 
     def ready(self):
-        from . import signals
+        from . import signals  # noqa: F401

@@ -1,5 +1,4 @@
 import datetime
-from os.path import abspath, join, dirname
 
 from django.contrib.auth.models import User
 from django.core import management
@@ -32,16 +31,21 @@ class Command(BaseCommand):
             title='Home',
             slug='home',
             main_title='Every news site should be secure.',
-            sub_title='HTTPS encryption enables security, privacy, and prevents censorship. '
-                      'We’re tracking its adoption.',
+            sub_title='HTTPS encryption enables security, privacy, and '
+                      'prevents censorship. We’re tracking its adoption.',
             why_header='HTTPS protects your privacy and security',
-            why_body="With HTTPS enabled by default you can protect reader privacy, improve your website's security, "
-                     "better protect your sources, prevent censorship, improve your search rankings, provide a better "
-                     "user experience, see your website loading speeds potentially increase, and avoid Google shaming.",
+            why_body="With HTTPS enabled by default you can protect reader"
+                     " privacy, improve your website's security, better"
+                     " protect your sources, prevent censorship, improve"
+                     " your search rankings, provide a better user experience,"
+                     " see your website loading speeds potentially increase,"
+                     " and avoid Google shaming.",
             how_header='Resources for switching your news site over to HTTPS',
-            how_body="Switching your news site over to HTTPS is not as simple as flicking a switch. But a handful of "
-                     "news organizations have already pioneered the effort and have shared their tips and tricks for "
-                     "making it as smooth as possible. We've documented them here."
+            how_body="Switching your news site over to HTTPS is not as simple"
+                     " as flicking a switch. But a handful of news "
+                     "organizations have already pioneered the effort and "
+                     "have shared their tips and tricks for making it as "
+                     "smooth as possible. We've documented them here."
         )
         root_page.add_child(instance=home_page)
 
@@ -53,7 +57,8 @@ class Command(BaseCommand):
             is_default_site=True
         )
 
-        # Add "Why?" and "How" pages, since they're so prominently featured on the home page.
+        # Add "Why?" and "How" pages, since they're so prominently featured
+        # on the home page.
         why_page = ContentPage(
             title='Why?',
             slug='why',
@@ -93,20 +98,21 @@ class Command(BaseCommand):
         blog_index_page.add_child(instance=blog_post)
 
         # Main menu via wagtailmenus
-        # Remember: Pages must have `show_in_menus=True` *and* a corresponding MainMenuItem to show up
+        # Remember: Pages must have `show_in_menus=True` *and* a corresponding
+        # MainMenuItem to show up
         main_menu = MainMenu.objects.create(site=site)
 
-        why_menu_item = MainMenuItem.objects.create(
+        why_menu_item = MainMenuItem.objects.create(  # noqa: F841
             menu=main_menu,
             link_text='Why?',
             link_page=why_page
         )
-        how_menu_item = MainMenuItem.objects.create(
+        how_menu_item = MainMenuItem.objects.create(  # noqa: F841
             menu=main_menu,
             link_text='How',
             link_page=how_page
         )
-        blog_index_menu_item = MainMenuItem.objects.create(
+        blog_index_menu_item = MainMenuItem.objects.create(  # noqa: F841
             menu=main_menu,
             link_text='Blog',
             link_page=blog_index_page

@@ -5,4 +5,4 @@ class SitesConfig(AppConfig):
     name = 'sites'
 
     def ready(self):
-        import sites.signals
+        import sites.signals  # noqa: F401

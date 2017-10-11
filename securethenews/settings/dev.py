@@ -1,6 +1,6 @@
 from __future__ import absolute_import, unicode_literals
 
-from .base import *
+from .base import *  # noqa: F403,F401
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -17,6 +17,6 @@ ADMINS = [
 ]
 
 try:
-    from .local import *
+    from .local import *  # noqa: F403,F401
 except ImportError:
     pass
