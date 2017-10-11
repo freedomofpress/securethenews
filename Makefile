@@ -11,6 +11,10 @@ ci-go: ## Provisions and tests a prod-like setup.
 ci-tests: ## Runs test suite against prod-like setup.
 	@molecule verify -s ci
 
+.PHONY: flake8
+flake8: ## Runs flake8 on source.
+	flake8 api blog home pledges search securethenews sites --exclude 'migrations/' --count
+
 .PHONY: dev-go
 dev-go: ## Creates dev environment.
 	molecule converge -s dev
