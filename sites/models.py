@@ -4,6 +4,10 @@ from django.forms import ValidationError
 from django.urls import reverse
 from django.utils.text import slugify
 
+from wagtail.wagtailadmin.edit_handlers import FieldPanel
+from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
+from wagtail.wagtailsnippets.models import register_snippet
+
 from pledges.models import Pledge
 
 
@@ -217,3 +221,22 @@ class Scan(models.Model):
             score=self.score,
             grade=self.grade
         )
+
+@register_snippet
+class SiteCategory(models.Model):
+    name = models.CharField(max_length=255)
+    icon = models.ForeignKey(
+        'wagtailimages.Image', null=True, blank=True,
+        on_delete=models.SET_NULL, related_name='+'
+    )
+
+    panels = [
+        FieldPanel('name'),
+        ImageChooserPanel('icon'),
+    ]
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name_plural = 'site categories'
