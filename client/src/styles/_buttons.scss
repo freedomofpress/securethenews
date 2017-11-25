@@ -1,4 +1,5 @@
 $buttonHeight: 50px;
+$smallButtonHeight: 30px;
 
 .button {
   display: inline-block;
@@ -90,6 +91,35 @@ $buttonHeight: 50px;
     }
   }
 }
+
+.sm-button {
+  display: inline-block;
+  margin-bottom: 5px;
+  vertical-align: middle;
+  border-radius: $smallButtonHeight / 2;
+  font-size: 14px;
+  height: $smallButtonHeight;
+  line-height: $smallButtonHeight;
+  padding: 0 $smallButtonHeight * 1.5;
+  cursor: pointer;
+  text-align: center;
+  touch-action: manipulation;
+  border: 1px solid transparent;
+  white-space: nowrap;
+
+  &.button-gray {
+    background-color: $lightGray;
+    color: $blue;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 1px;
+
+    &:hover {
+      background-color: darken($lightGray, 10%);
+    }
+  }
+}
+
 
 @media (max-width: $mediaXs) {
   .button {
