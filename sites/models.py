@@ -5,6 +5,7 @@ from django.urls import reverse
 from django.utils.text import slugify
 
 from wagtail.wagtailadmin.edit_handlers import FieldPanel
+from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsnippets.models import register_snippet
 
@@ -34,6 +35,20 @@ class Site(models.Model):
 
     objects = models.Manager()
     scanned = ScannedSitesManager()
+
+    sitecategory = models.ForeignKey(
+        'SiteCategory',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+',
+        help_text='Select which leaderboard you would like this '
+                  'news site to appear on'
+    )
+
+    content_panels = [
+        SnippetChooserPanel('category'),
+    ]
 
     class Meta:
         ordering = ['name']
