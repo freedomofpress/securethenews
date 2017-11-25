@@ -36,7 +36,7 @@ class Site(models.Model):
     objects = models.Manager()
     scanned = ScannedSitesManager()
 
-    sitecategory = models.ForeignKey(
+    site_category = models.ForeignKey(
         'SiteCategory',
         null=True,
         blank=True,
