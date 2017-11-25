@@ -244,7 +244,8 @@ class SiteCategory(models.Model):
         'wagtailimages.Image', null=True, blank=True,
         on_delete=models.SET_NULL, related_name='+'
     )
-
+    slug = models.SlugField('Slug', unique=True, editable=False,
+                            allow_unicode=True)
     panels = [
         FieldPanel('name'),
         ImageChooserPanel('icon'),
