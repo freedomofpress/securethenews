@@ -239,7 +239,7 @@ class Scan(models.Model):
 
 @register_snippet
 class SiteCategory(models.Model):
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=255, unique=True)
     icon = models.ForeignKey(
         'wagtailimages.Image', null=True, blank=True,
         on_delete=models.SET_NULL, related_name='+'
