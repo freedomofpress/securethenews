@@ -254,5 +254,10 @@ class SiteCategory(models.Model):
     def __str__(self):
         return self.name
 
+    def clean(self):
+        self.slug = slugify(self.name, allow_unicode=True)
+        if len(self.slug) == 0:
+            raise ValidationError('Slug must not be an empty string')
+
     class Meta:
         verbose_name_plural = 'site categories'
