@@ -237,6 +237,7 @@ class Scan(models.Model):
             grade=self.grade
         )
 
+
 @register_snippet
 class SiteCategory(models.Model):
     name = models.CharField(max_length=255, unique=True)
