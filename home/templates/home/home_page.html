@@ -96,6 +96,21 @@
     </div>
   </section>
 
+  <section class="leaderboard-section">
+    <h1 class="leaderboard-header align-center">View Leaderboards by Category</h1>
+    <div class="section-content">
+      {% for site_category in site_categories %}
+        <div class="align-center">
+          <a href="{% url 'sites:leaderboard' slug=site_category.slug %}">
+            <div class="sm-button button-gray" aria-role="button">
+              {{ site_category.name }} <i class="fa fa-chevron-right" aria-hidden="true"></i>
+            </div>
+          </a>
+        </div>
+      {% endfor %}
+    </div>
+  </section>
+
   <!-- Dump the site data to be rendered client-side. -->
   <script type="text/javascript">
     var STNsiteData = {{ sites_json|safe }};
