@@ -259,5 +259,9 @@ class SiteCategory(models.Model):
         if len(self.slug) == 0:
             raise ValidationError('Slug must not be an empty string')
 
+    def save(self, *args, **kwargs):
+        self.full_clean()
+        return super().save(*args, **kwargs)
+
     class Meta:
         verbose_name_plural = 'site categories'
