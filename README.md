@@ -9,7 +9,14 @@ The installation instructions below assume you have the following software on yo
 * [virtualenv](http://www.virtualenv.org/en/latest/virtualenv.html#installation)
 * [docker](https://docs.docker.com/engine/installation/)
 
-Create a Python2 virtualenv and install `molecule/requirements.txt`/.
+Create a Python2 virtualenv and install `molecule/requirements.txt`/. From the
+checkout directory, run:
+
+```bash
+virtualenv env/
+source env/bin/activate
+pip install -r molecule/requirements.txt
+```
 
 Then run:
 
@@ -17,16 +24,31 @@ Then run:
 make dev-go
 ```
 
-The development environment creates a default superuser (username: `test`, password:
-`test`) that you can use to log in to the Admin interface at `/admin`.
+If this command completes successfully, your development site will be available
+at: http://localhost:8000
 
-To update all the sites in the development environment, run:
+To import the example data, run:
+
+```bash
+make dev-createdevdata
+```
+
+This will also create an admin user for the web interface at
+http://localhost:8000/admin/ (username: test, password: test).
+
+If you want to start the TLS scan for all the news sites in your development
+environment, run:
 
 ```bash
 make dev-scan
 ```
 
-For a full list of all helper commands in the Makefile, run `make help`.
+For a full list of all helper commands in the Makefile, run `make help`. And,
+of course, you can obtain a shell directly into any of the containers, e.g.:
+
+```bash
+docker exec -it stn_django bash
+```
 
 ### Development Fixtures
 
