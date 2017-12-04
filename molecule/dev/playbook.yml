@@ -76,7 +76,7 @@
 
     - name: Build node image with pax flags
       docker_image:
-        name: "node_grsec:{{ node_tag }}"
+        name: "{{ node_grsec_image|default('node') }}:{{ node_tag }}"
         # Reuse custom NodeJS Dockerfile from CI
         dockerfile: "{{ molecule_scenario_directory }}/../ci/NodeDockerfile-stn"
         path: ../../
@@ -115,7 +115,7 @@
     - name: Start Django server
       docker_container:
         name: stn_django
-        image: "stn_django"
+        image: "stn_django:{{ requirements_hash }}"
         volumes:
           - ../../:/var/www/django
         state: started
