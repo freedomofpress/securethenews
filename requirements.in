@@ -9,5 +9,6 @@ elasticsearch
 gunicorn
 pshtt
 psycopg2
+safety
 wagtail
 wagtailmenus

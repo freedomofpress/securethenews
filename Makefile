@@ -54,6 +54,15 @@ update-pip-dependencies: ## Uses pip-compile to update requirements.txt
 dev-debug: ## Creates local docker container to troubleshoot dev env.
 	docker build -t stn_django -f molecule/dev/DjangoDockerfile .
 	docker run -v $(DIR):/django -it stn_django bash
+	
+.PHONY: safety
+safety: ## Runs `safety check` to check python dependencies for vulnerabilities
+	@for req_file in `find . -type f -name '*requirements.txt'`; do \
+		echo "Checking file $$req_file" \
+		&& safety check --full-report -r $$req_file \
+		&& echo -e '\n' \
+		|| exit 1; \
+	done
 
 .PHONY: clean
 clean: ## Removes temporary gitignored development artifacts

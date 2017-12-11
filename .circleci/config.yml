@@ -15,6 +15,10 @@ jobs:
             pip install -r molecule/requirements.txt
 
       - run:
+          name: Check Python dependencies for CVEs
+          command: make safety
+
+      - run:
           name: flake8 lint on the source
           command: |
             . ~/.venv/bin/activate
