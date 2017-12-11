@@ -10,7 +10,6 @@ beautifulsoup4==4.6.0     # via pytablereader, wagtail
 certifi==2017.7.27.1      # via requests
 cffi==1.10.0              # via cryptography
 chardet==3.0.4            # via requests
-click==6.7                # via safety
 cryptography==1.9         # via pyopenssl, sslyze
 dataproperty==0.25.6      # via pytablereader, pytablewriter, simplesqlite
 django-analytical==2.2.2
@@ -25,7 +24,6 @@ django==1.11.5
 djangorestframework==3.6.4  # via wagtail
 docopt==0.6.2             # via pshtt
 dominate==2.3.1           # via pytablewriter
-dparse==0.2.1             # via safety
 elasticsearch==5.4.0
 gunicorn==19.7.1
 html5lib==0.999999999     # via wagtail
@@ -36,7 +34,6 @@ markdown2==2.3.4          # via pytablereader
 mbstrdecoder==0.2.2       # via pytablereader, pytablewriter, simplesqlite, typepy
 nassl==0.17.0             # via sslyze
 olefile==0.44             # via pillow
-packaging==16.8           # via dparse, safety
 path.py==10.4             # via pytablereader
 pathvalidate==0.16.1      # via pytablereader, pytablewriter, simplesqlite
 pillow==4.2.1             # via wagtail
@@ -45,17 +42,15 @@ psycopg2==2.7.3.1
 publicsuffix==1.1.0       # via pshtt
 pycparser==2.18           # via cffi
 pyopenssl==17.2.0         # via pshtt
-pyparsing==2.2.0          # via packaging, pytablereader
+pyparsing==2.2.0          # via pytablereader
 pytablereader==0.13.3     # via pytablewriter, simplesqlite
 pytablewriter==0.24.0     # via pshtt
 python-dateutil==2.6.1    # via typepy
 pytz==2017.2              # via django, django-modelcluster, typepy
-pyyaml==3.12              # via dparse
 requests-cache==0.4.13    # via pshtt
-requests==2.18.4          # via django-mailgun, pshtt, pytablereader, requests-cache, safety, wagtail
-safety==1.6.1
+requests==2.18.4          # via django-mailgun, pshtt, pytablereader, requests-cache, wagtail
 simplesqlite==0.15.0      # via pytablewriter
-six==1.10.0               # via cryptography, django-mailgun, dparse, html5lib, mbstrdecoder, packaging, pyopenssl, pytablereader, pytablewriter, python-dateutil, simplesqlite, typepy
+six==1.10.0               # via cryptography, django-mailgun, html5lib, mbstrdecoder, pyopenssl, pytablereader, pytablewriter, python-dateutil, simplesqlite, typepy
 sslyze==1.1.4             # via pshtt
 tls-parser==1.1.0         # via sslyze
 toml==0.9.2               # via pytablewriter
