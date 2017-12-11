@@ -50,6 +50,24 @@ of course, you can obtain a shell directly into any of the containers, e.g.:
 docker exec -it stn_django bash
 ```
 
+### Updating Python dependencies
+
+New requirements should be added to ``*requirements.in`` files, for use with ``pip-compile``.
+There are two Python requirements files:
+
+* ``requirements.in`` production application dependencies
+* ``molecule/requirements.in`` local testing and CI requirements (e.g. molecule, safety)
+
+Add the desired dependency to the appropriate ``.in`` file, then run:
+
+.. code:: bash
+
+    make update-pip-dependencies
+
+All requirements files will be regenerated based on compatible versions. Multiple ``.in``
+files can be merged into a single ``.txt`` file, for use with ``pip``. The Makefile
+target handles the merging of multiple files.
+
 ### Development Fixtures
 
 The `createdevdata` management commands loads Site and Scan data from the
