@@ -16,7 +16,9 @@ jobs:
 
       - run:
           name: Check Python dependencies for CVEs
-          command: make safety
+          command: |
+            . ~/.venv/bin/activate
+            make safety
 
       - run:
           name: flake8 lint on the source
