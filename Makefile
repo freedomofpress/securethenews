@@ -50,6 +50,9 @@ update-pip-dependencies: ## Uses pip-compile to update requirements.txt
 		bash -c 'pip install pip-tools && pip-compile \
 		--output-file /code/requirements.txt /code/requirements.in'
 
+# Update dev/testing Python dependencies.
+	pip-compile --output-file molecule/requirements.txt molecule/requirements.in
+
 .PHONY: dev-debug
 dev-debug: ## Creates local docker container to troubleshoot dev env.
 	docker build -t stn_django -f molecule/dev/DjangoDockerfile .
