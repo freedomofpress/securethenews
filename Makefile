@@ -71,6 +71,10 @@ safety: ## Runs `safety check` to check python dependencies for vulnerabilities
 clean: ## Removes temporary gitignored development artifacts
 	rm -rvf db.sqlite3 node_modules client/build static
 
+.PHONY: bandit
+bandit: ## Runs `bandit` static code analysis tool for security bugs
+	bandit --recursive . -lll --exclude molecule,node_modules,.venv
+
 # Explaination of the below shell command should it ever break.
 # 1. Set the field separator to ": ##" to parse lines for make targets.
 # 2. Check for second field matching, skip otherwise.
