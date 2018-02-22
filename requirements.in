@@ -7,6 +7,8 @@ django-filter
 django-mailgun
 elasticsearch
 gunicorn
+# markdown2 is required by pshtt
+markdown2>=2.3.5
 pshtt
 psycopg2
 wagtail
