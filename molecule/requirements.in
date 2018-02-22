@@ -1,5 +1,7 @@
-ansible<2.4
+ansible>2.4
 molecule>=2
 pip-tools
-docker
+# Bug with ansible and docker 3.0+
+# https://github.com/ansible/ansible/issues/35612
+docker<3.0
 safety

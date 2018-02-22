@@ -30,7 +30,7 @@ html5lib==0.999999999     # via wagtail
 idna==2.6                 # via cryptography, requests
 jsonschema==2.6.0         # via pytablereader
 logbook==1.1.0            # via dataproperty, pytablereader, pytablewriter, simplesqlite
-markdown2==2.3.4          # via pytablereader
+markdown2==2.3.5
 mbstrdecoder==0.2.2       # via pytablereader, pytablewriter, simplesqlite, typepy
 nassl==0.17.0             # via sslyze
 olefile==0.44             # via pillow
