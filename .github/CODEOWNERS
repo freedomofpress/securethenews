@@ -1,0 +1,8 @@
+# Harris is codeowner for all website changes
+*   @harrislapiroff
+
+# Mike should review testing changes, with Conor as backup
+molecule/   @msheiny @conorsch
+
+# Mickael should be in the loop on ownership modifications
+.github/    @emkll
