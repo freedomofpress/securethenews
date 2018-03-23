@@ -27,6 +27,12 @@ jobs:
             make flake8
 
       - run:
+          name: Static code analysis for vulnerabilities
+          command: |
+            . ~/.venv/bin/activate
+            make bandit
+
+      - run:
           name: Ensure Django service stands up
           command: |
             . ~/.venv/bin/activate

@@ -12,6 +12,7 @@ asn1crypto==0.23.0        # via cryptography
 attrs==17.3.0             # via pytest
 backports.functools-lru-cache==1.2.1  # via arrow
 backports.ssl-match-hostname==3.5.0.1  # via docker
+bandit==1.4.0
 bcrypt==3.1.4             # via paramiko
 binaryornot==0.4.4        # via cookiecutter
 certifi==2017.11.5        # via requests
@@ -33,6 +34,8 @@ flake8==3.3.0             # via molecule
 funcsigs==1.0.2           # via pytest
 future==0.16.0            # via cookiecutter
 git-url-parse==1.0.2      # via python-gilt
+gitdb2==2.0.3             # via gitpython
+gitpython==2.1.8          # via bandit
 idna==2.6                 # via cryptography, requests
 ipaddress==1.0.18         # via cryptography, docker
 jinja2-time==0.2.0        # via cookiecutter
@@ -45,7 +48,7 @@ monotonic==1.4            # via fasteners
 packaging==16.8           # via dparse, safety
 paramiko==2.4.0           # via ansible
 pathspec==0.5.5           # via yamllint
-pbr==3.0.1                # via git-url-parse, molecule, python-gilt
+pbr==3.0.1                # via git-url-parse, molecule, python-gilt, stevedore
 pexpect==4.2.1            # via molecule
 pip-tools==1.11.0
 pluggy==0.6.0             # via pytest
@@ -62,11 +65,13 @@ pyparsing==2.2.0          # via packaging
 pytest==3.3.1             # via testinfra
 python-dateutil==2.6.1    # via arrow
 python-gilt==1.1.0        # via molecule
-pyyaml==3.12              # via ansible, ansible-lint, dparse, molecule, python-gilt, yamllint
+pyyaml==3.12              # via ansible, ansible-lint, bandit, dparse, molecule, python-gilt, yamllint
 requests==2.18.4          # via docker, safety
 safety==1.6.1
 sh==1.12.14               # via molecule, python-gilt
-six==1.11.0               # via ansible-lint, bcrypt, click-completion, cryptography, docker, docker-pycreds, dparse, fasteners, git-url-parse, packaging, pip-tools, pynacl, pytest, python-dateutil, testinfra, websocket-client
+six==1.11.0               # via ansible-lint, bandit, bcrypt, click-completion, cryptography, docker, docker-pycreds, dparse, fasteners, git-url-parse, packaging, pip-tools, pynacl, pytest, python-dateutil, stevedore, testinfra, websocket-client
+smmap2==2.0.3             # via gitdb2
+stevedore==1.28.0         # via bandit
 tabulate==0.7.7           # via molecule
 testinfra==1.7.1          # via molecule
 tree-format==0.1.1        # via molecule
