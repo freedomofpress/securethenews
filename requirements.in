@@ -1,4 +1,4 @@
-Django
+Django>=1.11.11<2
 django-analytical
 django-cors-headers
 django-crispy-forms
@@ -7,6 +7,7 @@ django-filter
 django-mailgun
 elasticsearch
 gunicorn
+markdown2>=2.3.5  # required by pytable, forcing newer version for patch
 pshtt
 psycopg2
 wagtail

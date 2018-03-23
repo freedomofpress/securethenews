@@ -20,7 +20,7 @@ django-mailgun==0.9.1
 django-modelcluster==3.1  # via wagtail
 django-taggit==0.22.1     # via wagtail
 django-treebeard==4.1.2   # via wagtail
-django==1.11.5
+django==1.11.11
 djangorestframework==3.6.4  # via wagtail
 docopt==0.6.2             # via pshtt
 dominate==2.3.1           # via pytablewriter
@@ -30,7 +30,7 @@ html5lib==0.999999999     # via wagtail
 idna==2.6                 # via cryptography, requests
 jsonschema==2.6.0         # via pytablereader
 logbook==1.1.0            # via dataproperty, pytablereader, pytablewriter, simplesqlite
-markdown2==2.3.4          # via pytablereader
+markdown2==2.3.5
 mbstrdecoder==0.2.2       # via pytablereader, pytablewriter, simplesqlite, typepy
 nassl==0.17.0             # via sslyze
 olefile==0.44             # via pillow
