@@ -1,0 +1,30 @@
+# 3.6.5-alpine3.7 - May 11, 2018
+FROM python@sha256:bfac58481666aeb60ff6354e81afe888cc8c7b1effb1039870377fc7fa86ef43
+
+RUN apk add --no-cache \
+            curl=7.59.0-r0 \
+            gcc=6.4.0-r5 \
+            git=2.15.0-r1 \
+            # pillow dep
+            jpeg-dev=8-r6 \
+            libffi-dev=3.2.1-r4 \
+            musl-dev=1.1.18-r3 \
+            paxctl=0.9-r0 \
+            postgresql-dev=10.3-r0 \
+            # pillow dep
+            tiff-dev=4.0.9-r2 \
+            # pillow dep
+            zlib-dev=1.2.11-r1
+
+
+COPY docker/django-start.sh /usr/local/bin
+RUN  chmod +x /usr/local/bin/django-start.sh
+
+RUN adduser -D -g "" gcorn
+
+RUN paxctl -cm /usr/local/bin/python
+COPY securethenews/requirements.txt /requirements.txt
+RUN pip install -r /requirements.txt
+
+EXPOSE 8000
+USER gcorn

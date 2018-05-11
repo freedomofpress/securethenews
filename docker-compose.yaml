@@ -1,0 +1,58 @@
+---
+version: '3'
+networks:
+  app:
+services:
+  stn_postgresql:
+    image: postgres:9.3
+    ports:
+      - "5432"
+    volumes:
+      - ./:/django
+    environment:
+      POSTGRES_PASSWORD: securethenewspassword
+      POSTGRES_USER: securethenews
+      POSTGRES_DB: securethenewsdb
+    user: postgres
+    networks:
+      app:
+        aliases:
+          - db
+
+  stn_node:
+    build:
+      context: .
+      dockerfile: docker/NodeDockerfile
+      args:
+        NODE_VER: 4.8.2-alpine
+    volumes:
+      - ./:/var/www/django
+    working_dir: /var/www/django
+    command: /bin/ash -c "npm install && touch .node_complete && gulp watch"
+    user: node
+    networks:
+      - app
+
+  stn_django:
+    build:
+      context: .
+      dockerfile: docker/DjangoDockerfile
+    depends_on:
+      - stn_node
+      - stn_postgresql
+    environment:
+      DJANGO_DB_PASSWORD: securethenewspassword
+      DJANGO_DB_USER: securethenews
+      DJANGO_DB_NAME: securethenewsdb
+      DJANGO_DB_PORT: 5432
+      DJANGO_DB_HOST: db
+    working_dir: /var/www/django
+    volumes:
+      - ./:/var/www/django
+    command: django-start.sh
+    ports:
+      - "8000:8000"
+    networks:
+      app:
+        aliases:
+          - app

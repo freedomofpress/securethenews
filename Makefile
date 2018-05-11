@@ -15,31 +15,23 @@ ci-tests: ## Runs test suite against prod-like setup.
 flake8: ## Runs flake8 on source.
 	flake8 api blog home pledges search securethenews sites --exclude 'migrations/'
 
-.PHONY: dev-go
-dev-go: ## Creates dev environment.
-	molecule converge -s dev
-
 .PHONY: dev-createdevdata
 dev-createdevdata: ## Imports site data in dev environment.
-	docker exec -it stn_django bash -c "./manage.py migrate"
-	docker exec -it stn_django bash -c "./manage.py createdevdata"
+	docker-compose exec stn_django bash -c "./manage.py migrate"
+	docker-compose exec stn_django bash -c "./manage.py createdevdata"
 
 .PHONY: dev-makemigrations
 dev-migrate: ## Generates new db migrations and applies them.
-	docker exec -it stn_django bash -c "./manage.py makemigrations"
-	docker exec -it stn_django bash -c "./manage.py migrate"
+	docker-compose exec stn_django bash -c "./manage.py makemigrations"
+	docker-compose exec stn_django bash -c "./manage.py migrate"
 
 .PHONY: dev-scan
 dev-scan: ## Rescans all websites in dev environment.
-	docker exec -it stn_django bash -c "./manage.py scan"
+	docker-compose exec stn_django bash -c "./manage.py scan"
 
 .PHONY: dev-chownroot
 dev-chownroot: ## Fixes root-owner permissions created by docker.
 	sudo find $(DIR) -user root -exec chown -Rv $(WHOAMI):$(WHOAMI) '{}' \;
-
-.PHONY: dev-killapp
-dev-killapp: ## Destroys dev environment.
-	molecule destroy -s dev
 
 .PHONY: update-pip-dependencies
 update-pip-dependencies: ## Uses pip-compile to update requirements.txt
@@ -50,14 +42,6 @@ update-pip-dependencies: ## Uses pip-compile to update requirements.txt
 		bash -c 'pip install pip-tools && pip-compile \
 		--output-file /code/requirements.txt /code/requirements.in'
 
-# Update dev/testing Python dependencies.
-	pip-compile --output-file molecule/requirements.txt molecule/requirements.in
-
-.PHONY: dev-debug
-dev-debug: ## Creates local docker container to troubleshoot dev env.
-	docker build -t stn_django -f molecule/dev/DjangoDockerfile .
-	docker run -v $(DIR):/django -it stn_django bash
-	
 .PHONY: safety
 safety: ## Runs `safety check` to check python dependencies for vulnerabilities
 	@for req_file in `find . -type f -name '*requirements.txt'`; do \
