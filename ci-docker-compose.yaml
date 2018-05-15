@@ -1,0 +1,56 @@
+---
+version: '3'
+networks:
+  app:
+services:
+  stn_postgresql:
+    image: postgres:9.3
+    ports:
+      - "5432"
+    volumes:
+      - ./:/django
+    environment:
+      POSTGRES_PASSWORD: securethenewspassword
+      POSTGRES_USER: securethenews
+      POSTGRES_DB: securethenewsdb
+    user: postgres
+    networks:
+      app:
+        aliases:
+          - db
+
+  stn_django:
+    env_file: ${DJANGO_ENV_FILE}
+    image: quay.io/freedomofpress/securethe.news:latest
+    depends_on:
+      - stn_postgresql
+    working_dir: /django
+    volumes:
+      - ${HOST_STATIC_DIR:-stn-django-static}:/django-media
+      - ${HOST_MEDIA_DIR:-stn-django-static}:/django-static
+      - ${HOST_GUNICORN_DIR}:/etc/gunicorn:ro
+    command: django-start.sh
+    command: ash -c "./manage.py migrate && ./manage.py collectstatic -c --noinput && gunicorn -c /etc/gunicorn/gunicorn.py securethenews.wsgi"
+    networks:
+      app:
+        aliases:
+          - app
+
+  stn_nginx:
+    image: nginx:1.14-alpine
+    volumes:
+      - ./docker/nginx:/etc/nginx/conf.d/:ro
+      - ${HOST_STATIC_DIR:-stn-django-static}:/django-media:ro
+      - ${HOST_MEDIA_DIR:-stn-django-static}:/django-static:ro
+    depends_on:
+      - stn_django
+    ports:
+      - "8080:8080"
+    networks:
+      app:
+        aliases:
+          - nginx
+
+volumes:
+  stn-django-static:
+  stn-django-media:

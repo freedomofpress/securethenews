@@ -59,6 +59,14 @@ clean: ## Removes temporary gitignored development artifacts
 bandit: ## Runs `bandit` static code analysis tool for security bugs
 	bandit --recursive . -lll --exclude molecule,node_modules,.venv
 
+.PHONY: build-prod-container
+build-prod-container: ## Builds a django container for intended production usage
+	docker build -f docker/ProdDockerfile -t quay.io/freedomofpress/securethe.news .
+
+.PHONY: run-prod-env
+run-prod-env: ## Runs prod-like env (run build-prod-container first)
+	DJANGO_ENV_FILE=./docker/ci.env HOST_GUNICORN_DIR=./docker/gunicorn docker-compose -f ci-docker-compose.yaml up
+
 # Explaination of the below shell command should it ever break.
 # 1. Set the field separator to ": ##" to parse lines for make targets.
 # 2. Check for second field matching, skip otherwise.
