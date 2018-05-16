@@ -46,6 +46,7 @@ pyparsing==2.2.0          # via pytablereader
 pytablereader==0.13.3     # via pytablewriter, simplesqlite
 pytablewriter==0.24.0     # via pshtt
 python-dateutil==2.6.1    # via typepy
+python-json-logger==0.1.8
 pytz==2017.2              # via django, django-modelcluster, typepy
 requests-cache==0.4.13    # via pshtt
 requests==2.18.4          # via django-mailgun, pshtt, pytablereader, requests-cache, wagtail

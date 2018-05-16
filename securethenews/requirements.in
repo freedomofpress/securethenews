@@ -10,5 +10,6 @@ gunicorn
 markdown2>=2.3.5  # required by pshtt, forcing newer version for patch
 pshtt
 psycopg2
+python-json-logger
 wagtail
 wagtailmenus

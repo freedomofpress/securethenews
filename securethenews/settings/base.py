@@ -65,7 +65,8 @@ INSTALLED_APPS = [
     'django_filters',
     'crispy_forms',
     'rest_framework',
-    'corsheaders'
+    'corsheaders',
+    'django_logging'
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -81,6 +82,7 @@ MIDDLEWARE_CLASSES = [
 
     'wagtail.wagtailcore.middleware.SiteMiddleware',
     'wagtail.wagtailredirects.middleware.RedirectMiddleware',
+    'django_logging.middleware.DjangoLoggingMiddleware'
 ]
 
 # Anyone can use the API via CORS
@@ -181,3 +183,69 @@ REST_FRAMEWORK = {
 
 # Shiny forms for the web view of the API
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
+
+# Django json logging
+#
+
+LOG_DIR = os.environ.get('DJANGO_LOG_PATH', os.path.join(BASE_DIR, 'logs'))
+
+DJANGO_LOGGING = {
+    "CONSOLE_LOG": False,
+    "SQL_LOG": False,
+    "DISABLE_EXISTING_LOGGERS": False,
+    "PROPOGATE": False,
+    "LOG_LEVEL": os.environ.get('DJANGO_LOG_LEVEL', 'info'),
+    "LOG_PATH": LOG_DIR
+}
+
+# Ensure base log directory exists
+if not os.path.exists(LOG_DIR):
+    os.makedirs(LOG_DIR)
+DJANGO_OTHER_LOG = os.path.join(LOG_DIR, 'django-other.log')
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'rotate': {
+            'level': os.environ.get('DJANGO_LOG_LEVEL', 'info').upper(),
+            'class': 'logging.handlers.RotatingFileHandler',
+            'backupCount': 5,
+            'maxBytes': 10000000,
+            'filename': os.environ.get('DJANGO_LOGFILE', DJANGO_OTHER_LOG),
+            'formatter': 'django_builtin'
+        },
+        'null': {
+            'class': 'logging.NullHandler',
+        }
+    },
+    'formatters': {
+        'django_builtin': {
+            '()': 'pythonjsonlogger.jsonlogger.JsonFormatter',
+            'format': '%(asctime)s %(levelname)s %(name)s %(module)s %(message)s'
+        }
+    },
+    'loggers': {
+        'django.template': {
+            'handlers': ['rotate'],
+            'propagate': False,
+        },
+        'django.db.backends': {
+            'handlers': ['rotate'],
+            'propagate': False,
+        },
+        'django.security': {
+            'handlers': ['rotate'],
+            'propagate': False,
+        },
+        # These are already handled by the django json logging library
+        'django.request': {
+            'handlers': ['null'],
+            'propagate': False,
+        },
+        '': {
+            'handlers': ['rotate'],
+            'propagate': False,
+        },
+    },
+}
