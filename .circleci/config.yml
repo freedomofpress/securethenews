@@ -19,9 +19,9 @@ jobs:
             pipenv run make safety
 
       - run:
-          name: flake8 lint on the source
+          name: linters on the source
           command: |
-            pipenv run make flake8
+            pipenv run make lint
 
       - run:
           name: Static code analysis for vulnerabilities

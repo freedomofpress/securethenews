@@ -8,9 +8,9 @@ UID := $(shell id -u)
 ci-go: ## Provisions and tests a prod-like setup.
 	./scripts/ci-runner.sh
 
-.PHONY: flake8
-flake8: ## Runs flake8 on source.
-	flake8 api blog home pledges search securethenews sites --exclude 'migrations/'
+.PHONY: lint
+lint: ## Runs linters
+	flake8
 
 .PHONY: dev-createdevdata
 dev-createdevdata: ## Imports site data in dev environment.

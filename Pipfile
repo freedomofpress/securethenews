@@ -4,6 +4,7 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
+"autopep8" = "*"
 bandit = "*"
 docker-compose = "*"
 flake8 = "*"
