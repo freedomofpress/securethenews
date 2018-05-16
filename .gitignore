@@ -52,3 +52,6 @@ nosetests.xml
 coverage.xml
 *.cover
 .hypothesis/
+
+#visual studio code
+.vscode
