@@ -2,6 +2,7 @@
 DIR := ${CURDIR}
 WHOAMI := ${USER}
 RAND_PORT := ${RAND_PORT}
+UID := $(shell id -u)
 
 .PHONY: ci-go
 ci-go: ## Provisions and tests a prod-like setup.
@@ -66,6 +67,14 @@ build-prod-container: ## Builds a django container for intended production usage
 .PHONY: run-prod-env
 run-prod-env: ## Runs prod-like env (run build-prod-container first)
 	DJANGO_ENV_FILE=./docker/ci.env HOST_GUNICORN_DIR=./docker/gunicorn docker-compose -f ci-docker-compose.yaml up
+
+.PHONY: dev-go
+dev-go: dev-build ## Runs development environment
+	docker-compose up
+
+.PHONY: dev-build
+dev-build: ## Build development environment contaners
+	echo UID=$(UID) > .env && docker-compose build
 
 # Explaination of the below shell command should it ever break.
 # 1. Set the field separator to ": ##" to parse lines for make targets.

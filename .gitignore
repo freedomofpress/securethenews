@@ -32,3 +32,7 @@ media/
 # Node container
 npm-debug.log
 .node_complete
+
+
+# used for passing vars to docker-compose from make
+.env

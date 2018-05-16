@@ -37,6 +37,8 @@ services:
     build:
       context: .
       dockerfile: docker/DjangoDockerfile
+      args:
+        USERID: ${UID:?err}
     depends_on:
       - stn_node
       - stn_postgresql
@@ -46,9 +48,11 @@ services:
       DJANGO_DB_NAME: securethenewsdb
       DJANGO_DB_PORT: 5432
       DJANGO_DB_HOST: db
-    working_dir: /var/www/django
+      DJANGO_LOG_PATH: /django-logs
+    working_dir: /django
     volumes:
-      - ./:/var/www/django
+      - ./:/django
+      - ./logs:/django-logs
     command: django-start.sh
     ports:
       - "8000:8000"
