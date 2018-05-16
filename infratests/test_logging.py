@@ -1,25 +1,35 @@
 import json
-import pytest
+import subprocess
+
+
+docker_id = subprocess.check_output(["docker-compose",
+                                     "ps",
+                                     "-q",
+                                     "stn_django"]).rstrip()
+testinfra_hosts = ["docker://{}".format(docker_id.decode('utf-8'))]
+
 
 def request_and_scrape(url, filter_key, host):
     """ Take in URL, grab the relevant log line,
         return dict for comparison """
 
-    JSON_LOG_FILE = "/var/www/django-alpha/logs/app.log"
+    JSON_LOG_FILE = "/django-logs/app.log"
     # Generate log event via http requests
-    host.run("curl --user-agent testinfra http://localhost:8000" + url)
+    host.run("curl -L --user-agent testinfra --header 'Host: app'"
+    " http://localhost:8000" + url)
     # Pick out the last log line from django logs
     # This is obviously only reliable test on a test instance with no
     # other incoming traffic.
-    grab_log = host.check_output("grep {0} {1} | tail -n 1".format(
+    grab_log = host.check_output("/bin/grep {0} {1} | tail -n 1".format(
                                     filter_key,
                                     JSON_LOG_FILE
                                     ))
+
     # Process JSON
     raw_json = json.loads(grab_log)[filter_key]
     # The current json structure uses the time as the key
     # its a pretty dumb design.
-    filtered_json = raw_json[raw_json.keys()[0]]
+    filtered_json = raw_json[list(raw_json)[0]]
 
     return filtered_json
 
@@ -34,7 +44,7 @@ def test_json_log_exception(host):
     request = {
                 "data": {},
                 "meta": {
-                    "http_host": "localhost:8000",
+                    "http_host": "app",
                     "http_user_agent": "testinfra",
                     "path_info": url,
                     "remote_addr": "127.0.0.1"
@@ -57,7 +67,7 @@ def test_json_log_200(host):
 
     should_return = {"request":
                         {"data": {},
-                             "meta": {"http_host": "localhost:8000",
+                             "meta": {"http_host": "app",
                                       "http_user_agent": "testinfra",
                                       "path_info": "/",
                                       "remote_addr": "127.0.0.1"},

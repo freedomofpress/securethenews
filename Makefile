@@ -76,6 +76,14 @@ dev-go: dev-build ## Runs development environment
 dev-build: ## Build development environment contaners
 	echo UID=$(UID) > .env && docker-compose build
 
+.PHONY: app-tests
+app-tests: ## Run development tests (works against prod or dev env)
+	docker-compose run stn_django ./manage.py test --noinput --keepdb
+
+.PHONY: ops-tests
+ops-tests: ## Run testinfra-based tests (functional)
+	pytest --junit-xml test-results/ops-tests.xml infratests
+
 # Explaination of the below shell command should it ever break.
 # 1. Set the field separator to ": ##" to parse lines for make targets.
 # 2. Check for second field matching, skip otherwise.

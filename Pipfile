@@ -5,6 +5,8 @@ name = "pypi"
 
 [packages]
 docker-compose = "*"
+flake8 = "*"
+testinfra = "*"
 
 [requires]
-python_version = "2.7"
+python_version = "3"

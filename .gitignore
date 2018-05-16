@@ -1,6 +1,7 @@
-# Python bytecode
+### Python ###
+# Byte-compiled / optimized / DLL files
 __pycache__/
-*.pyc
+*.py[cod]
 
 # virtualenv
 env/
@@ -36,3 +37,18 @@ npm-debug.log
 
 # used for passing vars to docker-compose from make
 .env
+
+# dont checkin xml junit results
+test-results/*.xml
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
+.pytest_cache/
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
