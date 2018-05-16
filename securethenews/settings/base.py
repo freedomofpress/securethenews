@@ -249,3 +249,13 @@ LOGGING = {
         },
     },
 }
+
+# Django test xml output
+#
+
+if os.environ.get('DJANGO_XMLTEST_OUTPUT', 'no').lower() in ['yes', 'true']:
+    TEST_RUNNER = 'xmlrunner.extra.djangotestrunner.XMLTestRunner'
+    TEST_OUTPUT_DIR = "/django-logs"
+    TEST_OUTPUT_FILE_NAME = "app-tests.xml"
+    TEST_OUTPUT_DESCRIPTIONS = True
+    TEST_OUTPUT_VERBOSE = 2

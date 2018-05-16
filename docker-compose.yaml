@@ -49,6 +49,7 @@ services:
       DJANGO_DB_PORT: 5432
       DJANGO_DB_HOST: db
       DJANGO_LOG_PATH: /django-logs
+      DJANGO_XMLTEST_OUTPUT: "yes"
     working_dir: /django
     volumes:
       - ./:/django

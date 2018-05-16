@@ -46,8 +46,10 @@ RUN pip install -r /django/securethenews/requirements.txt
 
 # Really not used in production. Needed for mapped named volume
 # permission handling https://github.com/docker/compose/issues/3270
-RUN  mkdir /django-media && mkdir /django-static
-RUN  chown -R gcorn: /django-media && chown -R gcorn: /django-static
+RUN  mkdir /django-media /django-static /django-logs && \
+     chown -R gcorn: /django-media && \
+     chown -R gcorn: /django-static && \
+     chown -R gcorn: /django-logs
 
 EXPOSE 8000
 USER gcorn

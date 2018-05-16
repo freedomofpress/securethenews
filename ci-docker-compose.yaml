@@ -28,6 +28,7 @@ services:
     volumes:
       - ${HOST_STATIC_DIR:-stn-django-static}:/django-media
       - ${HOST_MEDIA_DIR:-stn-django-static}:/django-static
+      - ${HOST_LOGS_DIR:-stn-django-logs}:/django-logs
       - ${HOST_GUNICORN_DIR}:/etc/gunicorn:ro
     command: django-start.sh
     command: ash -c "./manage.py migrate && ./manage.py collectstatic -c --noinput && gunicorn -c /etc/gunicorn/gunicorn.py securethenews.wsgi"
@@ -54,3 +55,4 @@ services:
 volumes:
   stn-django-static:
   stn-django-media:
+  stn-django-logs:
