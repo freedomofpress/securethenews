@@ -10,32 +10,36 @@ jobs:
       - run:
           name: Install testing pre-reqs
           command: |
-            virtualenv ~/.venv
-            . ~/.venv/bin/activate
-            pip install -r molecule/requirements.txt
+            pip install -U pipenv pip
+            pipenv install
 
       - run:
           name: Check Python dependencies for CVEs
           command: |
-            . ~/.venv/bin/activate
-            make safety
+            pipenv run make safety
 
       - run:
           name: flake8 lint on the source
           command: |
-            . ~/.venv/bin/activate
-            make flake8
+            pipenv run make flake8
 
       - run:
           name: Static code analysis for vulnerabilities
           command: |
-            . ~/.venv/bin/activate
-            make bandit
+            pipenv run make bandit
 
       - run:
-          name: Ensure Django service stands up
+          name: Ensure we can build and run dev env
           command: |
-            . ~/.venv/bin/activate
+            pipenv run make docker-compose up -d
+            pipenv run make app-tests
+            pipenv run docker-compose down
+
+      - run:
+          name: Ensure we can build and run prod env
+          command: |
+            pipenv run make build-prod-container
+            pipenv run make run-prod-env
             make ci-go
 
       - store_test_results:

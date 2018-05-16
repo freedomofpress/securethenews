@@ -6,11 +6,7 @@ UID := $(shell id -u)
 
 .PHONY: ci-go
 ci-go: ## Provisions and tests a prod-like setup.
-	@molecule test -s ci
-
-.PHONY: ci-tests
-ci-tests: ## Runs test suite against prod-like setup.
-	@molecule verify -s ci
+	./scripts/ci-runner.sh
 
 .PHONY: flake8
 flake8: ## Runs flake8 on source.
@@ -66,7 +62,7 @@ build-prod-container: ## Builds a django container for intended production usage
 
 .PHONY: run-prod-env
 run-prod-env: ## Runs prod-like env (run build-prod-container first)
-	DJANGO_ENV_FILE=./docker/ci.env HOST_GUNICORN_DIR=./docker/gunicorn docker-compose -f ci-docker-compose.yaml up
+	@DJANGO_ENV_FILE=./docker/ci.env HOST_GUNICORN_DIR=./docker/gunicorn docker-compose -f ci-docker-compose.yaml up -d
 
 .PHONY: dev-go
 dev-go: dev-build ## Runs development environment
