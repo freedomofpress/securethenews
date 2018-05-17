@@ -1,27 +1,33 @@
 # Secure the News
 
-[![Build Status](https://travis-ci.org/freedomofpress/securethenews.svg?branch=master)](https://travis-ci.org/freedomofpress/securethenews)
+[![CircleCI](https://circleci.com/gh/freedomofpress/securethenews.svg?style=svg)](https://circleci.com/gh/freedomofpress/securethenews)
 
 ## Getting Started with the Development Environment
 
 The installation instructions below assume you have the following software on your machine:
 
-* [virtualenv](http://www.virtualenv.org/en/latest/virtualenv.html#installation)
+* [pipenv](https://docs.pipenv.org/#install-pipenv-today)
 * [docker](https://docs.docker.com/engine/installation/)
 
-Create a Python2 virtualenv and install `molecule/requirements.txt`/. From the
-checkout directory, run:
+From the checkout directory, run the following to jump into a virtualenv:
 
 ```bash
-virtualenv env/
-source env/bin/activate
-pip install -r molecule/requirements.txt
+# The very first time run
+$ pipenv install
+# Each subsequent time run this to enter a virtualenv shell
+$ pipenv shell
 ```
 
-Then run:
+Then run the following, which will be need to be run occassionally if you make modification to the django dockerfile deps:
 
 ```bash
-make dev-go
+make dev-init
+```
+
+To start up the development environment you can use the normal `docker-compose` flow:
+
+```bash
+docker-compose up
 ```
 
 If this command completes successfully, your development site will be available
@@ -44,11 +50,35 @@ make dev-scan
 ```
 
 For a full list of all helper commands in the Makefile, run `make help`. And,
-of course, you can obtain a shell directly into any of the containers, e.g.:
+of course, you can obtain a shell directly into any of the containers using `docker-compose` syntax. Just keep in mind the default shell is `ash` under alpine. Here is an example of entering the django container:
 
 ```bash
-docker exec -it stn_django bash
+$ docker-compose exec django ash
 ```
+
+## Getting Started with the Production Environment
+
+The environment is fairly similar to development with the exception that your code will not auto-reload and be reflected in the container. So this is not a great environment to development under but it reflects a production-like environment run under `gunicorn` and behind a reverse-proxy nginx server.
+
+The flow is this:
+
+```bash
+# Build the prod container (everytime you make a code-change need to re-do this)
+make build-prod-container
+
+# Run the prod environment
+docker-compose -f ci-docker-compose.yaml up
+
+# Run production apptests
+make app-tests-prod
+
+# Run ops tests
+make ops-tests
+
+# Teardown prod
+docker-compose -f ci-docker-compose.yaml down
+```
+
 
 ### Updating Python dependencies
 
