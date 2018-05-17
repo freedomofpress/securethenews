@@ -10,7 +10,8 @@ env/
 db_backups/
 
 # Log files
-logs/
+logs/*.log
+logs/*.xml
 
 # Local deploy testing
 .molecule/
@@ -55,3 +56,7 @@ coverage.xml
 
 #visual studio code
 .vscode
+
+# ignore dynamically generated dockerfiles
+docker/DevDjangoDockerfile
+docker/ProdDjangoDockerfile

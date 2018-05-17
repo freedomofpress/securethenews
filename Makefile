@@ -14,17 +14,17 @@ lint: ## Runs linters
 
 .PHONY: dev-createdevdata
 dev-createdevdata: ## Imports site data in dev environment.
-	docker-compose exec stn_django bash -c "./manage.py migrate"
-	docker-compose exec stn_django bash -c "./manage.py createdevdata"
+	docker-compose exec django bash -c "./manage.py migrate"
+	docker-compose exec django bash -c "./manage.py createdevdata"
 
 .PHONY: dev-makemigrations
 dev-migrate: ## Generates new db migrations and applies them.
-	docker-compose exec stn_django bash -c "./manage.py makemigrations"
-	docker-compose exec stn_django bash -c "./manage.py migrate"
+	docker-compose exec django bash -c "./manage.py makemigrations"
+	docker-compose exec django bash -c "./manage.py migrate"
 
 .PHONY: dev-scan
 dev-scan: ## Rescans all websites in dev environment.
-	docker-compose exec stn_django bash -c "./manage.py scan"
+	docker-compose exec django bash -c "./manage.py scan"
 
 .PHONY: dev-chownroot
 dev-chownroot: ## Fixes root-owner permissions created by docker.
@@ -57,24 +57,42 @@ bandit: ## Runs `bandit` static code analysis tool for security bugs
 	bandit --recursive . -lll --exclude molecule,node_modules,.venv
 
 .PHONY: build-prod-container
-build-prod-container: ## Builds a django container for intended production usage
-	docker build -f docker/ProdDockerfile -t quay.io/freedomofpress/securethe.news .
+build-prod-container: prod-concat-docker ## Builds prod environment
+	docker-compose -f ci-docker-compose.yaml build
 
 .PHONY: run-prod-env
 run-prod-env: ## Runs prod-like env (run build-prod-container first)
-	@DJANGO_ENV_FILE=./docker/ci.env HOST_GUNICORN_DIR=./docker/gunicorn docker-compose -f ci-docker-compose.yaml up -d
+	docker-compose -f ci-docker-compose.yaml up -d
 
 .PHONY: dev-go
-dev-go: dev-build ## Runs development environment
+dev-go: dev-init ## Runs development environment
 	docker-compose up
 
-.PHONY: dev-build
-dev-build: ## Build development environment contaners
-	echo UID=$(UID) > .env && docker-compose build
+.PHONY: dev-init
+dev-init: dev-concat-docker docker-env-inject ## Build development environment contaners
+	docker-compose build
 
-.PHONY: app-tests
-app-tests: ## Run development tests (works against prod or dev env)
-	docker-compose run stn_django ./manage.py test --noinput --keepdb
+.PHONY: docker-env-inject
+docker-env-inject: ## Layout UID value for docker-compose ingestion
+	echo DJANGO_ENV_FILE=./docker/ci.env > .env
+	echo HOST_GUNICORN_DIR=./docker/gunicorn >> .env
+	echo UID=$(UID) >> .env
+
+.PHONY: dev-concat-docker
+dev-concat-docker: ## Concat docker files in prep for dev env
+	cd docker && cat djangodocker.snippet dev-django > DevDjangoDockerfile
+
+.PHONY: prod-concat-docker
+prod-concat-docker: ## Concat docker files in prep for prod env
+	@cd docker && cat 1-prod-node djangodocker.snippet 2-prod-django > ProdDjangoDockerfile
+
+.PHONY: app-tests-dev
+app-tests-dev: ## Run development tests (dev)
+	docker-compose run django ./manage.py test --noinput --keepdb
+
+.PHONY: app-tests-prod
+app-tests-prod: ## Run development tests (prod)
+	docker-compose -f ci-docker-compose.yaml run django ./manage.py test --noinput --keepdb
 
 .PHONY: ops-tests
 ops-tests: ## Run testinfra-based tests (functional)

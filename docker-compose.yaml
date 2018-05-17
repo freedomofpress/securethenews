@@ -3,7 +3,7 @@ version: '3'
 networks:
   app:
 services:
-  stn_postgresql:
+  postgresql:
     image: postgres:9.3
     ports:
       - "5432"
@@ -19,29 +19,30 @@ services:
         aliases:
           - db
 
-  stn_node:
+  node:
     build:
       context: .
       dockerfile: docker/NodeDockerfile
       args:
         NODE_VER: 4.8.2-alpine
+        USERID: ${UID:?err}
     volumes:
       - ./:/var/www/django
     working_dir: /var/www/django
     command: /bin/ash -c "npm install && touch .node_complete && gulp watch"
-    user: node
+    user: ${UID:?err}
     networks:
       - app
 
-  stn_django:
+  django:
     build:
       context: .
-      dockerfile: docker/DjangoDockerfile
+      dockerfile: docker/DevDjangoDockerfile
       args:
         USERID: ${UID:?err}
     depends_on:
-      - stn_node
-      - stn_postgresql
+      - node
+      - postgresql
     environment:
       DJANGO_DB_PASSWORD: securethenewspassword
       DJANGO_DB_USER: securethenews

@@ -3,7 +3,7 @@ version: '3'
 networks:
   app:
 services:
-  stn_postgresql:
+  postgresql:
     image: postgres:9.3
     ports:
       - "5432"
@@ -19,11 +19,13 @@ services:
         aliases:
           - db
 
-  stn_django:
+  django:
+    build:
+      context: .
+      dockerfile: docker/ProdDjangoDockerfile
     env_file: ${DJANGO_ENV_FILE}
-    image: quay.io/freedomofpress/securethe.news:latest
     depends_on:
-      - stn_postgresql
+      - postgresql
     working_dir: /django
     volumes:
       - ${HOST_STATIC_DIR:-stn-django-static}:/django-media
@@ -37,14 +39,14 @@ services:
         aliases:
           - app
 
-  stn_nginx:
+  nginx:
     image: nginx:1.14-alpine
     volumes:
       - ./docker/nginx:/etc/nginx/conf.d/:ro
       - ${HOST_STATIC_DIR:-stn-django-static}:/django-media:ro
       - ${HOST_MEDIA_DIR:-stn-django-static}:/django-static:ro
     depends_on:
-      - stn_django
+      - django
     ports:
       - "8080:8080"
     networks:

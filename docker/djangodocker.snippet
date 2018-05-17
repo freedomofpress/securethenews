@@ -15,20 +15,3 @@ RUN apk add --no-cache \
             tiff-dev=4.0.9-r2 \
             # pillow dep
             zlib-dev=1.2.11-r1
-
-
-COPY docker/django-start.sh /usr/local/bin
-RUN  chmod +x /usr/local/bin/django-start.sh
-
-ARG USERID
-RUN adduser -D -g "" -u "${USERID}" gcorn
-
-RUN paxctl -cm /usr/local/bin/python
-COPY securethenews/requirements.txt /requirements.txt
-RUN pip install -r /requirements.txt
-
-RUN  mkdir /django-logs && \
-     chown -R gcorn: /django-logs
-
-EXPOSE 8000
-USER gcorn

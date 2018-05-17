@@ -6,7 +6,7 @@ import subprocess
 docker_id = subprocess.check_output(["docker-compose",
                                      "ps",
                                      "-q",
-                                     "stn_django"]).rstrip()
+                                     "django"]).rstrip()
 testinfra_hosts = ["docker://{}".format(docker_id.decode('utf-8'))]
 
 PSHTT_CLI_PATH = "/usr/local/bin/pshtt"
