@@ -2,6 +2,7 @@
 FROM python@sha256:bfac58481666aeb60ff6354e81afe888cc8c7b1effb1039870377fc7fa86ef43
 
 RUN apk add --no-cache \
+            bash=4.4.19-r1 \
             curl=7.59.0-r0 \
             gcc=6.4.0-r5 \
             git=2.15.0-r1 \
@@ -15,3 +16,9 @@ RUN apk add --no-cache \
             tiff-dev=4.0.9-r2 \
             # pillow dep
             zlib-dev=1.2.11-r1
+
+COPY docker/wait-for-it.sh /usr/local/bin
+RUN chmod +x /usr/local/bin/wait-for-it.sh
+
+COPY docker/django-start.sh /usr/local/bin
+RUN  chmod +x /usr/local/bin/django-start.sh

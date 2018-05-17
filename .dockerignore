@@ -3,3 +3,4 @@ client/build/
 media/
 molecule
 .git
+**/*.pyc

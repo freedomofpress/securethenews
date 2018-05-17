@@ -46,9 +46,8 @@ jobs:
           command: |
             pipenv run make build-prod-container
             pipenv run make run-prod-env
-            echo "Wait for environemnt to come up completely"
             while ! curl --output /dev/null --silent --head --fail http://localhost:8080; do sleep 1 && echo -n .; done;
-            make ci-go
+            pipenv run make ci-go
 
       - store_test_results:
           path: ~/securethenews/test-results

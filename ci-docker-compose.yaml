@@ -33,7 +33,6 @@ services:
       - ${HOST_LOGS_DIR:-stn-django-logs}:/django-logs
       - ${HOST_GUNICORN_DIR}:/etc/gunicorn:ro
     command: django-start.sh
-    command: ash -c "./manage.py migrate && ./manage.py collectstatic -c --noinput && gunicorn -c /etc/gunicorn/gunicorn.py securethenews.wsgi"
     networks:
       app:
         aliases:
