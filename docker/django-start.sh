@@ -6,7 +6,7 @@ set -e
 wait_for_node() {
     if [ "${DEPLOY_ENV}" == "dev" ]; then
         echo "Waiting for node to start..."
-        until -f .node_complete
+        while [ ! -f .node_complete ]
         do
             sleep 2
         done
