@@ -58,7 +58,7 @@ bandit: ## Runs `bandit` static code analysis tool for security bugs
 
 .PHONY: build-prod-container
 build-prod-container: prod-concat-docker ## Builds prod environment
-	docker-compose -f ci-docker-compose.yaml build
+	docker-compose -f ci-docker-compose.yaml build --no-cache
 
 .PHONY: run-prod-env
 run-prod-env: ## Runs prod-like env (run build-prod-container first)
