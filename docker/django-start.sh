@@ -16,7 +16,7 @@ wait_for_node() {
 
 wait_for_postgres() {
     echo "Waiting for postgres to start..."
-    until nc -z "${DJANGO_DB_HOST}" -p "${DJANGO_DB_PORT}"
+    until nc -z "${DJANGO_DB_HOST}" "${DJANGO_DB_PORT}"
     do
         sleep 2
     done
