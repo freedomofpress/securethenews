@@ -17,8 +17,5 @@ RUN apk add --no-cache \
             # pillow dep
             zlib-dev=1.2.11-r1
 
-COPY docker/wait-for-it.sh /usr/local/bin
-RUN chmod +x /usr/local/bin/wait-for-it.sh
-
 COPY docker/django-start.sh /usr/local/bin
 RUN  chmod +x /usr/local/bin/django-start.sh
