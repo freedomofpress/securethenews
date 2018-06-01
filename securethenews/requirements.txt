@@ -46,17 +46,19 @@ pyparsing==2.2.0          # via pytablereader
 pytablereader==0.13.3     # via pytablewriter, simplesqlite
 pytablewriter==0.24.0     # via pshtt
 python-dateutil==2.6.1    # via typepy
+python-json-logger==0.1.8
 pytz==2017.2              # via django, django-modelcluster, typepy
 requests-cache==0.4.13    # via pshtt
 requests==2.18.4          # via django-mailgun, pshtt, pytablereader, requests-cache, wagtail
 simplesqlite==0.15.0      # via pytablewriter
-six==1.10.0               # via cryptography, django-mailgun, html5lib, mbstrdecoder, pyopenssl, pytablereader, pytablewriter, python-dateutil, simplesqlite, typepy
+six==1.10.0               # via cryptography, django-mailgun, html5lib, mbstrdecoder, pyopenssl, pytablereader, pytablewriter, python-dateutil, simplesqlite, typepy, unittest-xml-reporting
 sslyze==1.1.4             # via pshtt
 tls-parser==1.1.0         # via sslyze
 toml==0.9.2               # via pytablewriter
 typepy==0.0.20            # via dataproperty, pytablereader, pytablewriter, simplesqlite
 typing==3.6.2             # via nassl, sslyze, tls-parser
 unidecode==0.4.21         # via wagtail
+unittest-xml-reporting==2.1.1
 urllib3==1.22             # via elasticsearch, requests
 wagtail==1.12.1
 wagtailmenus==2.4

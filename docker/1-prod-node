@@ -1,0 +1,11 @@
+ARG NODE_VER=4.8.2-alpine
+FROM node:${NODE_VER} AS node-assets
+
+# Oddly, node-sass requires both python and make to build bindings
+RUN apk add --no-cache paxctl python make g++
+RUN paxctl -cm /usr/local/bin/node
+# Install gulp globally so it can be used during builds
+RUN npm install --global gulp-cli
+
+COPY ./ /src-files
+RUN cd /src-files && ( npm install && gulp build:production )

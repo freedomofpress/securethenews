@@ -1,0 +1,15 @@
+[[source]]
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+"autopep8" = "*"
+bandit = "*"
+docker-compose = "*"
+flake8 = "*"
+safety = "*"
+testinfra = "*"
+
+[requires]
+python_version = "3"

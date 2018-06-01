@@ -1,0 +1,59 @@
+---
+version: '3'
+networks:
+  app:
+services:
+  postgresql:
+    image: postgres:9.3
+    ports:
+      - "5432"
+    volumes:
+      - ./:/django
+    environment:
+      POSTGRES_PASSWORD: securethenewspassword
+      POSTGRES_USER: securethenews
+      POSTGRES_DB: securethenewsdb
+    user: postgres
+    networks:
+      app:
+        aliases:
+          - db
+
+  django:
+    build:
+      context: .
+      dockerfile: docker/ProdDjangoDockerfile
+    env_file: ${DJANGO_ENV_FILE}
+    depends_on:
+      - postgresql
+    working_dir: /django
+    volumes:
+      - ${HOST_STATIC_DIR:-stn-django-static}:/django-media
+      - ${HOST_MEDIA_DIR:-stn-django-static}:/django-static
+      - ${HOST_LOGS_DIR:-stn-django-logs}:/django-logs
+      - ${HOST_GUNICORN_DIR}:/etc/gunicorn:ro
+    command: django-start.sh
+    networks:
+      app:
+        aliases:
+          - app
+
+  nginx:
+    image: nginx:1.14-alpine
+    volumes:
+      - ./docker/nginx:/etc/nginx/conf.d/:ro
+      - ${HOST_STATIC_DIR:-stn-django-static}:/django-media:ro
+      - ${HOST_MEDIA_DIR:-stn-django-static}:/django-static:ro
+    depends_on:
+      - django
+    ports:
+      - "8080:8080"
+    networks:
+      app:
+        aliases:
+          - nginx
+
+volumes:
+  stn-django-static:
+  stn-django-media:
+  stn-django-logs:

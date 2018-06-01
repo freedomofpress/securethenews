@@ -1,8 +1,15 @@
-import pytest
 import json
-import os
+import pytest
+import subprocess
 
-PSHTT_CLI_PATH = os.environ['pshtt_location']
+
+docker_id = subprocess.check_output(["docker-compose",
+                                     "ps",
+                                     "-q",
+                                     "django"]).rstrip()
+testinfra_hosts = ["docker://{}".format(docker_id.decode('utf-8'))]
+
+PSHTT_CLI_PATH = "/usr/local/bin/pshtt"
 PSHTT_DOMAINS = [
     'freedom.press'
 ]

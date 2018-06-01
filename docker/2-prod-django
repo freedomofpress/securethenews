@@ -1,0 +1,21 @@
+RUN adduser -D -g "" gcorn
+
+RUN paxctl -cm /usr/local/bin/python
+COPY --from=node-assets /src-files/ /django/
+# Unfortunately the chown flag in COPY is not
+# available in my docker system version :(
+RUN find /django -path /django/node_modules -prune -o -print -exec chown gcorn: '{}' \;
+
+WORKDIR /django
+RUN pip install -r /django/securethenews/requirements.txt
+
+# Really not used in production. Needed for mapped named volume
+# permission handling https://github.com/docker/compose/issues/3270
+RUN  mkdir /django-media /django-static /django-logs && \
+     chown -R gcorn: /django-media && \
+     chown -R gcorn: /django-static && \
+     chown -R gcorn: /django-logs
+
+EXPOSE 8000
+USER gcorn
+CMD ./manage.py migrate && ./manage.py runserver 0.0.0.0:8000
