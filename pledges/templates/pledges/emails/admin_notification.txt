@@ -1,3 +1,0 @@
-A pledge for {{ site.name }} has been confirmed and is ready for review:
-
-{{ moderation_link }}

@@ -1,5 +1,0 @@
-Your pledge to secure your site has been {{ pledge.get_review_status_display|lower }}!
-
-{% if pledge.review_status == pledge.STATUS_APPROVED %}The score page for your site has been updated to reflect your pledge.{% endif %}
-
-If you have any questions or concerns, please reach out to us at: contact@securethe.news.

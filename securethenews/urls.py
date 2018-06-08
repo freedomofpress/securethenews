@@ -28,7 +28,6 @@ urlpatterns = [
     path('search/', search_views.search, name='search'),
 
     path('sites/', include('sites.urls')),
-    path('pledge/', include('pledges.urls')),
     path('news/', include('blog.urls')),
     path('api/', include('api.urls')),
 
