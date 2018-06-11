@@ -3,6 +3,7 @@ DIR := ${CURDIR}
 WHOAMI := ${USER}
 RAND_PORT := ${RAND_PORT}
 UID := $(shell id -u)
+GIT_REV := $(shell git rev-parse HEAD | cut -c1-10)
 
 .PHONY: ci-go
 ci-go: ## Provisions and tests a prod-like setup.
@@ -63,6 +64,18 @@ build-prod-container: prod-concat-docker ## Builds prod environment
 .PHONY: run-prod-env
 run-prod-env: ## Runs prod-like env (run build-prod-container first)
 	docker-compose -f ci-docker-compose.yaml up -d
+
+.PHONY: prod-push
+prod-push: ## Publishes prod container image to registry
+	docker tag quay.io/freedomofpress/securethenews:latest quay.io/freedomofpress/securethenews:$(GIT_REV)
+	docker push quay.io/freedomofpress/securethenews
+	docker push quay.io/freedomofpress/securethenews:$(GIT_REV)
+
+.PHONY: staging-push
+staging-push: ## Publishes prod container image to registry with staging tag
+	docker tag quay.io/freedomofpress/securethenews:latest quay.io/freedomofpress/securethenews:staging
+	docker push quay.io/freedomofpress/securethenews:staging
+	docker push quay.io/freedomofpress/securethenews:$(GIT_REV)
 
 .PHONY: dev-go
 dev-go: dev-init ## Runs development environment
