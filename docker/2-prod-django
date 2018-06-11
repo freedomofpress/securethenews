@@ -1,4 +1,6 @@
 RUN adduser -D -g "" gcorn
+LABEL MAINTAINER="Freedom of the Press Foundation"
+LABEL APP="securethenews"
 
 RUN paxctl -cm /usr/local/bin/python
 COPY --from=node-assets /src-files/ /django/
