@@ -97,7 +97,7 @@ dev-concat-docker: ## Concat docker files in prep for dev env
 	cd docker && cat djangodocker.snippet dev-django djangodocker-runcmds.snippet > DevDjangoDockerfile
 
 .PHONY: prod-concat-docker
-prod-concat-docker: ## Concat docker files in prep for prod env
+prod-concat-docker: docker-env-inject ## Concat docker files in prep for prod env
 	cd docker && cat 1-prod-node djangodocker.snippet 2-prod-django djangodocker-runcmds.snippet > ProdDjangoDockerfile
 
 .PHONY: app-tests-dev
