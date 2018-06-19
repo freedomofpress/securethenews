@@ -74,6 +74,7 @@ prod-push: ## Publishes prod container image to registry
 .PHONY: staging-push
 staging-push: ## Publishes prod container image to registry with staging tag
 	docker tag quay.io/freedomofpress/securethenews:latest quay.io/freedomofpress/securethenews:staging
+	docker tag quay.io/freedomofpress/securethenews:latest quay.io/freedomofpress/securethenews:$(GIT_REV)
 	docker push quay.io/freedomofpress/securethenews:staging
 	docker push quay.io/freedomofpress/securethenews:$(GIT_REV)
 
