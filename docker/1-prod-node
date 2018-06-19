@@ -1,9 +1,13 @@
 ARG NODE_VER=4.8.2-alpine
 FROM node:${NODE_VER} AS node-assets
 
+# Make npm output less verbose
+ENV NPM_CONFIG_LOGLEVEL warn
+
 # Oddly, node-sass requires both python and make to build bindings
 RUN apk add --no-cache paxctl python make g++
 RUN paxctl -cm /usr/local/bin/node
+
 # Install gulp globally so it can be used during builds
 RUN npm install --global gulp-cli
 
