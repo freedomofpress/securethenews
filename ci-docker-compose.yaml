@@ -32,7 +32,6 @@ services:
       - ${HOST_MEDIA_DIR:-stn-django-static}:/django-static
       - ${HOST_LOGS_DIR:-stn-django-logs}:/django-logs
       - ${HOST_GUNICORN_DIR}:/etc/gunicorn:ro
-    command: django-start.sh
     networks:
       app:
         aliases:

@@ -56,7 +56,6 @@ services:
     volumes:
       - ./:/django
       - ./logs:/django-logs
-    command: django-start.sh
     ports:
       - "8000:8000"
     networks:

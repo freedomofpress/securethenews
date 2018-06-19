@@ -93,11 +93,11 @@ docker-env-inject: ## Layout UID value for docker-compose ingestion
 
 .PHONY: dev-concat-docker
 dev-concat-docker: ## Concat docker files in prep for dev env
-	cd docker && cat djangodocker.snippet dev-django > DevDjangoDockerfile
+	cd docker && cat djangodocker.snippet dev-django djangodocker-runcmds.snippet > DevDjangoDockerfile
 
 .PHONY: prod-concat-docker
 prod-concat-docker: ## Concat docker files in prep for prod env
-	@cd docker && cat 1-prod-node djangodocker.snippet 2-prod-django > ProdDjangoDockerfile
+	cd docker && cat 1-prod-node djangodocker.snippet 2-prod-django djangodocker-runcmds.snippet > ProdDjangoDockerfile
 
 .PHONY: app-tests-dev
 app-tests-dev: ## Run development tests (dev)

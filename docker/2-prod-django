@@ -17,7 +17,3 @@ RUN  mkdir /django-media /django-static /django-logs && \
      chown -R gcorn: /django-media && \
      chown -R gcorn: /django-static && \
      chown -R gcorn: /django-logs
-
-EXPOSE 8000
-USER gcorn
-CMD ./manage.py migrate && ./manage.py runserver 0.0.0.0:8000
