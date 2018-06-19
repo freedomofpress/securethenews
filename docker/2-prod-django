@@ -1,4 +1,3 @@
-RUN adduser -D -g "" gcorn
 LABEL MAINTAINER="Freedom of the Press Foundation"
 LABEL APP="securethenews"
 

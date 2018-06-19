@@ -3,6 +3,7 @@ DIR := ${CURDIR}
 WHOAMI := ${USER}
 RAND_PORT := ${RAND_PORT}
 UID := $(shell id -u)
+GID := $(shell id -g)
 GIT_REV := $(shell git rev-parse HEAD | cut -c1-10)
 
 .PHONY: ci-go
@@ -91,6 +92,7 @@ docker-env-inject: ## Layout UID value for docker-compose ingestion
 	echo DJANGO_ENV_FILE=./docker/ci.env > .env
 	echo HOST_GUNICORN_DIR=./docker/gunicorn >> .env
 	echo UID=$(UID) >> .env
+	echo GID=$(GID) >> .env
 
 .PHONY: dev-concat-docker
 dev-concat-docker: ## Concat docker files in prep for dev env

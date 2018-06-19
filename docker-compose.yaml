@@ -40,6 +40,7 @@ services:
       dockerfile: docker/DevDjangoDockerfile
       args:
         USERID: ${UID:?err}
+        GRPID: ${GID:?err}
     depends_on:
       - node
       - postgresql
