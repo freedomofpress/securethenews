@@ -1,7 +1,12 @@
 import json
-from .central_docker_find import testinfra_hosts
+import subprocess
 
-testinfra_hosts = testinfra_hosts
+
+docker_id = subprocess.check_output(["docker-compose",
+                                     "ps",
+                                     "-q",
+                                     "django"]).rstrip()
+testinfra_hosts = ["docker://{}".format(docker_id.decode('utf-8'))]
 
 
 def request_and_scrape(url, filter_key, host):
