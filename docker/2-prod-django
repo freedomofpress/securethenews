@@ -17,3 +17,6 @@ RUN  mkdir /django-media /django-static /django-logs && \
      chown -R gcorn: /django-media && \
      chown -R gcorn: /django-static && \
      chown -R gcorn: /django-logs
+
+RUN mkdir -p /etc/gunicorn && chown -R gcorn: /etc/gunicorn
+COPY docker/gunicorn/gunicorn.py /etc/gunicorn/gunicorn.py
