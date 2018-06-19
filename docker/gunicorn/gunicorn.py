@@ -1,11 +1,7 @@
 import os
 
-raw_env = ["{}={}".format(x, os.environ[x])
-           for x in os.environ.keys()
-           if x.startswith('DJANGO')]
-print(raw_env)
-user = "gcorn"
-group = "gcorn"
-bind = ['0.0.0.0:8000']
-loglevel = "debug"
-capture_output = False
+user = os.environ.get('DJANGO_GCORN_USER', 'gcorn')
+group = os.environ.get('DJANGO_GCORN_GROUP', 'gcorn')
+bind = os.environ.get('DJANGO_GCORN_BIND', '0.0.0.0:8000')
+loglevel = os.environ.get('DJANGO_GCORN_LOGLEVEL', 'debug')
+capture_output = os.environ.get('DJANGO_GCORN_CAPOUTPUT', False)

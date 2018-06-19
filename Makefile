@@ -3,6 +3,7 @@ DIR := ${CURDIR}
 WHOAMI := ${USER}
 RAND_PORT := ${RAND_PORT}
 UID := $(shell id -u)
+GIT_REV := $(shell git rev-parse HEAD | cut -c1-10)
 
 .PHONY: ci-go
 ci-go: ## Provisions and tests a prod-like setup.
@@ -64,6 +65,19 @@ build-prod-container: prod-concat-docker ## Builds prod environment
 run-prod-env: ## Runs prod-like env (run build-prod-container first)
 	docker-compose -f ci-docker-compose.yaml up -d
 
+.PHONY: prod-push
+prod-push: ## Publishes prod container image to registry
+	docker tag quay.io/freedomofpress/securethenews:latest quay.io/freedomofpress/securethenews:$(GIT_REV)
+	docker push quay.io/freedomofpress/securethenews
+	docker push quay.io/freedomofpress/securethenews:$(GIT_REV)
+
+.PHONY: staging-push
+staging-push: ## Publishes prod container image to registry with staging tag
+	docker tag quay.io/freedomofpress/securethenews:latest quay.io/freedomofpress/securethenews:staging
+	docker tag quay.io/freedomofpress/securethenews:latest quay.io/freedomofpress/securethenews:$(GIT_REV)
+	docker push quay.io/freedomofpress/securethenews:staging
+	docker push quay.io/freedomofpress/securethenews:$(GIT_REV)
+
 .PHONY: dev-go
 dev-go: dev-init ## Runs development environment
 	docker-compose up
@@ -80,11 +94,11 @@ docker-env-inject: ## Layout UID value for docker-compose ingestion
 
 .PHONY: dev-concat-docker
 dev-concat-docker: ## Concat docker files in prep for dev env
-	cd docker && cat djangodocker.snippet dev-django > DevDjangoDockerfile
+	cd docker && cat djangodocker.snippet dev-django djangodocker-runcmds.snippet > DevDjangoDockerfile
 
 .PHONY: prod-concat-docker
-prod-concat-docker: ## Concat docker files in prep for prod env
-	@cd docker && cat 1-prod-node djangodocker.snippet 2-prod-django > ProdDjangoDockerfile
+prod-concat-docker: docker-env-inject ## Concat docker files in prep for prod env
+	cd docker && cat 1-prod-node djangodocker.snippet 2-prod-django djangodocker-runcmds.snippet > ProdDjangoDockerfile
 
 .PHONY: app-tests-dev
 app-tests-dev: ## Run development tests (dev)

@@ -10,6 +10,3 @@ RUN pip install -r /requirements.txt
 
 RUN  mkdir /django-logs && \
      chown -R gcorn: /django-logs
-
-EXPOSE 8000
-USER gcorn

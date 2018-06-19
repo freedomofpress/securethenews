@@ -1,4 +1,6 @@
 RUN adduser -D -g "" gcorn
+LABEL MAINTAINER="Freedom of the Press Foundation"
+LABEL APP="securethenews"
 
 RUN paxctl -cm /usr/local/bin/python
 COPY --from=node-assets /src-files/ /django/
@@ -16,6 +18,5 @@ RUN  mkdir /django-media /django-static /django-logs && \
      chown -R gcorn: /django-static && \
      chown -R gcorn: /django-logs
 
-EXPOSE 8000
-USER gcorn
-CMD ./manage.py migrate && ./manage.py runserver 0.0.0.0:8000
+RUN mkdir -p /etc/gunicorn && chown -R gcorn: /etc/gunicorn
+COPY docker/gunicorn/gunicorn.py /etc/gunicorn/gunicorn.py
