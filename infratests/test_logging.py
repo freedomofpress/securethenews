@@ -84,3 +84,24 @@ def test_json_log_200(host):
                          "status": 200}}
 
     assert request_and_scrape('/', 'INFO', host) == should_return
+
+
+def test_dl_logger_doesnt_propogate(host):
+    """
+    Ensure dl_logger events aren't being dumped into django logs. This is a
+    problem of our catch all behavior and checks to make sure we have the
+    django logging module with propogate disabled
+
+    ex: {"asctime": "______", "levelname": "WARNING", "name": "dl_logger",
+        "module": "middleware",
+        "message": "<django_logging.log_object.LogObject object
+                    at 0x3aa51603be0>"}
+    """
+    host.run("curl -L --user-agent testinfra --header 'Host: app'"
+             " http://localhost:8000/")
+
+    grep_pattern = '\"dl_logger\"'
+    dl_logger_grep = host.run("egrep -q -r {}  /django-logs".format(
+                    grep_pattern))
+
+    assert dl_logger_grep.rc != 0

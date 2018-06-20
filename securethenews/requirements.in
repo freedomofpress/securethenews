@@ -3,7 +3,7 @@ django-analytical
 django-cors-headers
 django-crispy-forms
 django-filter
--e git+https://github.com/freedomofpress/django-logging.git@Remove_Elastic#egg=django-logging-json
+-e git+https://github.com/freedomofpress/django-logging.git@51f4fd4b02fafc3d6d9cddb5658247497404df7e#egg=django-logging-json
 django-mailgun
 elasticsearch
 gunicorn
