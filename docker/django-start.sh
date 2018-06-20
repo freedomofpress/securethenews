@@ -25,6 +25,8 @@ wait_for_postgres() {
 django_start() {
     ./manage.py migrate
     if [ "${DEPLOY_ENV}" == "dev" ]; then
+        echo "Killing previous logs .."
+        find "${DJANGO_LOG_PATH:-/django-logs}/" -type f -name '*.log*' -exec rm -vf '{}' \;
         ./manage.py runserver 0.0.0.0:8000
     else
         ./manage.py collectstatic -c --noinput
