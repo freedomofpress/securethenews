@@ -1,7 +1,7 @@
 ---
 version: 2
 jobs:
-  build:
+  safety_check:
     machine: true
     working_directory: ~/securethenews
     steps:
@@ -19,17 +19,34 @@ jobs:
       - run:
           name: Check Python dependencies for CVEs
           command: |
+            pipenv install --selective-upgrade safety
             pipenv run make safety
+
+      - run:
+          name: Static code analysis for vulnerabilities
+          command: |
+            pipenv install --selective-upgrade bandit
+            pipenv run make bandit
+
+  build:
+    machine: true
+    working_directory: ~/securethenews
+    steps:
+      - checkout
+
+      - run:
+          name: Install testing pre-reqs
+          command: |
+            # Set python to 3.5.2
+            pyenv global 3.5.2
+            pip install -U pip
+            pip install pipenv
+            pipenv install
 
       - run:
           name: linters on the source
           command: |
             pipenv run make lint
-
-      - run:
-          name: Static code analysis for vulnerabilities
-          command: |
-            pipenv run make bandit
 
       - run:
           name: Ensure we can build and run dev env
@@ -51,3 +68,20 @@ jobs:
 
       - store_test_results:
           path: ~/securethenews/test-results
+
+workflows:
+  version: 2
+  securethenews_ci:
+    jobs:
+      - safety_check
+      - build
+  nightly:
+    triggers:
+      - schedule:
+          cron: "0 0 * * *"
+          filters:
+            branches:
+              only:
+                - master
+    jobs:
+      - safety_check
