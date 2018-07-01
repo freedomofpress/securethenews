@@ -27,7 +27,9 @@ django_start() {
     if [ "${DEPLOY_ENV}" == "dev" ]; then
         ./manage.py runserver 0.0.0.0:8000
     else
-        ./manage.py collectstatic -c --noinput
+        if [ "${DJANGO_COLLECT_STATIC}" == "yes" ]; then
+            ./manage.py collectstatic -c --noinput
+        fi
         gunicorn -c /etc/gunicorn/gunicorn.py securethenews.wsgi
     fi
 }
