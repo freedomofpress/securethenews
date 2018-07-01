@@ -30,8 +30,6 @@ DATABASES = {
     }
 }
 
-STATIC_ROOT = os.environ['DJANGO_STATIC_ROOT']
-MEDIA_ROOT = os.environ['DJANGO_MEDIA_ROOT']
 
 try:
     es_host = os.environ.get('DJANGO_ES_HOST', 'disable')
@@ -82,3 +80,24 @@ if os.environ.get('CLOUDFLARE_TOKEN') and os.environ.get('CLOUDFLARE_EMAIL'):
 if os.environ.get('PIWIK_DOMAIN_PATH'):
     PIWIK_DOMAIN_PATH = os.environ.get('PIWIK_DOMAIN_PATH')
     PIWIK_SITE_ID = os.environ.get('PIWIK_SITE_ID', '1')
+
+
+if os.environ.get('AWS_SESSION_TOKEN'):
+    INSTALLED_APPS.append('storages')  # noqa: F405
+
+    AWS_S3_MEDIA_PATH = os.environ.get('AWS_S3_MEDIA_PATH', 'media')
+    AWS_S3_STATIC_PATH = os.environ.get('AWS_S3_STATIC_PATH', 'static')
+    AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
+    AWS_S3_REGION_NAME = os.environ.get('AWS_S3_REGION_NAME', 'us-east-1')
+
+    AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+    AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+    AWS_SESSION_TOKEN = os.environ.get('AWS_SESSION_TOKEN', '')
+    AWS_S3_USE_SSL = True
+    AWS_S3_SIGNATURE_VERSION = os.environ.get("AWS_S3_SIG_VER", "s3v4")
+    STATICFILES_STORAGE = "securethenews.s3_storage.StaticStorage"
+    DEFAULT_FILE_STORAGE = "securethenews.s3_storage.MediaStorage"
+
+else:
+    STATIC_ROOT = os.environ['DJANGO_STATIC_ROOT']
+    MEDIA_ROOT = os.environ['DJANGO_MEDIA_ROOT']
