@@ -98,6 +98,24 @@ if os.environ.get('AWS_SESSION_TOKEN'):
     STATICFILES_STORAGE = "securethenews.s3_storage.StaticStorage"
     DEFAULT_FILE_STORAGE = "securethenews.s3_storage.MediaStorage"
 
+elif os.environ.get('GS_BUCKET_NAME'):
+    INSTALLED_APPS.append('storages')  # noqa: F405
+    GS_BUCKET_NAME = os.environ.get("GS_BUCKET_NAME")
+    GS_PROJECT_ID = os.environ.get("GS_PROJECT_ID")
+    G_CREDS = os.environ.get("GS_CREDENTIALS", None)
+
+    # https://github.com/jschneier/django-storages/issues/455
+    if G_CREDS:
+        from google.oauth2.service_account import Credentials
+        GS_CREDENTIALS = Credentials.from_service_account_file(G_CREDS)
+
+    GS_MEDIA_PATH = os.environ.get('GS_MEDIA_PATH', 'media')
+    GS_STATIC_PATH = os.environ.get('GS_STATIC_PATH', 'static')
+
+    DEFAULT_FILE_STORAGE = 'securethenews.gce_storage.MediaStorage'
+    if os.environ.get("GS_STORE_STATIC", False):
+        STATICFILES_STORAGE = "securethenews.gce_storage.StaticStorage"
+
 else:
     STATIC_ROOT = os.environ['DJANGO_STATIC_ROOT']
     MEDIA_ROOT = os.environ['DJANGO_MEDIA_ROOT']

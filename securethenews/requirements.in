@@ -6,7 +6,7 @@ django-crispy-forms
 django-filter
 -e git+https://github.com/freedomofpress/django-logging.git@51f4fd4b02fafc3d6d9cddb5658247497404df7e#egg=django-logging-json
 django-mailgun
-django-storages # s3 asset storage
+django-storages[boto3, google] # aws s3, google storage asset management
 elasticsearch
 gunicorn
 markdown2>=2.3.5  # required by pshtt, forcing newer version for patch
