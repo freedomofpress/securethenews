@@ -11,6 +11,7 @@ markdown2>=2.3.5  # required by pshtt, forcing newer version for patch
 pshtt
 psycopg2
 python-json-logger
+sslyze>=1.4.3 # for cryptography >2.2
 unittest-xml-reporting
 wagtail
 wagtailmenus
