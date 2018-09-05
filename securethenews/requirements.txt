@@ -20,7 +20,7 @@ django-mailgun==0.9.1
 django-modelcluster==3.1  # via wagtail
 django-taggit==0.22.1     # via wagtail
 django-treebeard==4.1.2   # via wagtail
-django==1.11.11
+django==1.11.15
 djangorestframework==3.6.4  # via wagtail
 docopt==0.6.2             # via pshtt
 dominate==2.3.1           # via pytablewriter
