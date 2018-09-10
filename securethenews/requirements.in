@@ -1,4 +1,4 @@
-Django>=1.11.11<2
+Django>=1.11.15<2
 django-analytical
 django-cors-headers
 django-crispy-forms
