@@ -44,7 +44,8 @@ update-pip-dependencies: ## Uses pip-compile to update requirements.txt
 safety: ## Runs `safety check` to check python dependencies for vulnerabilities
 	@for req_file in `find . -type f -name '*requirements.txt'`; do \
 		echo "Checking file $$req_file" \
-		&& safety check --ignore 36351 --ignore 36546 --full-report -r $$req_file \
+		&& safety check --ignore 36351 --ignore 36546 --ignore 36533 --ignore 36534\
+		--full-report -r $$req_file \
 		&& echo -e '\n' \
 		|| exit 1; \
 	done
