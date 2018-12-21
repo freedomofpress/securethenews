@@ -14,20 +14,20 @@ RUN cd /src-files && ( npm install && npm run start )
 FROM python@sha256:bfac58481666aeb60ff6354e81afe888cc8c7b1effb1039870377fc7fa86ef43
 
 RUN apk add --no-cache \
-            bash \
-            curl \
-            gcc \
-            git \
-            # pillow dep
-            jpeg-dev \
-            libffi-dev \
-            musl-dev \
-            paxctl \
-            postgresql-dev \
-            # pillow dep
-            tiff-dev \
-            # pillow dep
-            zlib-dev
+    bash \
+    curl \
+    gcc \
+    git \
+    # pillow dep
+    jpeg-dev \
+    libffi-dev \
+    musl-dev \
+    paxctl \
+    postgresql-dev \
+    # pillow dep
+    tiff-dev \
+    # pillow dep
+    zlib-dev
 
 COPY docker/django-start.sh /usr/local/bin
 RUN  chmod +x /usr/local/bin/django-start.sh
@@ -47,9 +47,9 @@ RUN pip install -r /django/securethenews/requirements.txt
 # Really not used in production. Needed for mapped named volume
 # permission handling https://github.com/docker/compose/issues/3270
 RUN  mkdir /django-media /django-static /django-logs && \
-     chown -R gcorn: /django-media && \
-     chown -R gcorn: /django-static && \
-     chown -R gcorn: /django-logs
+    chown -R gcorn: /django-media && \
+    chown -R gcorn: /django-static && \
+    chown -R gcorn: /django-logs
 
 RUN mkdir -p /etc/gunicorn && chown -R gcorn: /etc/gunicorn
 COPY docker/gunicorn/gunicorn.py /etc/gunicorn/gunicorn.py
