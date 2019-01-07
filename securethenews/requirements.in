@@ -1,5 +1,5 @@
 boto3 # s3 storage
-Django>=1.11.15<2
+Django>=1.11.18<2
 django-analytical
 django-cors-headers
 django-crispy-forms
