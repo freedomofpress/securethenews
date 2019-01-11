@@ -7,7 +7,7 @@
 -e git+https://github.com/freedomofpress/django-logging.git@51f4fd4b02fafc3d6d9cddb5658247497404df7e#egg=django-logging-json
 asn1crypto==0.22.0        # via cryptography
 beautifulsoup4==4.6.0     # via pytablereader, wagtail
-boto3==1.7.48
+boto3==1.7.48             # via django-storages
 botocore==1.10.48         # via boto3, s3transfer
 cachetools==2.1.0         # via google-auth
 certifi==2017.7.27.1      # via requests
