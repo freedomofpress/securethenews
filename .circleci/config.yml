@@ -66,6 +66,12 @@ jobs:
             while ! curl --output /dev/null --silent --head --fail http://localhost:8080; do sleep 1 && echo -n .; done;
             pipenv run make ci-go
 
+      - run:
+          name: Push container ... but don't fail on forks
+          command: |
+            docker login -u "${QUAY_USER}" -p "${QUAY_PASS}" quay.io || true
+            make prod-push || true
+
       - store_test_results:
           path: ~/securethenews/test-results
 
