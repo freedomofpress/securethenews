@@ -4,6 +4,8 @@ WHOAMI := ${USER}
 RAND_PORT := ${RAND_PORT}
 UID := $(shell id -u)
 GIT_REV := $(shell git rev-parse HEAD | cut -c1-10)
+GIT_BR := $(shell git rev-parse --abbrev-ref HEAD)
+STN_IMAGE := quay.io/freedomofpress/securethenews
 
 .PHONY: ci-go
 ci-go: ## Provisions and tests a prod-like setup.
@@ -69,16 +71,9 @@ run-prod-env: ## Runs prod-like env (run build-prod-container first)
 
 .PHONY: prod-push
 prod-push: ## Publishes prod container image to registry
-	docker tag quay.io/freedomofpress/securethenews:latest quay.io/freedomofpress/securethenews:$(GIT_REV)
-	docker push quay.io/freedomofpress/securethenews
-	docker push quay.io/freedomofpress/securethenews:$(GIT_REV)
-
-.PHONY: staging-push
-staging-push: ## Publishes prod container image to registry with staging tag
-	docker tag quay.io/freedomofpress/securethenews:latest quay.io/freedomofpress/securethenews:staging
-	docker tag quay.io/freedomofpress/securethenews:latest quay.io/freedomofpress/securethenews:$(GIT_REV)
-	docker push quay.io/freedomofpress/securethenews:staging
-	docker push quay.io/freedomofpress/securethenews:$(GIT_REV)
+	docker tag $(STN_IMAGE):latest $(STN_IMAGE):$(GIT_REV)-$(GIT_BR)
+	docker push $(STN_IMAGE):latest
+	docker push $(STN_IMAGE):$(GIT_REV)-$(GIT_BR)
 
 .PHONY: dev-go
 dev-go: dev-init ## Runs development environment
