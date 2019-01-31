@@ -49,6 +49,21 @@ jobs:
             pipenv run make lint
 
       - run:
+          name: BUILD and push containers
+          command: |
+            pipenv run make build-prod-container
+            pipenv run make run-prod-env
+            docker login -u "${QUAY_USER}" -p "${QUAY_PASS}" quay.io || true
+            make prod-push || true
+
+      - run:
+          name: Ensure we can run prod env
+          command: |
+            pipenv run make run-prod-env
+            while ! curl --output /dev/null --silent --head --fail http://localhost:8080; do sleep 1 && echo -n .; done;
+            pipenv run make ci-go
+
+      - run:
           name: Ensure we can build and run dev env
           command: |
             pipenv run make dev-init
@@ -57,20 +72,6 @@ jobs:
             while ! curl --output /dev/null --silent --head --fail http://localhost:8000; do sleep 1 && echo -n .; done;
             pipenv run make app-tests-dev
             pipenv run docker-compose down
-
-      - run:
-          name: Ensure we can build and run prod env
-          command: |
-            pipenv run make build-prod-container
-            pipenv run make run-prod-env
-            while ! curl --output /dev/null --silent --head --fail http://localhost:8080; do sleep 1 && echo -n .; done;
-            pipenv run make ci-go
-
-      - run:
-          name: Push container ... but don't fail on forks
-          command: |
-            docker login -u "${QUAY_USER}" -p "${QUAY_PASS}" quay.io || true
-            make prod-push || true
 
       - store_test_results:
           path: ~/securethenews/test-results
