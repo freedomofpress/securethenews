@@ -1,4 +1,4 @@
-ARG NODE_VER=4.8.2-alpine
+ARG NODE_VER
 FROM node:${NODE_VER} AS node-assets
 
 # Make npm output less verbose
