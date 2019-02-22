@@ -3,7 +3,7 @@ from unittest import mock
 
 from django.test import TestCase
 
-from wagtail.wagtailcore.models import Page
+from wagtail.core.models import Page
 
 from .models import BlogIndexPage, BlogPost
 

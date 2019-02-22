@@ -3,7 +3,7 @@
 from __future__ import unicode_literals
 
 from django.db import migrations
-from wagtail.wagtailcore.rich_text import RichText
+from wagtail.core.rich_text import RichText
 
 
 def convert_to_streamfield(apps, schema_editor):
