@@ -187,20 +187,27 @@ CRISPY_TEMPLATE_PACK = 'bootstrap3'
 #
 
 LOG_DIR = os.environ.get('DJANGO_LOG_PATH', os.path.join(BASE_DIR, 'logs'))
+LOG_TO_CONSOLE = bool(os.environ.get('DJANGO_LOG_CONSOLE', False))
 
 DJANGO_LOGGING = {
-    "CONSOLE_LOG": False,
+    "CONSOLE_LOG": LOG_TO_CONSOLE,
     "SQL_LOG": False,
     "DISABLE_EXISTING_LOGGERS": False,
     "PROPOGATE": False,
     "LOG_LEVEL": os.environ.get('DJANGO_LOG_LEVEL', 'info'),
-    "LOG_PATH": LOG_DIR
+    "LOG_PATH": LOG_DIR,
+    "INDENT_CONSOLE_LOG": 0
 }
 
 # Ensure base log directory exists
-if not os.path.exists(LOG_DIR):
+if not os.path.exists(LOG_DIR) and not LOG_TO_CONSOLE:
     os.makedirs(LOG_DIR)
 DJANGO_OTHER_LOG = os.path.join(LOG_DIR, 'django-other.log')
+
+# Logs other than tracebacks and requests
+GENERIC_LOG_HANDLER = 'rotate'
+if LOG_TO_CONSOLE:
+    GENERIC_LOG_HANDLER = 'console'
 
 LOGGING = {
     'version': 1,
@@ -212,30 +219,36 @@ LOGGING = {
             'backupCount': 5,
             'maxBytes': 10000000,
             'filename': os.environ.get('DJANGO_LOGFILE', DJANGO_OTHER_LOG),
-            'formatter': 'django_builtin'
+            'formatter': 'json_out'
         },
+
+        'console': {
+            'class': 'logging.StreamHandler',
+            'formatter': 'json_out'
+        },
+
         'null': {
             'class': 'logging.NullHandler',
         }
     },
     'formatters': {
-        'django_builtin': {
+        'json_out': {
             '()': 'pythonjsonlogger.jsonlogger.JsonFormatter',
-            'format': "%(asctime)s %(levelname)s %(name)s "
+            'format': "%(levelname)s %(created)s %(name)s "
                       "%(module)s %(message)s"
         }
     },
     'loggers': {
         'django.template': {
-            'handlers': ['rotate'],
+            'handlers': [GENERIC_LOG_HANDLER],
             'propagate': False,
         },
         'django.db.backends': {
-            'handlers': ['rotate'],
+            'handlers': [GENERIC_LOG_HANDLER],
             'propagate': False,
         },
         'django.security': {
-            'handlers': ['rotate'],
+            'handlers': [GENERIC_LOG_HANDLER],
             'propagate': False,
         },
         # These are already handled by the django json logging library
@@ -243,8 +256,13 @@ LOGGING = {
             'handlers': ['null'],
             'propagate': False,
         },
+        # Log entries from runserver
+        'django.server': {
+            'handlers': ['null'],
+            'propagate': False,
+        },
         '': {
-            'handlers': ['rotate'],
+            'handlers': [GENERIC_LOG_HANDLER],
             'propagate': False,
         },
     },
