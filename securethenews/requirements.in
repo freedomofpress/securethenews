@@ -1,9 +1,10 @@
+boto3 # s3 storage
 Django>=1.11.20<2
 django-analytical
 django-cors-headers
 django-crispy-forms
 django-filter
--e git+https://github.com/freedomofpress/django-logging.git@51f4fd4b02fafc3d6d9cddb5658247497404df7e#egg=django-logging-json
+-e git+https://github.com/freedomofpress/django-logging.git@ff46c7397b324744f948e342dda563ecab1ceed3#egg=django-logging-json
 django-mailgun
 django-storages[boto3, google]>=1.7 # aws s3, google storage asset management
 elasticsearch
