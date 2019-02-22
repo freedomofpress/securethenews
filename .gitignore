@@ -56,7 +56,3 @@ coverage.xml
 
 #visual studio code
 .vscode
-
-# ignore dynamically generated dockerfiles
-docker/DevDjangoDockerfile
-docker/ProdDjangoDockerfile

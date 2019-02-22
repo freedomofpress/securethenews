@@ -23,6 +23,8 @@ services:
     build:
       context: .
       dockerfile: docker/ProdDjangoDockerfile
+      args:
+        NODE_VER: 10.15.1-alpine
     image: quay.io/freedomofpress/securethenews
     env_file: ${DJANGO_ENV_FILE}
     depends_on:
