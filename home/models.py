@@ -9,12 +9,15 @@ from modelcluster.fields import ParentalKey
 from wagtail.contrib.table_block.blocks import TableBlock
 from wagtail.core import blocks, hooks
 from wagtail.core.models import Page
-from wagtail.core.fields import (RichTextField,
-                                        StreamField)
-from wagtail.admin.edit_handlers import (FieldPanel, FieldRowPanel,
-                                                MultiFieldPanel, InlinePanel,
-                                                PageChooserPanel,
-                                                StreamFieldPanel)
+from wagtail.core.fields import RichTextField, StreamField
+from wagtail.admin.edit_handlers import (
+    FieldPanel,
+    FieldRowPanel,
+    MultiFieldPanel,
+    InlinePanel,
+    PageChooserPanel,
+    StreamFieldPanel,
+)
 from wagtail.contrib.forms.edit_handlers import FormSubmissionsPanel
 from wagtail.contrib.forms.models import AbstractEmailForm, AbstractFormField
 from wagtail.images.blocks import ImageChooserBlock
