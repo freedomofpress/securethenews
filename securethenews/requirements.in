@@ -15,4 +15,4 @@ psycopg2
 python-json-logger
 unittest-xml-reporting
 wagtail<2.1
-wagtailmenus
+wagtailmenus>=2.12

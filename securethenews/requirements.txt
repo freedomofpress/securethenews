@@ -16,6 +16,7 @@ chardet==3.0.4            # via requests
 cryptography==1.9         # via pyopenssl, sslyze
 dataproperty==0.25.6      # via pytablereader, pytablewriter, simplesqlite
 django-analytical==2.2.2
+django-cogwheels==0.2     # via wagtailmenus
 django-cors-headers==2.1.0
 django-crispy-forms==1.6.1
 django-filter==1.0.4
@@ -79,7 +80,7 @@ unidecode==0.4.21         # via wagtail
 unittest-xml-reporting==2.1.1
 urllib3==1.22             # via elasticsearch, requests
 wagtail==2.0.2
-wagtailmenus==2.4
+wagtailmenus==2.12
 webencodings==0.5.1       # via html5lib
 wget==3.2                 # via pshtt
 willow==1.1               # via wagtail
