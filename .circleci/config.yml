@@ -28,6 +28,12 @@ jobs:
             pipenv install --selective-upgrade bandit
             pipenv run make bandit
 
+      - run:
+          name: Check node dependencies for vulnerabilities
+          command: |
+            pipenv run make dev-init
+            pipenv run make npm-audit
+
   build:
     machine: true
     working_directory: ~/securethenews
