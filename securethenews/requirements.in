@@ -8,7 +8,7 @@ django-filter
 django-mailgun
 django-storages[boto3, google]>=1.7 # aws s3, google storage asset management
 elasticsearch
-gunicorn
+gunicorn>=19.8 # Need above gunicorn 19.8 in order to use dict_config inline
 markdown2>=2.3.5  # required by pshtt, forcing newer version for patch
 pshtt
 psycopg2

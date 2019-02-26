@@ -27,6 +27,8 @@ services:
         NODE_VER: 10.15.1-alpine
     image: quay.io/freedomofpress/securethenews
     env_file: ${DJANGO_ENV_FILE}
+    environment:
+      DJANGO_LOG_CONSOLE: "yes"
     depends_on:
       - postgresql
     working_dir: /django
