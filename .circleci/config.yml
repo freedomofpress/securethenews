@@ -27,8 +27,12 @@ jobs:
           command: |
             pipenv install --selective-upgrade bandit
             pipenv run make bandit
+      - run:
+          name: linters on the source
+          command: |
+            pipenv run make lint
 
-  build:
+  build_dev:
     machine: true
     working_directory: ~/securethenews
     steps:
@@ -44,9 +48,29 @@ jobs:
             pipenv install
 
       - run:
-          name: linters on the source
+          name: Ensure we can build and run dev env
           command: |
-            pipenv run make lint
+            pipenv run make dev-init
+            pipenv run docker-compose up -d
+            echo "Wait for environemnt to come up completely"
+            while ! curl --output /dev/null --silent --head --fail http://localhost:8000; do sleep 1 && echo -n .; done;
+            pipenv run make app-tests-dev
+            pipenv run docker-compose down
+
+  build_prod:
+    machine: true
+    working_directory: ~/securethenews
+    steps:
+      - checkout
+
+      - run:
+          name: Install testing pre-reqs
+          command: |
+            # Set python to 3.5.2
+            pyenv global 3.5.2
+            pip install -U pip
+            pip install pipenv
+            pipenv install
 
       - run:
           name: BUILD and push containers
@@ -63,16 +87,6 @@ jobs:
             while ! curl --output /dev/null --silent --head --fail http://localhost:8080; do sleep 1 && echo -n .; done;
             pipenv run make ci-go
 
-      - run:
-          name: Ensure we can build and run dev env
-          command: |
-            pipenv run make dev-init
-            pipenv run docker-compose up -d
-            echo "Wait for environemnt to come up completely"
-            while ! curl --output /dev/null --silent --head --fail http://localhost:8000; do sleep 1 && echo -n .; done;
-            pipenv run make app-tests-dev
-            pipenv run docker-compose down
-
       - store_test_results:
           path: ~/securethenews/test-results
 
@@ -81,7 +95,8 @@ workflows:
   securethenews_ci:
     jobs:
       - safety_check
-      - build
+      - build_prod
+      - build_dev
   nightly:
     triggers:
       - schedule:
