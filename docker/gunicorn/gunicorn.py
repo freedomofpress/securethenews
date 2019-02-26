@@ -21,6 +21,9 @@ if os.environ.get('DJANGO_LOG_CONSOLE', "n").lower() in ['y', '1', 'yes']:
                 'class': 'logging.StreamHandler',
                 'formatter': 'json_out'
             },
+            'null': {
+                'class': 'logging.NullHandler',
+            }
 
         },
         'formatters': {
@@ -32,8 +35,7 @@ if os.environ.get('DJANGO_LOG_CONSOLE', "n").lower() in ['y', '1', 'yes']:
         },
         'loggers': {
             'gunicorn.access': {
-                'handlers': ['jsonconsole'],
-                'level': 'INFO',
+                'handlers': ['null'],
             },
             'gunicorn.error': {
                 'handlers': ['jsonconsole'],
