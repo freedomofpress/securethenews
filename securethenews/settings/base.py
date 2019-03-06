@@ -79,6 +79,7 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 
     'wagtail.wagtailcore.middleware.SiteMiddleware',
     'wagtail.wagtailredirects.middleware.RedirectMiddleware',
@@ -278,3 +279,6 @@ if os.environ.get('DJANGO_XMLTEST_OUTPUT', 'no').lower() in ['yes', 'true']:
     TEST_OUTPUT_FILE_NAME = "app-tests.xml"
     TEST_OUTPUT_DESCRIPTIONS = True
     TEST_OUTPUT_VERBOSE = 2
+
+# Whitenoise
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'

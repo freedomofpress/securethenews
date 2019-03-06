@@ -80,6 +80,7 @@ wagtail==1.12.1
 wagtailmenus==2.4
 webencodings==0.5.1       # via html5lib
 wget==3.2                 # via pshtt
+whitenoise==4.1.2
 willow==0.4               # via wagtail
 xlrd==1.1.0               # via pytablereader
 xlsxwriter==0.9.9         # via pytablewriter

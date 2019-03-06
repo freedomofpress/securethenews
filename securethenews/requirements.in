@@ -16,3 +16,4 @@ python-json-logger
 unittest-xml-reporting
 wagtail
 wagtailmenus
+whitenoise
