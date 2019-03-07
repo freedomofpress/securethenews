@@ -44,6 +44,7 @@ services:
       - node
       - postgresql
     environment:
+      DJANGO_COLLECT_STATIC: "yes"
       DJANGO_LOG_CONSOLE: "yes"
       DJANGO_DB_PASSWORD: securethenewspassword
       DJANGO_DB_USER: securethenews
