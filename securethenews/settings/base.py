@@ -282,4 +282,4 @@ if os.environ.get('DJANGO_XMLTEST_OUTPUT', 'no').lower() in ['yes', 'true']:
     TEST_OUTPUT_VERBOSE = 2
 
 # Whitenoise
-STATICFILES_STORAGE = 'securethenews.whitenoise_storage.WhiteNoiseStaticFilesStorage'
+STATICFILES_STORAGE = 'securethenews.whitenoise_storage.FilesStorage'
