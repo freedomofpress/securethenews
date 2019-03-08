@@ -10,3 +10,36 @@ capture_output = os.environ.get('DJANGO_GCORN_CAPOUTPUT', False)
 # is not the default.
 workers = int(os.environ.get('DJANGO_GCORN_WORKERS', 6))
 threads = int(os.environ.get('DJANGO_GCORN_THREADS', 1))
+
+# Log gunicorn events to console if specified user env supplied
+if os.environ.get('DJANGO_LOG_CONSOLE', "n").lower() in ['y', '1', 'yes']:
+    logconfig_dict = {
+        'version': 1,
+        'disable_existing_loggers': False,
+        'handlers': {
+            'jsonconsole': {
+                'class': 'logging.StreamHandler',
+                'formatter': 'json_out'
+            },
+            'null': {
+                'class': 'logging.NullHandler',
+            }
+
+        },
+        'formatters': {
+            'json_out': {
+                '()': 'pythonjsonlogger.jsonlogger.JsonFormatter',
+                'format': "%(levelname)s %(created)s %(name)s "
+                "%(module)s %(message)s"
+            }
+        },
+        'loggers': {
+            'gunicorn.access': {
+                'handlers': ['null'],
+            },
+            'gunicorn.error': {
+                'handlers': ['jsonconsole'],
+                'level': 'INFO',
+            },
+        },
+    }
