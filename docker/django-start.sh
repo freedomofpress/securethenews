@@ -22,10 +22,10 @@ wait_for_postgres() {
 }
 
 django_start() {
-    ./manage.py migrate | json_format migrate
     if [ "${DJANGO_COLLECT_STATIC}" == "yes" ]; then
         ./manage.py collectstatic -c --noinput | json_format collectstatic
     fi
+    ./manage.py migrate | json_format migrate
     if [ "${DEPLOY_ENV}" == "dev" ]; then
         ./manage.py runserver 0.0.0.0:8000
     else

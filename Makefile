@@ -109,6 +109,10 @@ app-tests-prod: ## Run development tests (prod)
 ops-tests: ## Run testinfra-based tests (functional)
 	pytest --junit-xml test-results/ops-tests.xml infratests
 
+.PHONY: open-browser
+open-browser: ## Opens a web-browser pointing to the compose env
+	@./scripts/browser-open.sh
+
 # Explaination of the below shell command should it ever break.
 # 1. Set the field separator to ": ##" to parse lines for make targets.
 # 2. Check for second field matching, skip otherwise.
