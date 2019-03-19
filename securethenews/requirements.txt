@@ -18,14 +18,14 @@ dataproperty==0.25.6      # via pytablereader, pytablewriter, simplesqlite
 django-analytical==2.2.2
 django-cogwheels==0.2     # via wagtailmenus
 django-cors-headers==2.1.0
-django-crispy-forms==1.6.1
+django-crispy-forms==1.7.2
 django-filter==1.0.4
 django-mailgun==0.9.1
 django-modelcluster==4.3  # via wagtail
 django-storages[boto3,google]==1.7.1
 django-taggit==0.23.0     # via wagtail
 django-treebeard==4.3     # via wagtail
-django==1.11.20
+django==2.0.13
 djangorestframework==3.9.1  # via wagtail
 docopt==0.6.2             # via pshtt
 docutils==0.14            # via botocore

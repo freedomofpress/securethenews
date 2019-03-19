@@ -1,8 +1,8 @@
 boto3 # s3 storage
-Django>=1.11.20<2
+Django>=2.0.13,<2.1
 django-analytical
 django-cors-headers
-django-crispy-forms
+django-crispy-forms>=1.7.2
 django-filter
 -e git+https://github.com/freedomofpress/django-logging.git@51f4fd4b02fafc3d6d9cddb5658247497404df7e#egg=django-logging-json
 django-mailgun
