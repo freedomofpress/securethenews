@@ -9,7 +9,6 @@ bandit = "*"
 docker-compose = "*"
 flake8 = "*"
 safety = "*"
-testinfra = "*"
 
 [requires]
 python_version = "3"
