@@ -17,7 +17,7 @@ class PledgeForm(ModelForm):
 
         # 1. The URL should match the domain of the site
         site = self.cleaned_data['site']
-        domain_re = '([\w\.]+\.)?{}'.format(site.domain.replace('.', '\.'))
+        domain_re = r'([\w\.]+\.)?{}'.format(site.domain.replace('.', r'\.'))
         parsed_url = urlparse(self.cleaned_data['url'])
         if not re.match(domain_re, parsed_url.netloc):
             raise ValidationError(
@@ -25,7 +25,7 @@ class PledgeForm(ModelForm):
             )
 
         # 2. The contact email address should match the domain of the site
-        email_re = '.+@{}'.format(site.domain.replace('.', '\.'))
+        email_re = '.+@{}'.format(site.domain.replace('.', r'\.'))
         if not re.match(email_re, self.cleaned_data['contact_email']):
             raise ValidationError(
                 'Contact email address must match the site domain.'
