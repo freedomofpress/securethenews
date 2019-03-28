@@ -13,7 +13,7 @@ class SiteFilter(django_filters.rest_framework.FilterSet):
     """
     # This is nicer than the default, which only lets you input a specific
     # date.
-    added_range = django_filters.DateTimeFromToRangeFilter(name='added')
+    added_range = django_filters.DateTimeFromToRangeFilter(field_name='added')
 
     class Meta:
         model = Site
@@ -26,8 +26,8 @@ class ScanFilter(django_filters.rest_framework.FilterSet):
     performed, as well as the score range among a list of scans
     """
     timestamp_range = django_filters.DateTimeFromToRangeFilter(
-        name='timestamp')
-    score_range = django_filters.RangeFilter(name='score')
+        field_name='timestamp')
+    score_range = django_filters.RangeFilter(field_name='score')
 
     class Meta:
         model = Scan
