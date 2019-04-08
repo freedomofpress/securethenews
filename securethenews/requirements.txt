@@ -15,7 +15,7 @@ cffi==1.10.0              # via cryptography
 chardet==3.0.4            # via requests
 cryptography==1.9         # via pyopenssl, sslyze
 dataproperty==0.25.6      # via pytablereader, pytablewriter, simplesqlite
-django-analytical==2.2.2
+django-analytical==2.5.0
 django-cogwheels==0.2     # via wagtailmenus
 django-cors-headers==2.1.0
 django-crispy-forms==1.7.2
