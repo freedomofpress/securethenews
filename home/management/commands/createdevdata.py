@@ -5,7 +5,7 @@ from django.core import management
 from django.core.management.base import BaseCommand
 from django.db import transaction
 
-from wagtail.wagtailcore.models import Page, Site
+from wagtail.core.models import Page, Site
 
 from wagtailmenus.models import MainMenu, MainMenuItem
 

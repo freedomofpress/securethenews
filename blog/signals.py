@@ -1,5 +1,5 @@
-from wagtail.wagtailcore.signals import page_published, page_unpublished
-from wagtail.contrib.wagtailfrontendcache.utils import purge_page_from_cache
+from wagtail.core.signals import page_published, page_unpublished
+from wagtail.contrib.frontend_cache.utils import purge_page_from_cache
 
 from blog.models import BlogPost
 

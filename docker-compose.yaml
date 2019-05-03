@@ -4,7 +4,7 @@ networks:
   app:
 services:
   postgresql:
-    image: postgres:9.3
+    image: postgres:9.5
     ports:
       - "127.0.0.1::5432"
     volumes:

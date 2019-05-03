@@ -1,13 +1,12 @@
 from django.db import models
 from django.template.defaultfilters import striptags
 
-from wagtail.wagtailcore import blocks
-from wagtail.wagtailcore.models import Page
-from wagtail.wagtailcore.fields import (StreamField)
-from wagtail.wagtailadmin.edit_handlers import (FieldPanel,
-                                                StreamFieldPanel)
-from wagtail.wagtailimages.blocks import ImageChooserBlock
-from wagtail.wagtailsearch import index
+from wagtail.core import blocks
+from wagtail.core.models import Page
+from wagtail.core.fields import (StreamField)
+from wagtail.admin.edit_handlers import FieldPanel, StreamFieldPanel
+from wagtail.images.blocks import ImageChooserBlock
+from wagtail.search import index
 
 
 class BlogPost(Page):

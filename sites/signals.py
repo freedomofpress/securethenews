@@ -2,7 +2,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.urls import reverse
 
-from wagtail.contrib.wagtailfrontendcache.utils import purge_url_from_cache
+from wagtail.contrib.frontend_cache.utils import purge_url_from_cache
 
 from sites.models import Scan
 

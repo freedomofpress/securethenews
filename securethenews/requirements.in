@@ -1,9 +1,9 @@
 boto3 # s3 storage
-Django>=1.11.20<2
-django-analytical
+Django>=2.1,<2.2
+django-analytical>=2.5,<2.6
 django-cors-headers
-django-crispy-forms
-django-filter
+django-crispy-forms>=1.7.2
+django-filter>=2.1.0
 -e git+https://github.com/freedomofpress/django-logging.git@51f4fd4b02fafc3d6d9cddb5658247497404df7e#egg=django-logging-json
 django-mailgun
 django-storages[boto3, google]>=1.7 # aws s3, google storage asset management
@@ -14,5 +14,5 @@ pshtt
 psycopg2
 python-json-logger
 unittest-xml-reporting
-wagtail
-wagtailmenus
+wagtail>=2.3,<2.4
+wagtailmenus>=2.12
