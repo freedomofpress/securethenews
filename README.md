@@ -56,6 +56,22 @@ of course, you can obtain a shell directly into any of the containers using `doc
 $ docker-compose exec django ash
 ```
 
+### Debugging
+
+If you want to use the [PDB](https://docs.python.org/3/library/pdb.html) program for debugging, it is possible.  First, add this line to an area of the code you wish to debug:
+
+```
+import ipdb; ipdb.set_trace()
+```
+
+Second, attach to the running Django container.  This must be done in a shell, and it is within this attached shell that you will be able to interact with the debugger.  The command to attach is `docker attach <ID_OF_DJANGO_CONTAINER>`, and on UNIX-type systems, you can look up the ID and attach to the container with this single command:
+
+```
+docker attach $(docker ps -aqf "name=freedompress_django")
+```
+
+Once you have done this, you can load the page that will run the code with your `import ipdb` and the debugger will activate in the shell you attached.
+
 ## Getting Started with the Production Environment
 
 The environment is fairly similar to development with the exception that your code will not auto-reload and be reflected in the container. So this is not a great environment to development under but it reflects a production-like environment run under `gunicorn` and behind a reverse-proxy nginx server.

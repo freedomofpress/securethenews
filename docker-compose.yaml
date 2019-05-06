@@ -35,6 +35,8 @@ services:
       - app
 
   django:
+    stdin_open: true
+    tty: true
     build:
       context: .
       dockerfile: docker/DevDjangoDockerfile
