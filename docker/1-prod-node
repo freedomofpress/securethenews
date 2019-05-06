@@ -9,7 +9,7 @@ RUN apk add --no-cache paxctl python make g++
 RUN paxctl -cm /usr/local/bin/node
 
 # Install gulp globally so it can be used during builds
-RUN npm install --global gulp-cli
+RUN NPM_CONFIG_UNSAFE_PERM=true npm install --global gulp-cli
 
 COPY ./ /src-files
 RUN cd /src-files && ( npm install && gulp build:production )
