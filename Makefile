@@ -42,7 +42,8 @@ update-pip-dependencies: ## Uses pip-compile to update requirements.txt
 # be resolved differently.
 	docker run -v "$(DIR)/securethenews:/code" -it python:3.6-slim \
 		bash -c 'pip install pip-tools && apt-get update && apt-get install git -y && pip-compile \
-		--output-file /code/requirements.txt /code/requirements.in'
+		--output-file /code/requirements.txt /code/requirements.in && \
+        pip-compile -U --no-header --output-file /code/dev-requirements.txt /code/dev-requirements.in'
 
 .PHONY: safety
 safety: ## Runs `safety check` to check python dependencies for vulnerabilities

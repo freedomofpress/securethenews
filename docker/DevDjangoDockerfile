@@ -26,7 +26,7 @@ ARG USERID
 RUN adduser -D -g "" -u "${USERID}" gcorn
 
 RUN paxctl -cm /usr/local/bin/python
-COPY securethenews/requirements.txt /requirements.txt
+COPY securethenews/dev-requirements.txt /requirements.txt
 RUN pip install -r /requirements.txt
 
 RUN  mkdir /django-logs && \
