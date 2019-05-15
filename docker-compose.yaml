@@ -44,14 +44,14 @@ services:
       - node
       - postgresql
     environment:
-      DJANGO_LOG_CONSOLE: "yes"
+      DEPLOY_ENV: dev
+      DJANGO_ALLOWED_HOSTS: "app localhost"
+      DJANGO_DB_HOST: db
       DJANGO_DB_PASSWORD: securethenewspassword
       DJANGO_DB_USER: securethenews
       DJANGO_DB_NAME: securethenewsdb
       DJANGO_DB_PORT: 5432
-      DJANGO_DB_HOST: db
-      DJANGO_XMLTEST_OUTPUT: "yes"
-      DEPLOY_ENV: dev
+      DJANGO_SETTINGS_MODULE: securethenews.settings.dev
     working_dir: /django
     volumes:
       - ./:/django

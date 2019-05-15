@@ -26,7 +26,18 @@ services:
       args:
         NODE_VER: 10.15.1-alpine
     image: quay.io/freedomofpress/securethenews
-    env_file: ${DJANGO_ENV_FILE}
+    environment:
+      DEPLOY_ENV: prod
+      DJANGO_ALLOWED_HOSTS: "app localhost"
+      DJANGO_DB_HOST: db
+      DJANGO_DB_PASSWORD: securethenewspassword
+      DJANGO_DB_USER: securethenews
+      DJANGO_DB_NAME: securethenewsdb
+      DJANGO_STATIC_ROOT: /django-static
+      DJANGO_MEDIA_ROOT: /django-media
+      DJANGO_DB_PORT: 5432
+      DJANGO_SETTINGS_MODULE: securethenews.settings.production
+      DJANGO_SECRET_KEY: 002b5d76a026c29190c50e610a73516cb277f0abd07ae6233fbbe86f655abc5a
     depends_on:
       - postgresql
     working_dir: /django
@@ -44,7 +55,7 @@ services:
     volumes:
       - ./docker/nginx:/etc/nginx/conf.d/:ro
       - ${HOST_STATIC_DIR:-stn-django-static}:/django-media:ro
-      - ${HOST_MEDIA_DIR:-stn-django-static}:/django-static:ro
+      - ${HOST_MEDIA_DIR:-stn-django-static}:/django-static:ro 
     depends_on:
       - django
     ports:
