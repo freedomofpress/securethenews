@@ -13,6 +13,10 @@ ci-go: ## Provisions and tests a prod-like setup.
 lint: ## Runs linters
 	flake8
 
+.PHONY: check-migrations
+check-migrations: ## Check for ungenerated migrations
+	docker-compose exec -T django bash -c "./manage.py makemigrations --dry-run --check"
+
 .PHONY: dev-createdevdata
 dev-createdevdata: ## Imports site data in dev environment.
 	docker-compose exec django bash -c "./manage.py migrate"

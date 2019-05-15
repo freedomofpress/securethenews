@@ -56,6 +56,7 @@ jobs:
             echo "Wait for environemnt to come up completely"
             while ! curl --output /dev/null --silent --head --fail http://localhost:8000; do sleep 1 && echo -n .; done;
             pipenv run make app-tests-dev
+            pipenv run make check-migrations
             pipenv run docker-compose down
 
       - run:
