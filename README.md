@@ -18,7 +18,7 @@ $ pipenv install
 $ pipenv shell
 ```
 
-Then run the following, which will be need to be run occassionally if you make modification to the django dockerfile deps:
+Then run the following, which will be need to be run once at clone of this repo:
 
 ```bash
 make dev-init
