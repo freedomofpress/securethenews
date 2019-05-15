@@ -67,10 +67,10 @@ import ipdb; ipdb.set_trace()
 Second, attach to the running Django container.  This must be done in a shell, and it is within this attached shell that you will be able to interact with the debugger.  The command to attach is `docker attach <ID_OF_DJANGO_CONTAINER>`, and on UNIX-type systems, you can look up the ID and attach to the container with this single command:
 
 ```
-docker attach $(docker ps -aqf "name=freedompress_django")
+docker attach $(docker-compose ps -q django)
 ```
 
-Once you have done this, you can load the page that will run the code with your `import ipdb` and the debugger will activate in the shell you attached.
+Once you have done this, you can load the page that will run the code with your `import ipdb` and the debugger will activate in the shell you attached. To detach from the shell without stopping the container press `Control+P` followed by `Control+Q`.
 
 ## Getting Started with the Production Environment
 
