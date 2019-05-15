@@ -73,17 +73,6 @@ jobs:
             pipenv run make lint
 
       - run:
-          name: BUILD and push containers
-          command: |
-            pipenv run make dev-init
-            pipenv run docker-compose up -d
-            echo "Wait for environemnt to come up completely"
-            while ! curl --output /dev/null --silent --head --fail http://localhost:8000; do sleep 1 && echo -n .; done;
-            pipenv run make app-tests-dev
-            pipenv run make check-migrations
-            pipenv run docker-compose down
-
-      - run:
           name: Ensure we can run prod env
           command: |
             pipenv run make run-prod-env
@@ -95,10 +84,10 @@ jobs:
           command: |
             pipenv run make dev-init
             pipenv run docker-compose up -d
-            echo "Wait for environemnt to come up completely"
+            echo "Wait for environment to come up completely"
             while ! curl --output /dev/null --silent --head --fail http://localhost:8000; do sleep 1 && echo -n .; done;
+            pipenv run make check-migrations
             pipenv run make app-tests-dev
-            pipenv run docker-compose down
 
       - store_test_results:
           path: ~/securethenews/test-results
