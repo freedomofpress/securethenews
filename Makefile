@@ -84,22 +84,8 @@ dev-go: dev-init ## Runs development environment
 	docker-compose up
 
 .PHONY: dev-init
-dev-init: dev-concat-docker docker-env-inject ## Build development environment contaners
-	docker-compose build
-
-.PHONY: docker-env-inject
-docker-env-inject: ## Layout UID value for docker-compose ingestion
-	echo DJANGO_ENV_FILE=./docker/ci.env > .env
-	echo HOST_GUNICORN_DIR=./docker/gunicorn >> .env
-	echo UID=$(UID) >> .env
-
-.PHONY: dev-concat-docker
-dev-concat-docker: ## Concat docker files in prep for dev env
-	cd docker && cat djangodocker.snippet dev-django djangodocker-runcmds.snippet > DevDjangoDockerfile
-
-.PHONY: prod-concat-docker
-prod-concat-docker: docker-env-inject ## Concat docker files in prep for prod env
-	cd docker && cat 1-prod-node djangodocker.snippet 2-prod-django djangodocker-runcmds.snippet > ProdDjangoDockerfile
+dev-init: ## pipe ENVs into docker-compose, prevents need of wrapper script
+	echo UID=$(UID) > .env
 
 .PHONY: app-tests-dev
 app-tests-dev: ## Run development tests (dev)
