@@ -37,6 +37,7 @@ services:
   django:
     stdin_open: true
     tty: true
+    read_only: true
     build:
       context: .
       dockerfile: docker/DevDjangoDockerfile
