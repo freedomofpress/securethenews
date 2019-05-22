@@ -56,3 +56,6 @@ coverage.xml
 
 #visual studio code
 .vscode
+
+# Ignore files created to communicate system deployment info
+.versioninfo

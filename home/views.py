@@ -3,15 +3,13 @@ import os
 from django.http import HttpResponse
 
 
-GITINFO_PATH = os.path.join(
-    os.path.dirname(os.path.dirname(__file__)),
-    'gitinfo')
+DEPLOYINFO_PATH = os.environ.get('DJANGO_VERSION_FILE', '/deploy/version')
 
 
-def gitinfo_view(request):
+def deploy_info_view(request):
     try:
-        with open(GITINFO_PATH, 'r') as f:
+        with open(DEPLOYINFO_PATH, 'r') as f:
             contents = f.read()
     except FileNotFoundError:
-        contents = "<file not found at {}>".format(GITINFO_PATH)
+        contents = "<file not found at {}>".format(DEPLOYINFO_PATH)
     return HttpResponse(contents, content_type='text/plain')

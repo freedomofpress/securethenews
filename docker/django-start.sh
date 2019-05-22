@@ -28,6 +28,7 @@ django_start() {
         ./manage.py collectstatic -c --noinput
     fi
     if [ "${DEPLOY_ENV}" == "dev" ]; then
+        ./scripts/version-file.sh
         ./manage.py runserver 0.0.0.0:8000
     else
         gunicorn -c /etc/gunicorn/gunicorn.py securethenews.wsgi
