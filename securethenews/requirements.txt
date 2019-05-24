@@ -4,7 +4,7 @@
 #
 #    pip-compile --output-file /code/requirements.txt /code/requirements.in
 #
--e git+https://github.com/freedomofpress/django-logging.git@51f4fd4b02fafc3d6d9cddb5658247497404df7e#egg=django-logging-json
+-e git+https://github.com/freedomofpress/django-logging.git@ff46c7397b324744f948e342dda563ecab1ceed3#egg=django-logging-json
 asn1crypto==0.22.0        # via cryptography
 beautifulsoup4==4.6.0     # via pytablereader, wagtail
 boto3==1.7.48

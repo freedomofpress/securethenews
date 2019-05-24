@@ -1,2 +1,4 @@
 [flake8]
 exclude = blog/migrations,migrations,sites/migrations,node_modules
+per-file-ignores =
+    securethenews/settings/*:F405
