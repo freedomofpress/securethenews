@@ -63,7 +63,7 @@ publicsuffix==1.1.0
 pyasn1-modules==0.2.2
 pyasn1==0.4.3
 pycparser==2.18
-pygments==2.3.1           # via ipython
+pygments==2.4.2           # via ipython
 pyopenssl==17.2.0
 pyparsing==2.2.0
 pytablereader==0.13.3
@@ -78,7 +78,7 @@ s3transfer==0.1.13
 simplesqlite==0.15.0
 six==1.12.0
 sslyze==2.0.0
-tls-parser==1.2.0
+tls-parser==1.2.1
 toml==0.9.2
 traitlets==4.3.2          # via ipython
 typepy==0.0.20
