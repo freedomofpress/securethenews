@@ -1,4 +1,4 @@
-# 3.6.5-alpine3.7 - May 11, 2018
+# python3.6-slim-stretch - May 31, 2019
 FROM python@sha256:bab4801d3ea2b1b5a796e96c37654e6e8c2619d0ddbdc1314bb03e09361cc117
 
 RUN apt-get update && \
@@ -22,8 +22,6 @@ RUN apt-get update && \
         paxctl \
         python3-dev
 
-COPY docker/django-start.sh /usr/local/bin
-RUN  chmod +x /usr/local/bin/django-start.sh
 COPY docker/django-start.sh /usr/local/bin
 RUN  chmod +x /usr/local/bin/django-start.sh
 
