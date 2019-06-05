@@ -1,10 +1,11 @@
-const Leaderboard = require('./leaderboard.js');
-const Teaser = require('./teaser.js');
-const Backbone = require('backbone');
-const _ = require('underscore');
-const $ = require('jquery');
+import Leaderboard from './leaderboard'
+import Teaser from './teaser'
+import Backbone from 'backbone'
+import _ from 'underscore'
+import $ from 'jquery'
 
-require('./styles/main.scss');
+import './styles/main.scss'
+
 
 Backbone.$ = $;
 

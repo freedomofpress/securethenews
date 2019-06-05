@@ -1,12 +1,13 @@
-const Backbone = require('backbone');
-const _ = require('underscore');
-const $ = require('jquery');
-const Sites = require('./sites.js');
-const template = require('./teasertemplate.jade');
+import Backbone from 'backbone'
+import _ from 'underscore'
+import $ from 'jquery'
+import Sites from './sites'
+
+import template from './teasertemplate.jade'
 
 const teaserRefreshInterval = 5000;
 
-module.exports = Backbone.View.extend({
+export default Backbone.View.extend({
 
   initialize() {
     // Instantiate collection using data injected into the template server-side
