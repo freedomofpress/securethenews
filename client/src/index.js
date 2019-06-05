@@ -4,6 +4,7 @@ const Backbone = require('backbone');
 const _ = require('underscore');
 const $ = require('jquery');
 
+require('./styles/main.scss');
 
 Backbone.$ = $;
 

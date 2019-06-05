@@ -1,4 +1,5 @@
 {% load static wagtailuserbar %}
+{% load render_bundle from webpack_loader %}
 {% load menu_tags %}
 {% load analytical %}
 
@@ -20,7 +21,7 @@
         <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}">
 
         {# Global stylesheets #}
-        <link rel="stylesheet" type="text/css" href="{% static 'main.css' %}">
+        {% render_bundle 'build' 'css' %}
         {% block extra_css %}
             {# Override this in templates to add extra stylesheets #}
         {% endblock %}
@@ -84,7 +85,7 @@
         {% endblock %}
 
         {# Global javascript #}
-        <script type="text/javascript" src="{% static 'build.js' %}"></script>
+        {% render_bundle 'build' 'js' %}
 
         {% block extra_js %}
             {# Override this in templates to add extra javascript #}

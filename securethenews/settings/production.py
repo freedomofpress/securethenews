@@ -52,6 +52,8 @@ try:
 except KeyError:
     pass
 
+WEBPACK_LOADER['default']['cache'] = True  # noqa: F405
+
 # Mailgun integration
 #
 if os.environ.get('MAILGUN_ACCESS_KEY'):

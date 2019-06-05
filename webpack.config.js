@@ -75,6 +75,16 @@ var common = {
 			{
 				test: /\.(jade|pug)$/,
 				use: ['pug-loader']
+			},
+			{
+				test: /\.(woff2?|ttf|eot|svg|otf)(\?v=\d+\.\d+\.\d+)?$/,
+				use: [{
+					loader: 'file-loader',
+					options: {
+						name: '[name].[ext]',
+						outputPath: 'fonts/'
+					}
+				}]
 			}
 		]
 	},

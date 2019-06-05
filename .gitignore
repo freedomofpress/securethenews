@@ -25,7 +25,7 @@ molecule/.cache/
 # Node dependencies
 node_modules
 
-# gulp build artifacts
+# webpack builds
 client/build/
 
 # Django/Wagtail user-uploaded files
