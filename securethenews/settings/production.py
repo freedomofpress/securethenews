@@ -52,7 +52,7 @@ try:
 except KeyError:
     pass
 
-WEBPACK_LOADER['default']['cache'] = True  # noqa: F405
+WEBPACK_LOADER['DEFAULT']['CACHE'] = True  # noqa: F405
 
 # Mailgun integration
 #
