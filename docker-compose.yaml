@@ -29,7 +29,7 @@ services:
     volumes:
       - ./:/var/www/django
     working_dir: /var/www/django
-    command: /bin/ash -c "npm install && touch .node_complete && gulp watch"
+    command: /bin/ash -c "npm install && touch .node_complete && npm run start"
     user: ${UID:?err}
     networks:
       - app
