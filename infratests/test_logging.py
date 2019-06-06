@@ -11,6 +11,7 @@ testinfra_hosts = ["docker://{}".format(docker_id.decode('utf-8'))]
 
 SKIP_LOG_TEST_MSG = "circle back and test this from container stdout"
 
+
 @pytest.mark.skip(reason=SKIP_LOG_TEST_MSG)
 def request_and_scrape(url, filter_key, host):
     """ Take in URL, grab the relevant log line,

@@ -16,6 +16,7 @@ PSHTT_DOMAINS = [
     'freedom.press'
 ]
 
+
 @pytest.mark.skip(reason=SKIP_LOG_TEST_MSG)
 def test_pshtt_installed(host):
     """
@@ -38,6 +39,7 @@ def test_pshtt_installed(host):
     assert host.check_output(pshtt_binary.path + " --version") \
         == "v0.0.1"
 
+
 @pytest.mark.skip(reason=SKIP_LOG_TEST_MSG)
 @pytest.mark.parametrize('domain', PSHTT_DOMAINS)
 def test_pssht_connectivity(host, domain):
@@ -51,6 +53,7 @@ def test_pssht_connectivity(host, domain):
     c = host.command("{} -o /tmp/o.csv {}".format(PSHTT_CLI_PATH, domain))
     assert c.rc == 0
     assert c.stderr.strip() == "Wrote results to /tmp/o.csv."
+
 
 @pytest.mark.skip(reason=SKIP_LOG_TEST_MSG)
 @pytest.mark.parametrize('domain', PSHTT_DOMAINS)
