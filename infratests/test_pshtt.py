@@ -9,12 +9,14 @@ docker_id = subprocess.check_output(["docker-compose",
                                      "django"]).rstrip()
 testinfra_hosts = ["docker://{}".format(docker_id.decode('utf-8'))]
 
+SKIP_LOG_TEST_MSG = "circle back and test this from container stdout"
+
 PSHTT_CLI_PATH = "/usr/local/bin/pshtt"
 PSHTT_DOMAINS = [
     'freedom.press'
 ]
 
-
+@pytest.mark.skip(reason=SKIP_LOG_TEST_MSG)
 def test_pshtt_installed(host):
     """
     We need the pshtt library for the SecureDrop Directory, for querying
@@ -36,7 +38,7 @@ def test_pshtt_installed(host):
     assert host.check_output(pshtt_binary.path + " --version") \
         == "v0.0.1"
 
-
+@pytest.mark.skip(reason=SKIP_LOG_TEST_MSG)
 @pytest.mark.parametrize('domain', PSHTT_DOMAINS)
 def test_pssht_connectivity(host, domain):
     """
@@ -50,7 +52,7 @@ def test_pssht_connectivity(host, domain):
     assert c.rc == 0
     assert c.stderr.strip() == "Wrote results to /tmp/o.csv."
 
-
+@pytest.mark.skip(reason=SKIP_LOG_TEST_MSG)
 @pytest.mark.parametrize('domain', PSHTT_DOMAINS)
 def test_pssht_json_output(host, domain):
     """
