@@ -6,6 +6,12 @@ exit_code=0
 # not stop the script right away
 make app-tests-prod || exit_code=1
 
+echo "--------------------------------------------------------------------------------------------------"
+echo "                                     DEBUG                                                        "
+echo "--------------------------------------------------------------------------------------------------"
+docker-compose ps
+echo "--------------------------------------------------------------------------------------------------"
+
 # Copy XML from container into local environment
 docker cp $(docker-compose ps -q django):/django-logs/app-tests.xml ./test-results/
 
