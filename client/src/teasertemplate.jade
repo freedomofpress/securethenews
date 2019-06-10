@@ -2,4 +2,4 @@
   for site in sites
     a(href=site.absolute_url)
       span(class='graded-news-org')= site.name
-        span(class='grade #{site.grade.class_name}')= site.grade.grade
+        span(class=`grade ${site.grade.class_name}`)= site.grade.grade
