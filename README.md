@@ -136,17 +136,6 @@ The test suite includes a smoke test for `createdevdata`, so you can easily
 verify that the command is working without disrupting your own development
 environment.
 
-### Live reload
-
-The default gulp `watch` task uses `gulp-livereload` to automatically trigger a
-browser refresh when changes to the frontend code are detected. In order to take
-advantage of this, you will need to install the [LiveReload Chrome
-extension](https://chrome.google.com/webstore/detail/livereload/jnihajbhpnppcggbcgedagnkighmdlei?hl=en).
-
-Once you've installed the extension, simply load the development site in your
-browser (`localhost:8000`) and click the LiveReload extension icon to initiate
-live reloading.
-
 ## API
 
 If everything is working correctly, you should be able to find an API endpoint

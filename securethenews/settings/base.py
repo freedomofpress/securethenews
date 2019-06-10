@@ -49,7 +49,7 @@ INSTALLED_APPS = [
     'wagtail.contrib.table_block',
 
     'wagtailmenus',
-
+    'webpack_loader',
     'modelcluster',
     'taggit',
 
@@ -182,6 +182,19 @@ REST_FRAMEWORK = {
 
 # Shiny forms for the web view of the API
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
+
+# Django-webpack configuration
+WEBPACK_LOADER = {  # noqa: W605
+    'DEFAULT': {
+        'CACHE': False,
+        'BUNDLE_DIR_NAME': '/',  # must end with slash
+        'STATS_FILE': os.path.join(BASE_DIR,
+                                   'client/build/webpack-stats.json'),
+        'POLL_INTERVAL': 0.1,
+        'TIMEOUT': None,
+        'IGNORE': ['.+\.hot-update.js', '.+\.map']
+    }
+}
 
 # Django json logging
 #

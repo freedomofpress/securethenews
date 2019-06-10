@@ -34,7 +34,7 @@ mixin check(condition)
               a(href=item.absolute_url)= item.name
               if item.pledge
                 a(href=item.pledge.url)
-                  i.pledged.fa.fa-handshake-o(title="#{ item.name } have pledged to secure their site.")
+                  i.pledged.fa.fa-handshake-o(title=`${item.name} have pledged to secure their site.`)
             td.desktop-only
               +check(item.valid_https)
             td.desktop-only
@@ -46,6 +46,6 @@ mixin check(condition)
             td.desktop-only
               +check(item.hsts_preloaded)
             td
-              span(class='grade #{item.grade.class_name}')= item.grade.grade
+              span(class=`grade ${item.grade.class_name}`)= item.grade.grade
   else
     p.align-center Sorry, no sites match your search query.

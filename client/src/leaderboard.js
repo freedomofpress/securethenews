@@ -1,10 +1,10 @@
-const Backbone = require('backbone');
-const _ = require('underscore');
-const $ = require('jquery');
-const Sites = require('./sites.js');
-const template = require('./leaderboardtemplate.jade');
+import Backbone from 'backbone'
+import _ from 'underscore'
+import $ from 'jquery'
+import Sites from './sites'
+import template from './leaderboardtemplate.jade'
 
-module.exports = Backbone.View.extend({
+export default Backbone.View.extend({
   initialize(options) {
     const optionsDefaults = {
       // Display this many results; if null, show all

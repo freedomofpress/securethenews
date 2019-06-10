@@ -10,6 +10,3 @@ RUN adduser -D -g "" -u "${USERID}" docker_user || true
 # Oddly, node-sass requires both python and make to build bindings
 RUN apk add --no-cache paxctl python make g++
 RUN paxctl -cm /usr/local/bin/node
-
-# Install gulp globally so it can be used during builds
-RUN npm install --global gulp-cli

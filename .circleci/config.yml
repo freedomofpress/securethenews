@@ -28,6 +28,30 @@ jobs:
             pipenv install --selective-upgrade bandit
             pipenv run make bandit
 
+  npm_audit:
+    machine: true
+    working_directory: ~/freedom.press
+    steps:
+      - checkout
+
+      - run:
+          name: Install dependencies
+          command: |
+            # Set to native py3 on circleci image
+            pyenv global 3.5.2
+            pip install -U pip
+            pip install pipenv
+            pipenv install
+
+      - run:
+          name: Check node dependencies for vulnerabilities
+          command: |
+            pipenv run make dev-init
+            pipenv run make ci-npm-audit
+
+      - store_test_results:
+          path: ~/freedom.press/test-results/
+
   build:
     machine: true
     working_directory: ~/securethenews
@@ -75,6 +99,7 @@ workflows:
   securethenews_ci:
     jobs:
       - safety_check
+      - npm_audit 
       - build
   nightly:
     triggers:

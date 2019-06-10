@@ -114,6 +114,15 @@ app-tests-dev: ## Run development tests (dev)
 app-tests-prod: ## Run development tests (prod)
 	docker-compose -f ci-docker-compose.yaml run django ./manage.py test --noinput --keepdb
 
+.PHONY: npm-audit
+npm-audit: ## Checks NodeJS NPM dependencies for vulnerabilities
+	@docker-compose run --entrypoint "/bin/ash -c" node 'npm install && $$(npm bin)/npm-audit-plus'
+
+.PHONY: ci-npm-audit
+ci-npm-audit:
+	@mkdir -p test-results # Creates necessary test-results folder
+	@docker-compose run --entrypoint "/bin/ash -c" node 'npm ci && $$(npm bin)/npm-audit-plus --xml > test-results/audit.xml'
+
 .PHONY: ops-tests
 ops-tests: ## Run testinfra-based tests (functional)
 	pytest --junit-xml test-results/ops-tests.xml infratests
