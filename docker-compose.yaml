@@ -27,8 +27,8 @@ services:
         NODE_VER: 10.15.1-alpine
         USERID: ${UID:?err}
     volumes:
-      - ./:/var/www/django
-    working_dir: /var/www/django
+      - ./:/django
+    working_dir: /django
     command: /bin/ash -c "npm install && touch .node_complete && npm run start"
     user: ${UID:?err}
     networks:
@@ -57,7 +57,6 @@ services:
     working_dir: /django
     volumes:
       - ./:/django
-      - ./logs:/django-logs
     ports:
       - "127.0.0.1:8000:8000"
     networks:
