@@ -19,8 +19,6 @@ RUN apk add --no-cache \
 
 COPY docker/django-start.sh /usr/local/bin
 RUN  chmod +x /usr/local/bin/django-start.sh
-COPY docker/django-start.sh /usr/local/bin
-RUN  chmod +x /usr/local/bin/django-start.sh
 
 ARG USERID
 RUN adduser -D -g "" -u "${USERID}" gcorn
