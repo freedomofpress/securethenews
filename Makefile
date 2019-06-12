@@ -67,11 +67,11 @@ bandit: ## Runs `bandit` static code analysis tool for security bugs
 
 .PHONY: build-prod-container
 build-prod-container: prod-concat-docker ## Builds prod environment
-	docker-compose -f ci-docker-compose.yaml build --no-cache
+	docker-compose -f prod-docker-compose.yaml build --no-cache
 
 .PHONY: run-prod-env
 run-prod-env: ## Runs prod-like env (run build-prod-container first)
-	docker-compose -f ci-docker-compose.yaml up -d
+	docker-compose -f prod-docker-compose.yaml up -d
 
 .PHONY: prod-push
 prod-push: ## Publishes prod container image to registry
@@ -93,7 +93,7 @@ app-tests-dev: ## Run development tests (dev)
 
 .PHONY: app-tests-prod
 app-tests-prod: ## Run development tests (prod)
-	docker-compose -f ci-docker-compose.yaml run django ./manage.py test --noinput --keepdb
+	docker-compose -f prod-docker-compose.yaml run django ./manage.py test --noinput --keepdb
 
 .PHONY: npm-audit
 npm-audit: ## Checks NodeJS NPM dependencies for vulnerabilities

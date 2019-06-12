@@ -75,9 +75,23 @@ jobs:
       - run:
           name: Ensure we can run prod env
           command: |
-            pipenv run make run-prod-env
+            pipenv run docker-compose -f prod-docker-compose.yaml up -d
             while ! curl --output /dev/null --silent --head --fail http://localhost:8080; do sleep 1 && echo -n .; done;
-            pipenv run make ci-go
+
+      - run:
+          name: Check for missing migrations
+          command: |
+            pipenv run docker-compose -f prod-docker-compose.yaml exec django /bin/bash -c "./manage.py makemigrations --dry-run --check"
+
+      - run:
+          name: Run app tests against prod containers
+          command: |
+            pipenv run docker-compose -f prod-docker-compose.yaml exec django /bin/bash -c "./manage.py test --noinput -k"
+
+      - run:
+          name: Run infra tests against prod containers
+          command: |
+            pipenv run pytest --junit-xml test-results/ops-tests.xml infratests
 
       - run:
           name: Ensure we can build and run dev env
