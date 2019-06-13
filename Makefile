@@ -4,6 +4,8 @@ WHOAMI := ${USER}
 RAND_PORT := ${RAND_PORT}
 UID := $(shell id -u)
 GIT_REV := $(shell git rev-parse HEAD | cut -c1-10)
+GIT_BR := $(shell git rev-parse --abbrev-ref HEAD)
+STN_IMAGE := quay.io/freedomofpress/securethenews
 
 .PHONY: ci-go
 ci-go: ## Provisions and tests a prod-like setup.
@@ -65,46 +67,25 @@ bandit: ## Runs `bandit` static code analysis tool for security bugs
 
 .PHONY: build-prod-container
 build-prod-container: prod-concat-docker ## Builds prod environment
-	docker-compose -f ci-docker-compose.yaml build --no-cache
+	docker-compose -f prod-docker-compose.yaml build --no-cache
 
 .PHONY: run-prod-env
 run-prod-env: ## Runs prod-like env (run build-prod-container first)
-	docker-compose -f ci-docker-compose.yaml up -d
+	docker-compose -f prod-docker-compose.yaml up -d
 
 .PHONY: prod-push
 prod-push: ## Publishes prod container image to registry
-	docker tag quay.io/freedomofpress/securethenews:latest quay.io/freedomofpress/securethenews:$(GIT_REV)
-	docker push quay.io/freedomofpress/securethenews
-	docker push quay.io/freedomofpress/securethenews:$(GIT_REV)
-
-.PHONY: staging-push
-staging-push: ## Publishes prod container image to registry with staging tag
-	docker tag quay.io/freedomofpress/securethenews:latest quay.io/freedomofpress/securethenews:staging
-	docker tag quay.io/freedomofpress/securethenews:latest quay.io/freedomofpress/securethenews:$(GIT_REV)
-	docker push quay.io/freedomofpress/securethenews:staging
-	docker push quay.io/freedomofpress/securethenews:$(GIT_REV)
+	docker tag $(STN_IMAGE):latest $(STN_IMAGE):$(GIT_REV)-$(GIT_BR)
+	docker push $(STN_IMAGE):latest
+	docker push $(STN_IMAGE):$(GIT_REV)-$(GIT_BR)
 
 .PHONY: dev-go
 dev-go: dev-init ## Runs development environment
 	docker-compose up
 
 .PHONY: dev-init
-dev-init: dev-concat-docker docker-env-inject ## Build development environment contaners
-	docker-compose build
-
-.PHONY: docker-env-inject
-docker-env-inject: ## Layout UID value for docker-compose ingestion
-	echo DJANGO_ENV_FILE=./docker/ci.env > .env
-	echo HOST_GUNICORN_DIR=./docker/gunicorn >> .env
-	echo UID=$(UID) >> .env
-
-.PHONY: dev-concat-docker
-dev-concat-docker: ## Concat docker files in prep for dev env
-	cd docker && cat djangodocker.snippet dev-django djangodocker-runcmds.snippet > DevDjangoDockerfile
-
-.PHONY: prod-concat-docker
-prod-concat-docker: docker-env-inject ## Concat docker files in prep for prod env
-	cd docker && cat 1-prod-node djangodocker.snippet 2-prod-django djangodocker-runcmds.snippet > ProdDjangoDockerfile
+dev-init: ## pipe ENVs into docker-compose, prevents need of wrapper script
+	echo UID=$(UID) > .env
 
 .PHONY: app-tests-dev
 app-tests-dev: ## Run development tests (dev)
@@ -112,7 +93,7 @@ app-tests-dev: ## Run development tests (dev)
 
 .PHONY: app-tests-prod
 app-tests-prod: ## Run development tests (prod)
-	docker-compose -f ci-docker-compose.yaml run django ./manage.py test --noinput --keepdb
+	docker-compose -f prod-docker-compose.yaml run django ./manage.py test --noinput --keepdb
 
 .PHONY: npm-audit
 npm-audit: ## Checks NodeJS NPM dependencies for vulnerabilities
