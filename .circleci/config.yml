@@ -10,8 +10,8 @@ jobs:
       - run:
           name: Install testing pre-reqs
           command: |
-            # Set python to 3.5.2
-            pyenv global 3.5.2
+            # Set python to 3.6.5, required for pytest/pathlib infra test
+            pyenv global 3.6.5
             pip install -U pip
             pip install pipenv
             pipenv install
@@ -38,7 +38,7 @@ jobs:
           name: Install dependencies
           command: |
             # Set to native py3 on circleci image
-            pyenv global 3.5.2
+            pyenv global 3.6.5
             pip install -U pip
             pip install pipenv
             pipenv install
@@ -61,8 +61,7 @@ jobs:
       - run:
           name: Install testing pre-reqs
           command: |
-            # Set python to 3.5.2
-            pyenv global 3.5.2
+            pyenv global 3.6.5
             pip install -U pip
             pip install pipenv
             pipenv install
@@ -88,13 +87,12 @@ jobs:
           command: |
             pipenv run docker-compose -f prod-docker-compose.yaml exec django /bin/bash -c "./manage.py test --noinput -k"
 
-      # Setting `|| true` because we expect this step to fail, due to a broken pathlib import.
-      # See upstream issue: https://github.com/pytest-dev/pytest/issues/5017 Once that issue
-      # is resolved, we can work on unbreaking the tests.
+      # Pytest must be invoked with python 3.6 or greater, due to a broken pathlib import.
+      # See upstream issue: https://github.com/pytest-dev/pytest/issues/5017
       - run:
           name: Run infra tests against prod containers
           command: |
-            pipenv run pytest --junit-xml test-results/ops-tests.xml infratests || true
+            pipenv run pytest --junit-xml test-results/ops-tests.xml infratests
 
       - run:
           name: Ensure we can build and run dev env
