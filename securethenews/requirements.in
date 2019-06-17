@@ -13,6 +13,7 @@ markdown2>=2.3.5  # required by pshtt, forcing newer version for patch
 pshtt
 psycopg2
 python-json-logger
+sslyze<2  # pinning older version for python3.5 compatibility
 unittest-xml-reporting
 wagtail>=2.3,<2.4
 wagtailmenus>=2.12
