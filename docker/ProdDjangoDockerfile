@@ -14,29 +14,32 @@ RUN paxctl -cm /usr/local/bin/node
 
 COPY ./ /src-files
 RUN cd /src-files && ( npm install && npm run build )
+# python:3.6-slim-stretch - May 31, 2019
+FROM python@sha256:bab4801d3ea2b1b5a796e96c37654e6e8c2619d0ddbdc1314bb03e09361cc117
 
-# 3.6.5-alpine3.7 - May 11, 2018
-FROM python@sha256:bfac58481666aeb60ff6354e81afe888cc8c7b1effb1039870377fc7fa86ef43
-
-RUN apk add --no-cache \
-            bash \
-            curl \
-            gcc \
-            git \
-            # pillow dep
-            jpeg-dev \
-            libffi-dev \
-            musl-dev \
-            paxctl \
-            postgresql-dev \
-            # pillow dep
-            tiff-dev \
-            # pillow dep
-            zlib-dev
+RUN apt-get update && \
+        apt-get install -y \
+        bash \
+        build-essential \
+        curl \
+        gcc \
+        git \
+        libjpeg-dev \
+        libffi-dev \
+        libpq-dev \
+        libtiff-dev \
+        libssl-dev \
+        libz-dev \
+        musl-dev \
+        netcat-traditional \
+        paxctl \
+        python3-dev
 
 COPY docker/django-start.sh /usr/local/bin
 RUN  chmod +x /usr/local/bin/django-start.sh
-RUN adduser -D -g "" gcorn
+
+RUN adduser --gecos "" gcorn
+
 LABEL MAINTAINER="Freedom of the Press Foundation"
 LABEL APP="securethenews"
 
