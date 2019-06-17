@@ -64,7 +64,7 @@ COPY docker/gunicorn/gunicorn.py /etc/gunicorn/gunicorn.py
 
 RUN mkdir /deploy && \
     chown -R gcorn: /deploy && \
-    /django/devops/scripts/version-file.sh
+    /django/scripts/version-file.sh
 
 EXPOSE 8000
 USER gcorn
