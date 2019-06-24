@@ -1,3 +1,9 @@
+ARG DJANGO_DB_HOST
+ARG DJANGO_DB_PASSWORD
+ARG DJANGO_DB_USER
+ARG DJANGO_DB_NAME
+ARG DJANGO_DB_PORT
+
 # python:3.6-slim-stretch - May 31, 2019
 FROM python@sha256:bab4801d3ea2b1b5a796e96c37654e6e8c2619d0ddbdc1314bb03e09361cc117
 
@@ -32,8 +38,14 @@ RUN pip install -r /requirements.txt
 RUN  mkdir /django-logs /deploy && \
      chown -R gcorn: /django-logs /deploy
 
-RUN /django/manage.py collectstatic -c --noinput
+ENV DJANGO_DB_HOST ${DJANGO_DB_HOST}
+ENV DJANGO_DB_PASSWORD ${DJANGO_DB_PASSWORD}
+ENV DJANGO_DB_USER {$DJANGO_DB_USER}
+ENV DJANGO_DB_NAME ${DJANGO_DB_NAME}
+ENV DJANGO_DB_PORT ${DJANGO_DB_PORT}
+
 RUN /django/scripts/version-file.sh
+RUN /django/manage.py collectstatic -c --noinput
 
 EXPOSE 8000
 USER gcorn

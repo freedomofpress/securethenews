@@ -25,6 +25,11 @@ services:
       dockerfile: docker/ProdDjangoDockerfile
       args:
         NODE_VER: 10.15.1-alpine
+        DJANGO_DB_HOST: db
+        DJANGO_DB_PASSWORD: securethenewspassword
+        DJANGO_DB_USER: securethenews
+        DJANGO_DB_NAME: securethenewsdb
+        DJANGO_DB_PORT: 5432
     image: quay.io/freedomofpress/securethenews
     read_only: true
     environment:

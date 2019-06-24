@@ -1,4 +1,10 @@
 ARG NODE_VER
+ARG DJANGO_DB_HOST
+ARG DJANGO_DB_PASSWORD
+ARG DJANGO_DB_USER
+ARG DJANGO_DB_NAME
+ARG DJANGO_DB_PORT
+
 FROM node:${NODE_VER} AS node-assets
 
 # Make npm output less verbose
@@ -65,9 +71,14 @@ COPY docker/gunicorn/gunicorn.py /etc/gunicorn/gunicorn.py
 RUN mkdir /deploy && \
     chown -R gcorn: /deploy
 
+ENV DJANGO_DB_HOST ${DJANGO_DB_HOST}
+ENV DJANGO_DB_PASSWORD ${DJANGO_DB_PASSWORD}
+ENV DJANGO_DB_USER {$DJANGO_DB_USER}
+ENV DJANGO_DB_NAME ${DJANGO_DB_NAME}
+ENV DJANGO_DB_PORT ${DJANGO_DB_PORT}
+
 RUN /django/scripts/version-file.sh
 
-RUN cd /django && ./managecoll.py migrate --noinput
 RUN cd /django && ./manage.py collectstatic -c --noinput
 
 EXPOSE 8000
