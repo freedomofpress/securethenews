@@ -32,6 +32,10 @@ RUN pip install -r /requirements.txt
 RUN  mkdir /django-logs /deploy && \
      chown -R gcorn: /django-logs /deploy
 
+RUN /django/manage.py collectstatic -c --noinput
+RUN /django/scripts/version-file.sh
+
 EXPOSE 8000
 USER gcorn
+
 CMD django-start.sh

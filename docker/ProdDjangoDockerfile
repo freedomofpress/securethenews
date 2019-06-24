@@ -63,9 +63,14 @@ RUN mkdir -p /etc/gunicorn && chown -R gcorn: /etc/gunicorn
 COPY docker/gunicorn/gunicorn.py /etc/gunicorn/gunicorn.py
 
 RUN mkdir /deploy && \
-    chown -R gcorn: /deploy && \
-    /django/scripts/version-file.sh
+    chown -R gcorn: /deploy
+
+RUN /django/scripts/version-file.sh
+
+RUN cd /django && ./managecoll.py migrate --noinput
+RUN cd /django && ./manage.py collectstatic -c --noinput
 
 EXPOSE 8000
 USER gcorn
+
 CMD django-start.sh
