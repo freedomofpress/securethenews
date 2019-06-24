@@ -43,6 +43,11 @@ services:
       dockerfile: docker/DevDjangoDockerfile
       args:
         USERID: ${UID:?err}
+        DJANGO_DB_HOST: db
+        DJANGO_DB_PASSWORD: securethenewspassword
+        DJANGO_DB_USER: securethenews
+        DJANGO_DB_NAME: securethenewsdb
+        DJANGO_DB_PORT: 5432
     depends_on:
       - node
       - postgresql
