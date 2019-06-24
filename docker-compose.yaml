@@ -37,6 +37,7 @@ services:
   django:
     stdin_open: true
     tty: true
+    read_only: true
     build:
       context: .
       dockerfile: docker/DevDjangoDockerfile
@@ -54,9 +55,11 @@ services:
       DJANGO_DB_NAME: securethenewsdb
       DJANGO_DB_PORT: 5432
       DJANGO_SETTINGS_MODULE: securethenews.settings.dev
+      DJANGO_LOG_CONSOLE: "true"
     working_dir: /django
     volumes:
       - ./:/django
+      - ./logs/:/django/logs
     ports:
       - "127.0.0.1:8000:8000"
     networks:
