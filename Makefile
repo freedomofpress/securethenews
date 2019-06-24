@@ -66,7 +66,7 @@ bandit: ## Runs `bandit` static code analysis tool for security bugs
 	bandit --recursive . -lll --exclude molecule,node_modules,.venv
 
 .PHONY: build-prod-container
-build-prod-container: prod-concat-docker ## Builds prod environment
+build-prod-container:
 	docker-compose -f prod-docker-compose.yaml build --no-cache
 
 .PHONY: run-prod-env
