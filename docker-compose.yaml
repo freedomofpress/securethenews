@@ -43,11 +43,15 @@ services:
       dockerfile: docker/DevDjangoDockerfile
       args:
         USERID: ${UID:?err}
+        DEPLOY_ENV: dev
+        DJANGO_ALLOWED_HOSTS: "app localhost"
         DJANGO_DB_HOST: db
         DJANGO_DB_PASSWORD: securethenewspassword
         DJANGO_DB_USER: securethenews
         DJANGO_DB_NAME: securethenewsdb
         DJANGO_DB_PORT: 5432
+        DJANGO_SETTINGS_MODULE: securethenews.settings.dev
+        DJANGO_LOG_CONSOLE: "true"
     depends_on:
       - node
       - postgresql
