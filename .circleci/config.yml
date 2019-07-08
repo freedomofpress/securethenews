@@ -76,7 +76,8 @@ jobs:
           name: Ensure we can run prod env
           command: |
             pipenv run docker-compose -f prod-docker-compose.yaml up -d
-            while ! curl --output /dev/null --silent --head --fail http://localhost:8080; do sleep 1 && echo -n .; done;
+            while ! curl --output /dev/null --silent --head --fail http://localhost:8080; do sleep 1; done;
+          no_output_timeout: 5m
 
       - run:
           name: Check for missing migrations
@@ -102,7 +103,7 @@ jobs:
             pipenv run make dev-init
             pipenv run docker-compose up -d
             echo "Wait for environment to come up completely"
-            while ! curl --output /dev/null --silent --head --fail http://localhost:8000; do sleep 1 && echo -n .; done;
+            while ! curl --output /dev/null --silent --head --fail http://localhost:8000; do sleep 1; done;
             pipenv run make check-migrations
             pipenv run make app-tests-dev
 
