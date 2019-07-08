@@ -109,6 +109,7 @@ ci-npm-audit:
 
 .PHONY: ops-tests
 ops-tests: ## Run testinfra-based tests (functional)
+	cp .env.prod .env
 	pytest --junit-xml test-results/ops-tests.xml infratests
 
 # Explaination of the below shell command should it ever break.

@@ -4,8 +4,8 @@ set -x
 
 cd /django
 
-if [[ -f .env ]]; then
-    . .env
+if [[ -f .env.prod ]]; then
+    . .env.prod
 fi
 
 env

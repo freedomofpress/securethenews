@@ -93,7 +93,7 @@ ENV DEPLOY_ENV=${DEPLOY_ENV} \
         DJANGO_MEDIA_ROOT=${DJANGO_MEDIA_ROOT} \
         DJANGO_LOG_CONSOLE=${DJANGO_LOG_CONSOLE}
 
-RUN chown gcorn: /django/.env
+#RUN chown gcorn: /django/.env
 
 RUN /django/scripts/version-file.sh
 
