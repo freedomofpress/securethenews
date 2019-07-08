@@ -67,6 +67,7 @@ bandit: ## Runs `bandit` static code analysis tool for security bugs
 
 .PHONY: build-prod-container
 build-prod-container:
+	cp ./.env.prod ./.env
 	docker-compose -f prod-docker-compose.yaml build --no-cache
 
 .PHONY: run-prod-env
@@ -85,7 +86,7 @@ dev-go: dev-init ## Runs development environment
 
 .PHONY: dev-init
 dev-init: ## pipe ENVs into docker-compose, prevents need of wrapper script
-	echo UID=$(UID) > .env
+	cp ./.env.develop ./.env
 
 .PHONY: app-tests-dev
 app-tests-dev: ## Run development tests (dev)
