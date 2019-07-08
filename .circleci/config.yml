@@ -106,6 +106,18 @@ jobs:
             while ! curl --output /dev/null --silent --head --fail http://localhost:8000; do sleep 1; done;
             pipenv run make check-migrations
             pipenv run make app-tests-dev
+          no_output_timeout: 5m
+
+      - run:
+          name: Yank docker logs
+          command: |
+            mkdir -p ~/dockercomposelogs || true
+            pipenv run docker-compose -f prod-docker-compose.yaml logs > ~/dockercomposelogs/prod.log
+            pipenv run docker-compose logs > ~/dockercomposelogs/dev.log
+          when: always
+
+      - store_artifacts:
+          path: ~/dockercomposelogs
 
       - store_test_results:
           path: ~/securethenews/test-results
