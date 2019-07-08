@@ -115,7 +115,7 @@ WSGI_APPLICATION = 'securethenews.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
-if not 'DJANGO_DB_HOST' in os.environ:
+if 'DJANGO_DB_HOST' not in os.environ:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
