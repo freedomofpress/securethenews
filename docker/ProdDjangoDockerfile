@@ -75,8 +75,6 @@ RUN  mkdir /django-media /django-static /django-logs && \
 RUN mkdir -p /etc/gunicorn && chown -R gcorn: /etc/gunicorn
 COPY docker/gunicorn/gunicorn.py /etc/gunicorn/gunicorn.py
 
-COPY ./.env /django/env
-
 RUN mkdir /deploy && \
     chown -R gcorn: /deploy
 
