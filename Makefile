@@ -9,6 +9,7 @@ STN_IMAGE := quay.io/freedomofpress/securethenews
 
 .PHONY: ci-go
 ci-go: ## Provisions and tests a prod-like setup.
+	cp .env.prod .env
 	./scripts/ci-runner.sh
 
 .PHONY: lint
@@ -67,7 +68,7 @@ bandit: ## Runs `bandit` static code analysis tool for security bugs
 
 .PHONY: build-prod-container
 build-prod-container:
-	cp ./.env.prod ./.env
+	cp ./.env.prod ./.enva
 	docker-compose -f prod-docker-compose.yaml build --no-cache
 
 .PHONY: run-prod-env
