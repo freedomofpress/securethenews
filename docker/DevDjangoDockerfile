@@ -38,11 +38,11 @@ RUN pip install -r /requirements.txt
 RUN  mkdir /django-logs /deploy && \
      chown -R gcorn: /django-logs /deploy
 
-ENV DJANGO_DB_HOST ${DJANGO_DB_HOST}
-ENV DJANGO_DB_PASSWORD ${DJANGO_DB_PASSWORD}
-ENV DJANGO_DB_USER {$DJANGO_DB_USER}
-ENV DJANGO_DB_NAME ${DJANGO_DB_NAME}
-ENV DJANGO_DB_PORT ${DJANGO_DB_PORT}
+ENV DJANGO_DB_HOST=${DJANGO_DB_HOST} \
+        DJANGO_DB_PASSWORD=${DJANGO_DB_PASSWORD} \
+        DJANGO_DB_USER={$DJANGO_DB_USER} \
+        DJANGO_DB_NAME=${DJANGO_DB_NAME} \
+        DJANGO_DB_PORT=${DJANGO_DB_PORT}
 
 RUN /django/scripts/version-file.sh
 RUN /django/manage.py collectstatic -c --noinput
