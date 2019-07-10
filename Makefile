@@ -9,7 +9,6 @@ STN_IMAGE := quay.io/freedomofpress/securethenews
 
 .PHONY: ci-go
 ci-go: ## Provisions and tests a prod-like setup.
-	cp .env.prod .env
 	./scripts/ci-runner.sh
 
 .PHONY: lint
@@ -68,7 +67,6 @@ bandit: ## Runs `bandit` static code analysis tool for security bugs
 
 .PHONY: build-prod-container
 build-prod-container:
-	cp .env.prod .env
 	docker-compose -f prod-docker-compose.yaml build --no-cache
 
 .PHONY: run-prod-env
@@ -87,7 +85,7 @@ dev-go: dev-init ## Runs development environment
 
 .PHONY: dev-init
 dev-init: ## pipe ENVs into docker-compose, prevents need of wrapper script
-	cp .env.develop .env
+	echo UID=$(UID) > .env
 
 .PHONY: app-tests-dev
 app-tests-dev: ## Run development tests (dev)
@@ -95,7 +93,6 @@ app-tests-dev: ## Run development tests (dev)
 
 .PHONY: app-tests-prod
 app-tests-prod: ## Run development tests (prod)
-	cp .env.prod .env
 	docker-compose -f prod-docker-compose.yaml run django ./manage.py test --noinput --keepdb
 
 .PHONY: npm-audit
@@ -109,7 +106,6 @@ ci-npm-audit:
 
 .PHONY: ops-tests
 ops-tests: ## Run testinfra-based tests (functional)
-	cp .env.prod .env
 	pytest --junit-xml test-results/ops-tests.xml infratests
 
 # Explaination of the below shell command should it ever break.
