@@ -1,4 +1,4 @@
-Django>=2.1,<2.2
+Django>=2.1.10,<2.2
 django-analytical>=2.5,<2.6
 django-cors-headers
 django-crispy-forms>=1.7.2
