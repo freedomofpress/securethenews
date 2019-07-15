@@ -159,6 +159,11 @@ LOGGING = {
             'class': 'logging.StreamHandler',
             'formatter': 'json_out'
         },
+        'debug': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'json_out'
+        },
         'null': {
             'class': 'logging.NullHandler',
         }
