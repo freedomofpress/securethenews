@@ -154,20 +154,11 @@ LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
     'handlers': {
-        'rotate': {
-            'level': os.environ.get('DJANGO_LOG_LEVEL', 'info').upper(),
-            'class': 'logging.handlers.RotatingFileHandler',
-            'backupCount': 5,
-            'maxBytes': 10000000,
-            'filename': os.environ.get('DJANGO_LOGFILE', DJANGO_OTHER_LOG),
-            'formatter': 'json_out'
-        },
-
         'console': {
+            'level': 'DEBUG',
             'class': 'logging.StreamHandler',
             'formatter': 'json_out'
         },
-
         'null': {
             'class': 'logging.NullHandler',
         }
@@ -180,6 +171,10 @@ LOGGING = {
         }
     },
     'loggers': {
+        'django': {
+            'handlers': [GENERIC_LOG_HANDLER],
+            'propagate': True,
+        },
         'django.template': {
             'handlers': [GENERIC_LOG_HANDLER],
             'propagate': False,
@@ -208,3 +203,14 @@ LOGGING = {
         },
     },
 }
+
+if not LOG_TO_CONSOLE:
+    LOGGING['handlers']['rotate'] = {
+        'level': os.environ.get('DJANGO_LOG_LEVEL', 'info').upper(),
+        'class': 'logging.handlers.RotatingFileHandler',
+        'backupCount': 5,
+        'maxBytes': 10000000,
+        'filename': os.environ.get('DJANGO_LOGFILE', DJANGO_OTHER_LOG),
+        'formatter': 'json_out'
+    }
+
