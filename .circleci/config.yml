@@ -1,26 +1,35 @@
 ---
+reuse-blerbs:
+  - &python_prereqs
+    run:
+      name: Install testing pre-reqs
+      command: |
+        # Set python to 3.5.2
+        pyenv global 3.5.2
+        pip install -U pip
+        pip install pipenv
+        pipenv install
+
 version: 2
 jobs:
-  safety_check:
+  safety_check_linters:
     machine: true
     working_directory: ~/securethenews
     steps:
       - checkout
 
-      - run:
-          name: Install testing pre-reqs
-          command: |
-            # Set python to 3.5.2
-            pyenv global 3.5.2
-            pip install -U pip
-            pip install pipenv
-            pipenv install
+      - *python_prereqs
 
       - run:
           name: Check Python dependencies for CVEs
           command: |
             pipenv install --selective-upgrade safety
             pipenv run make safety
+
+      - run:
+          name: linters on the source
+          command: |
+            pipenv run make lint
 
       - run:
           name: Static code analysis for vulnerabilities
@@ -34,14 +43,7 @@ jobs:
     steps:
       - checkout
 
-      - run:
-          name: Install dependencies
-          command: |
-            # Set to native py3 on circleci image
-            pyenv global 3.5.2
-            pip install -U pip
-            pip install pipenv
-            pipenv install
+      - *python_prereqs
 
       - run:
           name: Check node dependencies for vulnerabilities
@@ -52,25 +54,13 @@ jobs:
       - store_test_results:
           path: ~/freedom.press/test-results/
 
-  build:
+  run_prod:
     machine: true
     working_directory: ~/securethenews
     steps:
       - checkout
 
-      - run:
-          name: Install testing pre-reqs
-          command: |
-            # Set python to 3.5.2
-            pyenv global 3.5.2
-            pip install -U pip
-            pip install pipenv
-            pipenv install
-
-      - run:
-          name: linters on the source
-          command: |
-            pipenv run make lint
+      - *python_prereqs
 
       - run:
           name: Ensure we can run prod env
@@ -98,6 +88,27 @@ jobs:
             pipenv run pytest --junit-xml test-results/ops-tests.xml infratests || true
 
       - run:
+          name: Yank docker logs
+          command: |
+            mkdir -p ~/dockercomposelogs || true
+            pipenv run docker-compose -f prod-docker-compose.yaml logs > ~/dockercomposelogs/prod.log
+          when: always
+
+      - store_artifacts:
+          path: ~/dockercomposelogs
+
+      - store_test_results:
+          path: ~/securethenews/test-results
+
+  run_dev:
+    machine: true
+    working_directory: ~/securethenews
+    steps:
+      - checkout
+
+      - *python_prereqs
+
+      - run:
           name: Ensure we can build and run dev env
           command: |
             pipenv run make dev-init
@@ -112,7 +123,6 @@ jobs:
           name: Yank docker logs
           command: |
             mkdir -p ~/dockercomposelogs || true
-            pipenv run docker-compose -f prod-docker-compose.yaml logs > ~/dockercomposelogs/prod.log
             pipenv run docker-compose logs > ~/dockercomposelogs/dev.log
           when: always
 
@@ -126,9 +136,10 @@ workflows:
   version: 2
   securethenews_ci:
     jobs:
-      - safety_check
-      - npm_audit 
-      - build
+      - safety_check_linters
+      - npm_audit
+      - run_prod
+      - run_dev
   nightly:
     triggers:
       - schedule:
