@@ -218,4 +218,3 @@ if not LOG_TO_CONSOLE:
         'filename': os.environ.get('DJANGO_LOGFILE', DJANGO_OTHER_LOG),
         'formatter': 'json_out'
     }
-
