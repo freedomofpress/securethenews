@@ -91,6 +91,7 @@ wagtailmenus==2.12
 wcwidth==0.1.7            # via prompt-toolkit
 webencodings==0.5.1
 wget==3.2
+whitenoise==4.1.3
 willow==1.1
 xlrd==1.1.0
 xlsxwriter==0.9.9

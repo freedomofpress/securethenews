@@ -120,9 +120,6 @@ elif os.environ.get('GS_BUCKET_NAME'):
     else:
         STATIC_ROOT = os.environ['DJANGO_STATIC_ROOT']
 
-else:
-    STATIC_ROOT = os.environ['DJANGO_STATIC_ROOT']
-    MEDIA_ROOT = os.environ['DJANGO_MEDIA_ROOT']
 
 # Django json logging
 #

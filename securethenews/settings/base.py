@@ -84,6 +84,14 @@ MIDDLEWARE = [
     'django_logging.middleware.DjangoLoggingMiddleware'
 ]
 
+if bool(os.environ.get('DJANGO_WHITENOISE', False)):
+    security_middle_position = [p for p, v in enumerate(MIDDLEWARE)
+                                if "security.SecurityMiddleware" in v]
+    MIDDLEWARE.insert(security_middle_position[0]+1,
+                      'whitenoise.middleware.WhiteNoiseMiddleware'
+                      )
+
+
 # Anyone can use the API via CORS
 CORS_ORIGIN_ALLOW_ALL = True
 # API is read-only
@@ -162,10 +170,12 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'client', 'build'),
 ]
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = os.environ.get(
+    'DJANGO_STATIC_ROOT', os.path.join(BASE_DIR, 'static'))
 STATIC_URL = '/static/'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = os.environ.get(
+    'DJANGO_MEDIA_ROOT', os.path.join(BASE_DIR, 'media'))
 MEDIA_URL = '/media/'
 
 
