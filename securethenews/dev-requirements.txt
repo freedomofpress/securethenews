@@ -1,4 +1,4 @@
--e git+https://github.com/freedomofpress/django-logging.git@51f4fd4b02fafc3d6d9cddb5658247497404df7e#egg=django-logging-json
+-e git+https://github.com/freedomofpress/django-logging.git@806e4a8b1dfbdb57947d0e60453074942f25bbe4#egg=django-logging-json
 asn1crypto==0.22.0
 backcall==0.1.0           # via ipython
 beautifulsoup4==4.6.0
@@ -40,8 +40,8 @@ html5lib==0.999999999
 idna==2.6
 ipdb==0.12
 ipython-genutils==0.2.0   # via traitlets
-ipython==7.5.0            # via ipdb
-jedi==0.13.3              # via ipython
+ipython==7.6.1            # via ipdb
+jedi==0.14.1              # via ipython
 jmespath==0.9.3
 jsonschema==2.6.0
 logbook==1.1.0
@@ -49,7 +49,7 @@ markdown2==2.3.5
 mbstrdecoder==0.2.2
 nassl==1.1.3
 olefile==0.44
-parso==0.4.0              # via jedi
+parso==0.5.1              # via jedi
 path.py==10.4
 pathvalidate==0.16.1
 pexpect==4.7.0            # via ipython
