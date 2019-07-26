@@ -4,3 +4,5 @@ media/
 molecule
 **/*.pyc
 .versioninfo
+.pytest_cache
+__pycache__/
