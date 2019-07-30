@@ -117,7 +117,7 @@ elif os.environ.get('GS_BUCKET_NAME'):
     DEFAULT_FILE_STORAGE = 'securethenews.gce_storage.MediaStorage'
     if os.environ.get("GS_STORE_STATIC", False):
         STATICFILES_STORAGE = "securethenews.gce_storage.StaticStorage"
-    else:
+    elif os.environ.get("DJANGO_STATIC_ROOT", False):
         STATIC_ROOT = os.environ['DJANGO_STATIC_ROOT']
 
 
