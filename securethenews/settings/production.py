@@ -117,12 +117,9 @@ elif os.environ.get('GS_BUCKET_NAME'):
     DEFAULT_FILE_STORAGE = 'securethenews.gce_storage.MediaStorage'
     if os.environ.get("GS_STORE_STATIC", False):
         STATICFILES_STORAGE = "securethenews.gce_storage.StaticStorage"
-    else:
+    elif os.environ.get("DJANGO_STATIC_ROOT", False):
         STATIC_ROOT = os.environ['DJANGO_STATIC_ROOT']
 
-else:
-    STATIC_ROOT = os.environ['DJANGO_STATIC_ROOT']
-    MEDIA_ROOT = os.environ['DJANGO_MEDIA_ROOT']
 
 # Django json logging
 #
@@ -154,20 +151,16 @@ LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
     'handlers': {
-        'rotate': {
-            'level': os.environ.get('DJANGO_LOG_LEVEL', 'info').upper(),
-            'class': 'logging.handlers.RotatingFileHandler',
-            'backupCount': 5,
-            'maxBytes': 10000000,
-            'filename': os.environ.get('DJANGO_LOGFILE', DJANGO_OTHER_LOG),
-            'formatter': 'json_out'
-        },
-
         'console': {
+            'level': 'DEBUG',
             'class': 'logging.StreamHandler',
             'formatter': 'json_out'
         },
-
+        'debug': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'json_out'
+        },
         'null': {
             'class': 'logging.NullHandler',
         }
@@ -180,6 +173,10 @@ LOGGING = {
         }
     },
     'loggers': {
+        'django': {
+            'handlers': [GENERIC_LOG_HANDLER],
+            'propagate': True,
+        },
         'django.template': {
             'handlers': [GENERIC_LOG_HANDLER],
             'propagate': False,
@@ -208,3 +205,13 @@ LOGGING = {
         },
     },
 }
+
+if not LOG_TO_CONSOLE:
+    LOGGING['handlers']['rotate'] = {
+        'level': os.environ.get('DJANGO_LOG_LEVEL', 'info').upper(),
+        'class': 'logging.handlers.RotatingFileHandler',
+        'backupCount': 5,
+        'maxBytes': 10000000,
+        'filename': os.environ.get('DJANGO_LOGFILE', DJANGO_OTHER_LOG),
+        'formatter': 'json_out'
+    }

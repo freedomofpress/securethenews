@@ -18,7 +18,6 @@ services:
       app:
         aliases:
           - db
-
   django:
     build:
       context: .
@@ -26,46 +25,34 @@ services:
       args:
         NODE_VER: 10.15.1-alpine
     image: quay.io/freedomofpress/securethenews
+    read_only: true
     environment:
-      DEPLOY_ENV: prod
       DJANGO_ALLOWED_HOSTS: "app localhost"
+      DEPLOY_ENV: prod
       DJANGO_DB_HOST: db
       DJANGO_DB_PASSWORD: securethenewspassword
       DJANGO_DB_USER: securethenews
       DJANGO_DB_NAME: securethenewsdb
-      DJANGO_STATIC_ROOT: /django-static
-      DJANGO_MEDIA_ROOT: /django-media
       DJANGO_DB_PORT: 5432
       DJANGO_SETTINGS_MODULE: securethenews.settings.production
       DJANGO_SECRET_KEY: 002b5d76a026c29190c50e610a73516cb277f0abd07ae6233fbbe86f655abc5a
+      DJANGO_LOG_CONSOLE: 'True'
+      DJANGO_GCORN_UPLOAD_DIR: /dev/shm
+      DJANGO_GCORN_HEARTBT_DIR: /dev/shm
+      DJANGO_WHITENOISE: 'True'
     depends_on:
       - postgresql
     working_dir: /django
     volumes:
-      - ${HOST_STATIC_DIR:-stn-django-static}:/django-media
-      - ${HOST_MEDIA_DIR:-stn-django-static}:/django-static
+      - ${HOST_STATIC_DIR:-stn-django-media}:/django-media
       - ${HOST_LOGS_DIR:-stn-django-logs}:/django-logs
     networks:
       app:
         aliases:
           - app
-
-  nginx:
-    image: nginx:1.14-alpine
-    volumes:
-      - ./docker/nginx:/etc/nginx/conf.d/:ro
-      - ${HOST_STATIC_DIR:-stn-django-static}:/django-media:ro
-      - ${HOST_MEDIA_DIR:-stn-django-static}:/django-static:ro 
-    depends_on:
-      - django
     ports:
-      - "8080:8080"
-    networks:
-      app:
-        aliases:
-          - nginx
+      - "127.0.0.1:8000:8000"
 
 volumes:
-  stn-django-static:
   stn-django-media:
   stn-django-logs:

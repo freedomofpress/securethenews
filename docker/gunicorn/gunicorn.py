@@ -10,3 +10,5 @@ capture_output = os.environ.get('DJANGO_GCORN_CAPOUTPUT', False)
 # is not the default.
 workers = int(os.environ.get('DJANGO_GCORN_WORKERS', 6))
 threads = int(os.environ.get('DJANGO_GCORN_THREADS', 1))
+tmp_upload_dir = os.environ.get('DJANGO_GCORN_UPLOAD_DIR', None)
+worker_tmp_dir = os.environ.get('DJANGO_GCORN_HEARTBT_DIR', None)

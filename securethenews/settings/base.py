@@ -84,6 +84,14 @@ MIDDLEWARE = [
     'django_logging.middleware.DjangoLoggingMiddleware'
 ]
 
+if bool(os.environ.get('DJANGO_WHITENOISE', False)):
+    security_middle_position = [p for p, v in enumerate(MIDDLEWARE)
+                                if "security.SecurityMiddleware" in v]
+    MIDDLEWARE.insert(security_middle_position[0]+1,
+                      'whitenoise.middleware.WhiteNoiseMiddleware'
+                      )
+
+
 # Anyone can use the API via CORS
 CORS_ORIGIN_ALLOW_ALL = True
 # API is read-only
@@ -115,16 +123,24 @@ WSGI_APPLICATION = 'securethenews.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.environ.get('DJANGO_DB_NAME', 'stn'),
-        'USER': os.environ['DJANGO_DB_USER'],
-        'PASSWORD': os.environ['DJANGO_DB_PASSWORD'],
-        'HOST': os.environ['DJANGO_DB_HOST'],
-        'PORT': os.environ['DJANGO_DB_PORT']
+if 'DJANGO_DB_HOST' not in os.environ:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': 'stn-build',
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': os.environ.get('DJANGO_DB_NAME', 'stn'),
+            'USER': os.environ['DJANGO_DB_USER'],
+            'PASSWORD': os.environ['DJANGO_DB_PASSWORD'],
+            'HOST': os.environ['DJANGO_DB_HOST'],
+            'PORT': os.environ['DJANGO_DB_PORT']
+        }
+    }
 
 
 # Internationalization
@@ -154,10 +170,12 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'client', 'build'),
 ]
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = os.environ.get(
+    'DJANGO_STATIC_ROOT', os.path.join(BASE_DIR, 'static'))
 STATIC_URL = '/static/'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = os.environ.get(
+    'DJANGO_MEDIA_ROOT', os.path.join(BASE_DIR, 'media'))
 MEDIA_URL = '/media/'
 
 

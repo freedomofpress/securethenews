@@ -29,9 +29,10 @@ RUN paxctl -cm /usr/local/bin/python
 COPY securethenews/dev-requirements.txt /requirements.txt
 RUN pip install -r /requirements.txt
 
-RUN  mkdir /django-logs /deploy && \
-     chown -R gcorn: /django-logs /deploy
+RUN  mkdir /deploy && \
+    chown -R gcorn: /deploy
 
 EXPOSE 8000
 USER gcorn
+
 CMD django-start.sh
