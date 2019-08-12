@@ -130,7 +130,7 @@ LOG_TO_CONSOLE = bool(os.environ.get('DJANGO_LOG_CONSOLE', False))
 DJANGO_LOGGING = {
     "CONSOLE_LOG": LOG_TO_CONSOLE,
     "SQL_LOG": False,
-    "DISABLE_EXISTING_LOGGERS": False,
+    "DISABLE_EXISTING_LOGGERS": True,
     "PROPOGATE": False,
     "LOG_LEVEL": os.environ.get('DJANGO_LOG_LEVEL', 'info'),
     "LOG_PATH": LOG_DIR,
