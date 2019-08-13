@@ -19,11 +19,6 @@ lint: ## Runs linters
 check-migrations: ## Check for ungenerated migrations
 	docker-compose exec -T django bash -c "./manage.py makemigrations --dry-run --check"
 
-.PHONY: dev-createdevdata
-dev-createdevdata: ## Imports site data in dev environment.
-	docker-compose exec django bash -c "./manage.py migrate"
-	docker-compose exec django bash -c "./manage.py createdevdata"
-
 .PHONY: dev-makemigrations
 dev-migrate: ## Generates new db migrations and applies them.
 	docker-compose exec django bash -c "./manage.py makemigrations"
