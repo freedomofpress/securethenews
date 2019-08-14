@@ -1,5 +1,5 @@
-# Harris is codeowner for all website changes
-*   @harrislapiroff
+# Harris and Cameron are codeowners for all website changes
+*   @harrislapiroff @chigby
 
 # Mike should review testing changes, with Conor as backup
 molecule/   @msheiny @conorsch
