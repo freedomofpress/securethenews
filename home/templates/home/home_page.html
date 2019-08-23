@@ -96,20 +96,40 @@
     </div>
   </section>
 
-  <section class="leaderboard-section">
-    <h1 class="leaderboard-header align-center">View Leaderboards by Category</h1>
-    <div class="section-content">
-      {% for site_category in site_categories %}
-        <div class="align-center">
-          <a href="{% url 'sites:leaderboard' slug=site_category.slug %}">
-            <div class="sm-button button-gray" aria-role="button">
-              {{ site_category.name }} <i class="fa fa-chevron-right" aria-hidden="true"></i>
-            </div>
-          </a>
+  {% if site_categories|length > 0 %}
+    <section class="leaderboard-section">
+      <h1 class="leaderboard-header align-center">View Leaderboards by Category</h1>
+      <div class="d-flex justify-center ">
+        {% for site_category in site_categories|slice:":5" %}
+          <div class="align-center">
+            <a href="{% url 'sites:leaderboard' slug=site_category.slug %}">
+              <div class="sm-button button-gray" aria-role="button">
+                {{ site_category.name }} <i class="fa fa-chevron-right" aria-hidden="true"></i>
+              </div>
+            </a>
+          </div>
+        {% endfor %}
+      </div>
+      <div class="d-flex justify-center small-buttons d-hidden" id="show-more-categories">
+        {% for site_category in site_categories|slice:"5:" %}
+          <div class="align-center">
+            <a href="{% url 'sites:leaderboard' slug=site_category.slug %}">
+              <div class="sm-button button-gray" aria-role="button">
+                {{ site_category.name }} <i class="fa fa-chevron-right" aria-hidden="true"></i>
+              </div>
+            </a>
+          </div>
+        {% endfor %}
+      </div>
+      {% if site_categories|length > 5 %}
+        <div class="section-content align-center">
+          <div class="sm-button button-gray-o" id="show-more">
+            <span>Show more</span> <i class="fa fa-chevron-right" aria-hidden="true"></i>
+          </div>
         </div>
-      {% endfor %}
-    </div>
-  </section>
+      {% endif %}
+    </section>
+  {% endif %}
 
   <!-- Dump the site data to be rendered client-side. -->
   <script type="text/javascript">

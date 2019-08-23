@@ -95,6 +95,7 @@ $smallButtonHeight: 30px;
 .sm-button {
   display: inline-block;
   margin-bottom: 5px;
+  margin: 0 3px 5px 3px;
   vertical-align: middle;
   border-radius: $smallButtonHeight / 2;
   font-size: 14px;
@@ -118,6 +119,24 @@ $smallButtonHeight: 30px;
       background-color: darken($lightGray, 10%);
     }
   }
+
+  &.button-gray-o {
+    border: 1px solid $lightGray;
+    color: $blue;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 1px;
+
+    &:hover {
+      background-color: $lightGray;
+    }
+  }
+}
+
+.small-buttons .sm-button {
+  padding: 0 10px;
+  font-size: 0.65rem;
+  font-weight: 600;
 }
 
 
