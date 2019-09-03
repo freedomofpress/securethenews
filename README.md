@@ -36,7 +36,7 @@ at: http://localhost:8000
 To import the example data, run:
 
 ```bash
-make dev-createdevdata
+docker-compose exec django ./manage.py createdevdata
 ```
 
 This will also create an admin user for the web interface at
