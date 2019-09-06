@@ -5,7 +5,7 @@ in future).
 """
 from django.core.exceptions import ObjectDoesNotExist
 from rest_framework import serializers
-from sites.models import Site, Scan
+from sites.models import Site, Scan, SiteCategory
 from urllib.parse import urljoin
 from django.urls import reverse
 
@@ -27,6 +27,16 @@ class ScanSerializer(serializers.ModelSerializer):
         return data.grade['grade']
 
 
+class CategorySerializer(serializers.ModelSerializer):
+    """
+    Used for the site category representation in a site view
+    """
+
+    class Meta:
+        model = SiteCategory
+        fields = ('name', 'icon', 'slug')
+
+
 class SiteSerializer(serializers.ModelSerializer):
 
     # In production, a site can have a lot of scans, so we don't want to expose
@@ -34,10 +44,11 @@ class SiteSerializer(serializers.ModelSerializer):
     # query set to the output.
     latest_scan = serializers.SerializerMethodField()
     all_scans = serializers.SerializerMethodField()
+    site_category = serializers.SerializerMethodField()
 
     class Meta:
         model = Site
-        fields = ('name', 'slug', 'domain', 'added',
+        fields = ('name', 'slug', 'domain', 'added', 'site_category',
                   'latest_scan', 'all_scans')
 
     def get_latest_scan(self, data):
@@ -54,3 +65,7 @@ class SiteSerializer(serializers.ModelSerializer):
         urlroot = reverse('api-root-v1')
         relative_url = urljoin(urlroot, 'sites/' + data.domain + '/scans/')
         return self.context['request'].build_absolute_uri(relative_url)
+
+    def get_site_category(self, data):
+        serializer_category = CategorySerializer(instance=data.site_category)
+        return serializer_category.data
