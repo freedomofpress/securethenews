@@ -4,10 +4,13 @@ from django.forms import ValidationError
 from django.urls import reverse
 from django.utils.text import slugify
 
+from modelcluster.fields import ParentalManyToManyField
+from modelcluster.models import ClusterableModel
 from wagtail.admin.edit_handlers import FieldPanel
-from wagtail.snippets.edit_handlers import SnippetChooserPanel
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.snippets.models import register_snippet
+
+from wagtailautocomplete.edit_handlers import AutocompletePanel
 
 from pledges.models import Pledge
 
@@ -36,18 +39,16 @@ class Site(models.Model):
     objects = models.Manager()
     scanned = ScannedSitesManager()
 
-    site_category = models.ForeignKey(
-        'SiteCategory',
-        null=True,
+    regions = ParentalManyToManyField(
+        'Region',
         blank=True,
-        on_delete=models.SET_NULL,
         related_name='+',
         help_text='Select which leaderboard you would like this '
                   'news site to appear on'
     )
 
     content_panels = [
-        SnippetChooserPanel('category'),
+        AutocompletePanel('regions', target_model='sites.Region'),
     ]
 
     class Meta:
@@ -239,7 +240,13 @@ class Scan(models.Model):
 
 
 @register_snippet
-class SiteCategory(models.Model):
+class Region(ClusterableModel):
+    @classmethod
+    def autocomplete_create(kls, value):
+        return kls.objects.create(name=value)
+
+    autocomplete_search_field = 'name'
+
     name = models.CharField(max_length=255, unique=True)
     icon = models.ForeignKey(
         'wagtailimages.Image', null=True, blank=True,
@@ -251,6 +258,9 @@ class SiteCategory(models.Model):
         FieldPanel('name'),
         ImageChooserPanel('icon'),
     ]
+
+    def autocomplete_label(self):
+        return str(self)
 
     def __str__(self):
         return self.name

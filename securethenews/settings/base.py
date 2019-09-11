@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'wagtail.contrib.modeladmin',
     'wagtail.contrib.table_block',
 
+    'wagtailautocomplete',
     'wagtailmenus',
     'webpack_loader',
     'modelcluster',

@@ -16,5 +16,6 @@ python-json-logger
 sslyze<2  # pinning older version for python3.5 compatibility
 unittest-xml-reporting
 wagtail>=2.3,<2.4
+wagtail-autocomplete
 wagtailmenus>=2.12
 whitenoise

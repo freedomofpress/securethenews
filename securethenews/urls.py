@@ -3,15 +3,24 @@ from __future__ import absolute_import, unicode_literals
 from django.conf import settings
 from django.urls import include, path
 from django.contrib import admin
+from wagtailautocomplete.urls.admin import urlpatterns as autocomplete_admin_urls
+from wagtailautocomplete.views import objects, search
 
 from search import views as search_views
 from wagtail.admin import urls as wagtailadmin_urls
 from wagtail.core import urls as wagtail_urls
 from wagtail.documents import urls as wagtaildocs_urls
 
+autocomplete_public_urls = [
+    path('objects/', objects),
+    path('search/', search),
+]
+
 urlpatterns = [
     path('django-admin/', admin.site.urls),
 
+    path('autocomplete/', include(autocomplete_public_urls)),
+    path('admin/autocomplete/', include(autocomplete_admin_urls)),
     path('admin/', include(wagtailadmin_urls)),
     path('documents/', include(wagtaildocs_urls)),
 

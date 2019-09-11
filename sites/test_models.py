@@ -1,7 +1,7 @@
 from django.forms import ValidationError
 from django.test import TestCase
 
-from sites.models import Site, Scan, SiteCategory
+from sites.models import Site, Scan, Region
 
 
 class TestSite(TestCase):
@@ -88,19 +88,19 @@ class TestScannedSitesManager(TestCase):
         self.assertIn(self.site, Site.scanned.all())
 
 
-class TestSiteCategory(TestCase):
+class TestRegion(TestCase):
 
     def setUp(self):
         self.site = Site.objects.create(name='Test Site', domain='test.com')
 
     def test_duplicate_categories_cannot_be_created(self):
-        SiteCategory.objects.create(name='test value')
+        Region.objects.create(name='test value')
 
         # Try to insert a duplicate value
         with self.assertRaises(ValidationError):
-            SiteCategory.objects.create(name='test value')
+            Region.objects.create(name='test value')
 
     def test_saving_category_creates_slug(self):
-        site_category = SiteCategory.objects.create(name='test value')
-        site_category.save()
-        self.assertEqual(site_category.slug, 'test-value')
+        region = Region.objects.create(name='test value')
+        region.save()
+        self.assertEqual(region.slug, 'test-value')

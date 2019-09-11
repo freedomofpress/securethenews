@@ -9,12 +9,12 @@
 {% block content %}
   <section class="blue-section">
     <div class="page-header">
-      {% if site_category.icon %}
-        {% image site_category.icon height-100 %}
+      {% if region.icon %}
+        {% image region.icon height-100 %}
       {% endif %}
     </div>
     <div class="section-content">
-      <h1 class="page-header">Leaderboard: {{ site_category.name }}</h1>
+      <h1 class="page-header">Leaderboard: {{ region.name }}</h1>
       <h5 class="page-subhead">See which news publications have the most secure HTTPS implementation</h5>
     </div>
   </section>

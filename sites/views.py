@@ -2,7 +2,7 @@ import json
 
 from django.shortcuts import get_object_or_404, render
 
-from .models import Site, SiteCategory
+from .models import Site, Region
 
 
 def index(request):
@@ -22,9 +22,9 @@ def site(request, slug):
 
 
 def leaderboard(request, slug):
-    site_category = get_object_or_404(SiteCategory, slug=slug)
-    sites = Site.objects.filter(site_category=site_category).all()
+    region = get_object_or_404(Region, slug=slug)
+    sites = Site.objects.filter(regions=region).all()
     return render(request, 'sites/leaderboard.html', dict(
         sites_json=json.dumps([site.to_dict() for site in sites]),
-        site_category=site_category,
+        region=region,
     ))

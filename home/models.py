@@ -22,7 +22,7 @@ from wagtail.contrib.forms.edit_handlers import FormSubmissionsPanel
 from wagtail.contrib.forms.models import AbstractEmailForm, AbstractFormField
 from wagtail.images.blocks import ImageChooserBlock
 
-from sites.models import Site, SiteCategory
+from sites.models import Site, Region
 
 
 class HomePage(Page):
@@ -93,8 +93,8 @@ class HomePage(Page):
         # Serialize sites with the results of their latest scans for the teaser
         context['sites_json'] = json.dumps([site.to_dict() for site in sites])
 
-        site_categories = SiteCategory.objects.all()
-        context['site_categories'] = site_categories
+        regions = Region.objects.all()
+        context['regions'] = regions
 
         return context
 
