@@ -1,3 +1,4 @@
+
 from django.db import models
 from django.db.models import Count
 from django.forms import ValidationError
@@ -22,7 +23,7 @@ class ScannedSitesManager(models.Manager):
         ).filter(num_scans__gt=0)
 
 
-class Site(models.Model):
+class Site(ClusterableModel):
     name = models.CharField('Name', max_length=255, unique=True)
     slug = models.SlugField('Slug', unique=True, editable=False,
                             allow_unicode=True)

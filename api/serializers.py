@@ -67,6 +67,8 @@ class SiteSerializer(serializers.ModelSerializer):
         return self.context['request'].build_absolute_uri(relative_url)
 
     def get_regions(self, data):
-        print(data)
-        serializer_region = RegionSerializer(instance=data.regions)
-        return serializer_region.data
+        regions = []
+        for region in data.regions.all():
+            serializer_region = RegionSerializer(instance=region)
+            regions.append(serializer_region.data)
+        return regions
