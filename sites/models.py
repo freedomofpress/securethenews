@@ -48,7 +48,7 @@ class Site(ClusterableModel):
                   'news site to appear on'
     )
 
-    content_panels = [
+    panels = [
         AutocompletePanel('regions', target_model='sites.Region'),
     ]
 

@@ -3,7 +3,8 @@ from __future__ import absolute_import, unicode_literals
 from django.conf import settings
 from django.urls import include, path
 from django.contrib import admin
-from wagtailautocomplete.urls.admin import urlpatterns as autocomplete_admin_urls
+from wagtailautocomplete.urls.admin import urlpatterns \
+    as autocomplete_admin_urls
 from wagtailautocomplete.views import objects, search
 
 from search import views as search_views
