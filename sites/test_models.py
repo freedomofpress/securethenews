@@ -93,14 +93,14 @@ class TestRegion(TestCase):
     def setUp(self):
         self.site = Site.objects.create(name='Test Site', domain='test.com')
 
-    def test_duplicate_categories_cannot_be_created(self):
+    def test_duplicate_regions_cannot_be_created(self):
         Region.objects.create(name='test value')
 
         # Try to insert a duplicate value
         with self.assertRaises(ValidationError):
             Region.objects.create(name='test value')
 
-    def test_saving_category_creates_slug(self):
+    def test_saving_region_creates_slug(self):
         region = Region.objects.create(name='test value')
         region.save()
         self.assertEqual(region.slug, 'test-value')

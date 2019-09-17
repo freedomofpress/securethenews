@@ -93,7 +93,7 @@ class HomePage(Page):
         # Serialize sites with the results of their latest scans for the teaser
         context['sites_json'] = json.dumps([site.to_dict() for site in sites])
 
-        regions = Region.objects.all()
+        regions = Region.objects.filter(sites__isnull=False).distinct()
         context['regions'] = regions
 
         return context

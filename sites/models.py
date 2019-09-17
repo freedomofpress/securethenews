@@ -43,12 +43,14 @@ class Site(ClusterableModel):
     regions = ParentalManyToManyField(
         'Region',
         blank=True,
-        related_name='+',
+        related_name='sites',
         help_text='Select which leaderboard you would like this '
                   'news site to appear on'
     )
 
     panels = [
+        FieldPanel('name'),
+        FieldPanel('domain'),
         AutocompletePanel('regions', target_model='sites.Region'),
     ]
 

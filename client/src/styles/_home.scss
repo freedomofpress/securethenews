@@ -109,6 +109,14 @@ $statBlockMaxWidth: 140px;
   color: $blue;
 }
 
+.leaderboard-section {
+  padding: 0 $spacingUnit 2 * $spacingUnit;
+
+  .section-content {
+    padding: 2 * $spacingUnit 0 0;
+  }
+}
+
 .leaderboard-button-container {
   margin-top: $spacingUnit * 3;
 }
