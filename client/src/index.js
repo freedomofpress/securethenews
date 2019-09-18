@@ -33,11 +33,11 @@ $('.mobile-header-js').on('click', (event) => {
 });
 
 $('#show-more').on('click', (event) => {
-  if ($('#show-more-categories').hasClass('d-hidden')) {
-    $('#show-more-categories').removeClass('d-hidden');
+  if ($('#show-more-regions').hasClass('d-hidden')) {
+    $('#show-more-regions').removeClass('d-hidden');
     $('#show-more span').html('Show less');
   } else {
-    $('#show-more-categories').addClass('d-hidden');
+    $('#show-more-regions').addClass('d-hidden');
     $('#show-more span').html('Show more');
   }
 });

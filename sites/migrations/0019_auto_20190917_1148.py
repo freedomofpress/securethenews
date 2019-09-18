@@ -22,7 +22,7 @@ class Migration(migrations.Migration):
                 ('icon', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='+', to='wagtailimages.Image')),
             ],
             options={
-                'verbose_name_plural': 'site categories',
+                'verbose_name_plural': 'site regions',
             },
         ),
         migrations.AddField(

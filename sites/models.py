@@ -278,4 +278,4 @@ class Region(ClusterableModel):
         return super().save(*args, **kwargs)
 
     class Meta:
-        verbose_name_plural = 'site categories'
+        verbose_name_plural = 'site regions'

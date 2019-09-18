@@ -98,7 +98,7 @@
 
   {% if regions|length > 0 %}
     <section class="leaderboard-section">
-      <h1 class="leaderboard-header align-center">View Leaderboards by Category</h1>
+      <h1 class="leaderboard-header align-center">View Leaderboards by Region</h1>
       <div class="d-flex justify-center ">
         {% for region in regions|slice:":5" %}
           <div class="align-center">
@@ -110,7 +110,7 @@
           </div>
         {% endfor %}
       </div>
-      <div class="d-flex justify-center small-buttons d-hidden" id="show-more-categories">
+      <div class="d-flex justify-center small-buttons d-hidden" id="show-more-regions">
         {% for region in regions|slice:"5:" %}
           <div class="align-center">
             <a href="{% url 'sites:leaderboard' slug=region.slug %}">
