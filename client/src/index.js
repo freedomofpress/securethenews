@@ -32,6 +32,16 @@ $('.mobile-header-js').on('click', (event) => {
   $('.tap-catcher-js').show();
 });
 
+$('#show-more').on('click', (event) => {
+  if ($('#show-more-regions').hasClass('d-hidden')) {
+    $('#show-more-regions').removeClass('d-hidden');
+    $('#show-more span').html('Show less');
+  } else {
+    $('#show-more-regions').addClass('d-hidden');
+    $('#show-more span').html('Show more');
+  }
+});
+
 $('.tap-catcher-js').on('touchend click', (e) => {
   const $nav = $('.nav');
   $nav.removeClass('uncollapsed');

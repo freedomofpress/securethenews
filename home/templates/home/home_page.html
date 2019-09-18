@@ -96,6 +96,41 @@
     </div>
   </section>
 
+  {% if regions|length > 0 %}
+    <section class="leaderboard-section">
+      <h1 class="leaderboard-header align-center">View Leaderboards by Region</h1>
+      <div class="d-flex justify-center ">
+        {% for region in regions|slice:":5" %}
+          <div class="align-center">
+            <a href="{% url 'sites:leaderboard' slug=region.slug %}">
+              <div class="sm-button button-gray" aria-role="button">
+                {{ region.name }} <i class="fa fa-chevron-right" aria-hidden="true"></i>
+              </div>
+            </a>
+          </div>
+        {% endfor %}
+      </div>
+      <div class="d-flex justify-center small-buttons d-hidden" id="show-more-regions">
+        {% for region in regions|slice:"5:" %}
+          <div class="align-center">
+            <a href="{% url 'sites:leaderboard' slug=region.slug %}">
+              <div class="sm-button button-gray" aria-role="button">
+                {{ region.name }} <i class="fa fa-chevron-right" aria-hidden="true"></i>
+              </div>
+            </a>
+          </div>
+        {% endfor %}
+      </div>
+      {% if regions|length > 5 %}
+        <div class="section-content align-center">
+          <div class="sm-button button-gray-o" id="show-more">
+            <span>Show more</span> <i class="fa fa-chevron-right" aria-hidden="true"></i>
+          </div>
+        </div>
+      {% endif %}
+    </section>
+  {% endif %}
+
   <!-- Dump the site data to be rendered client-side. -->
   <script type="text/javascript">
     var STNsiteData = {{ sites_json|safe }};

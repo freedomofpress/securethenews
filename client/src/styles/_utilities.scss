@@ -16,6 +16,15 @@
   display: inline-block;
 }
 
+.d-flex {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
 @media (max-width: $mediaSmall) {
   .desktop-only {
     display: none;
@@ -30,4 +39,8 @@
 
 .hidden {
   visibility: hidden;
+}
+
+.d-hidden {
+  display: none;
 }

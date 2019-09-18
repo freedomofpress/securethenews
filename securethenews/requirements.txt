@@ -79,6 +79,7 @@ typepy==0.0.20            # via dataproperty, pytablereader, pytablewriter, simp
 unidecode==0.4.21         # via wagtail
 unittest-xml-reporting==2.1.1
 urllib3==1.22             # via elasticsearch, requests
+wagtail-autocomplete==0.4
 wagtail==2.3
 wagtailmenus==2.12
 webencodings==0.5.1       # via html5lib
@@ -90,4 +91,4 @@ xlsxwriter==0.9.9         # via pytablewriter
 xlwt==1.3.0               # via pytablewriter
 
 # The following packages are considered to be unsafe in a requirements file:
-# setuptools==41.0.1        # via dataproperty, google-api-core, html5lib, protobuf, pytablereader, pytablewriter, python-json-logger, simplesqlite, typepy
+# setuptools==41.2.0        # via dataproperty, google-api-core, html5lib, protobuf, pytablereader, pytablewriter, python-json-logger, simplesqlite, typepy

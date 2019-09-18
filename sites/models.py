@@ -1,8 +1,17 @@
+
 from django.db import models
 from django.db.models import Count
 from django.forms import ValidationError
 from django.urls import reverse
 from django.utils.text import slugify
+
+from modelcluster.fields import ParentalManyToManyField
+from modelcluster.models import ClusterableModel
+from wagtail.admin.edit_handlers import FieldPanel
+from wagtail.images.edit_handlers import ImageChooserPanel
+from wagtail.snippets.models import register_snippet
+
+from wagtailautocomplete.edit_handlers import AutocompletePanel
 
 from pledges.models import Pledge
 
@@ -14,7 +23,7 @@ class ScannedSitesManager(models.Manager):
         ).filter(num_scans__gt=0)
 
 
-class Site(models.Model):
+class Site(ClusterableModel):
     name = models.CharField('Name', max_length=255, unique=True)
     slug = models.SlugField('Slug', unique=True, editable=False,
                             allow_unicode=True)
@@ -30,6 +39,20 @@ class Site(models.Model):
 
     objects = models.Manager()
     scanned = ScannedSitesManager()
+
+    regions = ParentalManyToManyField(
+        'Region',
+        blank=True,
+        related_name='sites',
+        help_text='Select which leaderboard you would like this '
+                  'news site to appear on'
+    )
+
+    panels = [
+        FieldPanel('name'),
+        FieldPanel('domain'),
+        AutocompletePanel('regions', target_model='sites.Region'),
+    ]
 
     class Meta:
         ordering = ['name']
@@ -217,3 +240,42 @@ class Scan(models.Model):
             score=self.score,
             grade=self.grade
         )
+
+
+@register_snippet
+class Region(ClusterableModel):
+    @classmethod
+    def autocomplete_create(kls, value):
+        return kls.objects.create(name=value)
+
+    autocomplete_search_field = 'name'
+
+    name = models.CharField(max_length=255, unique=True)
+    icon = models.ForeignKey(
+        'wagtailimages.Image', null=True, blank=True,
+        on_delete=models.SET_NULL, related_name='+'
+    )
+    slug = models.SlugField('Slug', unique=True, editable=False,
+                            allow_unicode=True)
+    panels = [
+        FieldPanel('name'),
+        ImageChooserPanel('icon'),
+    ]
+
+    def autocomplete_label(self):
+        return str(self)
+
+    def __str__(self):
+        return self.name
+
+    def clean(self):
+        self.slug = slugify(self.name, allow_unicode=True)
+        if len(self.slug) == 0:
+            raise ValidationError('Slug must not be an empty string')
+
+    def save(self, *args, **kwargs):
+        self.full_clean()
+        return super().save(*args, **kwargs)
+
+    class Meta:
+        verbose_name_plural = 'site regions'

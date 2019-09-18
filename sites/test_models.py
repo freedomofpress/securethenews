@@ -1,7 +1,7 @@
 from django.forms import ValidationError
 from django.test import TestCase
 
-from sites.models import Site, Scan
+from sites.models import Site, Scan, Region
 
 
 class TestSite(TestCase):
@@ -86,3 +86,21 @@ class TestScannedSitesManager(TestCase):
         ScannedSitesManager."""
         scan = Scan.objects.create(site=self.site, live=False)  # noqa: F841
         self.assertIn(self.site, Site.scanned.all())
+
+
+class TestRegion(TestCase):
+
+    def setUp(self):
+        self.site = Site.objects.create(name='Test Site', domain='test.com')
+
+    def test_duplicate_regions_cannot_be_created(self):
+        Region.objects.create(name='test value')
+
+        # Try to insert a duplicate value
+        with self.assertRaises(ValidationError):
+            Region.objects.create(name='test value')
+
+    def test_saving_region_creates_slug(self):
+        region = Region.objects.create(name='test value')
+        region.save()
+        self.assertEqual(region.slug, 'test-value')
