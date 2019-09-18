@@ -12,7 +12,7 @@ reuse-blerbs:
 
 version: 2
 jobs:
-  safety_check_linters:
+  safety_check:
     machine: true
     working_directory: ~/securethenews
     steps:
@@ -136,7 +136,7 @@ workflows:
   version: 2
   securethenews_ci:
     jobs:
-      - safety_check_linters
+      - safety_check
       - npm_audit
       - run_prod
       - run_dev
