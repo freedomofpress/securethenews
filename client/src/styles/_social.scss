@@ -1,6 +1,5 @@
 $facebookBlue: #354ba1;
 $twitterBlue: #139ae9;
-$gplusRed: #d5392f;
 $socialIconBorderWidth: 2px;
 
 .social-container {
@@ -42,13 +41,4 @@ $socialIconBorderWidth: 2px;
     }
   }
 
-  &.gplus {
-    color: $gplusRed;
-    border-color: $gplusRed;
-
-    &:hover {
-      background-color: $gplusRed;
-      color: #fff;
-    }
-  }
 }
