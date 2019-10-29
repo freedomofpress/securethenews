@@ -32,9 +32,6 @@ mixin check(condition)
           tr.leaderboard-row
             td
               a(href=item.absolute_url)= item.name
-              if item.pledge
-                a(href=item.pledge.url)
-                  i.pledged.fa.fa-handshake-o(title=`${item.name} have pledged to secure their site.`)
             td.desktop-only
               +check(item.valid_https)
             td.desktop-only

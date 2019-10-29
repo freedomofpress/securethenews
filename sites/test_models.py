@@ -51,11 +51,6 @@ class TestSite(TestCase):
         site.save()
         self.assertIn('í', site.slug)
 
-    def test_site_without_pledge(self):
-        """Site.pledge should return None if there are no approved
-        pledges for the Site."""
-        self.assertIsNone(self.site.pledge)
-
 
 class TestScan(TestCase):
 

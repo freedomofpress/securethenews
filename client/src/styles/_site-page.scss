@@ -81,19 +81,4 @@
     padding: $spacingUnit;
   }
 
-  .pledge {
-    background-color: #9eff8e;
-    border: 1px solid gray;
-    margin: 0 auto;
-    margin-top: $spacingUnit * 2;
-    padding: $spacingUnit / 2;
-    text-align: center;
-    width: 650px;
-
-    i {
-      display: inline-block;
-      margin-right: $spacingUnit / 2;
-    }
-
-  }
 }
