@@ -28,8 +28,6 @@ RUN adduser --gecos "" --uid "${USERID}" gcorn
 RUN paxctl -cm /usr/local/bin/python
 COPY securethenews/dev-requirements.txt /requirements.txt
 RUN pip install --require-hashes -r /requirements.txt
-COPY securethenews/requirements-github.txt /requirements-github.txt
-RUN pip install -r /requirements-github.txt
 
 RUN  mkdir /deploy && \
     chown -R gcorn: /deploy

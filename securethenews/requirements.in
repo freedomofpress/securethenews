@@ -1,3 +1,4 @@
+https://github.com/freedomofpress/django-logging/zipball/34fbeeea7a83bd54f8551bb50382a06b69814d4e
 Django>=2.1.11,<2.2
 django-analytical>=2.5,<2.6
 django-cors-headers

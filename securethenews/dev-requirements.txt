@@ -108,6 +108,8 @@ django-crispy-forms==1.7.2 \
 django-filter==2.1.0 \
     --hash=sha256:3dafb7d2810790498895c22a1f31b2375795910680ac9c1432821cbedb1e176d \
     --hash=sha256:a3014de317bef0cd43075a0f08dfa1d319a7ccc5733c3901fb860da70b0dda68
+https://github.com/freedomofpress/django-logging/zipball/34fbeeea7a83bd54f8551bb50382a06b69814d4e \
+    --hash=sha256:25d9a5e3393591a2fb81b22d069ac586e11abdfcad64ada8b911ca852ef9aa67
 django-mailgun==0.9.1 \
     --hash=sha256:d795076d18c0aa66fbac37f8b428f036417a3ec7ecc2d6499c021d318d60bfff
 django-modelcluster==4.3 \

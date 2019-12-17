@@ -1,1 +1,0 @@
--e git+https://github.com/freedomofpress/django-logging.git@34fbeeea7a83bd54f8551bb50382a06b69814d4e#egg=django-logging-json

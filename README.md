@@ -105,7 +105,6 @@ There are two Python requirements files:
 
 * `requirements.in` production application dependencies
 * `dev-requirements.in` local testing and CI requirements
-* `requirements-github.txt` contains URLs and commit hashes for GitHub-hosted dependencies.
 
 Add the desired dependency to the appropriate `.in` file, then run:
 
