@@ -51,7 +51,7 @@ COPY --from=node-assets /src-files/ /django/
 RUN find /django -path /django/node_modules -prune -o -print -exec chown gcorn: '{}' \;
 
 WORKDIR /django
-RUN pip install -r /django/securethenews/requirements.txt
+RUN pip install --require-hashes -r /django/securethenews/requirements.txt
 RUN pip install -r /django/securethenews/requirements-github.txt
 
 # Really not used in production. Needed for mapped named volume
