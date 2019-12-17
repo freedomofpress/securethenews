@@ -52,6 +52,7 @@ RUN find /django -path /django/node_modules -prune -o -print -exec chown gcorn: 
 
 WORKDIR /django
 RUN pip install -r /django/securethenews/requirements.txt
+RUN pip install -r /django/securethenews/requirements-github.txt
 
 # Really not used in production. Needed for mapped named volume
 # permission handling https://github.com/docker/compose/issues/3270
