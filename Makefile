@@ -32,15 +32,37 @@ dev-scan: ## Rescans all websites in dev environment.
 dev-chownroot: ## Fixes root-owner permissions created by docker.
 	sudo find $(DIR) -user root -exec chown -Rv $(WHOAMI):$(WHOAMI) '{}' \;
 
-.PHONY: update-pip-dependencies
-update-pip-dependencies: ## Uses pip-compile to update requirements.txt
+.PHONY: compile-pip-dependencies
+compile-pip-dependencies: ## Uses pip-compile to update requirements.txt
 # It is critical that we run pip-compile via the same Python version
 # that we're generating requirements for, otherwise the versions may
 # be resolved differently.
-	docker run -v "$(DIR)/securethenews:/code" -it python:3.6-slim \
-		bash -c 'pip install pip-tools && apt-get update && apt-get install git -y && pip-compile \
-		--output-file /code/requirements.txt /code/requirements.in && \
-        pip-compile -U --no-header --output-file /code/dev-requirements.txt /code/dev-requirements.in'
+	docker run -v "$(DIR)/securethenews:/code" -w /code -it python:3.6-slim \
+		bash -c 'apt-get update && apt-get install gcc -y && \
+    pip install --require-hashes -r /code/dev-requirements.txt && \
+		pip-compile --generate-hashes --no-header --output-file /code/requirements.txt /code/requirements.in && \
+		pip-compile --generate-hashes --no-header --allow-unsafe --output-file /code/dev-requirements.txt /code/dev-requirements.in'
+
+.PHONY: pip-update
+upgrade-pip: ## Uses pip-compile to update requirements.txt for upgrading a specific package
+# It is critical that we run pip-compile via the same Python version
+# that we're generating requirements for, otherwise the versions may
+# be resolved differently.
+	docker run -v "$(DIR):/code" -w /code -it python:3.6-slim \
+		bash -c 'apt-get update && apt-get install gcc -y && \
+    pip install --require-hashes -r dev-requirements.txt && \
+		pip-compile --generate-hashes --no-header --upgrade-package $(PACKAGE) --output-file requirements.txt requirements.in && \
+		pip-compile --generate-hashes --no-header --allow-unsafe --upgrade-package $(PACKAGE) --output-file dev-requirements.txt dev-requirements.in'
+
+.PHONY: pip-dev-update
+update-pip-dev: ## Uses pip-compile to update dev-requirements.txt for upgrading a specific package
+# It is critical that we run pip-compile via the same Python version
+# that we're generating requirements for, otherwise the versions may
+# be resolved differently.
+	docker run -v "$(DIR):/code" -w /code -it python:3.6-slim \
+		bash -c 'apt-get update && apt-get install gcc -y && \
+    pip install --require-hashes -r dev-requirements.txt && \
+		pip-compile --require-hashes --no-header --allow-unsafe --upgrade-package $(PACKAGE) --output-file dev-requirements.txt dev-requirements.in'
 
 .PHONY: safety
 safety: ## Runs `safety check` to check python dependencies for vulnerabilities
