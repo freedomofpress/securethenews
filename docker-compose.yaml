@@ -24,7 +24,8 @@ services:
       context: .
       dockerfile: docker/NodeDockerfile
       args:
-        NODE_VER: 10.15.1-alpine
+        NODE_VER: 10.17.0-alpine
+        NPM_VER: 6.13.4
         USERID: ${UID:?err}
     volumes:
       - ./:/django

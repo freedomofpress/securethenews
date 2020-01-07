@@ -1,8 +1,12 @@
 ARG NODE_VER
+ARG NPM_VER
 FROM node:${NODE_VER}
 
 # Make npm output less verbose
 ENV NPM_CONFIG_LOGLEVEL warn
+
+# Upgrade npm to speicifed version
+RUN npm install npm@${NPM_VER} -g
 
 # Workaround to avoid webpack hanging, see:
 # https://github.com/webpack/webpack-dev-server/issues/128
