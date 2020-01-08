@@ -17,5 +17,5 @@ sslyze<2  # pinning older version for python3.5 compatibility
 unittest-xml-reporting
 wagtail>=2.7,<2.8
 wagtail-autocomplete
-wagtailmenus>=2.12
+wagtailmenus>=3.0
 whitenoise
