@@ -140,8 +140,8 @@ docutils==0.14 \
     --hash=sha256:7a4bd47eaf6596e1295ecb11361139febe29b084a87bf005bf899f9a42edc3c6
 dominate==2.3.1 \
     --hash=sha256:4b8ce6f33633c9dd9175b228d21c00c801b6bd0327747cd5e17fc2da934c3a69
-draftjs-exporter==2.0.0 \
-    --hash=sha256:6d29c45ea12fef51fff65665a1c9c41fd5785b46f0d1ee70f2e61af7bfcfe77c
+draftjs-exporter==2.1.7 \
+    --hash=sha256:5839cbc29d7bce2fb99837a404ca40c3a07313f2a20e2700de7ad6aa9a9a18fb
 elasticsearch==5.4.0 \
     --hash=sha256:8f02d626cff98befd298ffb1d19d8e519643d86d3aa27f6d7388566ec4ba48ee \
     --hash=sha256:e754c688e20fe73160fb6f7f5b63f2a71c78788dc9e6908950681d3a39b56e85
@@ -406,9 +406,9 @@ urllib3==1.22 \
 wagtail-autocomplete==0.4 \
     --hash=sha256:45934480e60588d02f5b2029ce1c894d94d412703e64a61ca944fe1e23a7e796 \
     --hash=sha256:e1f55ca5147a94c398002b51f6b93d2aafeb2c127da428d714f08e79f61a3216
-wagtail==2.3 \
-    --hash=sha256:6aec70968f4792bf5200e1ac667e9dfd00ddc39367a072bf83752dfcaf13dd51 \
-    --hash=sha256:aa9daf174ed83dc9d805fc958b7d34f6cfe840d053e929af105d9f7d154938dc
+wagtail==2.4 \
+    --hash=sha256:1dd069ef8b3a08728fa5304e45ee2a92ed49b8e235e9c8b677adfd2039cff1fd \
+    --hash=sha256:fa588695932178667f58347fb77cc85a34be963ccceafa818e0d7f9998c2cdf3
 wagtailmenus==2.12 \
     --hash=sha256:683ad2aecfa6516a410966b2a3dd41be02385481ea037da835f48aa60ed407e0 \
     --hash=sha256:b66c81cd0eb329fbb956e4c1ce5a24a64d4aed09637b59c8c3a7fcac63de3619
