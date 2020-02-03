@@ -111,7 +111,23 @@ class ContentPage(Page):
     sub_header = models.CharField(max_length=50, default="")
     body = StreamField([
         ('heading', blocks.CharBlock(icon='title')),
-        ('rich_text', blocks.RichTextBlock()),
+        ('rich_text', blocks.RichTextBlock(
+            features=[
+                'bold',
+                'italic',
+                'h2',
+                'h3',
+                'h4',
+                'ol',
+                'ul',
+                'hr',
+                'embed',
+                'link',
+                'document-link',
+                'image',
+                'code',
+            ],
+        )),
         ('image', ImageChooserBlock()),
         ('quote', QuoteBlock()),
         ('table', TableBlock()),
