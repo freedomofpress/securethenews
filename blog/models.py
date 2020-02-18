@@ -14,7 +14,23 @@ class BlogPost(Page):
     byline = models.CharField(max_length=40)
     body = StreamField([
         ('heading', blocks.CharBlock()),
-        ('rich_text', blocks.RichTextBlock()),
+        ('rich_text', blocks.RichTextBlock(
+            features=[
+                'bold',
+                'italic',
+                'h2',
+                'h3',
+                'h4',
+                'ol',
+                'ul',
+                'hr',
+                'embed',
+                'link',
+                'document-link',
+                'image',
+                'code',
+            ],
+        )),
         ('image', ImageChooserBlock()),
     ])
 
