@@ -50,10 +50,15 @@ make dev-scan
 ```
 
 For a full list of all helper commands in the Makefile, run `make help`. And,
-of course, you can obtain a shell directly into any of the containers using `docker-compose` syntax. Just keep in mind the default shell is `ash` under alpine. Here is an example of entering the django container:
+of course, you can obtain a shell directly into any of the containers using `docker-compose` syntax.
+Note that the default shell is different in `node` since it is based on Alpine.
 
 ```bash
-$ docker-compose exec django ash
+$ docker-compose exec django bash
+```
+
+```bash
+$ docker-compose exec node ash
 ```
 
 ### Debugging
