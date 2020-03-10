@@ -96,7 +96,7 @@
     <section class="leaderboard-section">
       <h1 class="leaderboard-header align-center">View Leaderboards by Region</h1>
       <div class="d-flex justify-center ">
-        {% for region in regions|slice:":5" %}
+        {% for region in regions|slice:":7" %}
           <div class="align-center">
             <a href="{% url 'sites:leaderboard' slug=region.slug %}">
               <div class="sm-button button-gray" aria-role="button">
@@ -107,7 +107,7 @@
         {% endfor %}
       </div>
       <div class="d-flex justify-center small-buttons d-hidden" id="show-more-regions">
-        {% for region in regions|slice:"5:" %}
+        {% for region in regions|slice:"7:" %}
           <div class="align-center">
             <a href="{% url 'sites:leaderboard' slug=region.slug %}">
               <div class="sm-button button-gray" aria-role="button">
@@ -117,7 +117,7 @@
           </div>
         {% endfor %}
       </div>
-      {% if regions|length > 5 %}
+      {% if regions|length > 7 %}
         <div class="section-content align-center">
           <div class="sm-button button-gray-o" id="show-more">
             <span>Show more</span> <i class="fa fa-chevron-right" aria-hidden="true"></i>
