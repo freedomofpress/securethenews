@@ -63,7 +63,7 @@ pip-dev-update: ## Uses pip-compile to update dev-requirements.txt for upgrading
 	docker run -v "$(DIR):/code" -w /code/securethenews -it $(PY_IMAGE) \
 		bash -c 'apt-get update && apt-get install gcc -y && \
 		pip install pip-tools && \
-		pip-compile --require-hashes --no-header --allow-unsafe --upgrade-package $(PACKAGE) --output-file dev-requirements.txt dev-requirements.in'
+		pip-compile --generate-hashes --no-header --allow-unsafe --upgrade-package $(PACKAGE) --output-file dev-requirements.txt dev-requirements.in'
 
 .PHONY: safety
 safety: ## Runs `safety check` to check python dependencies for vulnerabilities
