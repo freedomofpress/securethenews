@@ -6,6 +6,7 @@ UID := $(shell id -u)
 GIT_REV := $(shell git rev-parse HEAD | cut -c1-10)
 GIT_BR := $(shell git rev-parse --abbrev-ref HEAD)
 STN_IMAGE := quay.io/freedomofpress/securethenews
+PY_IMAGE := python:3.5-slim
 
 .PHONY: ci-go
 ci-go: ## Provisions and tests a prod-like setup.
@@ -37,7 +38,7 @@ compile-pip-dependencies: ## Uses pip-compile to update requirements.txt
 # It is critical that we run pip-compile via the same Python version
 # that we're generating requirements for, otherwise the versions may
 # be resolved differently.
-	docker run -v "$(DIR):/code" -w /code/securethenews -it python:3.6-slim \
+	docker run -v "$(DIR):/code" -w /code/securethenews -it $(PY_IMAGE) \
 		bash -c 'apt-get update && apt-get install gcc -y && \
 		pip install pip-tools && \
 		pip-compile --generate-hashes --no-header --output-file requirements.txt requirements.in && \
@@ -48,7 +49,7 @@ pip-update: ## Uses pip-compile to update requirements.txt for upgrading a speci
 # It is critical that we run pip-compile via the same Python version
 # that we're generating requirements for, otherwise the versions may
 # be resolved differently.
-	docker run -v "$(DIR):/code" -w /code/securethenews -it python:3.6-slim \
+	docker run -v "$(DIR):/code" -w /code/securethenews -it $(PY_IMAGE) \
 		bash -c 'apt-get update && apt-get install gcc -y && \
 		pip install pip-tools && \
 		pip-compile --generate-hashes --no-header --upgrade-package $(PACKAGE) --output-file requirements.txt requirements.in && \
@@ -59,7 +60,7 @@ pip-dev-update: ## Uses pip-compile to update dev-requirements.txt for upgrading
 # It is critical that we run pip-compile via the same Python version
 # that we're generating requirements for, otherwise the versions may
 # be resolved differently.
-	docker run -v "$(DIR):/code" -w /code/securethenews -it python:3.6-slim \
+	docker run -v "$(DIR):/code" -w /code/securethenews -it $(PY_IMAGE) \
 		bash -c 'apt-get update && apt-get install gcc -y && \
 		pip install pip-tools && \
 		pip-compile --require-hashes --no-header --allow-unsafe --upgrade-package $(PACKAGE) --output-file dev-requirements.txt dev-requirements.in'
