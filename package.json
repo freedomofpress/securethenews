@@ -40,7 +40,7 @@
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
     "watchify": "^3.11.1",
-    "webpack": "^4.33.0",
+    "webpack": "^4.42.1",
     "webpack-bundle-tracker": "^0.4.2-beta",
     "webpack-cli": "^3.3.2",
     "webpack-merge": "^4.2.1"
