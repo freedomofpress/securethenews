@@ -119,6 +119,9 @@ jobs:
             pipenv run make app-tests-dev
           no_output_timeout: 5m
 
+      - store_artifacts:
+          path: htmlcov
+
       - run:
           name: Yank docker logs
           command: |
