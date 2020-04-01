@@ -33,6 +33,13 @@ class Site(ClusterableModel):
         help_text='Specify the domain name without the scheme, '
                   'e.g. "example.com" instead of "https://example.com"')
 
+    twitter_handle = models.CharField(
+        'Twitter Handle',
+        blank=True,
+        max_length=16,
+        help_text='Specify the twitter handle starting with "@"'
+    )
+
     added = models.DateTimeField(auto_now_add=True)
 
     objects = models.Manager()
@@ -49,6 +56,7 @@ class Site(ClusterableModel):
     panels = [
         FieldPanel('name'),
         FieldPanel('domain'),
+        FieldPanel('twitter_handle'),
         AutocompletePanel('regions', target_model='sites.Region'),
     ]
 
