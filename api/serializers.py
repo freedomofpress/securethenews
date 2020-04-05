@@ -48,8 +48,8 @@ class SiteSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Site
-        fields = ('name', 'slug', 'domain', 'twitter_handle', 'added', 'regions',
-                  'latest_scan', 'all_scans')
+        fields = ('name', 'slug', 'domain', 'twitter_handle', 'added',
+                  'regions', 'latest_scan', 'all_scans')
 
     def get_latest_scan(self, data):
         try:
