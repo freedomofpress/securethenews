@@ -35,4 +35,4 @@ RUN  mkdir /deploy && \
 EXPOSE 8000
 USER gcorn
 
-CMD django-start.sh
+CMD ["/usr/local/bin/django-start.sh"]
