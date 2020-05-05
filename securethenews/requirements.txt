@@ -428,9 +428,9 @@ wagtail-autocomplete==0.4 \
     --hash=sha256:45934480e60588d02f5b2029ce1c894d94d412703e64a61ca944fe1e23a7e796 \
     --hash=sha256:e1f55ca5147a94c398002b51f6b93d2aafeb2c127da428d714f08e79f61a3216 \
     # via -r requirements.in
-wagtail==2.7.2 \
-    --hash=sha256:357cdb5733aeed18ae36c865eefd04484f545387331371d26a40b99affb1a327 \
-    --hash=sha256:e4d129ec3560cc4ee1fc9dae384c898938dded2bd7e7197376da8517be6b688b \
+wagtail==2.7.3 \
+    --hash=sha256:0c0bdcf885ffa48bad6c4b2ac375ba63a7745aa4e0c638683eaa92642893da10 \
+    --hash=sha256:e4a9aaf0941ecb2ec3264f032b905d803b1c3d69470d7269c7f3743ef6eacea1 \
     # via -r requirements.in, wagtail-autocomplete
 wagtailmenus==3.0 \
     --hash=sha256:1e0d37c4659bf20f2f645a1412cd63e88e6f89e692618e5a78301f5f9a148420 \
