@@ -15,7 +15,7 @@ psycopg2
 python-json-logger
 sslyze<2  # pinning older version for python3.5 compatibility
 unittest-xml-reporting
-wagtail>=2.7.2,<2.8
+wagtail>=2.7.3,<2.8
 wagtail-autocomplete
 wagtailmenus>=3.0
 whitenoise
