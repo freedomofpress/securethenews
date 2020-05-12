@@ -32,7 +32,7 @@
     "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-react": "^7.13.0",
     "mini-css-extract-plugin": "^0.7.0",
-    "node-sass": "^4.13.1",
+    "node-sass": "^4.14.1",
     "npm-audit-plus": "^0.1.5",
     "postcss-loader": "^3.0.0",
     "pug": "^2.0.3",
@@ -42,7 +42,7 @@
     "watchify": "^3.11.1",
     "webpack": "^4.42.1",
     "webpack-bundle-tracker": "^0.4.2-beta",
-    "webpack-cli": "^3.3.2",
+    "webpack-cli": "^3.3.11",
     "webpack-merge": "^4.2.1"
   },
   "dependencies": {
