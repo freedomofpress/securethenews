@@ -33,7 +33,7 @@
     "eslint-plugin-react": "^7.13.0",
     "mini-css-extract-plugin": "^0.7.0",
     "node-sass": "^4.14.1",
-    "npm-audit-plus": "^0.1.5",
+    "npm-audit-plus": "^0.1.7",
     "postcss-loader": "^3.0.0",
     "pug": "^2.0.3",
     "pug-loader": "^2.4.0",
