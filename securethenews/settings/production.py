@@ -2,6 +2,7 @@ from __future__ import absolute_import, unicode_literals
 
 from .base import *  # noqa: F403,F401
 import os
+import sys
 import logging
 
 # This is not the Django logger; it's for reporting problems while configuring
@@ -168,9 +169,10 @@ LOGGING = {
     'disable_existing_loggers': False,
     'handlers': {
         'console': {
-            'level': 'DEBUG',
+            'level': LOG_LEVEL,
             'class': 'logging.StreamHandler',
-            'formatter': 'json_out'
+            'formatter': 'json_out',
+            'stream': sys.stdout,
         },
         'debug': {
             'level': 'DEBUG',
