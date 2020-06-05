@@ -140,6 +140,7 @@ elif os.environ.get('GS_BUCKET_NAME'):
 #
 
 LOG_DIR = os.environ.get('DJANGO_LOG_PATH', os.path.join(BASE_DIR, 'logs'))
+LOG_LEVEL = os.environ.get('DJANGO_LOG_LEVEL', 'info').upper()
 LOG_TO_CONSOLE = bool(os.environ.get('DJANGO_LOG_CONSOLE', False))
 
 DJANGO_LOGGING = {
@@ -147,7 +148,7 @@ DJANGO_LOGGING = {
     "SQL_LOG": False,
     "DISABLE_EXISTING_LOGGERS": True,
     "PROPOGATE": False,
-    "LOG_LEVEL": os.environ.get('DJANGO_LOG_LEVEL', 'info'),
+    "LOG_LEVEL": LOG_LEVEL,
     "LOG_PATH": LOG_DIR,
     "INDENT_CONSOLE_LOG": 0
 }
@@ -223,7 +224,7 @@ LOGGING = {
 
 if not LOG_TO_CONSOLE:
     LOGGING['handlers']['rotate'] = {
-        'level': os.environ.get('DJANGO_LOG_LEVEL', 'info').upper(),
+        'level': LOG_LEVEL,
         'class': 'logging.handlers.RotatingFileHandler',
         'backupCount': 5,
         'maxBytes': 10000000,
