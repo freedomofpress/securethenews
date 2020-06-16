@@ -2,7 +2,12 @@ from __future__ import absolute_import, unicode_literals
 
 from .base import *  # noqa: F403,F401
 import os
+import sys
+import logging
 
+# This is not the Django logger; it's for reporting problems while configuring
+# the app, when logging may not otherwise be set up
+logging.basicConfig(format='%(levelname)s: %(message)s')
 
 DEBUG = False
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
@@ -102,22 +107,33 @@ if os.environ.get('AWS_SESSION_TOKEN'):
 
 elif os.environ.get('GS_BUCKET_NAME'):
     INSTALLED_APPS.append('storages')  # noqa: F405
-    GS_BUCKET_NAME = os.environ.get("GS_BUCKET_NAME")
-    GS_PROJECT_ID = os.environ.get("GS_PROJECT_ID")
-    G_CREDS = os.environ.get("GS_CREDENTIALS", None)
 
-    # https://github.com/jschneier/django-storages/issues/455
-    if G_CREDS:
+    if 'GS_CREDENTIALS' in os.environ:
         from google.oauth2.service_account import Credentials
-        GS_CREDENTIALS = Credentials.from_service_account_file(G_CREDS)
+        gs_creds_path = os.environ['GS_CREDENTIALS']
+        GS_CREDENTIALS = Credentials.from_service_account_file(gs_creds_path)
+    elif 'GOOGLE_APPLICATION_CREDENTIALS' in os.environ:
+        logging.warning('Defaulting to global GOOGLE_APPLICATION_CREDENTIALS')
+    else:
+        logging.warning(
+            'GS_CREDENTIALS or GOOGLE_APPLICATION_CREDENTIALS unset! ' +
+            'Falling back to credentials of the machine we are running on, ' +
+            'if it is a GCE instance. This is almost certainly not desired.'
+        )
 
+    # Optional setting; we generally do not need to use a bucket that lives in
+    # a different project, so this will be unset
+    if 'GS_PROJECT_ID' in os.environ:
+        GS_PROJECT_ID = os.environ['GS_PROJECT_ID']
+
+    GS_BUCKET_NAME = os.environ['GS_BUCKET_NAME']
     GS_MEDIA_PATH = os.environ.get('GS_MEDIA_PATH', 'media')
     GS_STATIC_PATH = os.environ.get('GS_STATIC_PATH', 'static')
 
     DEFAULT_FILE_STORAGE = 'securethenews.gce_storage.MediaStorage'
-    if os.environ.get("GS_STORE_STATIC", False):
-        STATICFILES_STORAGE = "securethenews.gce_storage.StaticStorage"
-    elif os.environ.get("DJANGO_STATIC_ROOT", False):
+    if 'GS_STORE_STATIC' in os.environ:
+        STATICFILES_STORAGE = 'securethenews.gce_storage.StaticStorage'
+    elif 'DJANGO_STATIC_ROOT' in os.environ:
         STATIC_ROOT = os.environ['DJANGO_STATIC_ROOT']
 
 
@@ -125,6 +141,7 @@ elif os.environ.get('GS_BUCKET_NAME'):
 #
 
 LOG_DIR = os.environ.get('DJANGO_LOG_PATH', os.path.join(BASE_DIR, 'logs'))
+LOG_LEVEL = os.environ.get('DJANGO_LOG_LEVEL', 'info').upper()
 LOG_TO_CONSOLE = bool(os.environ.get('DJANGO_LOG_CONSOLE', False))
 
 DJANGO_LOGGING = {
@@ -132,7 +149,7 @@ DJANGO_LOGGING = {
     "SQL_LOG": False,
     "DISABLE_EXISTING_LOGGERS": True,
     "PROPOGATE": False,
-    "LOG_LEVEL": os.environ.get('DJANGO_LOG_LEVEL', 'info'),
+    "LOG_LEVEL": LOG_LEVEL,
     "LOG_PATH": LOG_DIR,
     "INDENT_CONSOLE_LOG": 0
 }
@@ -152,9 +169,10 @@ LOGGING = {
     'disable_existing_loggers': False,
     'handlers': {
         'console': {
-            'level': 'DEBUG',
+            'level': LOG_LEVEL,
             'class': 'logging.StreamHandler',
-            'formatter': 'json_out'
+            'formatter': 'json_out',
+            'stream': sys.stdout,
         },
         'debug': {
             'level': 'DEBUG',
@@ -208,7 +226,7 @@ LOGGING = {
 
 if not LOG_TO_CONSOLE:
     LOGGING['handlers']['rotate'] = {
-        'level': os.environ.get('DJANGO_LOG_LEVEL', 'info').upper(),
+        'level': LOG_LEVEL,
         'class': 'logging.handlers.RotatingFileHandler',
         'backupCount': 5,
         'maxBytes': 10000000,
