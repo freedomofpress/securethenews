@@ -12,8 +12,10 @@ RUN npm install npm@${NPM_VER} -g
 # https://github.com/webpack/webpack-dev-server/issues/128
 ENV UV_THREADPOOL_SIZE 128
 
-ARG USERID
-RUN adduser -D -g "" -u "${USERID}" docker_user || true
+ARG USERID=1000
+# node image uses BusyBox adduser, so short options only
+# The image already has a 'node' user
+RUN adduser -D -g "" -u "${USERID}" docker_user
 
 # Oddly, node-sass requires both python and make to build bindings
 RUN apk add --no-cache paxctl python make g++
