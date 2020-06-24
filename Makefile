@@ -107,7 +107,7 @@ dev-init: ## pipe ENVs into docker-compose, prevents need of wrapper script
 
 .PHONY: app-tests-dev
 app-tests-dev: ## Run development tests (dev)
-	docker-compose run django /bin/bash -c \
+	docker-compose run django /bin/bash -ec \
 		"coverage run --source='.' ./manage.py test --noinput --keepdb; \
 		coverage html --skip-empty --omit='*/migrations/*.py'; \
 		coverage report --fail-under=65 --skip-empty --omit='*/migrations/*.py'"
