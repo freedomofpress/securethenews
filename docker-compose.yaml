@@ -22,7 +22,7 @@ services:
   node:
     build:
       context: .
-      dockerfile: docker/NodeDockerfile
+      dockerfile: docker/DevNodeDockerfile
       args:
         NODE_VER: 10.17.0-alpine
         NPM_VER: 6.13.4

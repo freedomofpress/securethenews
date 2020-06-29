@@ -43,7 +43,8 @@ RUN apt-get update && \
 COPY docker/django-start.sh /usr/local/bin
 RUN  chmod +x /usr/local/bin/django-start.sh
 
-RUN adduser --disabled-password --gecos "" gcorn
+ARG USERID=1000
+RUN adduser --disabled-password --gecos "" --uid "${USERID}" gcorn
 
 LABEL MAINTAINER="Freedom of the Press Foundation"
 LABEL APP="securethenews"
