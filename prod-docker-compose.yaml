@@ -22,9 +22,6 @@ services:
     build:
       context: .
       dockerfile: docker/ProdDjangoDockerfile
-      args:
-        NODE_VER: 10.17.0-alpine
-        NPM_VER: 6.13.4
     image: quay.io/freedomofpress/securethenews
     read_only: true
     environment:
