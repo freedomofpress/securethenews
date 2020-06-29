@@ -2,7 +2,7 @@
 DIR := ${CURDIR}
 WHOAMI := ${USER}
 RAND_PORT := ${RAND_PORT}
-DOCKER_COMPOSE_UID := 1000
+DOCKER_COMPOSE_UID := 1001 # avoid collision with node image's predefined user
 GIT_REV := $(shell git rev-parse HEAD | cut -c1-10)
 GIT_BR := $(shell git rev-parse --abbrev-ref HEAD)
 STN_IMAGE := quay.io/freedomofpress/securethenews
