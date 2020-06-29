@@ -2,14 +2,14 @@
 
 [![CircleCI](https://circleci.com/gh/freedomofpress/securethenews.svg?style=svg)](https://circleci.com/gh/freedomofpress/securethenews)
 
-## Getting Started with the Development Environment
+## Prerequisites
 
 The installation instructions below assume you have the following software on your machine:
 
 * [pipenv](https://docs.pipenv.org/#install-pipenv-today)
 * [docker](https://docs.docker.com/engine/installation/)
 
-From the checkout directory, run the following to jump into a virtualenv:
+Note that you can either install docker-compose natively or via pipenv. If you choose the pipenv route you'll need to run these commands:
 
 ```bash
 # The very first time run
@@ -17,6 +17,8 @@ $ pipenv install
 # Each subsequent time run this to enter a virtualenv shell
 $ pipenv shell
 ```
+
+## Local Development Instructions
 
 Then run the following, which will be need to be run once at clone of this repo:
 
