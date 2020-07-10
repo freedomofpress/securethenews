@@ -22,6 +22,10 @@ services:
     build:
       context: .
       dockerfile: docker/ProdDjangoDockerfile
+      args:
+        # Ensure that this does *not* depend on the host env, and the
+        # production CI and deployment can set it to whatever
+        USERID: 12345
     image: quay.io/freedomofpress/securethenews
     read_only: true
     environment:
