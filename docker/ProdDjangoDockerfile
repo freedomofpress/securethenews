@@ -43,7 +43,7 @@ RUN  chmod +x /usr/local/bin/django-start.sh
 
 # Infra will supply this in CI, because it needs to match Kubernetes
 ARG USERID
-RUN adduser --disabled-password --gecos "" --uid "${USERID}" gcorn
+RUN adduser --disabled-password --gecos "" --uid "${USERID?USERID must be supplied}" gcorn
 
 LABEL MAINTAINER="Freedom of the Press Foundation"
 LABEL APP="securethenews"
