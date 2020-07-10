@@ -41,7 +41,8 @@ RUN apt-get update && \
 COPY docker/django-start.sh /usr/local/bin
 RUN  chmod +x /usr/local/bin/django-start.sh
 
-ARG USERID=1000
+# Infra will supply this in CI, because it needs to match Kubernetes
+ARG USERID
 RUN adduser --disabled-password --gecos "" --uid "${USERID}" gcorn
 
 LABEL MAINTAINER="Freedom of the Press Foundation"
