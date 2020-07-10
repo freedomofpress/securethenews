@@ -97,6 +97,16 @@ CORS_ORIGIN_ALLOW_ALL = True
 # API is read-only
 CORS_ALLOW_METHODS = ('GET', 'HEAD', 'OPTIONS')
 
+# Set X-XSS-Protection
+SECURE_BROWSER_XSS_FILTER = True
+
+# Set X-Content-Type-Options
+SECURE_CONTENT_TYPE_NOSNIFF = True
+
+# Adjust HSTS
+SECURE_HSTS_SECONDS = 63072000
+SECURE_HSTS_PRELOAD = True
+
 ROOT_URLCONF = 'securethenews.urls'
 
 TEMPLATES = [
