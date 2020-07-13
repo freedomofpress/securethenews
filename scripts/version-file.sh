@@ -11,10 +11,19 @@ DEPLOY_FILE="${DJANGO_VERSION_FILE:-/deploy/version}"
 cat /dev/null > "${DEPLOY_FILE}"
 
 echo -e "## GIT INFO #####\n" >> "${DEPLOY_FILE}"
-git_tag_info="$(git describe --exact-match || echo "N/A")"
-echo -e "git tag: ${git_tag_info}\n" >> "${DEPLOY_FILE}"
-git_branch_info="$(git rev-parse --abbrev-ref HEAD || echo "N/A")"
+
+git_branch="$(git symbolic-ref --short HEAD 2>/dev/null || echo "N/A")"
 echo -e "git branch: ${git_branch_info}\n" >> "${DEPLOY_FILE}"
+
+case "$git_branch" in
+    N/A)
+        echo -e "release: $(git describe --exact-match)" >> "${DEPLOY_FILE}";;
+    prod)
+        echo -e "release: $(git describe HEAD^2)" >> "${DEPLOY_FILE}";;
+    *)
+        echo -e "last release and commits since: $(git describe)" >> "${DEPLOY_FILE}";;
+esac
+
 git log -5 --oneline >> "${DEPLOY_FILE}"
 
 echo -e "\n## PYTHON INFO #####" >> "${DEPLOY_FILE}"
