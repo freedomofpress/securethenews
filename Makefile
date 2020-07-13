@@ -6,7 +6,7 @@ HOST_UID := $(shell id -u)
 GIT_REV := $(shell git rev-parse HEAD | cut -c1-10)
 GIT_BR := $(shell git rev-parse --abbrev-ref HEAD)
 STN_IMAGE := quay.io/freedomofpress/securethenews
-PY_IMAGE := python:3.5-slim
+PY_IMAGE := python:3.7-slim
 
 .PHONY: ci-go
 ci-go: ## Provisions and tests a prod-like setup.
@@ -39,7 +39,7 @@ compile-pip-dependencies: ## Uses pip-compile to update requirements.txt
 # that we're generating requirements for, otherwise the versions may
 # be resolved differently.
 	docker run -v "$(DIR):/code" -w /code/securethenews -it $(PY_IMAGE) \
-		bash -c 'apt-get update && apt-get install gcc -y && \
+		bash -c 'apt-get update && apt-get install gcc libpq-dev -y && \
 		pip install pip-tools && \
 		pip-compile --generate-hashes --no-header --output-file requirements.txt requirements.in && \
 		pip-compile --generate-hashes --no-header --allow-unsafe --output-file dev-requirements.txt dev-requirements.in'
