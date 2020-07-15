@@ -4,8 +4,8 @@ reuse-blerbs:
     run:
       name: Install testing pre-reqs
       command: |
-        # Set python to 3.5.9
-        pyenv global 3.5.9
+        # Set python to 3.7.8
+        pyenv global 3.7.8
         pip install -U pip
         pip install pipenv
         pipenv install
