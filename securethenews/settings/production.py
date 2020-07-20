@@ -138,51 +138,60 @@ elif os.environ.get('GS_BUCKET_NAME'):
 
 
 # Django json logging
-#
 
-LOG_DIR = os.environ.get('DJANGO_LOG_PATH', os.path.join(BASE_DIR, 'logs'))
-LOG_LEVEL = os.environ.get('DJANGO_LOG_LEVEL', 'info').upper()
-LOG_TO_CONSOLE = bool(os.environ.get('DJANGO_LOG_CONSOLE', False))
+log_handlers = {
+    'debug': {
+        'level': 'DEBUG',
+        'class': 'logging.StreamHandler',
+        'formatter': 'json_out'
+    },
+    'null': {
+        'class': 'logging.NullHandler',
+    }
+}
+
+django_logfile = os.environ.get('DJANGO_LOGFILE')
+log_level = os.environ.get('DJANGO_LOG_LEVEL', 'info').upper()
+
+if django_logfile:
+    console_log = False
+    # Ensure base log directory exists
+    log_dir = os.path.dirname(django_logfile)
+    if not os.path.exists(log_dir):
+        os.makedirs(log_dir)
+    log_handler = 'rotate'
+    log_handlers['rotate'] = {
+        'level': log_level,
+        'class': 'logging.handlers.RotatingFileHandler',
+        'backupCount': 5,
+        'maxBytes': 10000000,
+        'filename': django_logfile,
+        'formatter': 'json_out'
+    }
+else:
+    console_log = True
+    log_handler = 'console'
+    log_handlers['console'] = {
+        'level': log_level,
+        'class': 'logging.StreamHandler',
+        'formatter': 'json_out',
+        'stream': sys.stdout,
+    }
 
 DJANGO_LOGGING = {
-    "CONSOLE_LOG": LOG_TO_CONSOLE,
+    "CONSOLE_LOG": console_log,
     "SQL_LOG": False,
     "DISABLE_EXISTING_LOGGERS": True,
     "PROPOGATE": False,
-    "LOG_LEVEL": LOG_LEVEL,
-    "LOG_PATH": LOG_DIR,
+    "LOG_LEVEL": log_level,
     "INDENT_CONSOLE_LOG": 0
 }
 
-# Ensure base log directory exists
-if not os.path.exists(LOG_DIR) and not LOG_TO_CONSOLE:
-    os.makedirs(LOG_DIR)
-DJANGO_OTHER_LOG = os.path.join(LOG_DIR, 'django-other.log')
-
-# Logs other than tracebacks and requests
-GENERIC_LOG_HANDLER = 'rotate'
-if LOG_TO_CONSOLE:
-    GENERIC_LOG_HANDLER = 'console'
 
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
-    'handlers': {
-        'console': {
-            'level': LOG_LEVEL,
-            'class': 'logging.StreamHandler',
-            'formatter': 'json_out',
-            'stream': sys.stdout,
-        },
-        'debug': {
-            'level': 'DEBUG',
-            'class': 'logging.StreamHandler',
-            'formatter': 'json_out'
-        },
-        'null': {
-            'class': 'logging.NullHandler',
-        }
-    },
+    'handlers': log_handlers,
     'formatters': {
         'json_out': {
             '()': 'pythonjsonlogger.jsonlogger.JsonFormatter',
@@ -192,19 +201,19 @@ LOGGING = {
     },
     'loggers': {
         'django': {
-            'handlers': [GENERIC_LOG_HANDLER],
+            'handlers': [log_handler],
             'propagate': True,
         },
         'django.template': {
-            'handlers': [GENERIC_LOG_HANDLER],
+            'handlers': [log_handler],
             'propagate': False,
         },
         'django.db.backends': {
-            'handlers': [GENERIC_LOG_HANDLER],
+            'handlers': [log_handler],
             'propagate': False,
         },
         'django.security': {
-            'handlers': [GENERIC_LOG_HANDLER],
+            'handlers': [log_handler],
             'propagate': False,
         },
         # These are already handled by the django json logging library
@@ -218,18 +227,8 @@ LOGGING = {
             'propagate': False,
         },
         '': {
-            'handlers': [GENERIC_LOG_HANDLER],
+            'handlers': [log_handler],
             'propagate': False,
         },
     },
 }
-
-if not LOG_TO_CONSOLE:
-    LOGGING['handlers']['rotate'] = {
-        'level': LOG_LEVEL,
-        'class': 'logging.handlers.RotatingFileHandler',
-        'backupCount': 5,
-        'maxBytes': 10000000,
-        'filename': os.environ.get('DJANGO_LOGFILE', DJANGO_OTHER_LOG),
-        'formatter': 'json_out'
-    }
