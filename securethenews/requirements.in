@@ -9,13 +9,12 @@ django-storages[boto3, google]>=1.7 # aws s3, google storage asset management
 django-webpack-loader
 elasticsearch
 gunicorn
-markdown2>=2.3.5  # required by pshtt, forcing newer version for patch
+markdown2>2.3.8
 pshtt
 psycopg2
 python-json-logger
-sslyze<2  # pinning older version for python3.5 compatibility
 unittest-xml-reporting
-wagtail>=2.7.3,<2.8
+wagtail>2.7.3,<2.8
 wagtail-autocomplete
 wagtailmenus>=3.0
 whitenoise
