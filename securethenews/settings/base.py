@@ -107,6 +107,11 @@ SECURE_CONTENT_TYPE_NOSNIFF = True
 SECURE_HSTS_SECONDS = 63072000
 SECURE_HSTS_PRELOAD = True
 
+# Rather than sending a header, this says to trust this request header (in
+# prod we are behind nginx, which sets it)
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+
 ROOT_URLCONF = 'securethenews.urls'
 
 TEMPLATES = [
