@@ -6,7 +6,7 @@ HOST_UID := $(shell id -u)
 GIT_REV := $(shell git rev-parse HEAD | cut -c1-10)
 GIT_BR := $(shell git rev-parse --abbrev-ref HEAD)
 STN_IMAGE := quay.io/freedomofpress/securethenews
-PY_IMAGE := python:3.5-slim
+PY_IMAGE := python:3.7-slim
 
 .PHONY: ci-go
 ci-go: ## Provisions and tests a prod-like setup.
@@ -39,7 +39,7 @@ compile-pip-dependencies: ## Uses pip-compile to update requirements.txt
 # that we're generating requirements for, otherwise the versions may
 # be resolved differently.
 	docker run -v "$(DIR):/code" -w /code/securethenews -it $(PY_IMAGE) \
-		bash -c 'apt-get update && apt-get install gcc -y && \
+		bash -c 'apt-get update && apt-get install gcc libpq-dev -y && \
 		pip install pip-tools && \
 		pip-compile --generate-hashes --no-header --output-file requirements.txt requirements.in && \
 		pip-compile --generate-hashes --no-header --allow-unsafe --output-file dev-requirements.txt dev-requirements.in'
@@ -69,9 +69,8 @@ pip-dev-update: ## Uses pip-compile to update dev-requirements.txt for upgrading
 safety: ## Runs `safety check` to check python dependencies for vulnerabilities
 	@for req_file in `find . -type f -name '*requirements.txt'`; do \
 		echo "Checking file $$req_file" \
-		&& safety check --ignore 36351 --ignore 36546 --ignore 36533 --ignore 36534\
-		--ignore=38449 --ignore=38450 --ignore=38451 --ignore=38452\
-		--ignore 36541 --ignore 38197 --ignore 38198 --full-report -r $$req_file \
+		&& safety check --ignore=38197 --ignore=38449 --ignore=38450 --ignore=38451 --ignore=38452\
+		--full-report -r $$req_file \
 		&& echo -e '\n' \
 		|| exit 1; \
 	done
