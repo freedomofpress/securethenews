@@ -102,6 +102,8 @@ class Scan(models.Model):
 
     timestamp = models.DateTimeField(auto_now_add=True)
 
+    onion_available = models.BooleanField(default=False)
+
     # Scan results
     # TODO: If a site isn't live, there may not be much of a point storing the
     # scan. This requirement also increases the complexity of the data model
@@ -151,19 +153,21 @@ class Scan(models.Model):
                 score = 70
 
                 if self.hsts:
-                    score += 5
+                    score += 4
 
                 # HSTS max-age is specified in seconds
                 eighteen_weeks = 18*7*24*60*60
                 if self.hsts_max_age and self.hsts_max_age >= eighteen_weeks:
-                    score += 5
+                    score += 4
 
                 if self.hsts_entire_domain:
-                    score += 10
+                    score += 6
                 if self.hsts_preload_ready:
-                    score += 5
+                    score += 4
                 if self.hsts_preloaded:
-                    score += 5
+                    score += 4
+                if self.onion_available:
+                    score += 4
 
         assert 0 <= score <= 100, \
             "score must be between 0 and 100 (inclusive), is: {}".format(score)
@@ -225,6 +229,7 @@ class Scan(models.Model):
     def to_dict(self):
         return dict(
             live=self.live,
+            onion_available=self.onion_available,
             valid_https=self.valid_https,
             downgrades_https=self.downgrades_https,
             defaults_to_https=self.defaults_to_https,
