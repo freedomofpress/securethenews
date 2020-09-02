@@ -38,6 +38,28 @@
       <div class="rating-section">
         <div class="rating-section-header clearfix align-middle">
           <div class="rating-section-title pull-left inline-block">
+            Onion service available
+          </div>
+          <div class="rating-section-grade pull-right inline-block">
+            {% if scan.onion_available %}
+              <span class="success">YES</span>
+            {% else %}
+              <span class="fail">NO</span>
+            {% endif %}
+          </div>
+        </div>
+        <div class="rating-section-body">
+          {% if scan.onion_available %}
+            Provides an onion service.
+          {% else %}
+            Does not provide an onion service.
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="rating-section">
+        <div class="rating-section-header clearfix align-middle">
+          <div class="rating-section-title pull-left inline-block">
             Valid HTTPS
           </div>
           <div class="rating-section-grade pull-right inline-block">

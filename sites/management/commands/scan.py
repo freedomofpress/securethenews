@@ -24,12 +24,32 @@ def pshtt(domain):
     return pshtt_results, stdout, stderr
 
 
+def is_onion_available(pshtt_results):
+    """
+    For HTTPS sites, we inspect the headers to see if the
+    Onion-Location header is present, indicating that the
+    site is available as an onion service.
+    """
+    onion_available = False
+
+    for key in ["https", "httpswww"]:
+        try:
+            headers = pshtt_results["endpoints"][key]["headers"]
+            if 'onion-location' in set(k.lower() for k in headers):
+                onion_available = True
+        except KeyError:
+            pass
+
+    return onion_available
+
+
 def scan(site):
     # Scan the domain with pshtt
     results, stdout, stderr = pshtt(site.domain)
 
     scan = Scan(
         site=site,
+        onion_available=is_onion_available(results),
 
         live=results['Live'],
 

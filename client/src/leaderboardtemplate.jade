@@ -1,5 +1,5 @@
 - var iconClass = "fa-caret-" + (state.order == "desc" ? "down" : "up");
-  
+
 mixin check(condition)
   if condition
     i.fa.fa-check.grade-a
@@ -23,6 +23,8 @@ mixin check(condition)
             .inline-block.align-middle HSTS
           th.desktop-only
             .inline-block.align-middle HSTS Preloaded
+          th.desktop-only
+            .inline-block.align-middle Available Over Onion Services
           th.sort-control(data-sort-key='score')
             .inline-block.align-middle Grade
             if state.orderBy == 'score'
@@ -42,6 +44,8 @@ mixin check(condition)
               +check(item.hsts)
             td.desktop-only
               +check(item.hsts_preloaded)
+            td.desktop-only
+              +check(item.onion_available)
             td
               span(class=`grade ${item.grade.class_name}`)= item.grade.grade
   else
