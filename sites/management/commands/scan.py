@@ -3,6 +3,7 @@ import logging
 from lxml import etree, html
 import requests
 import subprocess
+from typing import Optional
 
 from django.core.management.base import BaseCommand, CommandError
 from django.db import transaction
@@ -30,7 +31,7 @@ def pshtt(domain):
     return pshtt_results, stdout, stderr
 
 
-def is_onion_available(pshtt_results):
+def is_onion_available(pshtt_results) -> Optional[bool]:
     """
     For HTTPS sites, we inspect the headers to see if the
     Onion-Location header is present, indicating that the
@@ -43,6 +44,7 @@ def is_onion_available(pshtt_results):
             headers = pshtt_results["endpoints"][key]["headers"]
             if 'onion-location' in set(k.lower() for k in headers):
                 onion_available = True
+                return onion_available
         except KeyError:
             pass
 
@@ -59,9 +61,11 @@ def is_onion_available(pshtt_results):
                 matching_meta_tags = tree.xpath('//meta[@http-equiv="onion-location"]/@content')
                 if len(matching_meta_tags) >= 1:
                     onion_available = True
+                    return onion_available
             except KeyError:
                 pass
             except (etree.ParserError, requests.exceptions.RequestException) as e:
+                onion_available = None
                 # Error when requesting or parsing the page content, we log and continue on.
                 logger.error(e)
 
