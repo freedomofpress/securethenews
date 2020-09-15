@@ -136,3 +136,11 @@
     var STNsiteData = {{ sites_json|safe }};
   </script>
 {% endblock %}
+
+{% block onion_service %}
+  {% if onion_hostname %}
+  <p class="fine-print">
+    Tor address: <a href="http://{{ onion_hostname }}">{{ onion_hostname }}</a>
+  </p>
+  {% endif %}
+{% endblock %}

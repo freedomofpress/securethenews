@@ -4,6 +4,7 @@ import json
 import math
 
 from django.db import models
+from django.conf import settings
 
 from modelcluster.fields import ParentalKey
 from wagtail.contrib.table_block.blocks import TableBlock
@@ -64,6 +65,10 @@ class HomePage(Page):
         """Special Wagtail method used to add more variables to the
         template context."""
         context = super(HomePage, self).get_context(request)
+
+        # Our onion service
+        if settings.ONION_HOSTNAME is not None:
+            context['onion_hostname'] = settings.ONION_HOSTNAME
 
         # Compute summary statistics
         sites = Site.scanned.all()
