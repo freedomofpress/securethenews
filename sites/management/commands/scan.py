@@ -74,14 +74,15 @@ def is_onion_available(pshtt_results) -> Optional[bool]:
     # If the header is not provided, it's possible the news organization
     # has included it the HTML of the page in a meta tag using the `http-equiv`
     # attribute.
-    for key in ["https", "httpswww"]:
-        try:
-            url = pshtt_results["endpoints"][key]["url"]
-            onion_available = is_onion_loc_in_meta_tag(url)
-            if onion_available is not None:
-                return onion_available
-        except KeyError:
-            pass
+    canonical_url = pshtt_results.get("Canonical URL", None)
+    if not canonical_url:
+        base_domain = pshtt_results.get("Base Domain", None)
+        logger.error('could not find canonical URL for {}'.format(base_domain))
+        return None
+    elif not canonical_url.startswith("https://"):  # Skip scan if not HTTPS.
+        return False
+    else:
+        onion_available = is_onion_loc_in_meta_tag(canonical_url)
 
     return onion_available
 

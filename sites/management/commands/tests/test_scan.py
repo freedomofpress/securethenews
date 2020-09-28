@@ -8,6 +8,19 @@ from django.test import TestCase
 
 META_TAG = '<meta http-equiv="onion-location" content="http://myonion.onion">'
 
+# This result represents a pshtt scan result for example.com where no
+# Onion-Location header is found.
+PSHTT_NO_ONION_HEADER_AVAILABLE = {
+        "Canonical URL": "https://example.com",
+        "Base Domain": "example.com",
+        "endpoints": {
+            "http": {"headers": {}, "url": "http://example.com"},
+            "https": {"headers": {}, "url": "https://example.com"},
+            "httpswww": {"headers": {}, "url": "https://www.example.com"},
+            "httpwww": {"headers": {}, "url": "http://www.example.com"},
+        }
+    }
+
 
 class TestScan(TestCase):
     @mock.patch('sites.management.commands.scan.is_onion_loc_in_meta_tag',
@@ -18,6 +31,8 @@ class TestScan(TestCase):
         over HTTPS
         """
         http_onion_available_pshtt = {
+            "Canonical URL": "https://example.com",
+            "Base Domain": "example.com",
             "endpoints": {
                 "http": {
                     "headers": {
@@ -42,6 +57,8 @@ class TestScan(TestCase):
     def test_onion_available_over_https(self, mock_onion):
         """Simulates a HTTPS site with the onion location header"""
         https_onion_available_pshtt = {
+            "Canonical URL": "https://example.com",
+            "Base Domain": "example.com",
             "endpoints": {
                 "http": {
                     "headers": {
@@ -74,32 +91,33 @@ class TestScan(TestCase):
         Simulates a HTTPS site without the Onion-Location either in the
         header or the meta tag
         """
-        https_onion_not_available_pshtt = {
-            "endpoints": {
-                "http": {"headers": {}, "url": "http://example.com"},
-                "https": {"headers": {}, "url": "https://example.com"},
-                "httpswww": {"headers": {}, "url": "https://www.example.com"},
-                "httpwww": {"headers": {}, "url": "http://www.example.com"},
-            }
-        }
-        assert is_onion_available(https_onion_not_available_pshtt) is False
+        assert is_onion_available(PSHTT_NO_ONION_HEADER_AVAILABLE) is False
 
     @mock.patch('sites.management.commands.scan.is_onion_loc_in_meta_tag',
                 return_value=True)
     def test_onion_available_over_https_meta_tag(self, mock_onion):
         """
         Simulates a HTTPS site with the Onion-Location header provided
-        only in the meta tag
+        only in the meta tag.
         """
-        https_onion_not_available_in_header_pshtt = {
+        assert is_onion_available(PSHTT_NO_ONION_HEADER_AVAILABLE)
+
+    @mock.patch('sites.management.commands.scan.is_onion_loc_in_meta_tag',
+                return_value=True)
+    def test_onion_available_error_getting_canonical_url(self, mock_onion):
+        """
+        Simulates a failure to get the canonical URL for a site.
+        """
+        pshtt_result_no_canonical_url = {
+            "Base Domain": "example.com",
             "endpoints": {
                 "http": {"headers": {}, "url": "http://example.com"},
                 "https": {"headers": {}, "url": "https://example.com"},
                 "httpswww": {"headers": {}, "url": "https://www.example.com"},
                 "httpwww": {"headers": {}, "url": "http://www.example.com"},
+                }
             }
-        }
-        assert is_onion_available(https_onion_not_available_in_header_pshtt)
+        assert is_onion_available(pshtt_result_no_canonical_url) is None
 
     def test_is_onion_loc_in_meta_tag_found(self):
         """
