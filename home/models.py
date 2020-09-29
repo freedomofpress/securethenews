@@ -78,15 +78,22 @@ class HomePage(Page):
                                      for scan in latest_scans
                                      if scan.defaults_to_https]
 
+        sites_providing_onions = [scan.site
+                                  for scan in latest_scans
+                                  if scan.onion_available]
+
         # Avoid divide by 0 if no Sites have been set up yet
         if sites.count() > 0:
             context['percent_offering_https'] = math.floor(
                 len(sites_offering_https) / sites.count() * 100)
             context['percent_defaulting_to_https'] = math.floor(
                 len(sites_defaulting_to_https) / sites.count() * 100)
+            context['percent_providing_onions'] = math.floor(
+                len(sites_providing_onions) / sites.count() * 100)
         else:
             context['percent_offering_https'] = 0
             context['percent_defaulting_to_https'] = 0
+            context['percent_providing_onions'] = 0
 
         # Serialize sites with the results of their latest scans for the teaser
         context['sites_json'] = json.dumps([site.to_dict() for site in sites])

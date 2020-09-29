@@ -50,7 +50,7 @@ pip-update: ## Uses pip-compile to update requirements.txt for upgrading a speci
 # that we're generating requirements for, otherwise the versions may
 # be resolved differently.
 	docker run -v "$(DIR):/code" -w /code/securethenews -it $(PY_IMAGE) \
-		bash -c 'apt-get update && apt-get install gcc -y && \
+		bash -c 'apt-get update && apt-get install gcc libpq-dev -y && \
 		pip install pip-tools && \
 		pip-compile --generate-hashes --no-header --upgrade-package $(PACKAGE) --output-file requirements.txt requirements.in && \
 		pip-compile --generate-hashes --no-header --allow-unsafe --upgrade-package $(PACKAGE) --output-file dev-requirements.txt dev-requirements.in'
@@ -61,7 +61,7 @@ pip-dev-update: ## Uses pip-compile to update dev-requirements.txt for upgrading
 # that we're generating requirements for, otherwise the versions may
 # be resolved differently.
 	docker run -v "$(DIR):/code" -w /code/securethenews -it $(PY_IMAGE) \
-		bash -c 'apt-get update && apt-get install gcc -y && \
+		bash -c 'apt-get update && apt-get install gcc libpq-dev -y && \
 		pip install pip-tools && \
 		pip-compile --generate-hashes --no-header --allow-unsafe --upgrade-package $(PACKAGE) --output-file dev-requirements.txt dev-requirements.in'
 
@@ -69,7 +69,7 @@ pip-dev-update: ## Uses pip-compile to update dev-requirements.txt for upgrading
 safety: ## Runs `safety check` to check python dependencies for vulnerabilities
 	@for req_file in `find . -type f -name '*requirements.txt'`; do \
 		echo "Checking file $$req_file" \
-		&& safety check --ignore=38197 --ignore=38449 --ignore=38450 --ignore=38451 --ignore=38452\
+		&& safety check --ignore=38197\
 		--full-report -r $$req_file \
 		&& echo -e '\n' \
 		|| exit 1; \
