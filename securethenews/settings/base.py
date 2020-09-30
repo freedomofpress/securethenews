@@ -112,6 +112,10 @@ SECURE_HSTS_PRELOAD = True
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 
+# Make the deployment's onion service name available to templates
+ONION_HOSTNAME = os.environ.get('DJANGO_ONION_HOSTNAME')
+
+
 ROOT_URLCONF = 'securethenews.urls'
 
 TEMPLATES = [
