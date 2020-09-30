@@ -31,4 +31,13 @@
 .fine-print {
   font-size: 12px;
   margin-bottom: $spacingUnit;
+  
+  a {
+    color: $textGray;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 }
