@@ -23,8 +23,10 @@ mixin check(condition)
             .inline-block.align-middle HSTS
           th.desktop-only
             .inline-block.align-middle HSTS Preloaded
-          th.desktop-only
+          th.sort-control(data-sort-key='onion_available')
             .inline-block.align-middle Available Over Onion Services
+            if state.orderBy == 'onion_available'
+              i.sort-icon.fa(class=iconClass)
           th.sort-control(data-sort-key='score')
             .inline-block.align-middle Grade
             if state.orderBy == 'score'
