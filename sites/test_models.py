@@ -71,11 +71,6 @@ class TestScannedSitesManager(TestCase):
     def setUp(self):
         self.site = Site.objects.create(name='Test Site', domain='test.com')
 
-    def test_unscanned_sites_unavailable(self):
-        """If a Site hasn't been scanned yet, it shouldn't be available through
-        the ScannedSitesManager."""
-        self.assertNotIn(self.site, Site.scanned.all())
-
     def test_scanned_sites_available(self):
         """Once a Site has been scanned, it should be available through the
         ScannedSitesManager."""

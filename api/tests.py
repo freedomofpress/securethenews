@@ -75,13 +75,14 @@ class APISiteScansTests(APITestCase):
 
     def test_get_site_scans(self):
         """
-        <api root>/sites/securethe.news/scans should return two scans
+        <api root>/sites/securethe.news/scans should return three scans
+        (first scan is done on creation)
         """
         url = urljoin(urlroot, 'sites/securethe.news/scans/')
         response = self.client.get(url, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         # The API itself should return a result count
-        self.assertEqual(response.data['count'], 2)
+        self.assertEqual(response.data['count'], 3)
         self.assertTrue(response.data['results'][0]['live'])
 
 
