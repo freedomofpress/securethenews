@@ -104,8 +104,6 @@ class Scan(models.Model):
 
     timestamp = models.DateTimeField(auto_now_add=True)
 
-    onion_available = models.BooleanField(default=False)
-
     # Scan results
     # TODO: If a site isn't live, there may not be much of a point storing the
     # scan. This requirement also increases the complexity of the data model
@@ -114,6 +112,7 @@ class Scan(models.Model):
 
     # These are nullable because it may not be possible to determine their
     # values (for example, if the site is down at the time of the scan).
+    onion_available = models.NullBooleanField()
     valid_https = models.NullBooleanField()
     downgrades_https = models.NullBooleanField()
     defaults_to_https = models.NullBooleanField()
