@@ -6,6 +6,8 @@ from .base import *  # noqa: F403,F401
 DEBUG = True
 
 # SECURITY WARNING: keep the secret key used in production secret!
+# The SECRET_KEY below is only used in the dev and testing environment.
+# It is NOT used in production (see production.py).
 SECRET_KEY = 'fz08^an-s((swaouk(l+q)$ou2iina8w+1)t2yy0y9laahjh_('
 
 
