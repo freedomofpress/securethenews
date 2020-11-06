@@ -260,7 +260,10 @@ CSP_SCRIPT_SRC = (
     "'sha256-hk71/yNgJt0WwDMKIEPWJnms3ftGXFupYCx2GTlIB68='",
     # inline code for admin login page
     "'sha256-k0JY2oqoByUSPWtC/jMqxOh8d97885BXv2fPJ5gKeEg='",
-    "'sha256-rpjW8Yb1oj3Jg4It9QBspH3wBoSTwndEFmse3sPn8Qw='"
+    "'sha256-rpjW8Yb1oj3Jg4It9QBspH3wBoSTwndEFmse3sPn8Qw='",
+    # needed for piwik inline
+    "'sha256-Ujy9USzNCsaDKHVACggM1NqXbQJ2ljlpMX9U4g2d5d0='",
+    "analytics.freedom.press",
 )
 CSP_STYLE_SRC = (
     "'self'",
@@ -274,7 +277,8 @@ CSP_CONNECT_SRC = ("'self'",)
 # Need to be lists for now so that CSP configuration can add to them.
 # This should be reverted after testing.
 CSP_IMG_SRC = [
-    "'self'"
+    "'self'",
+    "analytics.freedom.press",
 ]
 CSP_OBJECT_SRC = ["'self'"]
 CSP_MEDIA_SRC = ["'self'"]
