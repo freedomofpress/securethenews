@@ -274,24 +274,27 @@ CSP_STYLE_SRC = (
 CSP_FRAME_SRC = ("'self'",)
 CSP_CONNECT_SRC = ("'self'",)
 
+# This will be used to evaluate Google Storage media support in staging
+GS_CUSTOM_ENDPOINT = os.environ.get(
+    "GS_CUSTOM_ENDPOINT",
+    "https://media.securethe.news"
+)
+
 # Need to be lists for now so that CSP configuration can add to them.
 # This should be reverted after testing.
-CSP_IMG_SRC = [
+CSP_IMG_SRC = (
     "'self'",
     "analytics.freedom.press",
-]
-CSP_OBJECT_SRC = ["'self'"]
-CSP_MEDIA_SRC = ["'self'"]
-
-# This will be used to evaluate Google Storage media support in staging
-if os.environ.get("DJANGO_CSP_IMG_HOSTS"):
-    CSP_IMG_SRC.extend(os.environ["DJANGO_CSP_IMG_HOSTS"].split())
-    CSP_MEDIA_SRC.extend(os.environ["DJANGO_CSP_IMG_HOSTS"].split())
-
-# There are also PDF <embeds> in some news posts, so rather than adding to
-# default-src, set an explicit object-source
-if os.environ.get("DJANGO_CSP_OBJ_HOSTS"):
-    CSP_OBJECT_SRC.extend(os.environ["DJANGO_CSP_OBJ_HOSTS"].split())
+    GS_CUSTOM_ENDPOINT,
+)
+CSP_OBJECT_SRC = (
+    "'self'",
+    GS_CUSTOM_ENDPOINT,
+)
+CSP_MEDIA_SRC = (
+    "'self'",
+    GS_CUSTOM_ENDPOINT,
+)
 
 # Report URI must be a string, not a tuple.
 CSP_REPORT_URI = os.environ.get(
