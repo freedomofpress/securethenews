@@ -81,7 +81,10 @@ MIDDLEWARE = [
 
     'wagtail.core.middleware.SiteMiddleware',
     'wagtail.contrib.redirects.middleware.RedirectMiddleware',
-    'django_logging.middleware.DjangoLoggingMiddleware'
+    'django_logging.middleware.DjangoLoggingMiddleware',
+
+    # Middleware for content security policy
+    'csp.middleware.CSPMiddleware',
 ]
 
 if bool(os.environ.get('DJANGO_WHITENOISE', False)):
@@ -242,3 +245,59 @@ if os.environ.get('DJANGO_XMLTEST_OUTPUT', 'no').lower() in ['yes', 'true']:
     TEST_OUTPUT_FILE_NAME = "app-tests.xml"
     TEST_OUTPUT_DESCRIPTIONS = True
     TEST_OUTPUT_VERBOSE = 2
+
+# Content Security Policy
+# script:
+# unsafe-eval for client/build/build.js
+# style:
+# #2 and #3 hashes needed for inline style for modernizr on admin page
+# #4 needed for wagtail admin
+CSP_DEFAULT_SRC = ("'self'",)
+CSP_SCRIPT_SRC = (
+    "'self'",
+    "'unsafe-eval'",
+    # inline code to load STNsiteData
+    "'sha256-hk71/yNgJt0WwDMKIEPWJnms3ftGXFupYCx2GTlIB68='",
+    # inline code for admin login page
+    "'sha256-k0JY2oqoByUSPWtC/jMqxOh8d97885BXv2fPJ5gKeEg='",
+    "'sha256-rpjW8Yb1oj3Jg4It9QBspH3wBoSTwndEFmse3sPn8Qw='",
+    # needed for piwik inline
+    "'sha256-Ujy9USzNCsaDKHVACggM1NqXbQJ2ljlpMX9U4g2d5d0='",
+    "analytics.freedom.press",
+)
+CSP_STYLE_SRC = (
+    "'self'",
+    "'sha256-CwE3Bg0VYQOIdNAkbB/Btdkhul49qZuwgNCMPgNY5zw='",
+    "'sha256-MZKTI0Eg1N13tshpFaVW65co/LeICXq4hyVx6GWVlK0='",
+    "'sha256-aqNNdDLnnrDOnTNdkJpYlAxKVJtLt9CtFLklmInuUAE='",
+)
+CSP_FRAME_SRC = ("'self'",)
+CSP_CONNECT_SRC = ("'self'",)
+
+# This will be used to evaluate Google Storage media support in staging
+GS_CUSTOM_ENDPOINT = os.environ.get(
+    "GS_CUSTOM_ENDPOINT",
+    "https://media.securethe.news"
+)
+
+# Need to be lists for now so that CSP configuration can add to them.
+# This should be reverted after testing.
+CSP_IMG_SRC = (
+    "'self'",
+    "analytics.freedom.press",
+    GS_CUSTOM_ENDPOINT,
+)
+CSP_OBJECT_SRC = (
+    "'self'",
+    GS_CUSTOM_ENDPOINT,
+)
+CSP_MEDIA_SRC = (
+    "'self'",
+    GS_CUSTOM_ENDPOINT,
+)
+
+# Report URI must be a string, not a tuple.
+CSP_REPORT_URI = os.environ.get(
+    'DJANGO_CSP_REPORT_URI',
+    'https://freedomofpress.report-uri.com/r/d/csp/enforce'
+)

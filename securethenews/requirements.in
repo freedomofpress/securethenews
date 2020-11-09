@@ -3,6 +3,7 @@ Django>=2.2.12,<2.3
 django-analytical>=2.5,<2.6
 django-cors-headers>=3.0.0
 django-crispy-forms>=1.7.2
+django-csp
 django-filter>=2.1.0
 django-mailgun
 django-storages[boto3, google]>=1.7 # aws s3, google storage asset management
