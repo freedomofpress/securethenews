@@ -1,8 +1,5 @@
-# Harris and Cameron are codeowners for all website changes
-*   @harrislapiroff @chigby
+# Harris, Cameron, and Saptak are codeowners for all website changes
+*   @harrislapiroff @chigby @SaptakS
 
-# Mike should review testing changes, with Conor as backup
-molecule/   @msheiny @conorsch
-
-# Mickael should be in the loop on ownership modifications
-.github/    @emkll
+# Harris should be in the loop on all ownership modifications
+.github/    @harrislapiroff
