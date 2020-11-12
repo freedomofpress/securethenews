@@ -88,6 +88,7 @@ class HomePage(Page):
                                   if scan.onion_available]
 
         # Avoid divide by 0 if no Sites have been set up yet
+        context['total_sites'] = sites.count()
         if sites.count() > 0:
             context['percent_offering_https'] = math.floor(
                 len(sites_offering_https) / sites.count() * 100)
