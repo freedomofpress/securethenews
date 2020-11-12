@@ -45,7 +45,7 @@
   </section>
 
   <!-- Dump the site data to be rendered client-side. -->
-  <script type="text/javascript">
+  <script type="text/javascript" nonce="{{request.csp_nonce}}">
     var STNsiteData = {{ sites_json|safe }};
   </script>
 {% endblock %}

@@ -274,6 +274,9 @@ CSP_STYLE_SRC = (
 CSP_FRAME_SRC = ("'self'",)
 CSP_CONNECT_SRC = ("'self'",)
 
+# Nonce needed for region based STNsiteData
+CSP_INCLUDE_NONCE_IN = ["script-src"]
+
 # This will be used to evaluate Google Storage media support in staging
 GS_CUSTOM_ENDPOINT = os.environ.get(
     "GS_CUSTOM_ENDPOINT",
