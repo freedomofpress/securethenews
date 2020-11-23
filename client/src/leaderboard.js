@@ -58,6 +58,12 @@ export default Backbone.View.extend({
 
     models = _.sortBy(models, this.state.get('orderBy'))
 
+    if (this.state.get('orderBy') == 'https_available') {
+      models = _.sortBy(models, function(item) {
+        return item.valid_https && !item.downgrades_https
+      })
+    }
+
     if (this.state.get('order') == 'desc') {
       models = models.reverse();
     }

@@ -13,17 +13,27 @@ mixin check(condition)
       thead
         tr.leaderboard-row
           th
-          th.desktop-only
+          th.desktop-only.sort-control(data-sort-key='valid_https')
             .inline-block.align-middle Valid HTTPS
-          th.desktop-only
+            if state.orderBy == 'valid_https'
+              i.sort-icon.fa(class=iconClass)
+          th.desktop-only.sort-control(data-sort-key='https_available')
             .inline-block.align-middle Available Over HTTPS
-          th.desktop-only
+            if state.orderBy == 'https_available'
+              i.sort-icon.fa(class=iconClass)
+          th.desktop-only.sort-control(data-sort-key='defaults_to_https')
             .inline-block.align-middle Defaults to HTTPS
-          th.desktop-only
+            if state.orderBy == 'defaults_to_https'
+              i.sort-icon.fa(class=iconClass)
+          th.desktop-only.sort-control(data-sort-key='hsts')
             .inline-block.align-middle HSTS
-          th.desktop-only
+            if state.orderBy == 'hsts'
+              i.sort-icon.fa(class=iconClass)
+          th.desktop-only.sort-control(data-sort-key='hsts_preloaded')
             .inline-block.align-middle HSTS Preloaded
-          th.sort-control(data-sort-key='onion_available')
+            if state.orderBy == 'hsts_preloaded'
+              i.sort-icon.fa(class=iconClass)
+          th.desktop-only.sort-control(data-sort-key='onion_available')
             .inline-block.align-middle Available Over Onion Services
             if state.orderBy == 'onion_available'
               i.sort-icon.fa(class=iconClass)
