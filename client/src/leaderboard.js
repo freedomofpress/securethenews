@@ -9,7 +9,7 @@ import orderBy from 'lodash/orderBy'
 // an, the) removed and converted to lower-case for sorting in a more
 // expected, human-readable way.
 const sortableName = (obj) => {
-  return obj.name.replace(/^(an?|the)\s*/i, '').toLowerCase();
+  return obj.name.replace(/^(an?|the)\s+/i, '').toLowerCase();
 }
 
 
