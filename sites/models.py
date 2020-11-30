@@ -32,6 +32,13 @@ class Site(ClusterableModel):
         unique=True,
         help_text='Specify the domain name without the scheme, '
                   'e.g. "example.com" instead of "https://example.com"')
+    onion_address = models.URLField(
+        blank=True,
+        help_text=('The Onion address for this site. This field takes '
+                   'precedence over the Onion-Location header from scan '
+                   'results for determining if a site is available over Onion '
+                   'services.'),
+    )
 
     twitter_handle = models.CharField(
         'Twitter Handle',
@@ -176,7 +183,10 @@ class Scan(models.Model):
 
     @property
     def onion_available(self):
-        return self.onion_location_header
+        if self.site.onion_address:
+            return True
+        else:
+            return self.onion_location_header
 
     @property
     def grade(self):
