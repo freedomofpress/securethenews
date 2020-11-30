@@ -112,7 +112,7 @@ class Scan(models.Model):
 
     # These are nullable because it may not be possible to determine their
     # values (for example, if the site is down at the time of the scan).
-    onion_available = models.NullBooleanField()
+    onion_location_header = models.NullBooleanField()
     valid_https = models.NullBooleanField()
     downgrades_https = models.NullBooleanField()
     defaults_to_https = models.NullBooleanField()
@@ -173,6 +173,10 @@ class Scan(models.Model):
         assert 0 <= score <= 100, \
             "score must be between 0 and 100 (inclusive), is: {}".format(score)
         self.score = score
+
+    @property
+    def onion_available(self):
+        return self.onion_location_header
 
     @property
     def grade(self):

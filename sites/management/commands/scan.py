@@ -106,7 +106,7 @@ def scan(site):
         hsts_preload_ready=results['HSTS Preload Ready'],
         hsts_preloaded=results['HSTS Preloaded'],
 
-        onion_available=is_onion_available(results),
+        onion_location_header=is_onion_available(results),
 
         pshtt_stdout=stdout,
         pshtt_stderr=stderr,
