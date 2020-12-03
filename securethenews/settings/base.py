@@ -249,27 +249,21 @@ if os.environ.get('DJANGO_XMLTEST_OUTPUT', 'no').lower() in ['yes', 'true']:
 # Content Security Policy
 # script:
 # unsafe-eval for client/build/build.js
+# unsafe-inline for admin
 # style:
+# unsafe-inline needed for wagtail admin inline styles
 # #2 and #3 hashes needed for inline style for modernizr on admin page
 # #4 needed for wagtail admin
 CSP_DEFAULT_SRC = ("'self'",)
 CSP_SCRIPT_SRC = (
     "'self'",
     "'unsafe-eval'",
-    # inline code to load STNsiteData
-    "'sha256-hk71/yNgJt0WwDMKIEPWJnms3ftGXFupYCx2GTlIB68='",
-    # inline code for admin login page
-    "'sha256-k0JY2oqoByUSPWtC/jMqxOh8d97885BXv2fPJ5gKeEg='",
-    "'sha256-rpjW8Yb1oj3Jg4It9QBspH3wBoSTwndEFmse3sPn8Qw='",
-    # needed for piwik inline
-    "'sha256-Ujy9USzNCsaDKHVACggM1NqXbQJ2ljlpMX9U4g2d5d0='",
+    "'unsafe-inline'",
     "analytics.freedom.press",
 )
 CSP_STYLE_SRC = (
     "'self'",
-    "'sha256-CwE3Bg0VYQOIdNAkbB/Btdkhul49qZuwgNCMPgNY5zw='",
-    "'sha256-MZKTI0Eg1N13tshpFaVW65co/LeICXq4hyVx6GWVlK0='",
-    "'sha256-aqNNdDLnnrDOnTNdkJpYlAxKVJtLt9CtFLklmInuUAE='",
+    "'unsafe-inline'",
 )
 CSP_FRAME_SRC = ("'self'",)
 CSP_CONNECT_SRC = ("'self'",)
