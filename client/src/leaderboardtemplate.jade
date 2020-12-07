@@ -8,6 +8,7 @@ mixin check(condition)
 
 .leaderboard
   if items.length > 0
+    p(class='sites-count')= `Total matched sites: ${items.length}`
     table#header-fixed
     table#header-normal
       thead
