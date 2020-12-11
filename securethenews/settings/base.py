@@ -19,12 +19,11 @@ import sys
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.dirname(PROJECT_DIR)
 
-DEBUG = False
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
+DEBUG = False
 
 # Application definition
 
@@ -82,7 +81,8 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
 ]
 
-if bool(os.environ.get('DJANGO_WHITENOISE', False)):
+# Must be directly after SecurityMiddleware
+if os.environ.get('DJANGO_WHITENOISE'):
     MIDDLEWARE.append('whitenoise.middleware.WhiteNoiseMiddleware')
 
 MIDDLEWARE.extend([
@@ -95,8 +95,11 @@ MIDDLEWARE.extend([
 ])
 
 
+# Django HTTP settings
+
 # Anyone can use the API via CORS
 CORS_ORIGIN_ALLOW_ALL = True
+
 # API is read-only
 CORS_ALLOW_METHODS = ('GET', 'HEAD', 'OPTIONS')
 
@@ -201,6 +204,7 @@ MEDIA_URL = '/media/'
 
 WAGTAIL_SITE_NAME = "securethenews"
 
+
 # Base URL to use when referring to full URLs within the Wagtail -
 # admin backend e.g. in notification emails. Don't include
 # '/admin' or a trailing slash
@@ -231,6 +235,7 @@ WEBPACK_LOADER = {  # noqa: W605
         'IGNORE': [r'.+\.hot-update.js', r'.+\.map']
     }
 }
+
 
 # Django test xml output
 #

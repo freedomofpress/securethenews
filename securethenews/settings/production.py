@@ -8,7 +8,6 @@ import logging
 # the app, when logging may not otherwise be set up
 logging.basicConfig(format='%(levelname)s: %(message)s')
 
-DEBUG = False
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS').split(' ')
 BASE_URL = os.environ.get('DJANGO_BASE_URL', 'https://securethe.news')
