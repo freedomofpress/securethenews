@@ -144,14 +144,8 @@ WSGI_APPLICATION = 'securethenews.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
-if 'DJANGO_DB_HOST' not in os.environ:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': 'stn-build',
-        }
-    }
-else:
+
+if 'DJANGO_DB_HOST' in os.environ:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -160,6 +154,13 @@ else:
             'PASSWORD': os.environ['DJANGO_DB_PASSWORD'],
             'HOST': os.environ['DJANGO_DB_HOST'],
             'PORT': os.environ['DJANGO_DB_PORT']
+        }
+    }
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'stn-build.sqlite3'),
         }
     }
 
