@@ -20,26 +20,3 @@ try:
     from .local import *  # noqa: F403,F401
 except ImportError:
     pass
-
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': True,
-    'handlers': {
-        'console': {
-            'class': 'logging.StreamHandler',
-        }
-    },
-    'loggers': {
-        'django': {
-            'handlers': ['console'],
-            'propagate': True,
-        },
-        '': {
-            'handlers': ['console'],
-            'propagate': True,
-        },
-    }
-}
-
-INSTALLED_APPS.remove('django_logging')
-MIDDLEWARE.remove('django_logging.middleware.DjangoLoggingMiddleware')
