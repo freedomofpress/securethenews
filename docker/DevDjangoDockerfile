@@ -1,5 +1,5 @@
-# python:3.7-slim - May 31, 2019
-FROM python@sha256:e191d73f7f87dfff6f723655ff5222e1c90c9e67bc727a5c5a4d4cd45943efd4
+# sha256 as of 2020-12-11 for 3.7-slim
+FROM python@sha256:563bd6daac518cf3345939c35515643bf66f2b41ca2cf8156783c3cf0f9a480b
 
 RUN apt-get update && \
         apt-get install -y \

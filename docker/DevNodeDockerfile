@@ -1,5 +1,5 @@
-# sha256 as of 2020-06-30 for node:10-alpine
-FROM node@sha256:bafda8e474ba8973f146cb3fc2d531cf7fb7fec73ef4ca04aa38f26db520a883
+# sha256 as of 2020-12-10 for 10-alpine
+FROM node@sha256:0d798a992de3fe3e080f49a8b862ce815cd99c110e707c24e711f8e2ea4b389e
 
 # Install npm, making output less verbose
 ARG NPM_VER=6.13.7
