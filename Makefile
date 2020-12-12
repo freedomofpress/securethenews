@@ -100,6 +100,9 @@ dev-go: dev-init ## Runs development environment
 dev-init: ## pipe ENVs into docker-compose, prevents need of wrapper script
 	echo UID=$(HOST_UID) > .env
 
+.PHONY: dev-tests
+dev-test: app-tests-dev
+
 .PHONY: app-tests-dev
 app-tests-dev: ## Run development tests (dev)
 	docker-compose run django /bin/bash -ec \
