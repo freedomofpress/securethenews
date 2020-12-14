@@ -18,6 +18,8 @@ import os
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.dirname(PROJECT_DIR)
 
+DEBUG = False
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
@@ -78,21 +80,19 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+]
 
+if bool(os.environ.get('DJANGO_WHITENOISE', False)):
+    MIDDLEWARE.append('whitenoise.middleware.WhiteNoiseMiddleware')
+
+MIDDLEWARE.extend([
     'wagtail.core.middleware.SiteMiddleware',
     'wagtail.contrib.redirects.middleware.RedirectMiddleware',
     'django_logging.middleware.DjangoLoggingMiddleware',
 
     # Middleware for content security policy
     'csp.middleware.CSPMiddleware',
-]
-
-if bool(os.environ.get('DJANGO_WHITENOISE', False)):
-    security_middle_position = [p for p, v in enumerate(MIDDLEWARE)
-                                if "security.SecurityMiddleware" in v]
-    MIDDLEWARE.insert(security_middle_position[0]+1,
-                      'whitenoise.middleware.WhiteNoiseMiddleware'
-                      )
+])
 
 
 # Anyone can use the API via CORS
@@ -105,10 +105,6 @@ SECURE_BROWSER_XSS_FILTER = True
 
 # Set X-Content-Type-Options
 SECURE_CONTENT_TYPE_NOSNIFF = True
-
-# Adjust HSTS
-SECURE_HSTS_SECONDS = 63072000
-SECURE_HSTS_PRELOAD = True
 
 # Rather than sending a header, this says to trust this request header (in
 # prod we are behind nginx, which sets it)
@@ -259,7 +255,7 @@ CSP_SCRIPT_SRC = (
     "'self'",
     "'unsafe-eval'",
     "'unsafe-inline'",
-    "analytics.freedom.press",
+    "https://analytics.freedom.press",
 )
 CSP_STYLE_SRC = (
     "'self'",
