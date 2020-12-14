@@ -64,6 +64,7 @@ class Site(ClusterableModel):
         FieldPanel('name'),
         FieldPanel('domain'),
         FieldPanel('twitter_handle'),
+        FieldPanel('onion_address'),
         AutocompletePanel('regions', target_model='sites.Region'),
     ]
 
