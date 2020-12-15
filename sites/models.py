@@ -32,6 +32,13 @@ class Site(ClusterableModel):
         unique=True,
         help_text='Specify the domain name without the scheme, '
                   'e.g. "example.com" instead of "https://example.com"')
+    onion_address = models.URLField(
+        blank=True,
+        help_text=('The Onion address for this site. This field takes '
+                   'precedence over the Onion-Location header from scan '
+                   'results for determining if a site is available over Onion '
+                   'services.'),
+    )
 
     twitter_handle = models.CharField(
         'Twitter Handle',
@@ -57,6 +64,7 @@ class Site(ClusterableModel):
         FieldPanel('name'),
         FieldPanel('domain'),
         FieldPanel('twitter_handle'),
+        FieldPanel('onion_address'),
         AutocompletePanel('regions', target_model='sites.Region'),
     ]
 
@@ -112,7 +120,7 @@ class Scan(models.Model):
 
     # These are nullable because it may not be possible to determine their
     # values (for example, if the site is down at the time of the scan).
-    onion_available = models.NullBooleanField()
+    onion_location_header = models.NullBooleanField()
     valid_https = models.NullBooleanField()
     downgrades_https = models.NullBooleanField()
     defaults_to_https = models.NullBooleanField()
@@ -173,6 +181,13 @@ class Scan(models.Model):
         assert 0 <= score <= 100, \
             "score must be between 0 and 100 (inclusive), is: {}".format(score)
         self.score = score
+
+    @property
+    def onion_available(self):
+        if self.site.onion_address:
+            return True
+        else:
+            return self.onion_location_header
 
     @property
     def grade(self):
