@@ -61,10 +61,13 @@ WEBPACK_LOADER['DEFAULT']['CACHE'] = True  # noqa: F405
 
 # Mailgun integration
 #
-if os.environ.get('MAILGUN_ACCESS_KEY'):
-    EMAIL_BACKEND = 'django_mailgun.MailgunBackend'
-    MAILGUN_ACCESS_KEY = os.environ.get('MAILGUN_ACCESS_KEY')
-    MAILGUN_SERVER_NAME = os.environ.get('MAILGUN_SERVER_NAME')
+if os.environ.get('MAILGUN_API_KEY'):
+    INSTALLED_APPS.append('anymail')  # noqa: F405
+    EMAIL_BACKEND = 'anymail.backends.mailgun.EmailBackend'
+    ANYMAIL = {
+        'MAILGUN_API_KEY': os.environ['MAILGUN_API_KEY'],
+        'MAILGUN_SENDER_DOMAIN': os.environ['MAILGUN_SENDER_DOMAIN'],
+    }
     DEFAULT_FROM_EMAIL = os.environ.get('MAILGUN_FROM_ADDR',
                                         'webmaster@mg.securethe.news')
 
