@@ -5,7 +5,7 @@ django-cors-headers>=3.0.0
 django-crispy-forms>=1.7.2
 django-csp
 django-filter>=2.1.0
-django-mailgun
+django-anymail
 django-storages[boto3, google]>=1.7 # aws s3, google storage asset management
 django-webpack-loader
 elasticsearch
