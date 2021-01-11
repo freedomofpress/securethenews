@@ -314,7 +314,7 @@ log_handler = {
     "level": log_level,
 }
 
-log_dir = os.environ.get("DJANGO_LOG_PATH")
+log_dir = os.environ.get("DJANGO_LOG_DIR")
 if log_dir:
     if not os.path.exists(log_dir):
         os.makedirs(log_dir)
