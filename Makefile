@@ -67,13 +67,8 @@ pip-dev-update: ## Uses pip-compile to update dev-requirements.txt for upgrading
 
 .PHONY: safety
 safety: ## Runs `safety check` to check python dependencies for vulnerabilities
-	@for req_file in `find . -type f -name '*requirements.txt'`; do \
-		echo "Checking file $$req_file" \
-		&& safety check --ignore=38197\
-		--full-report -r $$req_file \
-		&& echo -e '\n' \
-		|| exit 1; \
-	done
+# Upgrade safety to ensure we are using the latest version.
+	pip install --upgrade safety && ./scripts/safety_check.py
 
 .PHONY: clean
 clean: ## Removes temporary gitignored development artifacts
@@ -104,6 +99,9 @@ dev-go: dev-init ## Runs development environment
 .PHONY: dev-init
 dev-init: ## pipe ENVs into docker-compose, prevents need of wrapper script
 	echo UID=$(HOST_UID) > .env
+
+.PHONY: dev-tests
+dev-test: app-tests-dev
 
 .PHONY: app-tests-dev
 app-tests-dev: ## Run development tests (dev)

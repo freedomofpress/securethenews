@@ -38,7 +38,6 @@ services:
       DJANGO_DB_PORT: 5432
       DJANGO_SETTINGS_MODULE: securethenews.settings.production
       DJANGO_SECRET_KEY: 002b5d76a026c29190c50e610a73516cb277f0abd07ae6233fbbe86f655abc5a
-      DJANGO_LOG_CONSOLE: 'True'
       DJANGO_GCORN_UPLOAD_DIR: /dev/shm
       DJANGO_GCORN_HEARTBT_DIR: /dev/shm
       DJANGO_WHITENOISE: 'True'
@@ -47,7 +46,6 @@ services:
     working_dir: /django
     volumes:
       - ${HOST_STATIC_DIR:-stn-django-media}:/django-media
-      - ${HOST_LOGS_DIR:-stn-django-logs}:/django-logs
     networks:
       app:
         aliases:
@@ -57,4 +55,3 @@ services:
 
 volumes:
   stn-django-media:
-  stn-django-logs:

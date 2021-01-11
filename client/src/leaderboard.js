@@ -1,8 +1,17 @@
 import Backbone from 'backbone'
 import _ from 'underscore'
-import $ from 'jquery'
+import $, { get } from 'jquery'
 import Sites from './sites'
 import template from './leaderboardtemplate.jade'
+import orderBy from 'lodash/orderBy'
+
+// Return the name attribute of an object with beginning articles (a,
+// an, the) removed and converted to lower-case for sorting in a more
+// expected, human-readable way.
+const sortableName = (obj) => {
+  return obj.name.replace(/^(an?|the)\s+/i, '').toLowerCase();
+}
+
 
 export default Backbone.View.extend({
   initialize(options) {
@@ -56,11 +65,11 @@ export default Backbone.View.extend({
         || site.domain.toLowerCase().indexOf(this.state.get('searchString')) !== -1;
     });
 
-    models = _.sortBy(models, this.state.get('orderBy'))
-
-    if (this.state.get('order') == 'desc') {
-      models = models.reverse();
+    let orderByIdentity = this.state.get('orderBy')
+    if (orderByIdentity == 'https_available') {
+      orderByIdentity = (item) => item.valid_https && !item.downgrades_https
     }
+    models = orderBy(models, [orderByIdentity, sortableName], [this.state.get('order'), 'asc']);
 
     if (this.options.limit !== null) {
       models = models.slice(0, this.options.limit);

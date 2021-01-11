@@ -66,15 +66,63 @@ class TestScan(TestCase):
         self.assertGreater(scan.score, 0)
 
 
+class TestSiteWithNoOnionAddress(TestCase):
+    def setUp(self):
+        self.site = Site.objects.create(
+            name='Test Site',
+            domain='test.com',
+        )
+
+    def test_onion_unavailability_determined_by_header(self):
+        scan = Scan(
+            site=self.site,
+            live=True,
+            valid_https=True,
+            onion_location_header=False,
+        )
+        self.assertFalse(scan.onion_available)
+
+    def test_onion_availability_determined_by_header(self):
+        scan = Scan(
+            site=self.site,
+            live=True,
+            valid_https=True,
+            onion_location_header=True,
+        )
+        self.assertTrue(scan.onion_available)
+
+
+class TestSiteWithDefinedOnionAddress(TestCase):
+    def setUp(self):
+        self.site = Site.objects.create(
+            name='Test Site',
+            domain='test.com',
+            onion_address='https://example.onion',
+        )
+
+    def test_onion_unavailability_determined_by_header(self):
+        scan = Scan(
+            site=self.site,
+            live=True,
+            valid_https=True,
+            onion_location_header=False,
+        )
+        self.assertTrue(scan.onion_available)
+
+    def test_onion_availability_determined_by_header(self):
+        scan = Scan(
+            site=self.site,
+            live=True,
+            valid_https=True,
+            onion_location_header=True,
+        )
+        self.assertTrue(scan.onion_available)
+
+
 class TestScannedSitesManager(TestCase):
 
     def setUp(self):
         self.site = Site.objects.create(name='Test Site', domain='test.com')
-
-    def test_unscanned_sites_unavailable(self):
-        """If a Site hasn't been scanned yet, it shouldn't be available through
-        the ScannedSitesManager."""
-        self.assertNotIn(self.site, Site.scanned.all())
 
     def test_scanned_sites_available(self):
         """Once a Site has been scanned, it should be available through the

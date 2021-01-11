@@ -1,5 +1,5 @@
-# sha256 as of 2020-06-30 for node:10-alpine
-FROM node@sha256:bafda8e474ba8973f146cb3fc2d531cf7fb7fec73ef4ca04aa38f26db520a883 AS node-assets
+# sha256 as of 2020-12-11 for 10-alpine
+FROM node@sha256:0d798a992de3fe3e080f49a8b862ce815cd99c110e707c24e711f8e2ea4b389e AS node-assets
 
 # Install npm, making output less verbose
 ARG NPM_VER=6.13.7
@@ -17,8 +17,8 @@ RUN paxctl -cm /usr/local/bin/node
 COPY ./ /src-files
 RUN cd /src-files && ( npm install && npm run build )
 
-# sha256 as of 2020-06-30 for python:3.7-slim
-FROM python@sha256:e191d73f7f87dfff6f723655ff5222e1c90c9e67bc727a5c5a4d4cd45943efd4
+# sha256 as of 2020-12-11 for 3.7-slim
+FROM python@sha256:563bd6daac518cf3345939c35515643bf66f2b41ca2cf8156783c3cf0f9a480b
 
 RUN apt-get update && \
         apt-get install -y \

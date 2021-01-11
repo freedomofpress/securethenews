@@ -21,6 +21,10 @@
           <div class="stat-block-number">{{ percent_providing_onions }}%</div>
           <div class="stat-block-caption">Of news sites offer onion services</div>
         </div>
+        <div class="stat-block">
+          <div class="stat-block-number">{{ total_sites }}</div>
+          <div class="stat-block-caption">total news sites</div>
+        </div>
       </div>
 
       <div id="teaser">
@@ -135,4 +139,12 @@
   <script type="text/javascript">
     var STNsiteData = {{ sites_json|safe }};
   </script>
+{% endblock %}
+
+{% block onion_service %}
+  {% if onion_hostname %}
+  <p class="fine-print">
+    Tor address: <a href="http://{{ onion_hostname }}">{{ onion_hostname }}</a>
+  </p>
+  {% endif %}
 {% endblock %}
