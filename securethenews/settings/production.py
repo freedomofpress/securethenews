@@ -2,14 +2,12 @@ from __future__ import absolute_import, unicode_literals
 
 from .base import *  # noqa: F403,F401
 import os
-import sys
 import logging
 
 # This is not the Django logger; it's for reporting problems while configuring
 # the app, when logging may not otherwise be set up
 logging.basicConfig(format='%(levelname)s: %(message)s')
 
-DEBUG = False
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS').split(' ')
 BASE_URL = os.environ.get('DJANGO_BASE_URL', 'https://securethe.news')
@@ -138,101 +136,3 @@ elif os.environ.get('GS_BUCKET_NAME'):
         STATICFILES_STORAGE = 'securethenews.gce_storage.StaticStorage'
     elif 'DJANGO_STATIC_ROOT' in os.environ:
         STATIC_ROOT = os.environ['DJANGO_STATIC_ROOT']
-
-
-# Django json logging
-#
-
-LOG_DIR = os.environ.get('DJANGO_LOG_PATH', os.path.join(BASE_DIR, 'logs'))
-LOG_LEVEL = os.environ.get('DJANGO_LOG_LEVEL', 'info').upper()
-LOG_TO_CONSOLE = bool(os.environ.get('DJANGO_LOG_CONSOLE', False))
-
-DJANGO_LOGGING = {
-    "CONSOLE_LOG": LOG_TO_CONSOLE,
-    "SQL_LOG": False,
-    "DISABLE_EXISTING_LOGGERS": True,
-    "PROPOGATE": False,
-    "LOG_LEVEL": LOG_LEVEL,
-    "LOG_PATH": LOG_DIR,
-    "INDENT_CONSOLE_LOG": 0
-}
-
-# Ensure base log directory exists
-if not os.path.exists(LOG_DIR) and not LOG_TO_CONSOLE:
-    os.makedirs(LOG_DIR)
-DJANGO_OTHER_LOG = os.path.join(LOG_DIR, 'django-other.log')
-
-# Logs other than tracebacks and requests
-GENERIC_LOG_HANDLER = 'rotate'
-if LOG_TO_CONSOLE:
-    GENERIC_LOG_HANDLER = 'console'
-
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'handlers': {
-        'console': {
-            'level': LOG_LEVEL,
-            'class': 'logging.StreamHandler',
-            'formatter': 'json_out',
-            'stream': sys.stdout,
-        },
-        'debug': {
-            'level': 'DEBUG',
-            'class': 'logging.StreamHandler',
-            'formatter': 'json_out'
-        },
-        'null': {
-            'class': 'logging.NullHandler',
-        }
-    },
-    'formatters': {
-        'json_out': {
-            '()': 'pythonjsonlogger.jsonlogger.JsonFormatter',
-            'format': "%(levelname)s %(created)s %(name)s "
-                      "%(module)s %(message)s"
-        }
-    },
-    'loggers': {
-        'django': {
-            'handlers': [GENERIC_LOG_HANDLER],
-            'propagate': True,
-        },
-        'django.template': {
-            'handlers': [GENERIC_LOG_HANDLER],
-            'propagate': False,
-        },
-        'django.db.backends': {
-            'handlers': [GENERIC_LOG_HANDLER],
-            'propagate': False,
-        },
-        'django.security': {
-            'handlers': [GENERIC_LOG_HANDLER],
-            'propagate': False,
-        },
-        # These are already handled by the django json logging library
-        'django.request': {
-            'handlers': ['null'],
-            'propagate': False,
-        },
-        # Log entries from runserver
-        'django.server': {
-            'handlers': ['null'],
-            'propagate': False,
-        },
-        '': {
-            'handlers': [GENERIC_LOG_HANDLER],
-            'propagate': False,
-        },
-    },
-}
-
-if not LOG_TO_CONSOLE:
-    LOGGING['handlers']['rotate'] = {
-        'level': LOG_LEVEL,
-        'class': 'logging.handlers.RotatingFileHandler',
-        'backupCount': 5,
-        'maxBytes': 10000000,
-        'filename': os.environ.get('DJANGO_LOGFILE', DJANGO_OTHER_LOG),
-        'formatter': 'json_out'
-    }

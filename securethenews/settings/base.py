@@ -14,6 +14,7 @@ from __future__ import absolute_import, unicode_literals
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+import sys
 
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.dirname(PROJECT_DIR)
@@ -22,13 +23,13 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
+DEBUG = False
 
 # Application definition
 
 INSTALLED_APPS = [
     'home',
     'search',
-
     'sites',
     'blog',
 
@@ -66,7 +67,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'rest_framework',
     'corsheaders',
-    'django_logging'
+    'django_logging',
 ]
 
 MIDDLEWARE = [
@@ -78,25 +79,27 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+]
 
+# Must be directly after SecurityMiddleware
+if os.environ.get('DJANGO_WHITENOISE'):
+    MIDDLEWARE.append('whitenoise.middleware.WhiteNoiseMiddleware')
+
+MIDDLEWARE.extend([
     'wagtail.core.middleware.SiteMiddleware',
     'wagtail.contrib.redirects.middleware.RedirectMiddleware',
     'django_logging.middleware.DjangoLoggingMiddleware',
 
     # Middleware for content security policy
     'csp.middleware.CSPMiddleware',
-]
+])
 
-if bool(os.environ.get('DJANGO_WHITENOISE', False)):
-    security_middle_position = [p for p, v in enumerate(MIDDLEWARE)
-                                if "security.SecurityMiddleware" in v]
-    MIDDLEWARE.insert(security_middle_position[0]+1,
-                      'whitenoise.middleware.WhiteNoiseMiddleware'
-                      )
 
+# Django HTTP settings
 
 # Anyone can use the API via CORS
 CORS_ORIGIN_ALLOW_ALL = True
+
 # API is read-only
 CORS_ALLOW_METHODS = ('GET', 'HEAD', 'OPTIONS')
 
@@ -105,10 +108,6 @@ SECURE_BROWSER_XSS_FILTER = True
 
 # Set X-Content-Type-Options
 SECURE_CONTENT_TYPE_NOSNIFF = True
-
-# Adjust HSTS
-SECURE_HSTS_SECONDS = 63072000
-SECURE_HSTS_PRELOAD = True
 
 # Rather than sending a header, this says to trust this request header (in
 # prod we are behind nginx, which sets it)
@@ -145,14 +144,8 @@ WSGI_APPLICATION = 'securethenews.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
-if 'DJANGO_DB_HOST' not in os.environ:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': 'stn-build',
-        }
-    }
-else:
+
+if 'DJANGO_DB_HOST' in os.environ:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -161,6 +154,13 @@ else:
             'PASSWORD': os.environ['DJANGO_DB_PASSWORD'],
             'HOST': os.environ['DJANGO_DB_HOST'],
             'PORT': os.environ['DJANGO_DB_PORT']
+        }
+    }
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'stn-build.sqlite3'),
         }
     }
 
@@ -205,6 +205,7 @@ MEDIA_URL = '/media/'
 
 WAGTAIL_SITE_NAME = "securethenews"
 
+
 # Base URL to use when referring to full URLs within the Wagtail -
 # admin backend e.g. in notification emails. Don't include
 # '/admin' or a trailing slash
@@ -236,6 +237,7 @@ WEBPACK_LOADER = {  # noqa: W605
     }
 }
 
+
 # Django test xml output
 #
 
@@ -259,7 +261,7 @@ CSP_SCRIPT_SRC = (
     "'self'",
     "'unsafe-eval'",
     "'unsafe-inline'",
-    "analytics.freedom.press",
+    "https://analytics.freedom.press",
 )
 CSP_STYLE_SRC = (
     "'self'",
@@ -295,3 +297,87 @@ CSP_REPORT_URI = os.environ.get(
     'DJANGO_CSP_REPORT_URI',
     'https://freedomofpress.report-uri.com/r/d/csp/enforce'
 )
+
+
+# Logging
+#
+# Logs are now always JSON. Normally, they go to stdout. To override this for
+# development or legacy deploys, set DJANGO_LOG_DIR in the environment.
+
+log_level = os.environ.get("DJANGO_LOG_LEVEL", "info").upper()
+log_format = os.environ.get("DJANGO_LOG_FORMAT", "json")
+log_stdout = True
+log_handler = {
+    "formatter": log_format,
+    "class": "logging.StreamHandler",
+    "stream": sys.stdout,
+    "level": log_level,
+}
+
+log_dir = os.environ.get("DJANGO_LOG_DIR")
+if log_dir:
+    if not os.path.exists(log_dir):
+        os.makedirs(log_dir)
+    log_stdout = False
+    log_handler = {
+        "formatter": log_format,
+        "class": "logging.handlers.RotatingFileHandler",
+        "filename": os.path.join(log_dir, "django-other.log"),
+        "backupCount": 5,
+        "maxBytes": 10000000,
+        "level": log_level,
+    }
+
+DJANGO_LOGGING = {
+    "LOG_LEVEL": log_level,
+    "CONSOLE_LOG": log_stdout,
+    "INDENT_CONSOLE_LOG": 0,
+    "DISABLE_EXISTING_LOGGERS": True,
+    "PROPOGATE": False,
+    "SQL_LOG": False,
+}
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {
+        "normal": log_handler,
+        "null": {"class": "logging.NullHandler"},
+    },
+    "formatters": {
+        "json": {
+            "()": "pythonjsonlogger.jsonlogger.JsonFormatter",
+        },
+        "plain": {
+            "format": "%(asctime)s %(levelname)s %(name)s "
+            "%(module)s %(message)s",
+        },
+    },
+    "loggers": {
+        "django": {
+            "handlers": ["normal"], "propagate": True,
+        },
+        "django.template": {
+            "handlers": ["normal"], "propagate": False,
+        },
+        "django.db.backends": {
+            "handlers": ["normal"], "propagate": False,
+        },
+        "django.security": {
+            "handlers": ["normal"], "propagate": False,
+        },
+        # These are already handled by the django json logging library
+        "django.request": {
+            "handlers": ["null"],
+            "propagate": False,
+        },
+        # Log entries from runserver
+        "django.server": {
+            "handlers": ["null"], "propagate": False,
+        },
+        # Catchall
+        "": {
+            "handlers": ["normal"], "propagate": False,
+        },
+    },
+}
