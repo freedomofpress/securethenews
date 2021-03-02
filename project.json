@@ -1,5 +1,5 @@
 {
     "variables": {
-        "SAFETY_IGNORE_IDS": ["38197", "38932", "39252"]
+        "SAFETY_IGNORE_IDS": ["38197", "38932", "39252", "39606"]
     }
 }
