@@ -18,7 +18,7 @@ pyopenssl==19.0.0
 python-json-logger
 requests
 unittest-xml-reporting
-wagtail>=2.10.2,<2.11
+wagtail>=2.11.5,<2.12
 wagtail-autocomplete>=0.6
 wagtailmenus>=3.0
 whitenoise
