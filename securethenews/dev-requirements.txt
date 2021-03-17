@@ -638,8 +638,9 @@ urllib3==1.25.9 \
     #   botocore
     #   elasticsearch
     #   requests
-wagtail-autocomplete==0.6 \
-    --hash=sha256:5f8ddf16d3ca365af4ad0f09e8f45d9e982ca854dc1b084a8a30f66b00a7739d
+wagtail-autocomplete==0.6.1 \
+    --hash=sha256:4c6379e30cb1439e6c04dd758795e2ce47e34871401cc5d225e5eb0f40be8548 \
+    --hash=sha256:83f8f886f82cd201d33999fb64d5be1595bdd75a860d7a2a1110fa5249cbf0fd
     # via -r requirements.in
 wagtail==2.11.6 \
     --hash=sha256:1c69b7c8c6d85c2b24a626b1e7108c7e94ed10ca0f992b35d04a3d9e44cb601d \
