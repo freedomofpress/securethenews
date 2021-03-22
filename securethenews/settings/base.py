@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'wagtail.images',
     'wagtail.search',
     'wagtail.admin',
+    'wagtail.contrib.legacy.richtext',
     'wagtail.core',
 
     'wagtail.contrib.modeladmin',
@@ -86,7 +87,6 @@ if os.environ.get('DJANGO_WHITENOISE'):
     MIDDLEWARE.append('whitenoise.middleware.WhiteNoiseMiddleware')
 
 MIDDLEWARE.extend([
-    'wagtail.core.middleware.SiteMiddleware',
     'wagtail.contrib.redirects.middleware.RedirectMiddleware',
     'django_logging.middleware.DjangoLoggingMiddleware',
 
