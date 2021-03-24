@@ -268,7 +268,10 @@ CSP_STYLE_SRC = (
     "'unsafe-inline'",
 )
 CSP_FRAME_SRC = ("'self'",)
-CSP_CONNECT_SRC = ("'self'",)
+CSP_CONNECT_SRC = (
+    "'self'",
+    "https://analytics.freedom.press",
+)
 
 # This will be used to evaluate Google Storage media support in staging
 GS_CUSTOM_ENDPOINT = os.environ.get(
