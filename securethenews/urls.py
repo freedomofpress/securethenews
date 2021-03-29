@@ -7,6 +7,7 @@ from wagtailautocomplete.urls.admin import urlpatterns \
     as autocomplete_admin_urls
 from wagtailautocomplete.views import objects, search
 
+import home.views
 from search import views as search_views
 from wagtail.admin import urls as wagtailadmin_urls
 from wagtail.core import urls as wagtail_urls
@@ -24,6 +25,8 @@ urlpatterns = [
     path('admin/autocomplete/', include(autocomplete_admin_urls)),
     path('admin/', include(wagtailadmin_urls)),
     path('documents/', include(wagtaildocs_urls)),
+
+    path('health/ok/', home.views.health_ok),
 
     path('search/', search_views.search, name='search'),
 
