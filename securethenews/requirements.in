@@ -10,8 +10,7 @@ django-storages[boto3, google]>=1.7 # aws s3, google storage asset management
 django-webpack-loader
 elasticsearch
 gunicorn
-lxml
-markdown2>2.3.8
+lxml>=4.6.3
 pshtt
 psycopg2
 pyopenssl==19.0.0
