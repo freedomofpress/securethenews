@@ -356,10 +356,6 @@ lxml==4.6.2 \
     --hash=sha256:f83d281bb2a6217cd806f4cf0ddded436790e66f393e124dfe9731f6b3fb9afe \
     --hash=sha256:fc37870d6716b137e80d19241d0e2cff7a7643b925dfa49b4c8ebd1295eb506e
     # via -r requirements.in
-markdown2==2.3.9 \
-    --hash=sha256:89526090907ae5ece66d783c434b35c29ee500c1986309e306ce2346273ada6a \
-    --hash=sha256:e6b401ec80b75e76a6b3dbb2c8ade513156fa55fa6c30b9640a1abf6184a07c8
-    # via -r requirements.in
 mbstrdecoder==1.0.0 \
     --hash=sha256:9df7778c0c051c98f6b5a848909202e5cd423c9692665b20d1a9bd0f771b8235 \
     --hash=sha256:a7cbc188b04937c92129c193a255ec91e8dfd8dd2e7e9bf04b61bc937ac86ad3

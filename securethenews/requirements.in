@@ -11,7 +11,6 @@ django-webpack-loader
 elasticsearch
 gunicorn
 lxml
-markdown2>2.3.8
 pshtt
 psycopg2
 pyopenssl==19.0.0
