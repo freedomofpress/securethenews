@@ -1,8 +1,8 @@
-# sha256 as of 2020-12-11 for 10-alpine
-FROM node@sha256:0d798a992de3fe3e080f49a8b862ce815cd99c110e707c24e711f8e2ea4b389e AS node-assets
+# sha256 as of 2021-03-24 for 14-alpine
+FROM node@sha256:a75f7cc536062f9266f602d49047bc249826581406f8bc5a6605c76f9ed18e98 AS node-assets
 
 # Install npm, making output less verbose
-ARG NPM_VER=6.13.7
+ARG NPM_VER=6.14.11
 ENV NPM_CONFIG_LOGLEVEL warn
 RUN npm install npm@${NPM_VER} -g
 
