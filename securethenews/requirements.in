@@ -1,4 +1,5 @@
 https://github.com/freedomofpress/django-logging/zipball/34fbeeea7a83bd54f8551bb50382a06b69814d4e
+https://github.com/freedomofpress/pshtt/zipball/65596ff08fa7bf0357b5af63da73e2dead91c304
 Django>=2.2.20,<2.3
 django-analytical>=2.5,<2.6
 django-cors-headers>=3.0.0
@@ -11,7 +12,6 @@ django-webpack-loader
 elasticsearch
 gunicorn
 lxml>=4.6.3
-pshtt
 psycopg2
 pyopenssl==19.0.0
 python-json-logger
