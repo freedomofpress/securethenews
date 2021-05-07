@@ -12,7 +12,7 @@ django-webpack-loader
 elasticsearch
 gunicorn
 lxml>=4.6.3
-psycopg2
+psycopg2>=2.8.4
 pyopenssl==19.0.0
 python-json-logger
 requests
