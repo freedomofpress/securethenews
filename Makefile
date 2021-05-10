@@ -6,7 +6,7 @@ HOST_UID := $(shell id -u)
 GIT_REV := $(shell git rev-parse HEAD | cut -c1-10)
 GIT_BR := $(shell git rev-parse --abbrev-ref HEAD)
 STN_IMAGE := quay.io/freedomofpress/securethenews
-PY_IMAGE := python:3.7-slim
+PY_IMAGE := python:3.9-slim
 
 .PHONY: ci-go
 ci-go: ## Provisions and tests a prod-like setup.
