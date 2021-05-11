@@ -1,7 +1,6 @@
 {% load static wagtailuserbar %}
 {% load render_bundle from webpack_loader %}
 {% load menu_tags %}
-{% load analytical %}
 
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -11,8 +10,6 @@
     <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-
-        {% analytical_head_top %}
 
         <title>{% block title %}{% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %}{% endblock %}{% block title_suffix %}{% endblock %}</title>
         <meta name="description" content="" />
@@ -39,14 +36,9 @@
         <meta name="twitter:title" content="{% block twitter_card_title %}Secure the News{% endblock %}" />
         <meta name="twitter:description" content="{% block twitter_card_description %}Every news site should be secure.{% endblock %}" />
         <meta name="twitter:image" content="{{ request.scheme }}://{{ request.get_host }}{% static 'images/logo.png' %}" />
-
-        {% analytical_head_bottom %}
     </head>
 
     <body class="{% block body_class %}{% endblock %}">
-
-      {% analytical_body_top %}
-
       <div class="all-content">
         {% wagtailuserbar %}
 
@@ -92,8 +84,9 @@
             {# Override this in templates to add extra javascript #}
         {% endblock %}
       </div>
-      
-      {% analytical_body_bottom %}
-
+      {% if django_settings.ANALYTICS_ENABLED %}
+          <script type="text/javascript" src="{% static 'js/piwik.js' %}"></script>
+          <noscript><p><img src="https://analytics.freedom.press/piwik.php?idsite=4" style="border:0;" alt="" /></p></noscript>
+      {% endif %}
     </body>
 </html>

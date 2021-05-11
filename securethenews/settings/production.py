@@ -83,13 +83,6 @@ if os.environ.get('CLOUDFLARE_TOKEN') and os.environ.get('CLOUDFLARE_EMAIL'):
         },
     }
 
-# Piwik analytics, via django-analytical
-# https://pythonhosted.org/django-analytical/install.html
-if os.environ.get('PIWIK_DOMAIN_PATH'):
-    PIWIK_DOMAIN_PATH = os.environ.get('PIWIK_DOMAIN_PATH')
-    PIWIK_SITE_ID = os.environ.get('PIWIK_SITE_ID', '1')
-
-
 if os.environ.get('AWS_SESSION_TOKEN'):
     INSTALLED_APPS.append('storages')  # noqa: F405
 
@@ -136,3 +129,5 @@ elif os.environ.get('GS_BUCKET_NAME'):
         STATICFILES_STORAGE = 'securethenews.gce_storage.StaticStorage'
     elif 'DJANGO_STATIC_ROOT' in os.environ:
         STATIC_ROOT = os.environ['DJANGO_STATIC_ROOT']
+
+ANALYTICS_ENABLED = True
