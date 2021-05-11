@@ -92,11 +92,6 @@ dataproperty==0.49.1 \
     #   pytablereader
     #   pytablewriter
     #   tabledata
-django-analytical==2.5.0 \
-    --hash=sha256:0871db04aa8c864b0b44c98b462d2b8682ba9c31ab89f50d54a5ddfdc3ff6223 \
-    --hash=sha256:bbe09b15cf22d7d4ab4cd0a5cc454aa912f08691d86886a0652081b9fd7a1ff0 \
-    --hash=sha256:d9e475567fc021ed9e3bd1fa77db11a14b12c85fbc5b56121897b0fa571e6ed6
-    # via -r requirements.in
 django-anymail==8.1 \
     --hash=sha256:0301f2ea1dde7840e5276a5e2d1ca2a56fd558e2b71800e89ca895c18aa3c615 \
     --hash=sha256:0c3e56a339a37e654b7511572564fe0949f4fbb12c072761c9e35cfc49cb4dc1
@@ -153,7 +148,6 @@ django==2.2.22 \
     --hash=sha256:e831105edb153af1324de44d06091ca75520a227456387dda4a47d2f1cc2731a
     # via
     #   -r requirements.in
-    #   django-analytical
     #   django-anymail
     #   django-cors-headers
     #   django-csp
