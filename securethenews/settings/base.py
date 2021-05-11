@@ -201,6 +201,17 @@ MEDIA_ROOT = os.environ.get(
 MEDIA_URL = '/media/'
 
 
+# Disable analytics by default
+ANALYTICS_ENABLED = False
+
+# Export analytics settings for use in site templates
+SETTINGS_EXPORT = [
+    'ANALYTICS_ENABLED',
+]
+# Prevent template variable name collision with wagtail settings
+SETTINGS_EXPORT_VARIABLE_NAME = 'django_settings'
+
+
 # Wagtail settings
 
 WAGTAIL_SITE_NAME = "securethenews"

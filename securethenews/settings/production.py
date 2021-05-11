@@ -136,3 +136,5 @@ elif os.environ.get('GS_BUCKET_NAME'):
         STATICFILES_STORAGE = 'securethenews.gce_storage.StaticStorage'
     elif 'DJANGO_STATIC_ROOT' in os.environ:
         STATIC_ROOT = os.environ['DJANGO_STATIC_ROOT']
+
+ANALYTICS_ENABLED = True
