@@ -130,6 +130,9 @@ django-modelcluster==5.1 \
     --hash=sha256:783d177f7bf5c8f30fe365c347b9a032920de371fe1c63d955d7b283684d4c08 \
     --hash=sha256:d4a0f90e85ae1a193f417e149b6b01d0b2a867dcf97f7fae1d34a4363a9d7baa
     # via wagtail
+django-settings-export==1.2.1 \
+    --hash=sha256:fceeae49fc597f654c1217415d8e049fc81c930b7154f5d8f28c432db738ff79
+    # via -r requirements.in
 django-storages[boto3,google]==1.9.1 \
     --hash=sha256:3103991c2ee8cef8a2ff096709973ffe7106183d211a79f22cf855f33533d924 \
     --hash=sha256:a59e9923cbce7068792f75344ed7727021ee4ac20f227cf17297d0d03d141e91
@@ -156,6 +159,7 @@ django==2.2.22 \
     #   django-csp
     #   django-filter
     #   django-logging-json
+    #   django-settings-export
     #   django-storages
     #   django-taggit
     #   django-treebeard
