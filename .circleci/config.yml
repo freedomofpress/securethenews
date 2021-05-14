@@ -4,9 +4,9 @@ reuse-blerbs:
     run:
       name: Install testing pre-reqs
       command: |
-        # Set python to 3.7.8
+        # Set python to 3.9.1
         pyenv versions
-        pyenv global 3.7.8
+        pyenv global 3.9.1
         pip install -U pip
         pip install pipenv
         pipenv install
@@ -15,7 +15,7 @@ version: 2
 jobs:
   safety_check:
     machine:
-      image: ubuntu-1604:202007-01
+      image: ubuntu-2004:202101-01
     working_directory: ~/securethenews
     steps:
       - checkout
@@ -41,7 +41,7 @@ jobs:
 
   npm_audit:
     machine:
-      image: ubuntu-1604:202007-01
+      image: ubuntu-2004:202101-01
     working_directory: ~/freedom.press
     steps:
       - checkout
@@ -59,7 +59,7 @@ jobs:
 
   run_prod:
     machine:
-      image: ubuntu-1604:202007-01
+      image: ubuntu-2004:202101-01
     working_directory: ~/securethenews
     steps:
       - checkout
@@ -106,7 +106,7 @@ jobs:
 
   run_dev:
     machine:
-      image: ubuntu-1604:202007-01
+      image: ubuntu-2004:202101-01
     working_directory: ~/securethenews
     steps:
       - checkout
