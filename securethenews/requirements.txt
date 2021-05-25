@@ -118,8 +118,8 @@ django-filter==2.4.0 \
     # via
     #   -r requirements.in
     #   wagtail
-https://github.com/freedomofpress/django-logging/zipball/34fbeeea7a83bd54f8551bb50382a06b69814d4e \
-    --hash=sha256:25d9a5e3393591a2fb81b22d069ac586e11abdfcad64ada8b911ca852ef9aa67
+https://github.com/freedomofpress/django-logging/zipball/ced87b3266e350c68afd0aea8895d5d595f5fc83 \
+    --hash=sha256:bd8ec3ac68f4e9f4d0e7eaaeaa658dd6198b2f335c608318d4001562ae60aac3
     # via -r requirements.in
 django-modelcluster==5.1 \
     --hash=sha256:783d177f7bf5c8f30fe365c347b9a032920de371fe1c63d955d7b283684d4c08 \
