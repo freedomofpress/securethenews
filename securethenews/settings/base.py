@@ -347,6 +347,7 @@ DJANGO_LOGGING = {
     "DISABLE_EXISTING_LOGGERS": True,
     "PROPOGATE": False,
     "SQL_LOG": False,
+    "ENCODING": "utf-8",
 }
 
 LOGGING = {
