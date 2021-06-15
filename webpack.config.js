@@ -1,5 +1,5 @@
 var webpack       = require('webpack');
-var merge         = require('webpack-merge');
+const { merge }   = require('webpack-merge');
 var autoprefixer  = require('autoprefixer');
 var BundleTracker = require('webpack-bundle-tracker');
 var MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -40,7 +40,7 @@ var common = {
 				use: [
 					{
 						loader: 'babel-loader',
-						query: {
+						options: {
 							presets: [
 								'@babel/preset-react',
 								// Setting `modules` false, prevents babel from trying to use
