@@ -91,8 +91,8 @@ var common = {
 
 	plugins: [
 		new MiniCssExtractPlugin({
-			filename: TARGET === 'build' ? '[name]-[hash].css' : '[name].css',
-			chunkFilename: TARGET === 'build' ? '[id]-[hash].css' : '[id].css'
+			filename: TARGET === 'build' ? '[name]-[contenthash].css' : '[name].css',
+			chunkFilename: TARGET === 'build' ? '[id]-[contenthash].css' : '[id].css'
 		}),
 		new BundleTracker({
 			path: target,
@@ -104,7 +104,7 @@ var common = {
 if (TARGET === 'build') {
 	module.exports = merge(common, {
 		output: {
-			filename: '[name]-[hash].js'
+			filename: '[name]-[contenthash].js'
 		},
 		plugins: [
 			new webpack.DefinePlugin({
