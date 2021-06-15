@@ -116,10 +116,6 @@ if (TARGET === 'build') {
 
 if (TARGET === 'start') {
 	module.exports = merge(common, {
-		devtool: 'eval-source-map',
-		devServer: {
-			contentBase: target,
-			progress: true,
-		}
+		output: { pathinfo: true }
 	});
 }

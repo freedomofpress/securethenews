@@ -4,8 +4,8 @@
   "description": "Educating news organizations about transport security.",
   "main": "index.js",
   "scripts": {
-    "build": "webpack -p",
-    "start": "webpack -w -d --display-error-details",
+    "build": "webpack --mode production",
+    "start": "webpack watch --mode development --devtool eval-source-map",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
