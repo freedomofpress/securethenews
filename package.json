@@ -4,8 +4,8 @@
   "description": "Educating news organizations about transport security.",
   "main": "index.js",
   "scripts": {
-    "build": "webpack -p",
-    "start": "webpack -w -d --display-error-details",
+    "build": "webpack --mode production",
+    "start": "webpack watch --mode development --devtool eval-source-map",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -40,10 +40,10 @@
     "sass": "^1.32.8",
     "sass-loader": "^7.3.1",
     "style-loader": "^0.23.1",
-    "webpack": "^4.44.2",
-    "webpack-bundle-tracker": "^0.4.3",
-    "webpack-cli": "^3.3.12",
-    "webpack-merge": "^4.2.2"
+    "webpack": "^5.39.0",
+    "webpack-bundle-tracker": "^1.1.0",
+    "webpack-cli": "^4.7.2",
+    "webpack-merge": "^5.8.0"
   },
   "dependencies": {
     "backbone": "^1.3.3",

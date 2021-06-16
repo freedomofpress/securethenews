@@ -27,6 +27,7 @@ node_modules
 
 # webpack builds
 client/build/
+webpack-stats.json
 
 # Django/Wagtail user-uploaded files
 media/
