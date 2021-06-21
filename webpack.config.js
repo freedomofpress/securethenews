@@ -1,5 +1,5 @@
 var webpack       = require('webpack');
-var merge         = require('webpack-merge');
+const { merge }   = require('webpack-merge');
 var autoprefixer  = require('autoprefixer');
 var BundleTracker = require('webpack-bundle-tracker');
 var MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -40,7 +40,7 @@ var common = {
 				use: [
 					{
 						loader: 'babel-loader',
-						query: {
+						options: {
 							presets: [
 								'@babel/preset-react',
 								// Setting `modules` false, prevents babel from trying to use
@@ -91,8 +91,8 @@ var common = {
 
 	plugins: [
 		new MiniCssExtractPlugin({
-			filename: TARGET === 'build' ? '[name]-[hash].css' : '[name].css',
-			chunkFilename: TARGET === 'build' ? '[id]-[hash].css' : '[id].css'
+			filename: TARGET === 'build' ? '[name]-[contenthash].css' : '[name].css',
+			chunkFilename: TARGET === 'build' ? '[id]-[contenthash].css' : '[id].css'
 		}),
 		new BundleTracker({
 			path: target,
@@ -104,7 +104,7 @@ var common = {
 if (TARGET === 'build') {
 	module.exports = merge(common, {
 		output: {
-			filename: '[name]-[hash].js'
+			filename: '[name]-[contenthash].js'
 		},
 		plugins: [
 			new webpack.DefinePlugin({
@@ -116,10 +116,6 @@ if (TARGET === 'build') {
 
 if (TARGET === 'start') {
 	module.exports = merge(common, {
-		devtool: 'eval-source-map',
-		devServer: {
-			contentBase: target,
-			progress: true,
-		}
+		output: { pathinfo: true }
 	});
 }
