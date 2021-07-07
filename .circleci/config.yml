@@ -11,7 +11,15 @@ reuse-blerbs:
         pip install pipenv
         pipenv install
 
-version: 2
+version: 2.1
+commands:
+  check-changed-files-or-halt:
+    parameters:
+      pattern:
+        type: string
+    steps:
+      - run: git diff --name-only develop...HEAD|grep -q '<< parameters.pattern >>' || circleci step halt
+
 jobs:
   safety_check:
     machine:
@@ -45,6 +53,8 @@ jobs:
     working_directory: ~/freedom.press
     steps:
       - checkout
+      - check-changed-files-or-halt:
+          pattern: ^package-lock.json$
 
       - *python_prereqs
 
