@@ -65,9 +65,11 @@ export default Backbone.View.extend({
         || site.domain.toLowerCase().indexOf(this.state.get('searchString')) !== -1;
     });
 
-    let orderByIdentity = this.state.get('orderBy')
-    if (orderByIdentity == 'https_available') {
+    let orderByIdentity = ''
+    if (this.state.get('orderBy') == 'https_available') {
       orderByIdentity = (item) => item.valid_https && !item.downgrades_https
+    } else {
+      orderByIdentity = (item) => item[this.state.get('orderBy')] || '';
     }
     models = orderBy(models, [orderByIdentity, sortableName], [this.state.get('order'), 'asc']);
 
