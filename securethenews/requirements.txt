@@ -85,9 +85,9 @@ cryptography==3.4.7 \
     # via
     #   pyopenssl
     #   sslyze
-dataproperty==0.49.1 \
-    --hash=sha256:1c61f85450a6cffd15faccdeedc28ddd29d9ae95140b583e0aef15feb2c3d54d \
-    --hash=sha256:70ea253f74a51e39491770ac69428488bed75d62135accb234d89358d220b6ec
+dataproperty==0.52.0 \
+    --hash=sha256:8fda054fcc80f01e6c1c91e4853acd6982c99fdc91fb96f536d073c6ddaa2a5a \
+    --hash=sha256:b16885d394c2fa4a024f2e4318f9e387d909fd7e35d4cf6d1814c57d812fe21d
     # via
     #   pytablereader
     #   pytablewriter
@@ -436,9 +436,9 @@ pyparsing==2.4.7 \
 pyrsistent==0.16.0 \
     --hash=sha256:28669905fe725965daa16184933676547c5bb40a5153055a8dee2a4bd7933ad3
     # via jsonschema
-pytablereader==0.30.1 \
-    --hash=sha256:120def7e85b29b8a0f950b268fafe16b6c82a564557cd05b64235bf9b9f59c74 \
-    --hash=sha256:dc0eba98a45b91a25a9c4ed31ee6c1779983d058f8c1dc879394ef386f703e76
+pytablereader==0.31.0 \
+    --hash=sha256:0f99d439ee0a97281bd081bcf0c3bdf18123fe1b6ced438e9fbb052b73ece723 \
+    --hash=sha256:9977677c19883e29f7e2cd6c0eda588ce1fbde6d73632f64d670a531bc4a9cf7
     # via pshtt
 pytablewriter==0.54.0 \
     --hash=sha256:2d898a3eaf0b19aa0e48d9a9d1fe8db67f65235d6600d2b03817598991c917c4 \
@@ -524,9 +524,9 @@ tcolorpy==0.0.5 \
 tls-parser==1.2.2 \
     --hash=sha256:83e4cb15b88b00fad1a856ff54731cc095c7e4f1ff90d09eaa24a5f48854da93
     # via sslyze
-typepy[datetime]==1.1.5 \
-    --hash=sha256:1bbe790bb8d1b43b4541b235678974d5aee2357e1948cdf17cb4c14cbe4a2a82 \
-    --hash=sha256:bfcdded5466e47eb14716328d4da1887a599cf2dcb1a560f63da7abdda361f7d
+typepy[datetime]==1.2.0 \
+    --hash=sha256:96b4c50151ffaca025b7202cdd4e84987ca058f4d6cf1aad0d9c82226961455e \
+    --hash=sha256:d3cdabcabf1b6058ccaac1c7ef6a097ec3901a3a3ff79b0a038d8496b3900805
     # via
     #   dataproperty
     #   pytablereader
