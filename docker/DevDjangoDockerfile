@@ -1,5 +1,5 @@
-# sha256 as of 2021-05-07 for 3.9-slim
-FROM python@sha256:655f71f243ee31eea6774e0b923b990cd400a0689eff049facd2703e57892447
+# sha256 as of 2021-07-22
+FROM python:3.9-slim-buster@sha256:4e69709296a8ae67d97ba072e7f4973125939f3a13cd276c1e8ca1f7b7d49aa3
 
 RUN apt-get update && \
         apt-get install -y \
