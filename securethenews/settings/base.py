@@ -66,7 +66,6 @@ INSTALLED_APPS = [
     'crispy_forms',
     'rest_framework',
     'corsheaders',
-    'django_logging',
 ]
 
 MIDDLEWARE = [
@@ -86,7 +85,6 @@ if os.environ.get('DJANGO_WHITENOISE'):
 
 MIDDLEWARE.extend([
     'wagtail.contrib.redirects.middleware.RedirectMiddleware',
-    'django_logging.middleware.DjangoLoggingMiddleware',
 
     # Middleware for content security policy
     'csp.middleware.CSPMiddleware',
@@ -339,15 +337,6 @@ if log_dir:
         "level": log_level,
     }
 
-DJANGO_LOGGING = {
-    "LOG_LEVEL": log_level,
-    "CONSOLE_LOG": log_stdout,
-    "INDENT_CONSOLE_LOG": 0,
-    "DISABLE_EXISTING_LOGGERS": True,
-    "PROPOGATE": False,
-    "SQL_LOG": False,
-    "ENCODING": "utf-8",
-}
 
 LOGGING = {
     "version": 1,

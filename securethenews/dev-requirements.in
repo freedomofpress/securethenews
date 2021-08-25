@@ -1,3 +1,4 @@
 -r requirements.in
+colorama<1
 coverage
 ipdb
