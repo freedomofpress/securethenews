@@ -3,6 +3,7 @@ from __future__ import absolute_import, unicode_literals
 from .base import *  # noqa: F403,F401
 import os
 import logging
+import sys
 
 import structlog
 
@@ -19,6 +20,11 @@ MIDDLEWARE += [  # noqa: F405
     'home.middleware.RequestLogMiddleware',
 ]
 
+# Do not cache the logger when running unit tests
+if len(sys.argv) > 1 and sys.argv[1] == 'test':
+    cache_logger = False
+else:
+    cache_logger = True
 
 structlog.configure(
     processors=[
@@ -39,7 +45,7 @@ structlog.configure(
     # Provides predefined methods - log.debug(), log.info(), etc.
     wrapper_class=structlog.stdlib.BoundLogger,
     # Caching of our logger
-    cache_logger_on_first_use=True,
+    cache_logger_on_first_use=cache_logger,
 )
 
 pre_chain = [
