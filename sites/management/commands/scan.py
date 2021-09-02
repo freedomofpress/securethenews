@@ -1,5 +1,4 @@
 import json
-import logging
 from lxml import etree, html
 import requests
 import subprocess
@@ -7,10 +6,11 @@ from typing import Optional
 
 from django.core.management.base import BaseCommand, CommandError
 from django.db import transaction
+import structlog
 
 from sites.models import Site, Scan
 
-logger = logging.getLogger(__name__)
+logger = structlog.get_logger()
 
 TIMEOUT_REQUESTS = 5
 

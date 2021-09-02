@@ -1,4 +1,3 @@
-https://github.com/freedomofpress/django-logging/zipball/ced87b3266e350c68afd0aea8895d5d595f5fc83
 https://github.com/freedomofpress/pshtt/zipball/65596ff08fa7bf0357b5af63da73e2dead91c304
 Django>=2.2.24,<2.3
 django-cors-headers>=3.0.0
@@ -16,6 +15,7 @@ psycopg2>=2.8.4
 pyopenssl==19.0.0
 python-json-logger
 requests
+structlog>=21,<22
 unittest-xml-reporting
 wagtail>=2.11.8,<2.12
 wagtail-autocomplete>=0.6.2

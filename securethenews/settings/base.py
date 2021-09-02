@@ -66,7 +66,6 @@ INSTALLED_APPS = [
     'crispy_forms',
     'rest_framework',
     'corsheaders',
-    'django_logging',
 ]
 
 MIDDLEWARE = [
@@ -86,7 +85,6 @@ if os.environ.get('DJANGO_WHITENOISE'):
 
 MIDDLEWARE.extend([
     'wagtail.contrib.redirects.middleware.RedirectMiddleware',
-    'django_logging.middleware.DjangoLoggingMiddleware',
 
     # Middleware for content security policy
     'csp.middleware.CSPMiddleware',
@@ -338,58 +336,3 @@ if log_dir:
         "maxBytes": 10000000,
         "level": log_level,
     }
-
-DJANGO_LOGGING = {
-    "LOG_LEVEL": log_level,
-    "CONSOLE_LOG": log_stdout,
-    "INDENT_CONSOLE_LOG": 0,
-    "DISABLE_EXISTING_LOGGERS": True,
-    "PROPOGATE": False,
-    "SQL_LOG": False,
-    "ENCODING": "utf-8",
-}
-
-LOGGING = {
-    "version": 1,
-    "disable_existing_loggers": False,
-    "handlers": {
-        "normal": log_handler,
-        "null": {"class": "logging.NullHandler"},
-    },
-    "formatters": {
-        "json": {
-            "()": "pythonjsonlogger.jsonlogger.JsonFormatter",
-        },
-        "plain": {
-            "format": "%(asctime)s %(levelname)s %(name)s "
-            "%(module)s %(message)s",
-        },
-    },
-    "loggers": {
-        "django": {
-            "handlers": ["normal"], "propagate": True,
-        },
-        "django.template": {
-            "handlers": ["normal"], "propagate": False,
-        },
-        "django.db.backends": {
-            "handlers": ["normal"], "propagate": False,
-        },
-        "django.security": {
-            "handlers": ["normal"], "propagate": False,
-        },
-        # These are already handled by the django json logging library
-        "django.request": {
-            "handlers": ["null"],
-            "propagate": False,
-        },
-        # Log entries from runserver
-        "django.server": {
-            "handlers": ["null"], "propagate": False,
-        },
-        # Catchall
-        "": {
-            "handlers": ["normal"], "propagate": False,
-        },
-    },
-}

@@ -101,7 +101,6 @@ django==2.2.24 \
     #   django-cors-headers
     #   django-csp
     #   django-filter
-    #   django-logging-json
     #   django-settings-export
     #   django-storages
     #   django-taggit
@@ -134,9 +133,6 @@ django-filter==2.4.0 \
     # via
     #   -r requirements.in
     #   wagtail
-https://github.com/freedomofpress/django-logging/zipball/ced87b3266e350c68afd0aea8895d5d595f5fc83 \
-    --hash=sha256:bd8ec3ac68f4e9f4d0e7eaaeaa658dd6198b2f335c608318d4001562ae60aac3
-    # via -r requirements.in
 django-modelcluster==5.1 \
     --hash=sha256:783d177f7bf5c8f30fe365c347b9a032920de371fe1c63d955d7b283684d4c08 \
     --hash=sha256:d4a0f90e85ae1a193f417e149b6b01d0b2a867dcf97f7fae1d34a4363a9d7baa
@@ -485,7 +481,6 @@ six==1.15.0 \
     --hash=sha256:30639c035cdb23534cd4aa2dd52c3bf48f06e5f4a941509c8bafd8ce11080259 \
     --hash=sha256:8b74bedcbbbaca38ff6d7491d76f2b06b3592611af620f8426e82dddb04a5ced
     # via
-    #   django-logging-json
     #   google-api-core
     #   google-auth
     #   google-resumable-media
@@ -507,6 +502,10 @@ sqlparse==0.3.1 \
 sslyze==4.1.0 \
     --hash=sha256:76a50297aa2e3f4d8e2660865ca648eff672b0a5967fa052bb26b8b05e0d3ff9
     # via pshtt
+structlog==21.1.0 \
+    --hash=sha256:62f06fc0ee32fb8580f0715eea66cb87271eb7efb0eaf9af6b639cba8981de47 \
+    --hash=sha256:d9d2d890532e8db83c6977a2a676fb1889922ff0c26ad4dc0ecac26f9fafbc57
+    # via -r requirements.in
 tabledata==1.1.2 \
     --hash=sha256:7d2019de87fd5da2f45f4e36fd2dd9da326dd3c3a3191b7b5bdb65a477b29dd5 \
     --hash=sha256:db893596ab9066e5c4f002ae0fed70657e3b75cceb52dd1de5a0e145e338d830
