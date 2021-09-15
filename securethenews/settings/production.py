@@ -3,6 +3,9 @@ from __future__ import absolute_import, unicode_literals
 from .base import *  # noqa: F403,F401
 import os
 import logging
+import sys
+
+import structlog
 
 # This is not the Django logger; it's for reporting problems while configuring
 # the app, when logging may not otherwise be set up
@@ -11,6 +14,96 @@ logging.basicConfig(format='%(levelname)s: %(message)s')
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS').split(' ')
 BASE_URL = os.environ.get('DJANGO_BASE_URL', 'https://securethe.news')
+
+
+MIDDLEWARE += [  # noqa: F405
+    'home.middleware.RequestLogMiddleware',
+]
+
+# Do not cache the logger when running unit tests
+if len(sys.argv) > 1 and sys.argv[1] == 'test':
+    cache_logger = False
+else:
+    cache_logger = True
+
+structlog.configure(
+    processors=[
+        structlog.contextvars.merge_contextvars,
+        structlog.stdlib.filter_by_level,
+        structlog.stdlib.add_logger_name,
+        structlog.stdlib.add_log_level,
+        structlog.stdlib.PositionalArgumentsFormatter(),
+        structlog.processors.StackInfoRenderer(),
+        structlog.processors.format_exc_info,
+        structlog.processors.UnicodeDecoder(),
+        structlog.stdlib.ProcessorFormatter.wrap_for_formatter,
+    ],
+    # Our "event_dict" is explicitly a dict
+    context_class=dict,
+    # Provides the logging.Logger for the underlaying log call
+    logger_factory=structlog.stdlib.LoggerFactory(),
+    # Provides predefined methods - log.debug(), log.info(), etc.
+    wrapper_class=structlog.stdlib.BoundLogger,
+    # Caching of our logger
+    cache_logger_on_first_use=cache_logger,
+)
+
+pre_chain = [
+    # Add the log level and a timestamp to the event_dict if the log entry
+    # is not from structlog.
+    structlog.stdlib.add_log_level,
+    structlog.stdlib.add_logger_name,
+]
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {
+        "json_console": {
+            "class": "logging.StreamHandler",
+            "formatter": "json_formatter",
+        },
+        "null": {"class": "logging.NullHandler"},
+    },
+    "formatters": {
+        "json_formatter": {
+            "()": structlog.stdlib.ProcessorFormatter,
+            "processor": structlog.processors.JSONRenderer(),
+            "foreign_pre_chain": pre_chain,
+        },
+    },
+    "loggers": {
+        "django": {
+            "handlers": ["json_console"], "propagate": True,
+        },
+        "request_log": {
+            "handlers": ["json_console"], "propagate": False, "level": "DEBUG",
+        },
+        "django.template": {
+            "handlers": ["json_console"], "propagate": False,
+        },
+        "django.db.backends": {
+            "handlers": ["json_console"], "propagate": False,
+        },
+        "django.security": {
+            "handlers": ["json_console"], "propagate": False,
+        },
+        # These are already handled by the requrest logging middleware
+        "django.request": {
+            "handlers": ["null"],
+            "propagate": False,
+        },
+        # Log entries from runserver
+        "django.server": {
+            "handlers": ["null"], "propagate": False,
+        },
+        # Catchall
+        "": {
+            "handlers": ["json_console"], "propagate": False,
+        },
+    },
+}
+
 
 try:
     CSRF_TRUSTED_ORIGINS = os.environ['DJANGO_CSRF_TRUSTED_ORIGINS'].split(' ')
