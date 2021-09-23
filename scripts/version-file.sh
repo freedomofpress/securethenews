@@ -6,32 +6,46 @@
 
 set -e
 
-DEPLOY_FILE="${DJANGO_VERSION_FILE:-/deploy/version}"
+short_version_out="${DJANGO_SHORT_VERSION_FILE:-/deploy/version-short.txt}"
+full_version_out="${DJANGO_FULL_VERSION_FILE:-/deploy/version-full.txt}"
 
-cat /dev/null > "${DEPLOY_FILE}"
+branch="$(git rev-parse --abbrev-ref HEAD)"
+commit="$(git rev-parse --short HEAD)"
 
-echo -e "## GIT INFO #####\n" >> "${DEPLOY_FILE}"
-
-git_branch="$(git symbolic-ref --short HEAD 2>/dev/null || echo "N/A")"
-echo -e "git branch: ${git_branch}\n" >> "${DEPLOY_FILE}"
-
-case "$git_branch" in
-    N/A)
-        echo -e "release: $(git describe --exact-match)" >> "${DEPLOY_FILE}";;
+# prod is special, in that we care what tag was merged in, rather that
+# what the merge commit is.
+case "$branch" in
     prod)
-        echo -e "release: $(git describe HEAD^2)" >> "${DEPLOY_FILE}";;
+        branch_desc="on branch: ${branch}"
+        ref_desc="release tag: $(git describe HEAD^2)";;
+    HEAD)
+        branch_desc="no branch, detached HEAD"
+        ref_desc="not tagged, $(git describe)";;
     *)
-        echo -e "last release and commits since: $(git describe)" >> "${DEPLOY_FILE}";;
+        branch_desc="on branch: ${branch}"
+        ref_desc="not tagged, $(git describe)";;
 esac
 
-echo >> "${DEPLOY_FILE}"
-git log -5 --oneline >> "${DEPLOY_FILE}"
+echo "$commit" >"$short_version_out"
 
-echo -e "\n## PYTHON INFO #####" >> "${DEPLOY_FILE}"
-python --version >> "${DEPLOY_FILE}"
+cat >"$full_version_out" <<EOF
+#### GIT INFO ####
 
-echo -e "\n## PYTHON DEPS #####" >> "${DEPLOY_FILE}"
-pip freeze >> "${DEPLOY_FILE}"
+${branch_desc}
+commit: ${commit}
+${ref_desc}
 
-echo -e "\n## SYS INFO #####" >> "${DEPLOY_FILE}"
-cat /etc/*-release >> "${DEPLOY_FILE}"
+$(git log -5 --oneline)
+
+#### PYTHON INFO ####
+
+$(python3 --version)
+
+#### PYTHON DEPS ####
+
+$(pip freeze)
+
+#### SYS INFO ####
+
+$(cat /etc/*-release)
+EOF
