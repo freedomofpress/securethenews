@@ -2,7 +2,7 @@
 FROM node:14-alpine@sha256:5c33bc6f021453ae2e393e6e20650a4df0a4737b1882d389f17069dc1933fdc5
 
 # Install npm, making output less verbose
-ARG NPM_VER=6.14.11
+ARG NPM_VER=7.24.1
 ENV NPM_CONFIG_LOGLEVEL warn
 RUN npm install npm@${NPM_VER} -g
 
