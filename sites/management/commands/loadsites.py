@@ -4,6 +4,7 @@ from os.path import abspath
 
 from django.core.management.base import BaseCommand
 from django.db import transaction
+from django.core.exceptions import ValidationError
 
 from sites.models import Site
 
@@ -31,7 +32,13 @@ class Command(BaseCommand):
                     name=row['Organization Name'],
                     domain=row['Domain Name']
                 )
+                try:
+                    new_site.validate_unique()
+                except ValidationError:
+                    continue
+
                 new_site.save()
                 num_rows += 1
-            print('Added {} sites from {}'.format(
+
+            print('Added {} new site(s) from {}'.format(
                 num_rows, abspath(csvfile.name)))
