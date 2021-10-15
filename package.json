@@ -32,7 +32,7 @@
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-react": "^7.21.5",
     "mini-css-extract-plugin": "^1.4.1",
-    "npm-audit-plus": "^0.1.7",
+    "npm-audit-plus": "^0.2.0",
     "postcss": "^8.2.15",
     "postcss-loader": "^4.2.0",
     "pug": "^3.0.2",
