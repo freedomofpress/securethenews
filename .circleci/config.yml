@@ -22,30 +22,31 @@ commands:
 
 jobs:
   safety_check:
-    machine:
-      image: ubuntu-2004:202101-01
+    docker:
+      - image: cimg/python:3.9
     working_directory: ~/securethenews
     steps:
       - checkout
 
-      - *python_prereqs
+      - run:
+          name: Install pip dependencies
+          command: pip install --require-hashes -r securethenews/dev-requirements.txt
 
       - run:
           name: Check Python dependencies for CVEs
           command: |
-            pipenv install --selective-upgrade safety
-            pipenv run make safety
+            pip install --upgrade safety
+            ./scripts/safety_check.py
 
       - run:
           name: linters on the source
-          command: |
-            pipenv run make lint
+          command: flake8
 
       - run:
           name: Static code analysis for vulnerabilities
           command: |
-            pipenv install --selective-upgrade bandit
-            pipenv run make bandit
+            pip install --upgrade bandit
+            make bandit
 
   npm_audit:
     machine:
