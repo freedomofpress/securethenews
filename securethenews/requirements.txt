@@ -398,7 +398,7 @@ protobuf==3.12.2 \
     # via
     #   google-api-core
     #   googleapis-common-protos
-https://github.com/freedomofpress/pshtt/zipball/65596ff08fa7bf0357b5af63da73e2dead91c304 \
+pshtt @ https://github.com/freedomofpress/pshtt/zipball/65596ff08fa7bf0357b5af63da73e2dead91c304 \
     --hash=sha256:56e10b98409223c2800c25268822468579a7dad0faebc8ed31f9d12ef7b80381
     # via -r requirements.in
 psycopg2==2.8.5 \
