@@ -1,5 +1,5 @@
 https://github.com/freedomofpress/pshtt/zipball/65596ff08fa7bf0357b5af63da73e2dead91c304
-Django>=2.2.24,<2.3
+Django>=2.2.25,<2.3
 django-cors-headers>=3.0.0
 django-crispy-forms>=1.7.2
 django-csp
