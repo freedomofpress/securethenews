@@ -2,7 +2,9 @@
 
 # Secure the News
 
-[![CircleCI](https://circleci.com/gh/freedomofpress/securethenews.svg?style=svg)](https://circleci.com/gh/freedomofpress/securethenews)
+**This project has been retired. Please see our blog post for more
+information:**
+https://freedom.press/news/five-years-of-secure-the-news/
 
 ## Prerequisites
 
