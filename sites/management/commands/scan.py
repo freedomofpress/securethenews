@@ -140,5 +140,5 @@ class Command(BaseCommand):
 
         with transaction.atomic():
             for site in sites:
-                self.stdout.write('Scanning: {}'.format(site.domain))
+                print(f"Scanning: {site.domain}", file=self.stdout, flush=True)
                 scan(site)
